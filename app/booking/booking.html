@@ -1,0 +1,31 @@
+<div class="page-header">
+    <h3><span class="glyphicon">{{ model.pageName }}</span></h3>
+</div>
+<div class="page-content">
+    <form name="resourceForm">
+        <div class="form-group col-md-6">
+            <label for="firstName">Projeto</label>
+            <select class="form-control" required>
+                <option value="1">Treinamento Angular</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="lastName">Profissional</label>
+            <select class="form-control" required>
+                <option value="1">Bruno de Paula</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="startDate">Data Início</label>
+            <input id="startDate" type="date" name="startDate" placeholder="Informe a data início de alocação no projeto" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="finishDate">Data Fim</label>
+            <input id="finishDate" type="date" name="finishDate" placeholder="Informe a data fim de alocação no projeto" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="finishDate">Percentual Alocação</label>
+            <input id="finishDate" type="text" name="finishDate" placeholder="Informe o percentual de alocação do profissional" class="form-control">
+        </div>
+    </form>
+</div>
