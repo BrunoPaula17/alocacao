@@ -4,42 +4,37 @@
 <div class="page-content">
     <form name="resourceForm">
         <div class="form-group col-md-6">
-            <label for="projectID">Project Id</label>
-            <input id="projectID" value="{{projetID}}" type="text" name="projetID" placeholder="Write the project id" class="form-control"
-                readonly>
-        </div>
-        <div class="form-group col-md-6">
             <label for="wbs">WBS</label>
             <input id="wbs" value="{{wbs}}" type="text" name="wbs" placeholder="Write the project wbs" class="form-control" required>
         </div>
         <div class="form-group col-md-6">
-            <label for="name">Name</label>
+            <label for="name">Nome</label>
             <input id="name" value="{{name}}" type="text" name="name" placeholder="Write the project name" class="form-control" required>
         </div>
         <div class="form-group col-md-6">
-            <label for="client">Client</label>
+            <label for="client">Cliente</label>
             <select name="client" id="client" class="form-control">
                 <option value="">select the client</option>
             </select>
         </div>
         <div class="form-group col-md-6">
-            <label for="sponsor">Sponsor</label>
+            <label for="sponsor">Responsavel</label>
             <select name="sponsor" id="sponsor" class="form-control">
                  <option value="">select the sponsor</option>
             </select>
         </div>
         <div class="form-group col-md-6">
-            <label for="startDate">Start Date</label>
+            <label for="startDate">Data de Inicio</label>
             <input type="date" name="startDate" id="startDate" class="form-control" />
         </div>
         <div class="form-group col-md-6">
-            <label for="endDate">End Date</label>
+            <label for="endDate">Data de Fim</label>
             <input type="date" name="endDate" id="endDate" class="form-control" />
         </div>
         <div class="form-group col-md-6">
-            <label for="concludeDate">Conclude Date</label>
+            <label for="concludeDate">Data de Conclusao</label>
             <input type="date" name="concludeDate" id="concludeDate" class="form-control" />
         </div>
-        <input type="submit" value="Create" class="btn">
+        <input type="submit" value="Criar" class="btn">
     </form>
 </div>
