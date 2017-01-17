@@ -4,7 +4,7 @@
         "EID": "ronye.peterson.anjos",
         "Name": "Ronye Peterson Martins dos Anjos",
         "Email": "ronye.peterson.anjos@avanade.com",
-        "Role": "Senior Software Enginner",
+        "RoleID": "Senior Software Enginner",
         "Prefix": "11",
         "Phone": "971537512"
     },
@@ -13,7 +13,7 @@
         "EID": "thomas.anjos",
         "Name": "Thomas Jefferson Martins dos Anjos",
         "Email": "thomas.anjos@avanade.com",
-        "Role": "Senior Software Enginner",
+        "RoleID": "Senior Software Enginner",
         "Prefix": "11",
         "Phone": "963484588"
     },
@@ -22,7 +22,7 @@
         "EID": "elziria.anjos",
         "Name": "Elziria Martins dos Anjos",
         "Email": "elziria.dos.anjos@avanade.com",
-        "Role": "System Analyst",
+        "RoleID": "System Analyst",
         "Prefix": "11",
         "Phone": "984841212"
     },
@@ -31,7 +31,7 @@
         "EID": "jose.dos.anjos",
         "Name": "Jose dos Anjos",
         "Email": "jose.dos.anjos@avanade.com",
-        "Role": "Software Enginner",
+        "RoleID": "Software Enginner",
         "Prefix": "11",
         "Phone": "931312323"
     }
