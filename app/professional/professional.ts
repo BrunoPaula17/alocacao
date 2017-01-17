@@ -1,4 +1,6 @@
-export interface ProfessionalInterface {   
+import { ProfessionalInterface } from './professional.interface'
+
+export class Professional implements ProfessionalInterface{
     PID: number;
     EID: string;
     Name: string;

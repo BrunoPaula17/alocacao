@@ -1,4 +1,4 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
-import { AlocacaoModule } from './alocacao/alocacao.module'
+import { BookingModule } from './booking/booking.module'
 
-platformBrowserDynamic().bootstrapModule(AlocacaoModule);
+platformBrowserDynamic().bootstrapModule(BookingModule);
