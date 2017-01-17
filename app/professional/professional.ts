@@ -5,7 +5,7 @@ export class Professional implements ProfessionalInterface{
     EID: string;
     Name: string;
     Email: string;
-    Office:string;
+    Role:string;
     Prefix: number;
     Phone: number
 }
