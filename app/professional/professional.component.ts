@@ -28,8 +28,6 @@ ngOnInit() {
 
 getDetails(pro: Professional){
     this.currentProfessional = pro;
-    console.log(this.currentProfessional);
-    
 }
 
 }
