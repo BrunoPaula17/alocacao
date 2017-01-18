@@ -1,19 +1,22 @@
-import { Component } from '@angular/core'
-import { Booking } from './booking'
+import { Component } from '@angular/core';
+import { Booking } from './booking';
+import { BOOKINGS } from '../shared/mock';
 
 @Component({
     selector: 'ava-bok-app',
     templateUrl: './app/booking/booking.html'
 })
 export class BookingComponent {
+    bookings: Booking[] = BOOKINGS;
+    pageName: string = "Alocação";
+
     model: Booking = {
-            "pageName": "Alocação",
-            "bookingID": 1,
-            "projectID": 1,
-            "pid": 11036009,
-            "auditID": 1,
-            "initialDate": null,
-            "endDate": null,
-            "bookingPercentual": 0.3
-        };
+        "bookingID": 1,
+        "projectID": 1,
+        "pid": 11036009,
+        "auditID": 1,
+        "initialDate": null,
+        "endDate": null,
+        "bookingPercentual": 0.3
+    };
 }

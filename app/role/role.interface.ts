@@ -1,4 +1,4 @@
-export interface RoleInterface {
+export interface IRole {
     roleId: number;
     name: string;
     brc: string;

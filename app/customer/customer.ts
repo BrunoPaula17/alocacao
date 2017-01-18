@@ -1,7 +1,6 @@
-import { CustomerInterface } from './customer.interface'
+import { ICustomer } from './customer.interface'
 
-export class Customer implements CustomerInterface{
-    pageName: string;
+export class Customer implements ICustomer{
     customerID: number;
     name: string;
     responsible: number;
