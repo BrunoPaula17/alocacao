@@ -1,13 +1,14 @@
 <div class="page-header">
     <h3><span class="glyphicon" [innerHTML]="pageName"></span></h3>
 </div>
-
+<ava-prj-list [headers]="headers" [models]="models"></ava-prj-list>
+<br />
 <div class="row">
     <div class="col-md-10"></div>
     <div class=" col-md-2">
         <input type="button" value="Criar" class="btn btn-primary center-block" data-toggle="modal" data-target="#myModal">
     </div>
 </div>
-          <ava-prj-form [model]="model" [customers]="customers" [sponsors]="professionals"></ava-prj-form>
+<ava-prj-form [model]="model" [customers]="customers" [sponsors]="professionals"></ava-prj-form>
       
 
