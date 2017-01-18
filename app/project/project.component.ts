@@ -7,5 +7,6 @@ import { Project } from './project'
 })
 export class ProjectComponent {
     model: Project = new Project();
+    models: Project[];
     pageName: string = '<span class="fa fa-cubes"></span>&nbsp;Projetos';
 }
