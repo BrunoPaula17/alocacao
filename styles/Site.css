@@ -84,3 +84,9 @@
     background-color: #ff4f00;
   }
 }
+
+thead th{
+  background-color: #ff4f00;
+  color: white;
+  text-align: center;
+}
