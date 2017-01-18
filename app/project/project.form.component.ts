@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core'
+
 import { Project } from './project'
+import { Customer } from '../customer/customer'
+import { Professional } from '../professional/professional'
+
+
 
 @Component({
     selector: 'ava-prj-form',
@@ -8,4 +13,11 @@ import { Project } from './project'
 export class ProjectFormComponent {
     @Input()
     model: Project;
+
+    @Input()
+    customers: Customer[];
+
+    @Input()
+    sponsors: Professional[];
+
 }

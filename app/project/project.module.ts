@@ -11,4 +11,8 @@ import { ProjectFormComponent } from './project.form.component'
     bootstrap: [ ProjectComponent ]
 })
 
-export class ProjectModule { }
+export class ProjectModule {
+    
+ }
+
+
