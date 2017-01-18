@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Professional } from './professional';
-import { PROFESSIONALS } from '../shared/mock';
+import { Role } from '../role/role';
+import { PROFESSIONALS, ROLES } from '../shared/mock';
 
 @Component({
     selector: 'ava-pro-app',
@@ -8,7 +9,21 @@ import { PROFESSIONALS } from '../shared/mock';
 })
 
 export class ProfessionalComponent {
-    professional: Professional[] = PROFESSIONALS;
+    professionals: Professional[] = PROFESSIONALS;
+    roles: Role[] = ROLES;
     pageName:string = "Profissional";
+
+
+
+getRoleDetail(professional: Professional): void {
+    professional.role = this.roles.find(role => role.roleId == professional.roleID)
+
 }
 
+ngOnInit() {
+    this.professionals.forEach((item,index)=>{
+        this.getRoleDetail(item);
+    });
+}
+
+}
