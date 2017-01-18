@@ -64,7 +64,7 @@ export const PROFESSIONALS: Professional[] = [
         "eid": "ronye.peterson.anjos",
         "name": "Ronye Peterson Martins dos Anjos",
         "email": "ronye.peterson.anjos@avanade.com",
-        "roleID": 10,
+        "roleID": 1,
         "prefix": 11,
         "phone": 971537512
     },
@@ -73,7 +73,7 @@ export const PROFESSIONALS: Professional[] = [
         "eid": "thomas.anjos",
         "name": "Thomas Jefferson Martins dos Anjos",
         "email": "thomas.anjos@avanade.com",
-        "roleID": 9,
+        "roleID": 2,
         "prefix": 11,
         "phone": 963484588
     },
@@ -82,7 +82,7 @@ export const PROFESSIONALS: Professional[] = [
         "eid": "elziria.anjos",
         "name": "Elziria Martins dos Anjos",
         "email": "elziria.dos.anjos@avanade.com",
-        "roleID": 9,
+        "roleID": 3,
         "prefix": 11,
         "phone": 984841212
     },
@@ -91,7 +91,7 @@ export const PROFESSIONALS: Professional[] = [
         "eid": "jose.dos.anjos",
         "name": "Jose dos Anjos",
         "email": "jose.dos.anjos@avanade.com",
-        "roleID": 8,
+        "roleID": 4,
         "prefix": 11,
         "phone": 931312323
     }
