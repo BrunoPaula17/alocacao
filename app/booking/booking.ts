@@ -1,4 +1,6 @@
 import { BookingInterface } from './booking.interface';
+import { Project } from '../project/project'
+import { Professional } from '../professional/professional';
 
 export class Booking implements BookingInterface{
     bookingID: number;
@@ -8,5 +10,6 @@ export class Booking implements BookingInterface{
     initialDate: Date;
     endDate: Date;
     bookingPercentual: number;
-
+    project: Project;
+    professional: Professional;
 }
