@@ -141,7 +141,7 @@ export const PROJECTS: Project[] = [
         "clientID": 1,
         "startDate": new Date("2017-02-11T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 1,
         "name": "PRJ001",
         "wbs": "WBS00001"
@@ -151,7 +151,7 @@ export const PROJECTS: Project[] = [
         "clientID": 2,
         "startDate": new Date("2017-03-12T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-27T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 2,
         "name": "PRJ002",
         "wbs": "WBS00002"
@@ -161,7 +161,7 @@ export const PROJECTS: Project[] = [
         "clientID": 3,
         "startDate": new Date("2017-01-13T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-12T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 3,
         "name": "PRJ003",
         "wbs": "WBS00003"
@@ -171,7 +171,7 @@ export const PROJECTS: Project[] = [
         "clientID": 4,
         "startDate": new Date("2017-01-14T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-30T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 4,
         "name": "PRJ004",
         "wbs": "WBS00004"
@@ -181,7 +181,7 @@ export const PROJECTS: Project[] = [
         "clientID": 5,
         "startDate": new Date("2017-05-15T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-6T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 5,
         "name": "PRJ005",
         "wbs": "WBS00005"
@@ -191,7 +191,7 @@ export const PROJECTS: Project[] = [
         "clientID": 6,
         "startDate": new Date("2017-06-16T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-2T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 6,
         "name": "PRJ006",
         "wbs": "WBS00006"
@@ -201,7 +201,7 @@ export const PROJECTS: Project[] = [
         "clientID": 7,
         "startDate": new Date("2017-07-17T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-16T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 7,
         "name": "PRJ007",
         "wbs": "WBS00007"
@@ -211,7 +211,7 @@ export const PROJECTS: Project[] = [
         "clientID": 8,
         "startDate": new Date("2017-05-18T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-12T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 8,
         "name": "PRJ008",
         "wbs": "WBS00008"
@@ -221,7 +221,7 @@ export const PROJECTS: Project[] = [
         "clientID": 9,
         "startDate": new Date("2017-07-19T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-46T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 9,
         "name": "PRJ009",
         "wbs": "WBS00009"
@@ -231,7 +231,7 @@ export const PROJECTS: Project[] = [
         "clientID": 10,
         "startDate": new Date("2017-04-16T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-02-26T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 10,
         "name": "PRJ010",
         "wbs": "WBS00011"
@@ -241,7 +241,7 @@ export const PROJECTS: Project[] = [
         "clientID": 11,
         "startDate": new Date("2017-05-16T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-03-20T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 11,
         "name": "PRJ011",
         "wbs": "WBS00012"
@@ -251,7 +251,7 @@ export const PROJECTS: Project[] = [
         "clientID": 12,
         "startDate": new Date("2017-06-16T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-04-22T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 12,
         "name": "PRJ012",
         "wbs": "WBS00013"
@@ -261,7 +261,7 @@ export const PROJECTS: Project[] = [
         "clientID": 13,
         "startDate": new Date("2017-07-16T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-05-21T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 13,
         "name": "PRJ013",
         "wbs": "WBS00014"
@@ -271,7 +271,7 @@ export const PROJECTS: Project[] = [
         "clientID": 14,
         "startDate": new Date("2017-08-16T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 14,
         "name": "PRJ014",
         "wbs": "WBS00015"
@@ -281,7 +281,7 @@ export const PROJECTS: Project[] = [
         "clientID": 15,
         "startDate": new Date("2017-09-16T12: 21: 0 0.761Z"),
         "endDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
-        "concludeDate": null,
+        "concludeDate": new Date("2017-01-26T12: 21: 0 0.761Z"),
         "sponsor": 15,
         "name": "PRJ015",
         "wbs": "WBS00016"

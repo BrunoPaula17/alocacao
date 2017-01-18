@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core'
-import { Project } from './project'
+import { Project } from './project' 
+import { Header } from '../shared/header.grid'
 
 @Component({
     selector: 'ava-prj-list',
@@ -8,4 +9,6 @@ import { Project } from './project'
 export class ProjectListComponent {
     @Input()
     models: Project[];
+    @Input()
+    headers: Header[];
 }

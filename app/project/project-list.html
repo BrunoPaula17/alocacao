@@ -1,26 +1,25 @@
 <table class="table table-striped">
-    <thead>
-      <tr class="text-nowrap">
-        <th>Cliente</th>
-        <th>Nome</th>
-        <th>WBS</th>
-        <th>Responsável</th>
-        <th>Dt. Inicio</th>
-        <th>Dt. Fim</th>
-        <th>Dt. Conclusão</th>
-        <th>Ações</th>
-      </tr>
-      <tr>
-        <th *ngFor="let f of [1,2,3,4,5,6,7]">
-          <input type="text" class="form-control" name="filtro-{{f}}" id="filtro-{{f}}">
-        </th>
-        <th>&nbsp;</th>        
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="text-nowrap" *ngFor="let r of models">
-        <td>
-          
+  <thead>
+    <tr class="text-nowrap">
+      <th *ngFor="let h of headers">{{h.description}}</th>
+      <th>Ações</th>
+    </tr>
+    <!--<tr>
+      <th *ngFor="let f of [1,2,3,4,5,6,7]">
+        <input type="text" class="form-control" name="filtro-{{f}}" id="filtro-{{f}}">
+      </th>
+      <th>&nbsp;</th>
+    </tr>-->
+  </thead>
+  <tbody>
+    <tr class="text-nowrap" *ngFor="let r of models">
+      <td *ngFor="let h of headers">
+        <span *ngIf="h.filter == 'text'">{{r[h.field]}}</span>
+        <span *ngIf="h.filter == 'date'">{{r[h.field] | date:'dd/MM/yyyy'}}</span>
         </td>
-      </tr>
-  </table>
+      <td>
+        <span class="fa fa-edit text-info"></span>&nbsp;
+            <span class="fa fa-close text-danger"></span>&nbsp;
+      </td>
+    </tr>
+</table>
