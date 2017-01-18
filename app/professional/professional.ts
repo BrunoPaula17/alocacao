@@ -1,7 +1,6 @@
-import { ProfessionalInterface } from './professional.interface'
+import { IProfessional } from './professional.interface'
 
-export class Professional implements ProfessionalInterface{
-    pageName: string;
+export class Professional implements IProfessional{
     pid: number;
     eid: string;
     name: string;
