@@ -1,6 +1,9 @@
 import { IProject } from './project.interface' 
 
 export class Project implements IProject{
+    constructor(){
+
+    }
     projectID: number;
     clientID: number;
     startDate: Date;

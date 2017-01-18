@@ -1,5 +1,7 @@
-import { Component } from '@angular/core'
-import { Professional } from './professional'
+import { Component } from '@angular/core';
+import { Professional } from './professional';
+import { Role } from '../role/role';
+import { PROFESSIONALS, ROLES } from '../shared/mock';
 
 @Component({
     selector: 'ava-pro-app',
@@ -7,17 +9,21 @@ import { Professional } from './professional'
 })
 
 export class ProfessionalComponent {
-
+    professionals: Professional[] = PROFESSIONALS;
+    roles: Role[] = ROLES;
     pageName:string = "Profissional";
 
-    model: Professional = {
 
-            "pid": 10715376,
-            "eid": "ronye.peterson.anjos",
-            "name": "Ronye Anjos",
-            "email": "ronye.peterson.anjos@avanade.com",
-            "roleID":10,
-            "prefix": 11,
-            "phone": 971537512
-        };
+
+getRoleDetail(professional: Professional): void {
+    professional.role = this.roles.find(role => role.roleId == professional.roleID)
+
+}
+
+ngOnInit() {
+    this.professionals.forEach((item,index)=>{
+        this.getRoleDetail(item);
+    });
+}
+
 }

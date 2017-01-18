@@ -1,4 +1,4 @@
-import { IRole } from './role.interface'
+import { IRole } from './role.interface';
 
 export class Role implements IRole {
     roleId: number;
