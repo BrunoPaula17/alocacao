@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { Project } from './project'
+import { Component } from '@angular/core';
+import { Project } from './project';
 
 @Component({
     selector: 'ava-prj-app',
