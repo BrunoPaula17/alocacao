@@ -47,7 +47,7 @@ export const PROFESSIONALS: Professional[] = [
 
 export class ProfessionalComponent {
 
-    pageName:string "Profissional";
+    pageName:string = "Profissional";
 
     model: Professional = {
 
