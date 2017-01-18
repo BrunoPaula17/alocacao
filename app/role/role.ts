@@ -1,7 +1,6 @@
-import { RoleInterface } from './role.interface'
+import { IRole } from './role.interface'
 
-export class Role implements RoleInterface {
-    pageName: string;
+export class Role implements IRole {
     roleId: number;
     name: string;
     brc: string;

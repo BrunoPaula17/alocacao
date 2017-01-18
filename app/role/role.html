@@ -1,8 +1,16 @@
-<h3><span class="glyphicon">{{ model.pageName }}</span></h3>
+<h3><span class="glyphicon">{{ pageName }}</span></h3>
 <div class="page-header">
 </div>
 
 <div class="page-content">
+    <table>
+        <thead>
+            <th></th>
+        </thead>
+        <tbody>
+            <td></td>
+        </tbody>
+    </table>
     <form name="resourceForm">
         <div class="form-group col-md-6">
             <label for="role">Cargo</label>
@@ -28,7 +36,8 @@
         </div>
         <div class="form-group col-md-10">
             <label for="description">Descrição do Cargo</label>
-            <textarea rows="5" id="description" value={{model.description}} type="text" name="description" placeholder="Adicione uma descrição" class="form-control" required>
+            <textarea rows="5" id="description" value={{model.description}} type="text" name="description" placeholder="Adicione uma descrição"
+                class="form-control" required>
             </textarea>
         </div>
     </form>
