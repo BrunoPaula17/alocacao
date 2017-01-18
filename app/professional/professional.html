@@ -67,8 +67,8 @@
             <label for="roleID">Cargo</label>
             <select class="form-control" required>
                 <option *ngFor="let role of roles" 
-                        [attr.value]="role.level"
-                        [attr.selected]="role.RoleId == currentProfessional.RoleID ? true : null"
+                        [attr.value]="role.roleId"
+                        [attr.selected]="role.roleId === currentProfessional.roleID ? true : null"
                         ((click)="getDetails(professional)"
                         >{{ role.description }}</option>
             </select>
