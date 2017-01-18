@@ -1,5 +1,5 @@
-import { Component } from '@angular/core'
-import { Role } from './role'
+import { Component } from '@angular/core';
+import { Role } from './role';
 
 @Component({
     selector: 'ava-rol-app',

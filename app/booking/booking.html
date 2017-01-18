@@ -1,7 +1,27 @@
 <div class="page-header">
-    <h3><span class="glyphicon">{{ model.pageName }}</span></h3>
+    <h3><span class="glyphicon">{{ pageName }}</span></h3>
 </div>
 <div class="page-content">
+    <table class="table table-bordered table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Projeto</th>
+                <th>Profissional</th>
+                <th>Data de Início</th>
+                <th>Data Fim</th>
+                <th>Percentual de Alocação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of bookings">
+                <td>{{ booking.projectID }}</td>
+                <td>{{ booking.pid }}</td>
+                <td>{{ booking.initialDate }}</td>
+                <td>{{ booking.endDate }}</td>
+                <td>{{ booking.bookingPercentual }}</td>
+            </tr>
+        </tbody>
+    </table>
     <form name="resourceForm">
         <div class="form-group col-md-6">
             <label for="firstName">Projeto</label>

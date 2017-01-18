@@ -1,4 +1,4 @@
-export interface ProfessionalInterface {   
+export interface IProfessional {   
     pid: number;
     eid: string;
     name: string;
