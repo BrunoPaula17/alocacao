@@ -4,46 +4,40 @@
 <div class="page-content">
     <form name="resourceForm">
         <div class="form-group col-md-6">
-            <label for="firstName">PID</label>
+            <label for="pid">PID</label>
+            <input id="pid" type="text" name="pid" placeholder="Informe o PID " class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="entrepriseID">EID</label>
+            <input id="entrepriseID" type="text" name="entrepriseID" placeholder="Informe o EID " class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="name">Nome</label>
+            <input id="name" type="text" name="name" placeholder="Informe o Nome " class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input id="email" type="text" name="email" placeholder="Informe o Email " class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="office">Cargo</label>
             <select class="form-control" required>
-                <option value="1">PID</option>
+                <option value="12">Associate Software Engineer</option>
+                <option value="11">Software Engineer</option>
+                <option value="10">Senior Software Engineer</option>
+                <option value="9">System Analyst</option>
+                <option value="8">Senior System Analyst</option>
+                <option value="7">Manager</option>
+                <option value="6">Group Manager</option>
             </select>
         </div>
         <div class="form-group col-md-6">
-            <label for="lastName">EID</label>
-            <select class="form-control" required>
-                <option value="1">samara.martins</option>
-            </select>
+            <label for="prefix">Prefixo</label>
+            <input id="prefix" type="text" name="prefix" placeholder="Informe o Prefixo do Telefone" class="form-control">
         </div>
         <div class="form-group col-md-6">
-            <label for="lastName">Name</label>
-            <select class="form-control" required>
-                <option value="1">Samara Martins</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="lastName">Email</label>
-            <select class="form-control" required>
-                <option value="1">samara.martins@avanade.com</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="lastName">Office</label>
-            <select class="form-control" required>
-                <option value="1">Software Engineer</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="lastName">Prefix</label>
-            <select class="form-control" required>
-                <option value="1">11</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="lastName">Phone</label>
-            <select class="form-control" required>
-                <option value="1">XXXXXXXX</option>
-            </select>
+            <label for="phone">Telefone</label>
+            <input id="phone" type="text" name="phone" placeholder="Informe o Telefone" class="form-control">
         </div>
     </form>
 </div>
