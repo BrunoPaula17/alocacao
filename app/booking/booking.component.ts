@@ -9,14 +9,4 @@ import { BOOKINGS } from '../shared/mock';
 export class BookingComponent {
     bookings: Booking[] = BOOKINGS;
     pageName: string = "Alocação";
-
-    model: Booking = {
-        "bookingID": 1,
-        "projectID": 1,
-        "pid": 11036009,
-        "auditID": 1,
-        "initialDate": null,
-        "endDate": null,
-        "bookingPercentual": 0.3
-    };
 }
