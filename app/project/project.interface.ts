@@ -1,7 +1,7 @@
-export interface ProjectInterface{
+export interface IProject{
     projectID: number;
-    clientId: number;
-    startEnd: Date;
+    clientID: number;
+    startDate: Date;
     endDate: Date;
     concludeDate: Date;
     sponsor: number;

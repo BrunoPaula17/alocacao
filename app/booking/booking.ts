@@ -1,7 +1,6 @@
-import { BookingInterface } from './booking.interface'
+import { BookingInterface } from './booking.interface';
 
 export class Booking implements BookingInterface{
-    pageName: string;
     bookingID: number;
     projectID: number;
     pid: number;
