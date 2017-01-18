@@ -6,14 +6,6 @@ import { Project } from './project'
     templateUrl: './app/project/project.html'
 })
 export class ProjectComponent {
-    model: Project = {
-        projectID: 1,
-        clientID: 1,
-        startDate: null,
-        endDate: null,
-        concludeDate: null,
-        sponsor: 1,
-        name: "PRJ001",
-        wbs: "WBS00001",
-    };
+    model: Project = new Project();
+    pageName: string = '<span class="fa fa-cubes"></span>&nbsp;Projetos';
 }
