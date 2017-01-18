@@ -8,9 +8,5 @@ import { Customer } from './customer'
 export class CustomerComponent {
     pageName: string = "Cliente";
 
-    model: Customer = {
-            "customerID": 666,
-            "name": "o cão",
-            "responsible": 777
-        };
+   
 }
