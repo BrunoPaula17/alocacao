@@ -64,36 +64,40 @@ export const PROFESSIONALS: Professional[] = [
         "eid": "ronye.peterson.anjos",
         "name": "Ronye Peterson Martins dos Anjos",
         "email": "ronye.peterson.anjos@avanade.com",
-        "roleID": 10,
+        "roleID": 1,
         "prefix": 11,
-        "phone": 971537512
+        "phone": 971537512,
+        "role": null
     },
     {
         "pid": 10715377,
         "eid": "thomas.anjos",
         "name": "Thomas Jefferson Martins dos Anjos",
         "email": "thomas.anjos@avanade.com",
-        "roleID": 9,
+        "roleID": 2,
         "prefix": 11,
-        "phone": 963484588
+        "phone": 963484588,
+        "role": null
     },
     {
         "pid": 10715378,
         "eid": "elziria.anjos",
         "name": "Elziria Martins dos Anjos",
         "email": "elziria.dos.anjos@avanade.com",
-        "roleID": 9,
+        "roleID":3,
         "prefix": 11,
-        "phone": 984841212
+        "phone": 984841212,
+        "role": null
     },
     {
         "pid": 10715379,
         "eid": "jose.dos.anjos",
         "name": "Jose dos Anjos",
         "email": "jose.dos.anjos@avanade.com",
-        "roleID": 8,
+        "roleID": 4,
         "prefix": 11,
-        "phone": 931312323
+        "phone": 931312323,
+        "role": null
     }
 ]
 
