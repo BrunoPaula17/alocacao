@@ -1,9 +1,9 @@
 export interface ProfessionalInterface {   
-    PID: number;
-    EID: string;
-    Name: string;
-    Email: string;
-    Office:string;
-    Prefix: number;
-    Phone: number
+    pid: number;
+    eid: string;
+    name: string;
+    email: string;
+    roleID:number;
+    prefix: number;
+    phone: number
 }
