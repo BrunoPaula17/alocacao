@@ -6,4 +6,5 @@ export class Role implements RoleInterface {
     name: string;
     brc: string;
     level: number;
+    description: string;
 }
