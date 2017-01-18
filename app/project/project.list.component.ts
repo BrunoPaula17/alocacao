@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core'
 
+import { Header } from '../shared/header.grid';
+
 import { Project } from './project'
 import { Customer } from '../customer/customer'
 import { Professional } from '../professional/professional'
@@ -7,17 +9,19 @@ import { Professional } from '../professional/professional'
 
 
 @Component({
-    selector: 'ava-prj-form',
-    templateUrl: './app/project/project-form.html'
+    selector: 'ava-prj-list',
+    templateUrl: './app/project/project-list.html'
 })
-export class ProjectFormComponent {
+export class ProjectListComponent {
     @Input()
-    model: Project;
+    models: Project[];
 
     @Input()
-    customers: Customer[];
+    headers: Header[];
 
     @Input()
     sponsors: Professional[];
 
+    @Input()
+    customers: Customer[];
 }

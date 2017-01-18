@@ -1,5 +1,4 @@
-import { IProfessional } from './professional.interface';
-import { Role } from '../role/role';
+import { IProfessional } from './professional.interface'
 
 export class Professional implements IProfessional{
     pid: number;
@@ -8,6 +7,5 @@ export class Professional implements IProfessional{
     email: string;
     roleID:number;
     prefix: number;
-    phone: number;
-    role: Role;
+    phone: number
 }

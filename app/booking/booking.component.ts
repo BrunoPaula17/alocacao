@@ -9,4 +9,5 @@ import { BOOKINGS } from '../shared/mock';
 export class BookingComponent {
     bookings: Booking[] = BOOKINGS;
     pageName: string = "Alocação";
+    model: Booking;
 }

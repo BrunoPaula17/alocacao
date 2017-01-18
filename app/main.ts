@@ -1,4 +1,4 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'
-import { BookingModule } from './booking/booking.module'
+import { ProjectModule } from './project/project.module'
 
-platformBrowserDynamic().bootstrapModule(BookingModule);
+platformBrowserDynamic().bootstrapModule(ProjectModule);

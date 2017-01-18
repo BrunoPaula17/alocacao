@@ -1,23 +1,16 @@
 <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Client</th>
-        <th>Responsable</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>01</td>
-        <td>Doe</td>
-        <td>Avanade</td>
-        <td>John Titor</td>
-      </tr>
-      <tr>
-        <td>02</td>
-        <td>Doe</td>
-        <td>Avanade</td>
-        <td>John Titor</td>
-      </tr>
-  </table>
+  <thead>
+    <tr class="text-nowrap">
+      <th *ngFor="let h of headers">{{h.description}}</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of models">
+      <td *ngFor="let h of headers">{{r[h.field]}}</td>
+      <td class="text-center">
+        <span class="fa fa-edit text-info"></span>&nbsp;
+        <span class="fa fa-close text-danger"></span>
+      </td>
+    </tr>
+</table>

@@ -3,48 +3,40 @@
 </div>
 
 <div class="page-content">
-    <table class="table table-bordered table-striped table-hover table-responsive">
+    <table>
         <thead>
-            <tr>
-                <th>Cargo</th>
-                <th>BRC</th>
-                <th>Nível</th>
-                <th>Descrição</th>
-            </tr>
+            <th></th>
         </thead>
         <tbody>
-            <tr *ngFor="let role of roles"
-                (click)="OnRolesClick(role)">
-                <td>{{ role.name }}</td>
-                <td>{{ role.brc }}</td>
-                <td>{{ role.level }}</td>
-                <td>{{ role.description }}</td>
-            </tr>
+            <td></td>
         </tbody>
-
     </table>
-    <form name="resourceForm"
-          *ngIf="currentRole">
+    <form name="resourceForm">
         <div class="form-group col-md-6">
             <label for="role">Cargo</label>
-            <input id="role" value={{currentRole.name}} type="text" name="role" placeholder="Associate Software Engineer" class="form-control"
+            <input id="role" value={{model.name}} type="text" name="role" placeholder="Associate Software Engineer" class="form-control"
                 required>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="brc">BRC</label>
-            <input id="brc" value={{currentRole.brc}} type="text" name="brc" placeholder="2017ASE" class="form-control" required>
+            <input id="brc" value={{model.brc}} type="text" name="brc" placeholder="2017ASE" class="form-control" required>
         </div>
         <div class="form-group col-md-2">
             <label for="level">Nível</label>
             <select class="form-control">
-                <option *ngFor="let level of levels" 
-                        [value]="level" 
-                        [selected]="currentRole.level == level">{{ level }}</option>
+                <option value="1">Nivel 1</option>
+                <option value="8">Nivel 8</option>
+                <option value="9">Nivel 9</option>
+                <option value="10">Nivel 10</option>
+                <option value="11">Nivel 11</option>
+                <option value="12">Nivel 12</option>
             </select>
+            <!--<input id="level" value={{model.level}} type="text" name="level" placeholder="12" class="form-control"
+                required>-->
         </div>
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-10">
             <label for="description">Descrição do Cargo</label>
-            <textarea rows="3" id="description" value={{currentRole.description}} type="text" name="description" placeholder="Adicione uma descrição"
+            <textarea rows="5" id="description" value={{model.description}} type="text" name="description" placeholder="Adicione uma descrição"
                 class="form-control" required>
             </textarea>
         </div>
