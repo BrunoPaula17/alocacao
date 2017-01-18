@@ -1,9 +1,9 @@
-import { ProjectInterface } from './project.interface' 
+import { IProject } from './project.interface' 
 
-export class Project implements ProjectInterface{
+export class Project implements IProject{
     projectID: number;
-    clientId: number;
-    startEnd: Date;
+    clientID: number;
+    startDate: Date;
     endDate: Date;
     concludeDate: Date;
     sponsor: number;
