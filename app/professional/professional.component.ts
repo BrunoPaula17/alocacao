@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Professional } from './professional';
+import { PROFESSIONALS } from '../shared/mock';
 
 @Component({
     selector: 'ava-pro-app',
@@ -7,17 +8,7 @@ import { Professional } from './professional';
 })
 
 export class ProfessionalComponent {
-
+    professional: Professional[] = PROFESSIONALS;
     pageName:string = "Profissional";
-
-    model: Professional = {
-
-            "pid": 10715376,
-            "eid": "ronye.peterson.anjos",
-            "name": "Ronye Anjos",
-            "email": "ronye.peterson.anjos@avanade.com",
-            "roleID":10,
-            "prefix": 11,
-            "phone": 971537512
-        };
 }
+
