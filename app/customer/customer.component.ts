@@ -14,21 +14,3 @@ export class CustomerComponent {
             "responsible": 777
         };
 }
-
-export const CUSTOMERS: Customer[] = [    {
-        "customerID": 1,
-        "name": "Santander",
-        "responsible": 10775951
-    },
-
-    {
-        "customerID": 2,
-        "name": "Itaú",
-        "responsible": 10775951
-    },
-
-    {
-        "customerID": 3,
-        "name": "Safra",
-        "responsible": 10775951
-    }];
