@@ -11,17 +11,16 @@ import { CustomerService } from './customer.service';
 export class CustomerComponent implements OnInit {
     constructor(private _customerService: CustomerService) {
     }
-    
+
     customers: Customer[];
     pageName: string = "Cliente";
-    currentCustomer: Customer;
+    currentCustomer : Customer; 
     professionals: Professional[] = PROFESSIONALS;
 
     getProfessional(customer: Customer): void {
         customer.professional = this.professionals.find(professional => professional.pid == customer.responsible);
     }
-
-   OnLineClick(customer: Customer): void {
+      OnLineClick(customer: Customer): void {
         this.currentCustomer = customer;
     }
 
@@ -35,9 +34,10 @@ export class CustomerComponent implements OnInit {
                 });
             }
             );
+    
+  
+  
+
+   
     }
-
-
-
-
-}   
+}  
