@@ -3,7 +3,7 @@ import { Professional } from './professional';
 import { Role } from '../role/role';
 
 
-@Component({
+  @Component({
     moduleId: module.id,
     selector:'ava-pro-dtl-app',
     templateUrl:'professional-details.html'
