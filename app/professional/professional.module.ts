@@ -10,4 +10,5 @@ import { ProfessionalComponent } from './professional.component'
     bootstrap: [ ProfessionalComponent ]
 })
 
+
 export class ProfessionalModule { }
