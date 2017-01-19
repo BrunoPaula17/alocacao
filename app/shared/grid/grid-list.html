@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-striped table-bordered table-responsive">
   <thead>
     <tr class="text-nowrap">
       <th *ngFor="let h of headers">{{h.description}}</th>
@@ -7,7 +7,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let r of models">
-      <td *ngFor="let h of headers" [ngSwitch]="h.filter">  
+      <td *ngFor="let h of headers" class="{{h.class}}" [ngSwitch]="h.filter">  
         <span *ngSwitchCase="'date'">{{r[h.field] | date:'dd/MM/yyyy' }}</span>
         <span *ngSwitchDefault>{{r | fieldSelector: h.field }}</span>
       </td>
