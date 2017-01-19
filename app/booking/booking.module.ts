@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PercentualFilter } from '../shared/percentual.filter'
 
 import { BookingComponent } from './booking.component';
-import { BookingDetail } from './booking-details.component';
+import { BookingDetailComponent } from './booking-details.component';
 import { BookingService } from './booking.service';
 
 import { HeaderComponent } from '../shared/header/header.component';
@@ -11,7 +11,7 @@ import { HeaderComponent } from '../shared/header/header.component';
 @NgModule({
     imports: [ BrowserModule ],
     declarations: [ BookingComponent,
-                    BookingDetail,
+                    BookingDetailComponent,
                     PercentualFilter, 
                     HeaderComponent ],
     providers: [ BookingService ],
