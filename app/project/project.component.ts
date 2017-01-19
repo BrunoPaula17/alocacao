@@ -32,5 +32,6 @@ export class ProjectComponent implements OnInit {
     ngOnInit() {
         this.getCustomers();
         this.getProfessionals();
+        this.models[0].client = this.customers[0];
     }
 }
