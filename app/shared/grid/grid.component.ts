@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core'
+import { Header } from './grid-header'
+import { CustomGridService } from './grid.service';
 
 @Component({
     moduleId: module.id,
@@ -6,6 +8,9 @@ import { Component, Input } from '@angular/core'
     templateUrl: 'grid-list.html'
 })
 
-export class CustomGridComponent {
-    
+export class CustomGridComponent {  
+    @Input()
+    headers: Header[];
+    @Input()
+    models: Object[];
 }

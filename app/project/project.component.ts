@@ -16,9 +16,7 @@ import { PROJECTS, CUSTOMERS, PROFESSIONALS } from '../shared/mock'
 export class ProjectComponent extends OnInit {
     constructor(private _gridService: CustomGridService<Project>) { super() }
 
-    headers: Header[] = Project.Headers;
     model: Project = new Project();
-    models: Project[] = PROJECTS;
     pageName: string = '<span class="fa fa-cubes"></span>&nbsp;Projetos';
 
     customers: Customer[];
@@ -35,7 +33,7 @@ export class ProjectComponent extends OnInit {
     ngOnInit() {
         this.getCustomers();
         this.getProfessionals();
-        this.models[0].client = this.customers[0];
-        this.models[0].sponsor = this.professionals[0];
+        this._gridService.headers = Project.Headers;
+        this._gridService.models = PROJECTS;
     }
 }
