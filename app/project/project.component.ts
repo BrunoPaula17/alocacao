@@ -38,5 +38,6 @@ export class ProjectComponent extends OnInit {
         this._projectService.getProjects()
             .then((projects: Project[]) => this._gridService.models = projects)
         this._gridService.headers = Project.Headers;
+        
     }
 }
