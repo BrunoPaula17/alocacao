@@ -24,9 +24,7 @@ export class CustomerComponent implements OnInit{
     
    OnLineClick(customer:Customer) : void
    {
-       
        this.currentCustomer = customer;
-     
    }
 
    ngOnInit() {
