@@ -1,8 +1,8 @@
-import { BookingInterface } from './booking.interface';
+import { IBooking } from './booking.interface';
 import { Project } from '../project/project'
 import { Professional } from '../professional/professional';
 
-export class Booking implements BookingInterface{
+export class Booking implements IBooking{
     bookingID: number;
     projectID: number;
     pid: number;

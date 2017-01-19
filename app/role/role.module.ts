@@ -5,7 +5,7 @@ import { RoleService } from './role.service';
 
 import { RoleComponent } from './role.component';
 import { RoleDetailComponent } from './role-details.component';
-import { HeaderComponent } from '../shared/header/header.component'
+import { HeaderComponent } from '../shared/header/header.components';
 
 @NgModule({
     imports: [BrowserModule],
