@@ -12,18 +12,22 @@ export class ProfessionalComponent {
     professionals: Professional[] = PROFESSIONALS;
     roles: Role[] = ROLES;
     pageName:string = "Profissional";
+    currentProfessional: Professional;
 
 
 
 getRoleDetail(professional: Professional): void {
     professional.role = this.roles.find(role => role.roleId == professional.roleID)
-
 }
 
 ngOnInit() {
     this.professionals.forEach((item,index)=>{
         this.getRoleDetail(item);
     });
+}
+
+getDetails(pro: Professional){
+    this.currentProfessional = pro;
 }
 
 }

@@ -10,6 +10,8 @@ export class RoleComponent {
     roles: Role[] = ROLES;
     currentRole: Role;
 
+    levels: number[] = [6,7,8,9,10,11,12];
+    
     pageName: string = "Cargos";
 
     model: Role = {
