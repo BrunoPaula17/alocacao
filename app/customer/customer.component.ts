@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Customer } from './customer';
 import { CUSTOMERS, PROFESSIONALS } from '../shared/mock';
 import { Professional } from '../professional/professional'
@@ -7,7 +7,7 @@ import { Professional } from '../professional/professional'
     selector: 'ava-cust-app',
     templateUrl: './app/customer/customer.html'
 })
-export class CustomerComponent {
+export class CustomerComponent implements OnInit{
     customers: Customer[] = CUSTOMERS;
     pageName: string = "Cliente";
     currentCustomer : Customer; 
