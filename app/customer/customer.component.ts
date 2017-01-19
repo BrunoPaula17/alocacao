@@ -11,7 +11,7 @@ import { CustomerService } from './customer.service';
 export class CustomerComponent implements OnInit {
     constructor(private _customerService: CustomerService) {
     }
-    //customers: Customer[] = CUSTOMERS;
+    
     customers: Customer[];
     pageName: string = "Cliente";
     currentCustomer: Customer;
@@ -19,7 +19,6 @@ export class CustomerComponent implements OnInit {
 
     getProfessional(customer: Customer): void {
         customer.professional = this.professionals.find(professional => professional.pid == customer.responsible);
-        //console.log(customer);
     }
 
    OnLineClick(customer: Customer): void {
@@ -27,7 +26,6 @@ export class CustomerComponent implements OnInit {
     }
 
     ngOnInit() {
-        //this.getProfessional();
 
         this._customerService.getCustomerList()
             .then(customers => this.customers = customers)
