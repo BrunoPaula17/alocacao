@@ -5,5 +5,5 @@ export interface IProfessional {
     email: string;
     roleID:number;
     prefix: number;
-    phone: number
+    phone: string
 }

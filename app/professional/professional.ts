@@ -8,6 +8,6 @@ export class Professional implements IProfessional{
     email: string;
     roleID:number;
     prefix: number;
-    phone: number;
+    phone: string;
     role: Role;
 }
