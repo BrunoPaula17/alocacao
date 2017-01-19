@@ -43,19 +43,22 @@ export const BOOKINGS: Booking[] = [
 export const CUSTOMERS: Customer[] = [    {
         "customerID": 1,
         "name": "Santander",
-        "responsible": 10775951
+        "responsible": 10715377,
+        "professional": null
     },
 
     {
         "customerID": 2,
         "name": "Itaú",
-        "responsible": 10775951
+        "responsible": 10715378,
+        "professional": null
     },
 
     {
         "customerID": 3,
         "name": "Safra",
-        "responsible": 10775951
+        "responsible": 10715376,
+        "professional": null
     }];
 
 export const PROFESSIONALS: Professional[] = [
