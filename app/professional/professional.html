@@ -1,6 +1,4 @@
-<div class="page-header">
-    <h3><span class="glyphicon">{{ pageName }}</span></h3>
-</div>
+<ava-hdr-app [pageName]="'Profissional'"></ava-hdr-app>
 <div class="page-content">
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
@@ -26,70 +24,9 @@
             </tr>
         </tbody>
     </table>
-    <form name="resourceForm" *ngIf="currentProfessional">
-        <div class="form-group col-md-6">
-            <label for="pid">PID</label>
-            <input id="pid" 
-                   value="{{ currentProfessional.pid }}"
-                   type="text" 
-                   name="pid" 
-                   placeholder="Informe o PID " 
-                   class="form-control">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="eid">EID</label>
-            <input id="eid"
-                   value="{{ currentProfessional.eid }}"
-                   type="text" 
-                   name="entrepriseID" 
-                   placeholder="Informe o EID " 
-                   class="form-control">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="name">Nome</label>
-            <input id="name"
-                   value="{{ currentProfessional.name }}" 
-                   type="text" 
-                   name="name" 
-                   placeholder="Informe o Nome " 
-                   class="form-control">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input id="email"
-                   value="{{ currentProfessional.email }}"
-                   type="text" 
-                   name="email" 
-                   placeholder="Informe o Email " 
-                   class="form-control">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="roleID">Cargo</label>
-            <select class="form-control" required>
-                <option *ngFor="let role of roles" 
-                        [attr.value]="role.roleId"
-                        [attr.selected]="role.roleId === currentProfessional.roleID ? true : null"
-                        ((click)="getDetails(professional)"
-                        >{{ role.description }}</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="prefix">Prefixo</label>
-            <input id="prefix" 
-                   value="{{ currentProfessional.prefix}}"
-                   type="text" 
-                   name="prefix" 
-                   placeholder="Informe o Prefixo do Telefone" 
-                   class="form-control">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="phone">Telefone</label>
-            <input id="phone"
-                   value="{{ currentProfessional.phone }}" 
-                   type="text" 
-                   name="phone" 
-                   placeholder="Informe o Telefone" 
-                   class="form-control">
-        </div>
-    </form>
+
+    <ava-pro-dtl-app [professionals]="currentProfessionals" 
+                     [role]="role">
+    </ava-pro-dtl-app>    
+   
 </div>
