@@ -8,7 +8,7 @@ import { Customer } from '../customer/customer'
 import { Professional } from '../professional/professional'
 import { ProjectService } from './project.service'
 
-import { PROJECTS, CUSTOMERS, PROFESSIONALS } from '../shared/mock'
+import { CUSTOMERS, PROFESSIONALS } from '../shared/mock'
 
 @Component({
     selector: 'ava-prj-app',
