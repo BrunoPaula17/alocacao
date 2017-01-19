@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core'
+import { Header } from './grid-header'
 
 @Component({
     moduleId: module.id,
@@ -7,5 +8,10 @@ import { Component, Input } from '@angular/core'
 })
 
 export class CustomGridComponent {
-    
+    @Input()
+    headers: Header[];
+    @Input()
+    models: Object[];
+
+    Edit: null;
 }

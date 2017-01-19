@@ -19,7 +19,6 @@ export class ProjectComponent extends OnInit {
         private _projectService: ProjectService) { super() }
 
     model: Project = new Project();
-    models: Project[];
     pageName: string = '<span class="fa fa-cubes"></span>&nbsp;Projetos';
 
     customers: Customer[];
@@ -38,12 +37,9 @@ export class ProjectComponent extends OnInit {
         this.getProfessionals();
         this._projectService.getProjects()
             .then((projects: Project[]) => this._gridService.models = projects)
-            .then((projects: Project[]) => {
-                this.models[0].client = this.customers[0];
-                this.models[0].sponsor = this.professionals[0];
-            });
-        
         this._gridService.headers = Project.Headers;
-         
+        this._gridService.headers[0].Edit = function(obj: Project){
+            console.log(obj);
+        }
     }
 }

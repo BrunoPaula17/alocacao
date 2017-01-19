@@ -12,8 +12,8 @@
         <span *ngSwitchDefault>{{r | fieldSelector: h.field }}</span>
       </td>
       <td class="text-center">
-        <span class="fa fa-edit fa-2x text-info"></span>&nbsp;
-        <span class="fa fa-close fa-2x text-danger"></span>
+        <span class="fa fa-edit fa-2x text-info" (click)="Edit()"></span>&nbsp;
+        <span class="fa fa-close fa-2x text-danger" ></span>
       </td>
     </tr>
 </table>
