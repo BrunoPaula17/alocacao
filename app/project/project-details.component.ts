@@ -7,10 +7,10 @@ import { Professional } from '../professional/professional'
 
 
 @Component({
-    selector: 'ava-prj-form',
-    templateUrl: './app/project/project-form.html'
+    selector: 'ava-prj-dtl-app',
+    templateUrl: './app/project/project-details.html'
 })
-export class ProjectFormComponent {
+export class ProjectDetailsComponent {
     @Input()
     model: Project;
 

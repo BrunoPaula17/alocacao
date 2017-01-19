@@ -13,6 +13,6 @@ export class FieldSelector implements PipeTransform {
         result = result[value];
     });
 
-    return JSON.stringify(result);
+    return result + '';
   }
 }
