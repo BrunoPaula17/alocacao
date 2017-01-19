@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PercentualFilter } from '../shared/percentual.filter'
 import { RouterModule, Router } from '@angular/router';
 
-import { BookingComponent } from './booking.component';
-import { BookingDetailComponent } from './booking-details.component';
-import { BookingService } from './booking.service';
+import { BookingComponent } from './booking.component'
+import { BookingDetailComponent} from './booking-details.component';
+import { BookingService }  from './booking.service';
 
-import { HeaderComponent } from '../shared/header/header.components';
+import { HeaderComponent } from '../shared/header/header.component';
 
 @NgModule({
     imports: [BrowserModule,

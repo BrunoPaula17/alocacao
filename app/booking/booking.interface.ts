@@ -1,4 +1,4 @@
-export interface IBooking {
+export interface BookingInterface {
     bookingID: number;
     projectID: number;
     pid: number;
