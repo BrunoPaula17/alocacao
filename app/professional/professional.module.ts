@@ -8,7 +8,7 @@ import { ProfessionalService } from './Professional.service';
 
 import { HeaderComponent } from '../shared/header/header.component';
 
-@NgModule({
+ @NgModule({
     imports: [ BrowserModule ],
     declarations: [ ProfessionalComponent, 
                     ProfessionalDetail, 
