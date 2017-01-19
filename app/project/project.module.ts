@@ -8,11 +8,13 @@ import { FieldSelector } from '../shared/filter/field-selector.filter';
 
 import { ProjectComponent } from './project.component'
 import { ProjectDetailsComponent } from './project-details.component'
+import { ProjectService } from './project.service'
+
 
 @NgModule({
     imports: [ BrowserModule, FormsModule ],
     declarations: [ FieldSelector, CustomGridComponent, ProjectComponent, ProjectDetailsComponent ],
-    providers: [CustomGridService],
+    providers: [CustomGridService, ProjectService],
     bootstrap: [ ProjectComponent ]
 })
 
