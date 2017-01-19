@@ -14,8 +14,6 @@ export class ProfessionalComponent {
     pageName:string = "Profissional";
     currentProfessional: Professional;
 
-
-
 getRoleDetail(professional: Professional): void {
     professional.role = this.roles.find(role => role.roleId == professional.roleID)
 }

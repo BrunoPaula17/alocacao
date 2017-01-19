@@ -3,19 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { PhoneFilter } from '../shared/phone.filter'
 
 import { ProfessionalComponent } from './professional.component'
-import { ProfessionalDetail } from './professional-details.component';
-import { ProfessionalService } from './Professional.service';
 
-import { HeaderComponent } from '../shared/header/header.component';
-
- @NgModule({
+@NgModule({
     imports: [ BrowserModule ],
-    declarations: [ ProfessionalComponent, 
-                    ProfessionalDetail, 
-                    PhoneFilter,
-                    HeaderComponent ],
-    providers: [ ProfessionalService ],
+    declarations: [ ProfessionalComponent, PhoneFilter ],
     bootstrap: [ ProfessionalComponent ]
 })
+
 
 export class ProfessionalModule { }
