@@ -2,42 +2,94 @@
     <h3><span class="glyphicon">{{ pageName }}</span></h3>
 </div>
 <div class="page-content">
-    <form name="resourceForm">
+    <table class="table table-bordered table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>EID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Cargo</th>
+                <th>Prefixo</th>
+                <th>Telefone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let professional of professionals" (click)="getDetails(professional)">
+                <td>{{ professional.pid }}</td>
+                <td>{{ professional.eid }}</td>
+                <td>{{ professional.name }}</td>
+                <td>{{ professional.email }}</td>
+                <td>{{ professional.role.description }}</td>
+                <td>{{ professional.prefix }}</td>
+                <td>{{ professional.phone | telephone}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <form name="resourceForm" *ngIf="currentProfessional">
         <div class="form-group col-md-6">
             <label for="pid">PID</label>
-            <input id="pid" type="text" name="pid" placeholder="Informe o PID " class="form-control">
+            <input id="pid" 
+                   value="{{ currentProfessional.pid }}"
+                   type="text" 
+                   name="pid" 
+                   placeholder="Informe o PID " 
+                   class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="eid">EID</label>
-            <input id="eid" type="text" name="entrepriseID" placeholder="Informe o EID " class="form-control">
+            <input id="eid"
+                   value="{{ currentProfessional.eid }}"
+                   type="text" 
+                   name="entrepriseID" 
+                   placeholder="Informe o EID " 
+                   class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
-            <input id="name" type="text" name="name" placeholder="Informe o Nome " class="form-control">
+            <input id="name"
+                   value="{{ currentProfessional.name }}" 
+                   type="text" 
+                   name="name" 
+                   placeholder="Informe o Nome " 
+                   class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="email">Email</label>
-            <input id="email" type="text" name="email" placeholder="Informe o Email " class="form-control">
+            <input id="email"
+                   value="{{ currentProfessional.email }}"
+                   type="text" 
+                   name="email" 
+                   placeholder="Informe o Email " 
+                   class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="roleID">Cargo</label>
             <select class="form-control" required>
-                <option value="12">Associate Software Engineer</option>
-                <option value="11">Software Engineer</option>
-                <option value="10">Senior Software Engineer</option>
-                <option value="9">System Analyst</option>
-                <option value="8">Senior System Analyst</option>
-                <option value="7">Manager</option>
-                <option value="6">Group Manager</option>
+                <option *ngFor="let role of roles" 
+                        [attr.value]="role.roleId"
+                        [attr.selected]="role.roleId === currentProfessional.roleID ? true : null"
+                        ((click)="getDetails(professional)"
+                        >{{ role.description }}</option>
             </select>
         </div>
         <div class="form-group col-md-6">
             <label for="prefix">Prefixo</label>
-            <input id="prefix" type="text" name="prefix" placeholder="Informe o Prefixo do Telefone" class="form-control">
+            <input id="prefix" 
+                   value="{{ currentProfessional.prefix}}"
+                   type="text" 
+                   name="prefix" 
+                   placeholder="Informe o Prefixo do Telefone" 
+                   class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="phone">Telefone</label>
-            <input id="phone" type="text" name="phone" placeholder="Informe o Telefone" class="form-control">
+            <input id="phone"
+                   value="{{ currentProfessional.phone }}" 
+                   type="text" 
+                   name="phone" 
+                   placeholder="Informe o Telefone" 
+                   class="form-control">
         </div>
     </form>
 </div>

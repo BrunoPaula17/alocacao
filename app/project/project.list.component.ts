@@ -12,6 +12,7 @@ import { Professional } from '../professional/professional'
     selector: 'ava-prj-list',
     templateUrl: './app/project/project-list.html'
 })
+
 export class ProjectListComponent {
     @Input()
     models: Project[];
