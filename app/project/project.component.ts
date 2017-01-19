@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from './project';
-import { PROJECTS } from '../shared/mock' 
-import { Header } from '../shared/header.grid'
 
+import { Header } from '../shared/grid/grid-header';
+import { CustomGridService } from '../shared/grid/grid.service';
+
+import { Project } from './project';
 import { Customer } from '../customer/customer'
 import { Professional } from '../professional/professional'
 
-import { CUSTOMERS, PROFESSIONALS } from '../shared/mock'
+import { PROJECTS, CUSTOMERS, PROFESSIONALS } from '../shared/mock'
 
 @Component({
     selector: 'ava-prj-app',
     templateUrl: './app/project/project.html'
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent extends OnInit {
+    constructor(private _gridService: CustomGridService<Project>) { super() }
+
     headers: Header[] = Project.Headers;
     model: Project = new Project();
     models: Project[] = PROJECTS;
@@ -33,5 +36,6 @@ export class ProjectComponent implements OnInit {
         this.getCustomers();
         this.getProfessionals();
         this.models[0].client = this.customers[0];
+        this.models[0].sponsor = this.professionals[0];
     }
 }
