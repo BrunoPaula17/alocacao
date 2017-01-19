@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Booking } from './booking';
+import { BookingService } from './booking.service';
+
 import { Project } from '../project/project'
 import { Professional } from '../professional/professional';
-import { BOOKINGS, PROJECTS, PROFESSIONALS } from '../shared/mock';
+
+import { PROJECTS, PROFESSIONALS } from '../shared/mock';
 
 @Component({
     selector: 'ava-bok-app',
     templateUrl: './app/booking/booking.html'
 })
 export class BookingComponent implements OnInit {
-    bookings: Booking[] = BOOKINGS;
+    constructor(private _bookingService: BookingService) { }
+
     projects: Project[] = PROJECTS;
     professionals: Professional[] = PROFESSIONALS;
-    pageName: string = "Alocação";
+    bookings: Booking[];
     currentBooking: Booking;
 
     getProjectDetails(booking: Booking): void {
@@ -24,9 +29,12 @@ export class BookingComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.bookings.forEach((item, index)=> {
-            this.getProjectDetails(item);
-            this.getProfessionalDetails(item);
+        this._bookingService.getBookingList().then((booking: Booking[]) => {
+            this.bookings = booking;
+            this.bookings.forEach((item, index) => {
+                this.getProjectDetails(item);
+                this.getProfessionalDetails(item);
+            });
         });
     }
 
