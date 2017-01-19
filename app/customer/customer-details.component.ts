@@ -8,5 +8,7 @@ templateUrl: 'customer-details.html'
 })
 
 export class CustomerDetailsComponent{
+    
     @Input() customer:Customer;
+
 }
