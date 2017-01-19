@@ -20,12 +20,12 @@ export class Project implements IProject{
     wbs: string;
 
     static Headers: Header[] = [
-        {field: 'client.name', description:'Cliente', filter: 'text'},
-        {field: 'name', description:'Nome', filter: 'text'},
-        {field: 'wbs', description:'WBS', filter: 'text'},
-        {field: 'sponsor.name', description:'Responsável', filter: 'text'},
-        {field: 'startDate', description:'Dt. Inicio', filter: 'date'},
-        {field: 'endDate', description:'Dt. Fim', filter: 'date'},
-        {field: 'concludeDate', description:'Dt. Conclusão', filter: 'date'}
+        {field: 'client.name', description:'Cliente', filter: 'text', class: 'text-center'},
+        {field: 'name', description:'Nome', filter: 'text', class: 'text-center'},
+        {field: 'wbs', description:'WBS', filter: 'text', class: 'text-center'},
+        {field: 'sponsor.name', description:'Responsável', filter: 'text', class: 'text-center'},
+        {field: 'startDate', description:'Dt. Inicio', filter: 'date', class: 'text-center'},
+        {field: 'endDate', description:'Dt. Fim', filter: 'date', class: 'text-center'},
+        {field: 'concludeDate', description:'Dt. Conclusão', filter: 'date', class: 'text-center'}
     ];
 }

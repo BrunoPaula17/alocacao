@@ -6,6 +6,7 @@ import { CustomGridService } from '../shared/grid/grid.service';
 import { Project } from './project';
 import { Customer } from '../customer/customer'
 import { Professional } from '../professional/professional'
+import { ProjectService } from './project.service'
 
 import { PROJECTS, CUSTOMERS, PROFESSIONALS } from '../shared/mock'
 
@@ -14,11 +15,11 @@ import { PROJECTS, CUSTOMERS, PROFESSIONALS } from '../shared/mock'
     templateUrl: './app/project/project.html'
 })
 export class ProjectComponent extends OnInit {
-    constructor(private _gridService: CustomGridService<Project>) { super() }
+    constructor(private _gridService: CustomGridService<Project>,
+        private _projectService: ProjectService) { super() }
 
-    headers: Header[] = Project.Headers;
     model: Project = new Project();
-    models: Project[] = PROJECTS;
+    models: Project[];
     pageName: string = '<span class="fa fa-cubes"></span>&nbsp;Projetos';
 
     customers: Customer[];
@@ -35,7 +36,8 @@ export class ProjectComponent extends OnInit {
     ngOnInit() {
         this.getCustomers();
         this.getProfessionals();
-        this.models[0].client = this.customers[0];
-        this.models[0].sponsor = this.professionals[0];
+        this._projectService.getProjects()
+            .then((projects: Project[]) => this._gridService.models = projects);
+        this._gridService.headers = Project.Headers;
     }
 }
