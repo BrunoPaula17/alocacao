@@ -38,8 +38,5 @@ export class ProjectComponent extends OnInit {
         this._projectService.getProjects()
             .then((projects: Project[]) => this._gridService.models = projects)
         this._gridService.headers = Project.Headers;
-        this._gridService.headers[0].Edit = function(obj: Project){
-            console.log(obj);
-        }
     }
 }
