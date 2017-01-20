@@ -2,10 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Project } from './project'
-import { ProjectService } from '../project/Project.Service'
-import { Customer } from '../customer/customer'
-import { Professional } from '../professional/professional'
+import { Project } from './project';
+import { ProjectService } from '../project/project.service';
+import { Customer } from '../customer/customer';
+import { Professional } from '../professional/professional';
+
+//import { CustomerService } from '../customer/customer.service'
+import { ProfessionalService } from '../professional/professional.service'
 
 @Component({
     selector: 'ava-prj-dtl-app',
@@ -14,23 +17,27 @@ import { Professional } from '../professional/professional'
 export class ProjectDetailsComponent implements OnInit {
     constructor(private _router: ActivatedRoute,
         private _projectService: ProjectService,
-        private _location: Location) { }
+        //private _customerService: CustomerService,
+        private _professionalService: ProfessionalService,
+        private _location: Location) {
 
-    @Input()
-    model: Project;
+        this._professionalService.getProfessionalList().then((professionals: Professional[]) => this.sponsors = professionals);
+        //this._customerService.getCustomerList().then((customers: Customer[]) => this.customers = customers);
+    }
 
-    @Input()
+    project: Project;
     customers: Customer[];
-
-    @Input()
     sponsors: Professional[];
 
     goBack(): void {
         this._location.back();
     }
 
-    getDetails(id: number): Promise<Project> {
-        return this._projectService.getProjectDetails(id);
+    getDetails(id: number): void {
+        this._projectService.getProjectDetails(id)
+            .then((project: Project) => {
+                this.project = project;
+            });
     }
 
     ngOnInit(): void {
