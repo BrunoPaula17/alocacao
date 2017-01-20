@@ -11,7 +11,9 @@ import { ProfessionalService } from './professional.service'
 @NgModule({
     imports: [ BrowserModule,
     RouterModule.forChild([
-        {path:'professionals',component:ProfessionalComponent}
+        {path:'professionals',component:ProfessionalComponent},
+        {path:'professional/:id',component: ProfessionalDetailComponent}
+
     ])],
     declarations: [ ProfessionalComponent,
     ProfessionalDetailComponent, 
