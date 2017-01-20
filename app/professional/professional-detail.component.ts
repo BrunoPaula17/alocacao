@@ -23,7 +23,7 @@ export class ProfessionalDetailComponent implements OnInit {
                 private _location: Location){}
 
     professional: Professional;
-    @Input() role: Role[];
+    @Input() roles: Role[];
    
     getDetail(id:number): void {
         this._professionalService.getProfessional(id)
@@ -40,8 +40,8 @@ export class ProfessionalDetailComponent implements OnInit {
             this.getDetail(id);
         })
 
-        //this._roleService.getRoles()
-        //                 .then(role => this.role = role);
+        this._roleService.getRoleList()
+                         .then(role => this.roles = role);
     }
 
 }
