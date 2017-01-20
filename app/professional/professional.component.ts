@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Professional } from './professional';
 import { Role } from '../role/role';
 import { PROFESSIONALS, ROLES } from '../shared/mock';
@@ -9,7 +9,7 @@ import { ProfessionalService } from "./professional.service"
     templateUrl: './app/professional/professional.html'
 })
 
-export class ProfessionalComponent {
+export class ProfessionalComponent implements OnInit {
     constructor(private _professionalService:ProfessionalService)
     {
 
