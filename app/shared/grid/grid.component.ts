@@ -13,5 +13,6 @@ export class CustomGridComponent {
     @Input()
     models: Object[];
 
-    Edit: null;
+    // @Input()
+    // edit: Function;
 }
