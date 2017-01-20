@@ -11,9 +11,10 @@ import { ProjectComponent } from './project.component'
 import { ProjectDetailsComponent } from './project-details.component'
 import { ProjectService } from './project.service'
 
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, RouterModule.forChild([
+    imports: [BrowserModule, FormsModule, SharedModule,  RouterModule.forChild([
         { path: 'projects', component: ProjectComponent },
         { path: 'project/:id', component: ProjectDetailsComponent }])],
     declarations: [FieldSelector, CustomGridComponent, ProjectComponent, ProjectDetailsComponent],
