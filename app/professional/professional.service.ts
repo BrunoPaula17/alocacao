@@ -7,4 +7,8 @@ export class ProfessionalService {
     getProfessionalList():Promise<Professional[]>{
         return Promise.resolve(PROFESSIONALS);
     }
+
+    getProfessional(id:number):Promise<Professional>{
+        return Promise.resolve(PROFESSIONALS.find(professional => professional.pid === id));
+    }
 }

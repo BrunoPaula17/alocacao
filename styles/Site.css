@@ -90,3 +90,37 @@ thead th{
   color: white;
   text-align: center;
 }
+
+/*OVERRIDE FONT AWESOME */
+.fa-icon{
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.fa-small{
+  font-size: 1.5em;
+}
+
+.fa-avanade-orange{
+  color: #ff4f00;
+}
+
+.fa-orange{
+  color: #cc4100;
+}
+
+.fa-black{
+  color: #000;
+}
+
+/*OVERRIDE Bootstrap */
+.btn-primary{
+  background-color: #ff4f00 !important; 
+  border-color: #fff !important; 
+}
+
+.btn-primary.btn-outline:hover{
+  background-color: #fff !important; 
+  border-color: #ff4f00 !important; 
+  color: #ff4f00 !important; 
+}

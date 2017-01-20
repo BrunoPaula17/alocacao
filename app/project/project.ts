@@ -27,7 +27,7 @@ export class Project implements IProject{
         {field: 'startDate', description:'Dt. Inicio', filter: 'date', class: 'text-center', insert: false, update: true, delete: true},
         {field: 'endDate', description:'Dt. Fim', filter: 'date', class: 'text-center', insert: false, update: true, delete: true},
         {field: 'concludeDate', description:'Dt. Conclusão', filter: 'date', class: 'text-center', insert: false, update: true, delete: true},
-        {field: 'projectID', description:'Editar', filter: 'button', class: 'text-center', insert: false, update: true, delete: false},
-        {field: 'projectID', description:'Excluir', filter: 'button', class: 'text-center', insert: false, update: false, delete: true}
+        {field: 'projectID', description:'Ações', filter: 'button', class: 'text-center', insert: false, update: true, delete: true},
     ];
+
 }

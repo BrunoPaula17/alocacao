@@ -10,6 +10,7 @@
                 <th>Cargo</th>
                 <th>Prefixo</th>
                 <th>Telefone</th>
+                <th>Detalhar</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +22,8 @@
                 <td>{{ professional.role.description }}</td>
                 <td>{{ professional.prefix }}</td>
                 <td>{{ professional.phone | telephone}}</td>
+                <td><a class="fa fa-list-alt fa-2x text-warning" [routerLink]="['/professional', professional.pid]"></a></td>
             </tr>
         </tbody>
     </table>    
-    <ava-pro-dtl-app [professional]="currentProfessional"></ava-pro-dtl-app>
 </div>

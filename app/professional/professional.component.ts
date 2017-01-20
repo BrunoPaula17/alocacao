@@ -15,9 +15,8 @@ export class ProfessionalComponent implements OnInit {
 
     }
 
-    professionals: Professional[] = PROFESSIONALS;
     roles: Role[] = ROLES;
-    currentProfessional: Professional;
+    professionals: Professional[];
 
     getRoleDetail(professional: Professional): void {
         professional.role = this.roles.find(role => role.roleId == professional.roleID)
@@ -31,10 +30,6 @@ export class ProfessionalComponent implements OnInit {
             });
         });
 
-    }
-
-    getDetails(pro: Professional){
-        this.currentProfessional = pro;
     }
 
 }
