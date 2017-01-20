@@ -1,31 +1,28 @@
-
-<!-- <ava-hdr-app [pageName]="'Profissional'"></ava-hdr-app> -->
-<ava-hdr-app [pageName]="'Profissional'" [icon]="'fa-user-circle-o'"></ava-hdr-app>
+<ava-hdr-app [pageName]="'Profissional'" [icon]="'fa-users'"></ava-hdr-app>
 <div class="page-content">
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr>
-                <th>PID</th>
-                <th>EID</th>
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Cargo</th>
-                <th>Prefixo</th>
                 <th>Telefone</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let professional of professionals" (click)="getDetails(professional)">
-                <td class="text-center">{{ professional.pid }}</td>
-                <td class="text-center">{{ professional.eid }}</td>
-                <td class="text-center">{{ professional.name }}</td>
-                <td class="text-center">{{ professional.email }}</td>
-                <td class="text-center">{{ professional.role.description }}</td>
-                <td class="text-center">{{ professional.prefix }}</td>
-                <td class="text-center">{{ professional.phone | telephone}}</td>
-                <td class="text-center"><a class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional', professional.pid]"></a></td>
-                <!--<td class="text-center"><span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/booking', booking.bookingID]"></span></td>-->
+                <td>{{ professional.name }}</td>
+                <td>{{ professional.email }}</td>
+                <td class="text-center">{{ professional.role.name }}</td>
+                <td class="text-center">({{ professional.prefix }}) {{ professional.phone | telephone}}</td>
+                    
+                <td class="text-center">
+                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional', professional.pid]"></span>
+                    <span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/professional', professional.pid]"></span>
+                    <span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/professional', professional.pid]"></span>
+                </td>
+                
             </tr>
         </tbody>
     </table>    
