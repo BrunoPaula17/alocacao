@@ -5,7 +5,7 @@ import { Role } from "../role/role"
 @Component({
     moduleId: module.id,
     selector: 'ava-pro-dtl-app',
-    templateUrl: 'professional-details.html' 
+    templateUrl: 'professional-detail.html' 
 })
 
 export class ProfessionalDetailComponent {

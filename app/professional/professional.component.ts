@@ -17,25 +17,24 @@ export class ProfessionalComponent {
 
     professionals: Professional[] = PROFESSIONALS;
     roles: Role[] = ROLES;
-
     currentProfessional: Professional;
 
-getRoleDetail(professional: Professional): void {
-    professional.role = this.roles.find(role => role.roleId == professional.roleID)
-}
+    getRoleDetail(professional: Professional): void {
+        professional.role = this.roles.find(role => role.roleId == professional.roleID)
+    }
 
-ngOnInit() {
-    this._professionalService.getProfessionalList().then((professional:Professional[])=>{
-        this.professionals = professional;
-        this.professionals.forEach((item,index)=>{
-            this.getRoleDetail(item);
+    ngOnInit() {
+        this._professionalService.getProfessionalList().then((professional:Professional[])=>{
+            this.professionals = professional;
+            this.professionals.forEach((item,index)=>{
+                this.getRoleDetail(item);
+            });
         });
-    });
 
-}
+    }
 
-getDetails(pro: Professional){
-    this.currentProfessional = pro;
-}
+    getDetails(pro: Professional){
+        this.currentProfessional = pro;
+    }
 
 }
