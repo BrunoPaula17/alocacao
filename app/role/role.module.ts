@@ -12,7 +12,8 @@ import { SharedModule } from '../shared/shared.module';
     imports: [BrowserModule,
               SharedModule,
         RouterModule.forChild([
-            { path: "roles", component: RoleComponent}
+            { path: "roles", component: RoleComponent},
+            { path: "role/:id", component: RoleDetailComponent}
     ])],
     declarations: [RoleComponent,
         RoleDetailComponent],

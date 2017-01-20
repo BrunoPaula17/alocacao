@@ -7,16 +7,17 @@
                 <th>BRC</th>
                 <th>Nível</th>
                 <th>Descrição</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let role of roles" (click)="OnRolesClick(role)">
-                <td>{{ role.name }}</td>
-                <td>{{ role.brc }}</td>
-                <td>{{ role.level }}</td>
+            <tr *ngFor="let role of roles">
+                <td class="text-center">{{ role.name }}</td>
+                <td class="text-center">{{ role.brc }}</td>
+                <td class="text-center">{{ role.level }}</td>
                 <td>{{ role.description }}</td>
+                <td class="text-center"><span class="fa fa-list-alt fa-1.5x text-warning" [routerLink]="['/role', role.roleId]"></span></td>
             </tr>
         </tbody>
     </table>
-    <ava-rol-dtl-app [role]="currentRole"></ava-rol-dtl-app>
 </div>
