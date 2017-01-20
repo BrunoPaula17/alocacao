@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Professional } from './professional';
 import { Role } from '../role/role';
 import { PROFESSIONALS, ROLES } from '../shared/mock';
+import { ProfessionalService } from "./professional.service"
 
 @Component({
     selector: 'ava-pro-app',
@@ -9,9 +10,14 @@ import { PROFESSIONALS, ROLES } from '../shared/mock';
 })
 
 export class ProfessionalComponent {
+    constructor(private _professionalService:ProfessionalService)
+    {
+
+    }
+
     professionals: Professional[] = PROFESSIONALS;
     roles: Role[] = ROLES;
-    pageName:string = "Profissional";
+
     currentProfessional: Professional;
 
 getRoleDetail(professional: Professional): void {
@@ -19,9 +25,13 @@ getRoleDetail(professional: Professional): void {
 }
 
 ngOnInit() {
-    this.professionals.forEach((item,index)=>{
-        this.getRoleDetail(item);
+    this._professionalService.getProfessionalList().then((professional:Professional[])=>{
+        this.professionals = professional;
+        this.professionals.forEach((item,index)=>{
+            this.getRoleDetail(item);
+        });
     });
+
 }
 
 getDetails(pro: Professional){
