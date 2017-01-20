@@ -13,6 +13,5 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit(): void {
         this.iconClass = `fa ${this.icon}`;
-        
     }
 }
