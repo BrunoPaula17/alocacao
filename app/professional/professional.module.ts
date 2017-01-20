@@ -4,12 +4,13 @@ import { PhoneFilter } from '../shared/phone.filter';
 import { ProfessionalComponent } from './professional.component';
 import { ProfessionalDetailComponent } from './professional-detail.component';
 import { RouterModule, Router} from '@angular/router';
-import { HeaderComponent } from '../shared/header/header.component';
+import { SharedModule } from '../shared/shared.module';
 import { ProfessionalService } from './professional.service'
 
 
 @NgModule({
     imports: [ BrowserModule,
+    SharedModule,
     RouterModule.forChild([
         {path:'professionals',component:ProfessionalComponent},
         {path:'professional/:id',component: ProfessionalDetailComponent}
@@ -17,8 +18,7 @@ import { ProfessionalService } from './professional.service'
     ])],
     declarations: [ ProfessionalComponent,
     ProfessionalDetailComponent, 
-    PhoneFilter,
-    HeaderComponent],
+    PhoneFilter],
     providers: [ProfessionalService],
     bootstrap: [ ProfessionalComponent]
 })

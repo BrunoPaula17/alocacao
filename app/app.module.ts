@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
         ProjectModule, 
         CustomerModule,
         SharedModule,
-        //ProfessionalModule, 
+        ProfessionalModule, 
         RoleModule,
         RouterModule.forRoot([
         { path: 'welcome', component: WelcomeComponent },
