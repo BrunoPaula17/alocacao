@@ -11,7 +11,7 @@ import { RoleService } from './role.service';
 })
 export class RoleComponent implements OnInit {
     constructor(private _roleService: RoleService) {
-
+   
     }
 
     roles: Role[] = ROLES;

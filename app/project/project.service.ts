@@ -5,8 +5,8 @@ import { PROJECTS } from '../shared/mock';
 
 @Injectable()
 export class ProjectService {
-     _PROJECTS: Project[];
-        
+    _PROJECTS: Project[];
+
     constructor() {
         this._PROJECTS = PROJECTS;
     }
@@ -30,10 +30,10 @@ export class ProjectService {
         return project;
     }
 
-    deleteProject(projectID: number): void {
+    deleteProject(projectID: number): Promise<Boolean> {
         this._PROJECTS = this._PROJECTS.filter(function (project: Project) {
             return project.projectID != projectID
         });
+        return Promise.resolve(true);
     }
-
 }
