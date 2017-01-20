@@ -4,6 +4,7 @@ import { Role } from './role';
 import { ROLES } from '../shared/mock';
 
 import { RoleService } from './role.service';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
     selector: 'ava-rol-app',

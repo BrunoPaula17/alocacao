@@ -9,7 +9,6 @@ import { Professional } from '../professional/professional';
 
 import { Project } from '../project/project';
 import { ProjectService } from '../project/project.service';
-import { ProfessionalService } from '../professional/professional.service';
 
 @Component({
     moduleId: module.id,
@@ -20,7 +19,6 @@ export class BookingDetailComponent implements OnInit {
     constructor(private _bookingService: BookingService,
         private _router: ActivatedRoute,
         private _projectService: ProjectService,
-        private _professionalService: ProfessionalService,
         private _location: Location) { }
 
     booking: Booking;
@@ -44,8 +42,5 @@ export class BookingDetailComponent implements OnInit {
 
         this._projectService.getProjects()
                             .then(projects => this.projects = projects);
-
-        this._professionalService.getProfessionalList()
-                                 .then(professionals => this.professionals = professionals);
     }
 }
