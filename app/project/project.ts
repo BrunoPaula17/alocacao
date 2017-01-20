@@ -20,12 +20,14 @@ export class Project implements IProject{
     wbs: string;
 
     static Headers: Header[] = [
-        {field: 'client.name', description:'Cliente', filter: 'text', class: 'text-center'},
-        {field: 'name', description:'Nome', filter: 'text', class: 'text-center'},
-        {field: 'wbs', description:'WBS', filter: 'text', class: 'text-center'},
-        {field: 'sponsor.name', description:'Responsável', filter: 'text', class: 'text-center'},
-        {field: 'startDate', description:'Dt. Inicio', filter: 'date', class: 'text-center'},
-        {field: 'endDate', description:'Dt. Fim', filter: 'date', class: 'text-center'},
-        {field: 'concludeDate', description:'Dt. Conclusão', filter: 'date', class: 'text-center'}
+        {field: 'client.name', description:'Cliente', filter: 'text', class: 'text-left', insert: false, update: true, delete: true},
+        {field: 'name', description:'Nome', filter: 'text', class: 'text-center', insert: false, update: true, delete: true},
+        {field: 'wbs', description:'WBS', filter: 'text', class: 'text-center', insert: false, update: true, delete: true},
+        {field: 'sponsor.name', description:'Responsável', filter: 'text', class: 'text-center', insert: false, update: true, delete: true},
+        {field: 'startDate', description:'Dt. Inicio', filter: 'date', class: 'text-center', insert: false, update: true, delete: true},
+        {field: 'endDate', description:'Dt. Fim', filter: 'date', class: 'text-center', insert: false, update: true, delete: true},
+        {field: 'concludeDate', description:'Dt. Conclusão', filter: 'date', class: 'text-center', insert: false, update: true, delete: true},
+        {field: 'projectID', description:'Editar', filter: 'button', class: 'text-center', insert: false, update: true, delete: false},
+        {field: 'projectID', description:'Excluir', filter: 'button', class: 'text-center', insert: false, update: false, delete: true}
     ];
 }
