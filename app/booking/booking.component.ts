@@ -18,7 +18,6 @@ export class BookingComponent implements OnInit {
     projects: Project[] = PROJECTS;
     professionals: Professional[] = PROFESSIONALS;
     bookings: Booking[];
-    currentBooking: Booking;
 
     getProjectDetails(booking: Booking): void {
         booking.project = this.projects.find(project => project.projectID == booking.projectID);
@@ -36,9 +35,5 @@ export class BookingComponent implements OnInit {
                 this.getProfessionalDetails(item);
             });
         });
-    }
-
-    getDetails(booking: Booking) {
-        this.currentBooking = booking;
     }
 }
