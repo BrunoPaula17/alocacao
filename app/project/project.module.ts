@@ -14,7 +14,7 @@ import { ProjectService } from './project.service'
 
 @NgModule({
     imports: [BrowserModule, FormsModule, RouterModule.forChild([
-        { path: 'projects', component: ProjectComponent}
+        { path: 'projects', component: ProjectComponent }
     ])],
     declarations: [FieldSelector, CustomGridComponent, ProjectComponent, ProjectDetailsComponent],
     providers: [CustomGridService, ProjectService],
