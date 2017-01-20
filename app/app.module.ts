@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Router } from '@angular/router';
+import { HttpModule } from '@angular/http';
 
 import { BookingModule } from './booking/booking.module';
 import { ProfessionalModule } from './professional/professional.module';
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
         SharedModule,
         ProfessionalModule, 
         RoleModule,
+        HttpModule,
         RouterModule.forRoot([
         { path: 'welcome', component: WelcomeComponent },
         { path: '', redirectTo:'/welcome', pathMatch:'full' }
