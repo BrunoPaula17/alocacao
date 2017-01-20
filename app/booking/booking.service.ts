@@ -7,4 +7,8 @@ export class BookingService{
     getBookingList(): Promise<Booking[]>{
         return Promise.resolve(BOOKINGS);
     }
+
+    getBooking(id: number): Promise<Booking>{
+        return Promise.resolve(BOOKINGS.find(booking => booking.bookingID === id));
+    }
 }

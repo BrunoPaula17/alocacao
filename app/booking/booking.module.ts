@@ -4,15 +4,16 @@ import { PercentualFilter } from '../shared/percentual.filter'
 import { RouterModule, Router } from '@angular/router';
 
 import { BookingComponent } from './booking.component'
-import { BookingDetailComponent} from './booking-details.component';
-import { BookingService }  from './booking.service';
+import { BookingDetailComponent } from './booking-details.component';
+import { BookingService } from './booking.service';
 
 import { HeaderComponent } from '../shared/header/header.component';
 
 @NgModule({
     imports: [BrowserModule,
         RouterModule.forChild([
-            { path: 'bookings', component: BookingComponent }
+            { path: 'bookings', component: BookingComponent },
+            { path: 'booking/:id', component: BookingDetailComponent }
         ])],
     declarations: [BookingComponent,
         BookingDetailComponent,
