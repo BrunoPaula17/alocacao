@@ -1,4 +1,4 @@
-<ava-hdr-app [pageName]="'Alocação'"></ava-hdr-app>
+<ava-hdr-app [pageName]="'Alocação'" [icon]="'fa-calendar-check-o'"></ava-hdr-app>
 <div class="page-content">
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
@@ -8,7 +8,7 @@
                 <th>Data de Início</th>
                 <th>Data Fim</th>
                 <th>Percentual de Alocação</th>
-                <th>Detalhar</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,7 +18,7 @@
                 <td class="text-center">{{ booking.initialDate | date:'dd/MM/yyyy' }}</td>
                 <td class="text-center">{{ booking.endDate | date:'dd/MM/yyyy' }}</td>
                 <td class="text-center">{{ booking.bookingPercentual | percentual }}</td>
-                <td class="text-center"><a class="fa fa-list-alt fa-2x text-warning" [routerLink]="['/booking', booking.bookingID]"></a></td>
+                <td class="text-center"><span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/booking', booking.bookingID]"></span></td>
             </tr>
         </tbody>
     </table>
