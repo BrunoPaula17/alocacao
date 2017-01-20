@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Customer } from './customer';
-import { CUSTOMERS, PROFESSIONALS } from '../shared/mock';
+import { CustomerService } from '../customer/customer.service';
+
 import { Professional } from '../professional/professional'
+import { CUSTOMERS, PROFESSIONALS } from '../shared/mock';
+
+
 
 @Component({
     selector: 'ava-cust-app',
     templateUrl: './app/customer/customer.html'
 })
 export class CustomerComponent implements OnInit{
+    constructor(private _customerService: CustomerService){
+
+    }
+
     customers: Customer[] = CUSTOMERS;
     pageName: string = "Cliente";
     currentCustomer : Customer; 
@@ -17,17 +26,11 @@ export class CustomerComponent implements OnInit{
 
         this.customers.forEach(customer => {
             customer.professional = this.professionals.find(professional => professional.pid == customer.responsible);
-            console.log(customer);
         });
         
     }
     
-   OnLineClick(customer:Customer) : void
-   {
-       this.currentCustomer = customer;
-   }
-
-   ngOnInit() {
+    ngOnInit() {
         this.getProfessional();
     }
 
