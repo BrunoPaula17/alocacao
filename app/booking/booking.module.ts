@@ -7,20 +7,20 @@ import { BookingComponent } from './booking.component'
 import { BookingDetailComponent } from './booking-details.component';
 import { BookingService } from './booking.service';
 
-import { HeaderComponent } from '../shared/header/header.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-    imports: [BrowserModule,
+     imports: [BrowserModule,
+               SharedModule,
         RouterModule.forChild([
             { path: 'bookings', component: BookingComponent },
             { path: 'booking/:id', component: BookingDetailComponent }
         ])],
-    declarations: [BookingComponent,
-        BookingDetailComponent,
-        PercentualFilter,
-        HeaderComponent],
-    providers: [BookingService],
-    bootstrap: [BookingComponent]
+     declarations: [PercentualFilter,
+                    BookingComponent,
+                    BookingDetailComponent,
+                    PercentualFilter],
+     providers: [BookingService],
 })
 
 export class BookingModule { }

@@ -5,12 +5,22 @@ import { RouterModule, Router } from '@angular/router';
 import { BookingModule } from './booking/booking.module';
 import { ProfessionalModule } from './professional/professional.module';
 import { ProjectModule } from './project/project.module';
+import { CustomerModule } from './customer/customer.module';
+import { RoleModule } from './role/role.module'; 
+import { SharedModule } from './shared/shared.module';
 
 import { WelcomeComponent } from './welcome.component';
 import { AppComponent } from './app.component';
 
 @NgModule({
-    imports: [BrowserModule, BookingModule, ProjectModule, RouterModule.forRoot([
+    imports: [BrowserModule, 
+        BookingModule, 
+        ProjectModule, 
+        CustomerModule,
+        SharedModule,
+        //ProfessionalModule, 
+        RoleModule,
+        RouterModule.forRoot([
         { path: 'welcome', component: WelcomeComponent },
         { path: '', redirectTo:'/welcome', pathMatch:'full' }
     ])],
