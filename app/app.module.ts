@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Router } from '@angular/router';
 
 import { BookingModule } from './booking/booking.module';
+import { ProfessionalModule } from './professional/professional.module';
 
 import { WelcomeComponent } from './welcome.component';
 import { AppComponent } from './app.component';
