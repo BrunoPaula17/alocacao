@@ -23,9 +23,13 @@ export class CustomerApplication{
 
     getCustomer(id: number): Customer{
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        let professionalApp: ProfessionalApplication = new ProfessionalApplication();
         let costumer: Customer;
+        let professional: Professional
 
         costumer = customerPersistence.getCustomer(id);
+        costumer.professional = professionalApp.getProfessional(costumer.responsible);
+
         return costumer;
     }
 }

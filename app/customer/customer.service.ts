@@ -29,7 +29,7 @@ const SERVICE_URL: string = '/api/customer'
     // }
 
     getCustomer(id:number) : Promise<Customer>{
-         let url: string = `${SERVICE_URL}/${id}`;
+         let url: string = `${SERVICE_URL}/details/${id}`;
 
          return this._httpService.get(url)
             .toPromise()
