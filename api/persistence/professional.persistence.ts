@@ -1,6 +1,6 @@
 import {Professional } from '../../app/professional/Professional'
 
-export class ProfessionalService{
+export class ProfessionalPersistence{
 
     private Professional: Professional[]=[
             {
@@ -45,12 +45,12 @@ export class ProfessionalService{
     }
     ];
 
-    getBookings(): Professional[] {
+    getProfessinals(): Professional[] {
         return this.professional;
     }
 
-    getBooking(id: number): Professional {
-        return this.professional.find(profissional => professional.professionalID === id);
+    getProfessionals(id: number): Professional {
+        return this.professional.find(professional => professional.professionalID === id);
     }
 
 }
