@@ -54,7 +54,7 @@ export class ProfessionalPersistence{
         return this.professional.find(professional => professional.pid === pid);
     }
 
-    createProfessional(                     
+    insertProfessional(                     
                         pid: number,
                         eid: string,
                         name: string,
@@ -73,7 +73,7 @@ export class ProfessionalPersistence{
                         roleID:number,
                         prefix: number,
                         phone: string ): Professional{
-       return null
+       return true
     }
 
     deleteProfessional(pid: number ): Professional{
