@@ -4,10 +4,11 @@ import { Router, RouterModule } from '@angular/router'
 import { CustomerComponent } from './customer.component'
 import { CustomerDetailsComponent } from './customer-details.component'
 import { CustomerService } from './customer.service'
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-    imports: [BrowserModule,  RouterModule.forChild([
+    imports: [BrowserModule, SharedModule, RouterModule.forChild([
             { path: 'customers', component: CustomerComponent },
             { path: 'customer/:id', component: CustomerDetailsComponent}
         ])],
