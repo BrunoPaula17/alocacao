@@ -13,4 +13,6 @@ export class RoleApplication {
 
         return rolePersistence.getRole(id);
     }
+
+    
 }
