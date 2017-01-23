@@ -2,7 +2,7 @@ import { Customer } from '../../app/customer/customer';
 import { ICrud } from './crud.interface';
 
 export class CustomerPersistence implements ICrud<Customer>{
-    
+
     private customers: Customer[] = [
         {
             "customerID": 1,
@@ -35,56 +35,69 @@ export class CustomerPersistence implements ICrud<Customer>{
         }
     ];
 
-    getCustomers(): Customer[] {
-        return this.customers;
+    Create(customer: Customer): Customer {
+        let custID: number = 1;
+
+        let lastCustomer: Customer;
+        this.customers.indexOf(lastCustomer, this.customers.length - 1)
+
+        if (lastCustomer != null) {
+            custID = lastCustomer.customerID + 1;
+        }
+
+        customer.customerID = custID;
+
+        this.customers.push(customer);
+
+        return customer;
     }
 
-    getCustomer(id: number): Customer {
-        return this.customers.find(customer => customer.customerID === id);
-    }
-
-    Create(customer: Customer): Customer{
-        return null;
-    }
-    
-    List(): Customer[]{
-        let _customers: Customer[];
+    List(): Customer[] {
+        let _customers: Customer[] = new Array<Customer>();
         //_customers = this.customers;
 
         this.customers.forEach(customer => {
-            if(customer.deleted === false)
-            {
+            if (customer.deleted === false) {
                 _customers.push(customer);
             }
         })
 
         return _customers;
     }
-    
-    Read(id: number): Customer{
-        return this.customers.find(customer => customer.customerID === id);
-    }
-    
-    Update(custUpd: Customer): Customer{
-      
-       let customer: Customer = this.Read(custUpd.customerID);
-       customer = custUpd;
-       return customer;
-    }
-    
-    Delete(id: number): boolean{
-         let _customer: Customer;
-         let retBool: boolean;
 
-         _customer = this.customers.find(customer => customer.customerID === id);
+    Read(id: number): Customer {
+        return this.customers.find(customer => customer.customerID === id && customer.deleted === false);
+    }
 
-         if(_customer != null)
-         {
-             _customer.deleted = true;
-             retBool = true;
-         }
- 
-        return retBool;    
+    Update(custUpd: Customer): Customer {
+        let _customer: Customer;
+  
+        _customer = this.customers.find(customer => customer.customerID === custUpd.customerID);
+
+        if(_customer != null){
+            this.customers[this.customers.indexOf(_customer)] = _customer;
+        }
+        else{
+            _customer = null;     
+        }
+
+        //let customer: Customer = this.Read(custUpd.customerID);
+        //customer = custUpd;
+        return _customer;
+    }
+
+    Delete(id: number): boolean {
+        let _customer: Customer;
+        let retBool: boolean;
+
+        _customer = this.customers.find(customer => customer.customerID === id);
+
+        if (_customer != null) {
+            _customer.deleted = true;
+            retBool = true;
+        }
+
+        return retBool;
     }
 
 }
