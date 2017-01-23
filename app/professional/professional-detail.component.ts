@@ -26,9 +26,26 @@ export class ProfessionalDetailComponent implements OnInit {
     role: Role[];
     action: String;
    
-    getDetail(id:number): void {
-        this._professionalService.getProfessional(id)
+    getDetail(pid:number): void {
+        this._professionalService.getProfessional(pid)
+                                 .then(professional => this.professional = professional)
+    }
+
+    insertProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string): void {
+        this._professionalService.insertProfessional(pid,eid,name,email,roleID,prefix,phone)
+                                 .then(professional => this.professional = professional)
+
+    }
+
+    updateProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string): void {
+        this._professionalService.updateProfessional(pid,eid,name,email,roleID,prefix,phone)
+                                 .then(professional => this.professional = professional)
+    }
+
+    deleteProfessional(pid:number): void {
+        this._professionalService.deleteProfessional(pid)
             .then(professional => this.professional = professional)
+
     }
 
     goBack():void {
@@ -39,7 +56,20 @@ export class ProfessionalDetailComponent implements OnInit {
         this._router.params.subscribe((params: Params) => {
             let id:number = +params['id'];
             this.action = params['action'];
-            this.getDetail(id);
+
+            switch(this.action){
+                case 'insert':
+                    //this.insertProfessional();
+                    break;
+                case 'update':
+                    //this.updateProfessional();
+                    break;
+                case 'delete':
+                    //this.deleteProfessional();
+                default:
+                    //this.getDetail();
+            }
+
         })
 
         this._roleService.getRoleList()
