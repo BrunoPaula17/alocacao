@@ -6,9 +6,8 @@ import { CustomerDetailsComponent } from './customer-details.component'
 import { CustomerService } from './customer.service'
 import { SharedModule } from '../shared/shared.module';
 
-
 @NgModule({
-    imports: [BrowserModule, SharedModule, RouterModule.forChild([
+    imports: [SharedModule, BrowserModule,  RouterModule.forChild([
             { path: 'customers', component: CustomerComponent },
             { path: 'customer/:id', component: CustomerDetailsComponent}
         ])],
