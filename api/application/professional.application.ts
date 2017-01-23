@@ -11,7 +11,7 @@ export class ProfessionalApplication{
     getProfessional(pid: number): Professional{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
 
-        return  professionalPersistence.getProfessional(pid);
+        return professionalPersistence.getProfessional(pid);
     }
 
     insertProfessionals(pid: number, eid: string, name: string, email: string, 
