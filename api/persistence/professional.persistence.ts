@@ -2,7 +2,7 @@ import {Professional } from '../../app/professional/Professional'
 
 export class ProfessionalPersistence{
 
-    private Professional: 
+    private professional: 
         Professional[]=[{
 
             "pid": 10715376,
@@ -55,37 +55,29 @@ export class ProfessionalPersistence{
     }
 
     createProfessional(                     
-                        pid: number;
-                        eid: string;
-                        name: string;
-                        email: string;
-                        roleID:number;
-                        prefix: number;
+                        pid: number,
+                        eid: string,
+                        name: string,
+                        email: string,
+                        roleID:number,
+                        prefix: number,
                         phone: string ): Professional{
-        return true
-        
+        return null
     }
 
     updateProfessional( 
-                        pid: number;
-                        eid: string;
-                        name: string;
-                        email: string;
-                        roleID:number;
-                        prefix: number;
+                        pid: number,
+                        eid: string,
+                        name: string,
+                        email: string,
+                        roleID:number,
+                        prefix: number,
                         phone: string ): Professional{
-        //return this.professional.data.splice(professional => professional.pid === pid);
-        return true
+       return null
     }
 
     deleteProfessional(pid: number ): Professional{
-        //foeach 
-        //return this.professional.data.splice(professional => professional.pid === pid);
-        return true
+        return this.professional.splice(this.professional.find(professional => professional.pid === pid),1);
     }
-
-    
-
-    
 
 }
