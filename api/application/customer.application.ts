@@ -11,7 +11,7 @@ export class CustomerApplication{
         let costumers: Customer[];
         let professionals: Professional[];
 
-        costumers       = customerPersistence.getCustomers();
+        costumers       = customerPersistence.List();
         professionals   = professionalApp.getProfessionals();
 
         costumers.forEach(customer =>{
@@ -23,9 +23,13 @@ export class CustomerApplication{
 
     getCustomer(id: number): Customer{
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        let professionalApp: ProfessionalApplication = new ProfessionalApplication();
         let costumer: Customer;
+        let professional: Professional
 
-        costumer = customerPersistence.getCustomer(id);
+        costumer = customerPersistence.Read(id);
+        costumer.professional = professionalApp.getProfessional(costumer.responsible);
+
         return costumer;
     }
 }

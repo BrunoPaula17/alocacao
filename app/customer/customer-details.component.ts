@@ -17,7 +17,6 @@ import { ProfessionalService } from "../professional/professional.service"
 
 export class CustomerDetailsComponent implements OnInit {
     constructor(private _customerService: CustomerService,
-        private _professionalService:ProfessionalService,
         private _router: ActivatedRoute,
         private _location: Location) { }
 
@@ -29,39 +28,44 @@ export class CustomerDetailsComponent implements OnInit {
         this._location.back();
     }
 
-    getProfessional(): void{
+    // getProfessional(): void{
 
-        this.customer.professional = this.professionals.find(professional => professional.pid == this.customer.responsible);
+    //     this.customer.professional = this.professionals.find(professional => professional.pid == this.customer.responsible);
         
-    }
+    // }
 
-    getDetails(id: number): void {
-         this._professionalService.getProfessionalList()
-            .then ((professional: Professional[]) => {
-                this.professionals = professional;
+     getDetails(id: number): void {
+    //      this._professionalService.getProfessionalList()
+    //         .then ((professional: Professional[]) => {
+    //             this.professionals = professional;
+    //         })
+    //         .then (() => {
+    //             this._customerService.getCustomer(id)
+    //                 .then((customer : Customer) => {
+    //                     this.customer = customer;
+    //                 })
+    //         })
+    //         .then(() => {
+    //             this.getProfessional();
+    //         })
+
+
+    //     // this._customerService.getCustomer(id)
+    //     //     .then(customer => this.customer = customer);
+
+    //     // this.getProfessional();
+
+         this._customerService.getCustomer(id)
+            .then((customer: Customer) => {
+                this.customer = customer;
             })
-            .then (() => {
-                this._customerService.getCustomer(id)
-                    .then((customer : Customer) => {
-                        this.customer = customer;
-                    })
-            })
-            .then(() => {
-                this.getProfessional();
-            })
-
-
-        // this._customerService.getCustomer(id)
-        //     .then(customer => this.customer = customer);
-
-        // this.getProfessional();
     }
 
     ngOnInit(): void {
-         this._router.params.subscribe((params: Params) => {
-             let id: number = +params['id'];
-             this.getDetails(id);
-         })
+          this._router.params.subscribe((params: Params) => {
+              let id: number = +params['id'];
+              this.getDetails(id);
+          })
         // this._professionalService.getProfessionalList().then((professional:Professional[])=>{
         //     this.professionals = professional;
         //     //this.professionals.forEach((item,index)=>{
@@ -69,6 +73,7 @@ export class CustomerDetailsComponent implements OnInit {
         //     //});
         // });
 
+       
        
     }
 }
