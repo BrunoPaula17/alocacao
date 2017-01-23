@@ -1,12 +1,7 @@
 "use strict";
 var ProfessionalPersistence = (function () {
     function ProfessionalPersistence() {
-<<<<<<< HEAD
         this.Professional = [{
-=======
-        this.professional = [
-            {
->>>>>>> 568957d6ffec782c420b727b91b78554541d65ad
                 "pid": 10715376,
                 "eid": "ronye.peterson.anjos",
                 "name": "Ronye Peterson Martins dos Anjos",
@@ -48,19 +43,11 @@ var ProfessionalPersistence = (function () {
             }
         ];
     }
-<<<<<<< HEAD
-    ProfessionalPersistence.prototype.getProfessinals = function () {
-        return this.professional;
-    };
-    ProfessionalPersistence.prototype.getProfessionals = function (id) {
-        return this.professional.find(function (professional) { return professional.professionalID === id; });
-=======
     ProfessionalPersistence.prototype.getProfessionals = function () {
         return this.professional;
     };
     ProfessionalPersistence.prototype.getProfessional = function (id) {
         return this.professional.find(function (professional) { return professional.pid === id; });
->>>>>>> 568957d6ffec782c420b727b91b78554541d65ad
     };
     return ProfessionalPersistence;
 }());

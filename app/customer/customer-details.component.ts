@@ -23,6 +23,7 @@ export class CustomerDetailsComponent implements OnInit {
 
     customer:Customer;
     professionals: Professional[];
+
     
     goBack():void {
         this._location.back();
