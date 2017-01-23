@@ -24,6 +24,7 @@ export class ProfessionalDetailComponent implements OnInit {
 
     professional: Professional;
     role: Role[];
+    action: String;
    
     getDetail(id:number): void {
         this._professionalService.getProfessional(id)
@@ -36,7 +37,8 @@ export class ProfessionalDetailComponent implements OnInit {
 
     ngOnInit(): void{
         this._router.params.subscribe((params: Params) => {
-            let id: number = +params['id'];
+            let id:number = +params['id'];
+            this.action = params['action'];
             this.getDetail(id);
         })
 
