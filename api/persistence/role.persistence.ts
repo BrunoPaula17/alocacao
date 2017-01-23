@@ -1,6 +1,7 @@
 import { Role } from '../../app/role/role';
+import { ICrud } from './crud.interface';
 
-export class RolePersistence {
+export class RolePersistence implements ICrud<Role> {
     private roles: Role[] = [
         {
             "roleId": 1,
@@ -39,11 +40,45 @@ export class RolePersistence {
         }
     ];
 
-    getRoles(): Role[]{
+    Create(role: Role): Role {
+        return null;
+    }
+
+    List(): Role[] {
+        return null;
+    }
+
+    Read(id: number): Role {
+        return new Role();
+    }
+
+    Update(role: Role): Role { 
+        return null; 
+    }
+
+    Delete(id: number): boolean { 
+        return true; 
+    }
+
+    getRoles(): Role[] {
         return this.roles;
     }
 
-    getRole(id:number) : Role{
+    getRole(id: number): Role {
         return this.roles.find(r => r.roleId === id);
+    }
+
+    CreatetRole(role: Role): boolean {
+        //insert code here
+        return true;
+    }
+
+    ReadRole(role: any) {
+
+    }
+
+    UpdateRole(role: Role): boolean {
+
+        return true;
     }
 }
