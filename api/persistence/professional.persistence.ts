@@ -45,7 +45,7 @@ export class ProfessionalPersistence{
     }
     ];
 
-    //
+    //xx
     getProfessinals(): Professional[] {
         return this.professional;
     }
