@@ -3,6 +3,7 @@ import {Professional } from '../../app/professional/Professional'
 export class ProfessionalPersistence{
 
     private Professional: Professional[]=[{
+
         "pid": 10715376,
         "eid": "ronye.peterson.anjos",
         "name": "Ronye Peterson Martins dos Anjos",
@@ -44,12 +45,12 @@ export class ProfessionalPersistence{
     }
     ];
 
-    getProfessinals(): Professional[] {
+    getProfessionals(): Professional[] {
         return this.professional;
     }
 
-    getProfessionals(id: number): Professional {
-        return this.professional.find(professional => professional.professionalID === id);
+    getProfessional(id: number): Professional {
+        return this.professional.find(professional => professional.pid === id);
     }
 
 }
