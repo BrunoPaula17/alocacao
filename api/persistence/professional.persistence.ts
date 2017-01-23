@@ -2,8 +2,7 @@ import {Professional } from '../../app/professional/Professional'
 
 export class ProfessionalPersistence{
 
-    private Professional: Professional[]=[
-            {
+    private Professional: Professional[]=[{
         "pid": 10715376,
         "eid": "ronye.peterson.anjos",
         "name": "Ronye Peterson Martins dos Anjos",
