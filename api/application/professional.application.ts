@@ -14,7 +14,42 @@ export class ProfessionalApplication{
         return  professionalPersistence.getProfessional(pid);
     }
 
-    // setProfessional(pid: number): Professional{
+    insertProfessionals(pid: number, eid: string, name: string, email: string, 
+                        roleID: number, prefix: number, phone: string): Professional{                            
+        let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
+
+        if((isNaN(pid) || pid === null)||
+           (eid === null)||(email === null)||
+           (isNaN(roleID) || roleID === null)||
+           (prefix === null)||(phone === null)){
+            throw ("Por favor, verificar as informações.");
+        }else{
+            return professionalPersistence.insertProfessional(pid, eid, name, email, roleID, prefix, phone);
+        }
+    }
+
+    updateProfessional(pid: number, eid: string, name: string, email: string, 
+                        roleID: number, prefix: number, phone: string): Professional{
+        let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
-    // }
+        if((isNaN(pid) || pid === null)||
+           (eid === null)||(email === null)||
+           (isNaN(roleID) || roleID === null)||
+           (prefix === null)||(phone === null)){
+            throw ("Por favor, verificar as informações.");
+        }else{
+            return professionalPersistence.updateProfessional(pid, eid, name, email, roleID, prefix, phone);
+        }
+    }
+
+    deleteProfessional(pid: number): Professional{
+
+        let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
+        
+        if(isNaN(pid) && typeof pid === "number"){
+            throw ("Por favor, informa o PID.");
+        }else{
+            return professionalPersistence.deleteProfessional(pid);
+        }
+    }
 }

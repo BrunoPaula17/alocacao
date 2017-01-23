@@ -53,4 +53,33 @@ export class ProfessionalPersistence{
         return this.professional.find(professional => professional.pid === id);
     }
 
+    createProfessional(                     
+                        pid: number;
+                        eid: string;
+                        name: string;
+                        email: string;
+                        roleID:number;
+                        prefix: number;
+                        phone: string ): Professional{
+        
+    }
+
+    updateProfessional( 
+                        pid: number;
+                        eid: string;
+                        name: string;
+                        email: string;
+                        roleID:number;
+                        prefix: number;
+                        phone: string ): Professional{
+    }
+
+    deleteProfessional(pid: number ): Professional{
+        return true
+    }
+
+    
+
+    
+
 }
