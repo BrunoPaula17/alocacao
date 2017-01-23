@@ -119,35 +119,40 @@ export const ROLES: Role[] = [
         "name": "Associate Software Engineer",
         "brc": "2017SE",
         "level": 12,
-        "description":"Initial software development"
+        "description":"Initial software development",
+        "deleted": false
     },
     {
         "roleId": 2,
         "name": "Software Engineer",
         "brc": "2017SE2",
         "level": 11,
-        "description":"Software development"
+        "description":"Software development",
+        "deleted": false
     },
     {
         "roleId": 3,
         "name": "Senior Software Engineer",
         "brc": "2017SES",
         "level": 10,
-        "description":"Senior software development"
+        "description":"Senior software development",
+        "deleted": false
     },
         {
         "roleId": 4,
         "name": "System Analyst",
         "brc": "2017SA",
         "level": 9,
-        "description":"Role`s description"
+        "description":"Role`s description",
+        "deleted": false
     },
     {
         "roleId": 5,
         "name": "Senior System Analyst",
         "brc": "2017SSA",
         "level": 8,
-        "description":"Role`s description"
+        "description":"Role`s description",
+        "deleted": false
     }    
 ];
 

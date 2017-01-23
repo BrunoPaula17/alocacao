@@ -68,7 +68,6 @@ export class CustomerPersistence implements ICrud<Customer>{
     Read(id: number): Customer {
         return this.customers.find(customer => customer.customerID === id && customer.deleted === false);
     }
-
     Update(custUpd: Customer): Customer {
         let _customer: Customer;
   
