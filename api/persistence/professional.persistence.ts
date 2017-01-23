@@ -12,6 +12,7 @@ export class ProfessionalPersistence{
             "roleID": 1,
             "prefix": 11,
             "phone": "971537512",
+            "deleted": false,
             "role": null
         },
         {
@@ -32,6 +33,7 @@ export class ProfessionalPersistence{
             "roleID":3,
             "prefix": 11,
             "phone": "984841212",
+            "deleted": false,
             "role": null
         },
         {
@@ -42,6 +44,7 @@ export class ProfessionalPersistence{
             "roleID": 4,
             "prefix": 11,
             "phone": "931312323",
+            "deleted": false,
             "role": null
         }
         ];
@@ -61,8 +64,23 @@ export class ProfessionalPersistence{
                         email: string,
                         roleID:number,
                         prefix: number,
-                        phone: string ): Professional{
-        return null;
+                        phone: string ): Professional {
+
+        
+        professional[]=[{
+            "pid": pid,
+            "eid": eid,
+            "name": name,
+            "email": email,
+            "roleID": roleID,
+            "prefix": prefix,
+            "phone": phone,
+            "deleted": false,
+            "role": null
+        }]
+                            
+       return pid;
+
     }
 
     updateProfessional( 
@@ -72,13 +90,32 @@ export class ProfessionalPersistence{
                         email: string,
                         roleID:number,
                         prefix: number,
-                        phone: string ): Professional{
-       return null;
+                        phone: string ): Professional {
+
+    professional[this.professional.find(professional => professional.pid === pid)]=[{
+            "eid": eid,
+            "name": name,
+            "email": email,
+            "roleID": roleID,
+            "prefix": prefix,
+            "phone": phone,
+            "deleted": false,
+            "role": null
+        }]
+                            
+       return pid;
     }
 
-    deleteProfessional(pid: number ): Professional{
-        //return this.professional.splice(this.professional.find(professional => professional.pid === pid),1);
-        return null;
-}
+    deleteProfessional(pid: number ): boolean {
+        
+        if this.professional.find(professional => professional.pid === pid)] {
+            professional[this.professional.find(professional => professional.pid === pid)]=[{
+                "deleted": true,
+            }]
+            return true;
+        } else
+            return false;
+        
+    }
 
 }
