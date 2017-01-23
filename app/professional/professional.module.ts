@@ -13,9 +13,8 @@ import { ProfessionalService } from './professional.service'
     SharedModule,
     RouterModule.forChild([
         {path:'professionals',component:ProfessionalComponent},
-        {path:'professional/:id',component: ProfessionalDetailComponent}
-
-    ])],
+        {path:'professional/:action/:id',component: ProfessionalDetailComponent}
+    )],
     declarations: [ ProfessionalComponent,
     ProfessionalDetailComponent, 
     PhoneFilter],
