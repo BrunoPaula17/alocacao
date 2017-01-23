@@ -62,7 +62,7 @@ export class ProfessionalPersistence{
                         roleID:number,
                         prefix: number,
                         phone: string ): Professional{
-        return null
+        return null;
     }
 
     updateProfessional( 
@@ -73,11 +73,12 @@ export class ProfessionalPersistence{
                         roleID:number,
                         prefix: number,
                         phone: string ): Professional{
-       return true
+       return null;
     }
 
     deleteProfessional(pid: number ): Professional{
-        return this.professional.splice(this.professional.find(professional => professional.pid === pid),1);
-    }
+        //return this.professional.splice(this.professional.find(professional => professional.pid === pid),1);
+        return null;
+}
 
 }
