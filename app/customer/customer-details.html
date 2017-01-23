@@ -4,26 +4,27 @@
     <div class="form-group col-md-6">
         <label for="idClient">ID Cliente</label>
         <input id="idClient" value="{{ customer.customerID }}" type="text" name="customerID" placeholder="ID do Cliente" class="form-control"
-            required>
+            required disabled>
     </div>
     <div class="form-group col-md-6">
         <label for="name">Nome</label>
-        <input id="name" type="text" name="name" value="{{ customer.name }}" placeholder="Nome do Cliente" class="form-control" disabled>
+        <input id="name" type="text" name="name" value="{{ customer.name }}" 
+        placeholder="Nome do Cliente" class="form-control" [disabled]="action !== 'edit'">
     </div>
     <div class="form-group col-md-6">
         <label for="responsible">Responsável</label>
         <input id="responsible" type="text" name="responsible" value="{{ customer.professional.name }}" placeholder="Nome do profissional Avanade responsável"
-            class="form-control" disabled>
+            class="form-control" [disabled]="action !== 'edit'">
     </div>
     <div class="form-group col-md-6">
         <label for="contact">Contato</label>
         <input id="contact" type="text" name="contact" value="{{ customer.contact }}" placeholder="Nome do contato no cliente"
-            class="form-control" disabled>
+            class="form-control" [disabled]="action !== 'edit'">
     </div>
     <div class="form-group col-md-6">
         <label for="email">E-mail</label>
         <input id="email" type="text" name="email" value="{{ customer.email }}" placeholder="E-mail para contato"
-            class="form-control" disabled>
+            class="form-control" [disabled]="action !== 'edit'">
     </div>
     <br>
     <div class="form-group">
@@ -32,3 +33,4 @@
         </div>
     </div>
 </form>
+{{action}}

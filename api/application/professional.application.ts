@@ -24,7 +24,7 @@ export class ProfessionalApplication{
            (prefix === null)||(phone === null)){
             throw ("Por favor, verificar as informações.");
         }else{
-            return professionalPersistence.insertProfessional(pid, eid, name, email, roleID, prefix, phone);
+            return null;//professionalPersistence.insertProfessional(pid, eid, name, email, roleID, prefix, phone);
         }
     }
 
@@ -38,7 +38,7 @@ export class ProfessionalApplication{
            (prefix === null)||(phone === null)){
             throw ("Por favor, verificar as informações.");
         }else{
-            return professionalPersistence.updateProfessional(pid, eid, name, email, roleID, prefix, phone);
+            return null;//professionalPersistence.updateProfessional(pid, eid, name, email, roleID, prefix, phone);
         }
     }
 
@@ -49,7 +49,7 @@ export class ProfessionalApplication{
         if(isNaN(pid) && typeof pid === "number"){
             throw ("Por favor, informa o PID.");
         }else{
-            return professionalPersistence.deleteProfessional(pid);
+            return null;//professionalPersistence.deleteProfessional(pid);
         }
     }
 }

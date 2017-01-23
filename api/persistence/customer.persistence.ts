@@ -57,10 +57,12 @@ export class CustomerPersistence implements ICrud<Customer>{
        let customer: Customer = this.Read(custUpd.customerID);
        customer = custUpd;
        return customer;
+
     }
     
     Delete(id: number): boolean{
         return null;
+        
     }
 
 }

@@ -22,39 +22,14 @@ export class CustomerDetailsComponent implements OnInit {
 
     customer:Customer;
     professionals: Professional[];
-
+    action: string;
 
     goBack():void {
         this._location.back();
     }
 
-    // getProfessional(): void{
-
-    //     this.customer.professional = this.professionals.find(professional => professional.pid == this.customer.responsible);
-        
-    // }
-
      getDetails(id: number): void {
-    //      this._professionalService.getProfessionalList()
-    //         .then ((professional: Professional[]) => {
-    //             this.professionals = professional;
-    //         })
-    //         .then (() => {
-    //             this._customerService.getCustomer(id)
-    //                 .then((customer : Customer) => {
-    //                     this.customer = customer;
-    //                 })
-    //         })
-    //         .then(() => {
-    //             this.getProfessional();
-    //         })
-
-
-    //     // this._customerService.getCustomer(id)
-    //     //     .then(customer => this.customer = customer);
-
-    //     // this.getProfessional();
-
+   
          this._customerService.getCustomer(id)
             .then((customer: Customer) => {
                 this.customer = customer;
@@ -64,16 +39,9 @@ export class CustomerDetailsComponent implements OnInit {
     ngOnInit(): void {
           this._router.params.subscribe((params: Params) => {
               let id: number = +params['id'];
+              this.action = params['action'];
               this.getDetails(id);
           })
-        // this._professionalService.getProfessionalList().then((professional:Professional[])=>{
-        //     this.professionals = professional;
-        //     //this.professionals.forEach((item,index)=>{
-        //     //    this.getRoleDetail(item);
-        //     //});
-        // });
-
-       
        
     }
 }
