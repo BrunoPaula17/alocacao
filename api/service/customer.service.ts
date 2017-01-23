@@ -10,7 +10,7 @@ customerRouter.get('/list', (request: Request, response: Response) => {
     response.json(customerApp.getCustomers());
 });
 
-customerRouter.get('/:id', (request: Request, response: Response) => {
+customerRouter.get('/details/:id', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
     
     let id: number = +request.params.id;
