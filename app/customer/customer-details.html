@@ -1,13 +1,10 @@
 <ava-hdr-app [pageName]="'Clientes'" [icon]="'fa-user-circle'"></ava-hdr-app>
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a  (click)=edit()>  Editar</a></li>
-</ul>
-<br>
-<form name="customerForm" *ngIf="customer">
+
+<form ng-app="" name="customerForm" *ngIf="customer">
     <div class="form-group col-md-6">
         <label for="idClient">ID Cliente</label>
         <input id="idClient" value="{{ customer.customerID }}" type="text" name="customerID" placeholder="ID do Cliente" class="form-control"
-            required disabled>
+            required>
     </div>
     <div class="form-group col-md-6">
         <label for="name">Nome</label>
@@ -35,4 +32,3 @@
         </div>
     </div>
 </form>
-
