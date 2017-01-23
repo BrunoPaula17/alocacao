@@ -6,4 +6,6 @@ export class Customer implements ICustomer{
     name: string;
     responsible: number;
     professional: Professional;
+    contact: string;
+    email: string;
 }
