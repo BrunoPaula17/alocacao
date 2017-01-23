@@ -45,11 +45,11 @@ export class RolePersistence implements ICrud<Role> {
     }
 
     List(): Role[] {
-        return null;
+        return this.roles;
     }
 
     Read(id: number): Role {
-        return new Role();
+        return this.roles.find(r => r.roleId === id);
     }
 
     Update(role: Role): Role { 
@@ -58,27 +58,5 @@ export class RolePersistence implements ICrud<Role> {
 
     Delete(id: number): boolean { 
         return true; 
-    }
-
-    getRoles(): Role[] {
-        return this.roles;
-    }
-
-    getRole(id: number): Role {
-        return this.roles.find(r => r.roleId === id);
-    }
-
-    CreatetRole(role: Role): boolean {
-        //insert code here
-        return true;
-    }
-
-    ReadRole(role: any) {
-
-    }
-
-    UpdateRole(role: Role): boolean {
-
-        return true;
     }
 }

@@ -21,7 +21,6 @@ const SERVICE_URL: string = '/api/customer'
                 return response.json() as Customer[];
             })
             .catch(this.errorHandling);
-      
      
      }
 
@@ -42,6 +41,22 @@ const SERVICE_URL: string = '/api/customer'
 
     errorHandling(error: any) {
         console.log(error.message || error);
+    }
+
+    createCustomer(customer: Customer) : void{
+        let url: string = `${SERVICE_URL}`;
+        this._httpService.post(url, customer).toPromise().then((response: Response) => {
+            return response.json() as Customer
+        })
+        .catch(this.errorHandling);
+    } 
+
+    updateCustomer(customer: Customer): void{
+         let url: string = `${SERVICE_URL}`;
+        this._httpService.put(url, customer).toPromise().then((response: Response) => {
+            return response.json() as Customer
+        })
+        .catch(this.errorHandling);
     }
 }
 
