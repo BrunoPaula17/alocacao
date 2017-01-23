@@ -8,4 +8,5 @@ export class Customer implements ICustomer{
     professional: Professional;
     contact: string;
     email: string;
+    deleted: boolean;
 }

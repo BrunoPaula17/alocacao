@@ -10,7 +10,8 @@ export class CustomerPersistence implements ICrud<Customer>{
             "responsible": 10715377,
             "professional": null,
             "contact": "Roseli",
-            "email": "roseli@santander.com.br"
+            "email": "roseli@santander.com.br",
+            "deleted": false
         },
 
         {
@@ -19,7 +20,8 @@ export class CustomerPersistence implements ICrud<Customer>{
             "responsible": 10715378,
             "professional": null,
             "contact": "João",
-            "email": "joao@itau.com.br"
+            "email": "joao@itau.com.br",
+            "deleted": false
         },
 
         {
@@ -28,7 +30,8 @@ export class CustomerPersistence implements ICrud<Customer>{
             "responsible": 10715376,
             "professional": null,
             "contact": "Gabriel",
-            "email": "gabriel@safra.com.br"
+            "email": "gabriel@safra.com.br",
+            "deleted": true
         }
     ];
 
@@ -45,7 +48,17 @@ export class CustomerPersistence implements ICrud<Customer>{
     }
     
     List(): Customer[]{
-        return this.customers;
+        let _customers: Customer[];
+        //_customers = this.customers;
+
+        this.customers.forEach(customer => {
+            if(customer.deleted === false)
+            {
+                _customers.push(customer);
+            }
+        })
+
+        return _customers;
     }
     
     Read(id: number): Customer{
@@ -60,7 +73,18 @@ export class CustomerPersistence implements ICrud<Customer>{
     }
     
     Delete(id: number): boolean{
-        return null;
+         let _customer: Customer;
+         let retBool: boolean;
+
+         _customer = this.customers.find(customer => customer.customerID === id);
+
+         if(_customer != null)
+         {
+             _customer.deleted = true;
+             retBool = true;
+         }
+ 
+        return retBool;    
     }
 
 }

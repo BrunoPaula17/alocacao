@@ -46,7 +46,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715377,
         "professional": null,
         "contact": "Roseli",
-        "email": "roseli@santander.com.br"
+        "email": "roseli@santander.com.br",
+        "deleted": false
     },
 
     {
@@ -55,7 +56,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715378,
         "professional": null,
         "contact": "João",
-        "email": "joao@itau.com.br"
+        "email": "joao@itau.com.br",
+        "deleted": false
     },
 
     {
@@ -64,7 +66,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715376,
         "professional": null,
         "contact": "Gabriel",
-        "email": "gabriel@safra.com.br"
+        "email": "gabriel@safra.com.br",
+        "deleted": true
     }];
 
 export const PROFESSIONALS: Professional[] = [
