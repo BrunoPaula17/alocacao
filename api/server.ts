@@ -4,6 +4,7 @@ import * as http from 'http';
 import * as path from 'path';
 import { json } from 'body-parser';
 import { bookingRouter } from './service/booking.service';
+import  { roleRouter } from './service/role.service';
 
 const app: express.Application = express();
 
@@ -12,6 +13,7 @@ app.use(json());
 
 // Rotas de API
 app.use('/api/booking/', bookingRouter);
+app.use('/api/role/', roleRouter);
 
 app.get('*', (request: Request, response: Response) => {
     response.sendFile(path.join(__dirname, '../index.html'));
