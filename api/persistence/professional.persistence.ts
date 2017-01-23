@@ -2,8 +2,8 @@ import {Professional } from '../../app/professional/Professional'
 
 export class ProfessionalPersistence{
 
-    private professional: Professional[]=[
-    {
+    private Professional: Professional[]=[{
+
         "pid": 10715376,
         "eid": "ronye.peterson.anjos",
         "name": "Ronye Peterson Martins dos Anjos",
@@ -52,5 +52,34 @@ export class ProfessionalPersistence{
     getProfessional(id: number): Professional {
         return this.professional.find(professional => professional.pid === id);
     }
+
+    createProfessional(                     
+                        pid: number;
+                        eid: string;
+                        name: string;
+                        email: string;
+                        roleID:number;
+                        prefix: number;
+                        phone: string ): Professional{
+        
+    }
+
+    updateProfessional( 
+                        pid: number;
+                        eid: string;
+                        name: string;
+                        email: string;
+                        roleID:number;
+                        prefix: number;
+                        phone: string ): Professional{
+    }
+
+    deleteProfessional(pid: number ): Professional{
+        return true
+    }
+
+    
+
+    
 
 }
