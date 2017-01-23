@@ -49,6 +49,13 @@ var ProfessionalPersistence = (function () {
     ProfessionalPersistence.prototype.getProfessional = function (id) {
         return this.professional.find(function (professional) { return professional.pid === id; });
     };
+    ProfessionalPersistence.prototype.createProfessional = function (pid, eid, name, email, roleID, prefix, phone) {
+    };
+    ProfessionalPersistence.prototype.updateProfessional = function (pid, eid, name, email, roleID, prefix, phone) {
+    };
+    ProfessionalPersistence.prototype.deleteProfessional = function (pid) {
+        return true;
+    };
     return ProfessionalPersistence;
 }());
 exports.ProfessionalPersistence = ProfessionalPersistence;
