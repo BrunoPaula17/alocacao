@@ -1,6 +1,8 @@
 import { Customer } from '../../app/customer/customer';
+import { ICrud } from './crud.interface';
 
-export class CustomerPersistence {
+export class CustomerPersistence implements ICrud<Customer>{
+    
     private customers: Customer[] = [
         {
             "customerID": 1,
@@ -37,4 +39,28 @@ export class CustomerPersistence {
     getCustomer(id: number): Customer {
         return this.customers.find(customer => customer.customerID === id);
     }
+
+    Create(customer: Customer): Customer{
+        return null;
+    }
+    
+    List(): Customer[]{
+        return this.customers;
+    }
+    
+    Read(id: number): Customer{
+        return this.customers.find(customer => customer.customerID === id);
+    }
+    
+    Update(custUpd: Customer): Customer{
+      
+       let customer: Customer = this.Read(custUpd.customerID);
+       customer = custUpd;
+       return customer;
+    }
+    
+    Delete(id: number): boolean{
+        return null;
+    }
+
 }

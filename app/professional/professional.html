@@ -18,9 +18,9 @@
                 <td class="text-center">({{ professional.prefix }}) {{ professional.phone | telephone}}</td>
                     
                 <td class="text-center">
-                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional', professional.pid]"></span>
-                    <span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/professional', professional.pid]"></span>
-                    <span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/professional', professional.pid]"></span>
+                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/list', pid.pid]"></span>
+                    <span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/update', pid.pid]"></span>
+                    <span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/delete', pid.pid]"></span>
                 </td>
                 
             </tr>
