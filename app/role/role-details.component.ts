@@ -5,7 +5,6 @@ import { FormsModule }   from '@angular/forms';
 
 import { Role } from './role';
 import { RoleService } from './role.service';
-import { RoleApplication } from '../../api/application/role.application';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -17,8 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 export class RoleDetailComponent implements OnInit {
     constructor(private _roleService: RoleService,
             private _route: ActivatedRoute,
-            private _location: Location//,
-            //private _roleApp: RoleApplication
+            private _location: Location
     ) { }
 
     @Input() role: Role;
@@ -55,7 +53,7 @@ export class RoleDetailComponent implements OnInit {
     ngOnInit(): void {
         this._route.params.subscribe((params: Params) => {
             let id: number = +params['id'];
-            //this.getRoleDetails(id);
+            this.getRoleDetails(id);
         })
 
     }

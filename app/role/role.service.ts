@@ -12,7 +12,7 @@ export class RoleService {
     constructor(private _httpService: Http) { }
 
     getRoleList(): Promise<Role[]> {
-        let url: string = `${SERVICE_URL}/read/list`;
+        let url: string = `${SERVICE_URL}/list`;
 
         return this._httpService.get(url)
         .toPromise()
