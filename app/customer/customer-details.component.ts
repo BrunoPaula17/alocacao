@@ -17,6 +17,7 @@ import { ProfessionalService } from "../professional/professional.service"
 
 export class CustomerDetailsComponent implements OnInit {
     constructor(private _customerService: CustomerService,
+        private _professionalService: ProfessionalService,
         private _router: ActivatedRoute,
         private _location: Location) { }
 
@@ -29,11 +30,14 @@ export class CustomerDetailsComponent implements OnInit {
     }
 
     getDetails(id: number): void {
-
-        this._customerService.getCustomer(id)
+        this._professionalService.getProfessionalList()
+            .then((professional: Professional[]) => {
+                this.professionals = professional;
+                return this._customerService.getCustomer(id)
+            })
             .then((customer: Customer) => {
                 this.customer = customer;
-            })
+            });
     }
 
     update(cust: Customer) {
@@ -41,7 +45,7 @@ export class CustomerDetailsComponent implements OnInit {
             .then((customer: Customer) => {
                 this.customer = customer;
             })
-        
+
     }
 
     ngOnInit(): void {
@@ -50,6 +54,5 @@ export class CustomerDetailsComponent implements OnInit {
             this.action = params['action'];
             this.getDetails(id);
         })
-
     }
 }
