@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { Professional } from "./professional";
 import { ProfessionalService} from "./professional.service";
@@ -54,11 +55,16 @@ export class ProfessionalDetailComponent implements OnInit {
 
     ngOnInit(): void{
         this._router.params.subscribe((params: Params) => {
-            let pid:number = +params['pid'];
+            
             this.action = params['action'];
-            console.log(this.action);
-            this.getDetails(pid);
-
+            
+            if(this.action != 'insert') {
+                let pid:number = +params['pid'];
+                this.getDetails(pid);
+            }
+            else{
+                 this.professional = new Professional();
+            }
         })
 
         this._roleService.getRoleList()

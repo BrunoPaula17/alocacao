@@ -37,17 +37,18 @@ export class RoleDetailComponent implements OnInit {
     }
 
     onSave(){
-        //this._roleApp.CreateRole(this.role);
-        //salvar o objeto => this.role
-        console.log(this.role.level);
+         this._roleService.createRole(this.role);
+        //console.log(this.role.level);
     }
 
     onEdit(){
-        //salvar o objeto => this.role
+        this._roleService.updateRole(this.role);
     }
 
     onDelete(){
-        //salvar o objeto => this.role
+        let deleted: boolean; 
+        this._roleService.deleteRole(this.role.roleId);
+        console.log('Deletado');
     }
 
     ngOnInit(): void {
