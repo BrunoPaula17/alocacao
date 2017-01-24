@@ -4,7 +4,7 @@ import { RolePersistence } from '../persistence/role.persistence';
 export class RoleApplication {
     ListRoles(): Role[] {
         let rolePersistence: RolePersistence = new RolePersistence();
-
+         
         return rolePersistence.List();
     }
 
