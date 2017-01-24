@@ -6,4 +6,5 @@ export class Role implements IRole {
     brc: string;
     level: number;
     description: string;
+    deleted: boolean;
 }

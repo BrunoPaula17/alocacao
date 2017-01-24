@@ -9,7 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
     imports: [SharedModule, BrowserModule,  RouterModule.forChild([
             { path: 'customers', component: CustomerComponent },
-            { path: 'customer/:id', component: CustomerDetailsComponent}
+            { path: 'customer/:action/:id', component: CustomerDetailsComponent}
         ])],
     declarations: [CustomerComponent, CustomerDetailsComponent],
     providers: [CustomerService]

@@ -46,7 +46,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715377,
         "professional": null,
         "contact": "Roseli",
-        "email": "roseli@santander.com.br"
+        "email": "roseli@santander.com.br",
+        "deleted": false
     },
 
     {
@@ -55,7 +56,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715378,
         "professional": null,
         "contact": "João",
-        "email": "joao@itau.com.br"
+        "email": "joao@itau.com.br",
+        "deleted": false
     },
 
     {
@@ -64,7 +66,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715376,
         "professional": null,
         "contact": "Gabriel",
-        "email": "gabriel@safra.com.br"
+        "email": "gabriel@safra.com.br",
+        "deleted": true
     }];
 
 export const PROFESSIONALS: Professional[] = [
@@ -76,8 +79,13 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 1,
         "prefix": 11,
         "phone": "971537512",
+<<<<<<< HEAD
         "deleted": false,
         "role": null
+=======
+        "role": null,
+        "deleted": true
+>>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
     },
     {
         "pid": 10715377,
@@ -87,8 +95,13 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 2,
         "prefix": 11,
         "phone": "963484588",
+<<<<<<< HEAD
                 "deleted": false,
         "role": null
+=======
+        "role": null,
+        "deleted": true
+>>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
     },
     {
         "pid": 10715378,
@@ -98,8 +111,13 @@ export const PROFESSIONALS: Professional[] = [
         "roleID":3,
         "prefix": 11,
         "phone": "984841212",
+<<<<<<< HEAD
                 "deleted": false,
         "role": null
+=======
+        "role": null,
+        "deleted": true
+>>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
     },
     {
         "pid": 10715379,
@@ -109,8 +127,13 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 4,
         "prefix": 11,
         "phone": "931312323",
+<<<<<<< HEAD
                 "deleted": false,
         "role": null
+=======
+        "role": null,
+        "deleted": true
+>>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
     }
 ]
 
@@ -120,35 +143,40 @@ export const ROLES: Role[] = [
         "name": "Associate Software Engineer",
         "brc": "2017SE",
         "level": 12,
-        "description":"Initial software development"
+        "description":"Initial software development",
+        "deleted": false
     },
     {
         "roleId": 2,
         "name": "Software Engineer",
         "brc": "2017SE2",
         "level": 11,
-        "description":"Software development"
+        "description":"Software development",
+        "deleted": false
     },
     {
         "roleId": 3,
         "name": "Senior Software Engineer",
         "brc": "2017SES",
         "level": 10,
-        "description":"Senior software development"
+        "description":"Senior software development",
+        "deleted": false
     },
         {
         "roleId": 4,
         "name": "System Analyst",
         "brc": "2017SA",
         "level": 9,
-        "description":"Role`s description"
+        "description":"Role`s description",
+        "deleted": false
     },
     {
         "roleId": 5,
         "name": "Senior System Analyst",
         "brc": "2017SSA",
         "level": 8,
-        "description":"Role`s description"
+        "description":"Role`s description",
+        "deleted": false
     }    
 ];
 

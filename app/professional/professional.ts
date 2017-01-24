@@ -11,4 +11,5 @@ export class Professional implements IProfessional{
     phone: string;
     deleted: boolean;
     role: Role;
+    deleted: boolean;
 }

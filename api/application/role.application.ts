@@ -15,7 +15,7 @@ export class RoleApplication {
     }
 
     DeleteRole(id: number): boolean{
-        let rolePersistence: RolePersistence = new RolePersistence();
+        let rolePersistence: RolePersistence = new RolePersistence();        
 
         return rolePersistence.Delete(id);
     }
