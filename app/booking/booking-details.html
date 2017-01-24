@@ -1,33 +1,34 @@
 <ava-hdr-app [pageName]="'Alocação'" [icon]="'fa-calendar-check-o'"></ava-hdr-app>
 
-<form name="bookingForm" *ngIf="booking">
+<form name="bookingForm" *ngIf="booking" [ngSwitch]="action">
     <div class="form-group col-md-6">
         <label for="projects">Projeto</label>
-        <select class="form-control" required>
-                <option *ngFor='let project of projects'
-                  [attr.selected]="project.projectID === booking.projectID ? true : null">{{ project.name }}</option>
-            </select>
+        <select *ngSwitchCase="details" class="form-control" [(ngModel)]="booking.projectID" name="project" disabled>
+                <option value="{{ booking.projectID }}">{{ booking.project.name }}</option>
+        </select>
+        <select [(ngModel)]="booking.projectID" *ngSwitchDefault class="form-control" name="project" required>
+                <option *ngFor='let project of projects' value="{{ project.projectID }}" >{{ project.name }}</option>
+        </select>
     </div>
     <div class="form-group col-md-6">
         <label for="professionals">Profissional</label>
-        <select class="form-control" required>
-                <option *ngFor='let professional of professionals' 
-                 [attr.selected]='professional.pid === booking.pid ? true : null'>{{ professional.name }}</option>
+        <select [(ngModel)]="booking.professionalID" class="form-control" name="professional" required>
+                <option *ngFor='let professional of professionals'>{{ professional.name }}</option>
             </select>
     </div>
     <div class="form-group col-md-6">
         <label for="initialDate">Data Início</label>
-        <input id="initialDate" value="{{ booking.initialDate | date:'dd/MM/yyyy' }}" name="initialDate" placeholder="Informe a data início de alocação no projeto"
+        <input id="initialDate" [ngModel]="booking.initialDate | date:'dd/MM/yyyy'" name="initialDate" placeholder="Informe a data início de alocação no projeto"
             class="form-control">
     </div>
     <div class="form-group col-md-6">
         <label for="endDate">Data Fim</label>
-        <input id="endDate" value="{{ booking.endDate | date:'dd/MM/yyyy' }}" name="endDate" placeholder="Informe a data fim de alocação no projeto"
+        <input id="endDate" [ngModel]="booking.endDate | date:'dd/MM/yyyy'" name="endDate" placeholder="Informe a data fim de alocação no projeto"
             class="form-control">
     </div>
     <div class="form-group col-md-6">
         <label for="bookingPercentual">Percentual Alocação</label>
-        <input id="bookingPercentual" value="{{ booking.bookingPercentual | percentual }}" type="text" name="bookingPercentual" placeholder="Informe o percentual de alocação do profissional"
+        <input id="bookingPercentual" [ngModel]="booking.bookingPercentual | percentual" type="text" name="bookingPercentual" placeholder="Informe o percentual de alocação do profissional"
             class="form-control">
     </div>
     <div class="form-group">

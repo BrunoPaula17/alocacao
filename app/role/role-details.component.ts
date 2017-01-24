@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormsModule }   from '@angular/forms';
 
 import { Role } from './role';
 import { RoleService } from './role.service';
@@ -28,6 +29,25 @@ export class RoleDetailComponent implements OnInit {
 
     goBack(){
         this._location.back();
+    }
+
+    onCreate(){
+        //this._roleApp.CreateRole(this.role);
+        //salvar o objeto => this.role
+    }
+
+    onSave(){
+        //this._roleApp.CreateRole(this.role);
+        //salvar o objeto => this.role
+        console.log(this.role.level);
+    }
+
+    onEdit(){
+        //salvar o objeto => this.role
+    }
+
+    onDelete(){
+        //salvar o objeto => this.role
     }
 
     ngOnInit(): void {

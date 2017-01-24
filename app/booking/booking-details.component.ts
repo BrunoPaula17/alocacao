@@ -6,6 +6,7 @@ import { Booking } from './booking';
 import { BookingService } from './booking.service';
 
 import { Professional } from '../professional/professional';
+import { ProfessionalService } from '../professional/professional.service';
 
 import { Project } from '../project/project';
 import { ProjectService } from '../project/project.service';
@@ -18,29 +19,70 @@ import { ProjectService } from '../project/project.service';
 export class BookingDetailComponent implements OnInit {
     constructor(private _bookingService: BookingService,
         private _router: ActivatedRoute,
-        private _projectService: ProjectService,
-        private _location: Location) { }
+        private _location: Location,
+        private _professionalService: ProfessionalService,
+        private _projectService: ProjectService) { }
 
     booking: Booking;
-    @Input() professionals: Professional[];
+    professionals: Professional[];
     projects: Project[];
+    action: string;
 
-    getDetails(id: number): void {
-        this._bookingService.getBooking(id)
-            .then(booking => this.booking = booking);
+    getData(id: number): void {
+        this._professionalService.getProfessionalList()
+            .then((professionals: Professional[]) => {
+                this.professionals = professionals;
+            })
+            .then(() => {
+                return this._projectService.getProjects()
+            })
+            .then((projects: Project[]) => {
+                this.projects = projects;
+            })
+            .then(() => {
+                return this._bookingService.getBooking(id);
+            })
+            .then((booking: Booking) => {
+                this.booking = booking;
+            });
     }
 
-    goBack():void {
+    getDetails(id: number): void {
+        let actualBooking: Booking;
+
+        this._bookingService.getBooking(id)
+            .then((booking: Booking) => {
+                actualBooking = booking;
+
+                return this._projectService.getProjectDetails(actualBooking.projectID);
+            })
+            .then((project: Project) => {
+                actualBooking.project = project;
+
+                return this._professionalService.getProfessionalRead(actualBooking.pid)
+            })
+            .then((professional: Professional) => {
+                actualBooking.professional = professional;
+
+                this.booking = actualBooking;
+            });
+    }
+
+    goBack(): void {
         this._location.back();
     }
 
     ngOnInit(): void {
         this._router.params.subscribe((params: Params) => {
             let id: number = +params['id'];
-            this.getDetails(id);
-        })
+            this.action = params['action'];
 
-        this._projectService.getProjects()
-                            .then(projects => this.projects = projects);
+            this.action = this.action.toLowerCase();
+
+            if (this.action === "details")
+                this.getDetails(id);
+            else
+                this.getData(id);
+        })
     }
 }

@@ -56,6 +56,7 @@ export class ProfessionalDetailComponent implements OnInit {
         this._router.params.subscribe((params: Params) => {
             let pid:number = +params['pid'];
             this.action = params['action'];
+            console.log(this.action);
             this.getDetails(pid);
 
         })

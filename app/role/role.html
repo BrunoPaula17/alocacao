@@ -16,8 +16,13 @@
                 <td class="text-center">{{ role.brc }}</td>
                 <td class="text-center">{{ role.level }}</td>
                 <td>{{ role.description }}</td>
-                <td class="text-center"><span class="fa fa-list-alt fa-1.5x text-warning" [routerLink]="['/role', role.roleId]"></span></td>
+                <td class="text-center">
+                    <span title="Ver detalhes" class="fa fa-list-alt fa-1.5x text-warning" [routerLink]="['/role/read', role.roleId]"></span>
+                    <span title="Editar cargo" class="fa fa-edit fa-1.5x text-warning" [routerLink]="['/role', role.roleId]"></span>
+                    <span title="Deletar cargo" class="fa fa-close fa-1.5x text-warning" [routerLink]="['/role', role.roleId]"></span>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+<button type="button" class="btn btn-primary btn-outline">Novo Cargo</button> 
