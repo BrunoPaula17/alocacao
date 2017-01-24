@@ -1,5 +1,5 @@
 <ava-hdr-app [pageName]="'Alocação'" [icon]="'fa-calendar-check-o'"></ava-hdr-app>
-<div class="page-content">
+<div class="page-content" *ngIf="bookings">
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr>
@@ -18,9 +18,9 @@
                 <td class="text-center">{{ booking.initialDate | date:'dd/MM/yyyy' }}</td>
                 <td class="text-center">{{ booking.endDate | date:'dd/MM/yyyy' }}</td>
                 <td class="text-center">{{ booking.bookingPercentual | percentual }}</td>
-                <td class="text-center"><span class="fa fa-list-alt fa-small fa-black" [routerLink]="['/booking', booking.bookingID]"></span></td>
+                <td class="text-center"><span class="fa fa-list-alt fa-small fa-black" [routerLink]="['/booking', 'details',booking.bookingID]"></span></td>
             </tr>
         </tbody>
     </table>
+    <button type="button" class="btn btn-primary btn-outline">Novo</button>
 </div>
-<button type="button" class="btn btn-primary btn-outline">Novo</button>
