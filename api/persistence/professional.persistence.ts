@@ -103,7 +103,10 @@ export class ProfessionalPersistence implements ICrud<Professional>{
         Deleta logicamente as informações do profissional
     */
     Delete(pid: number): boolean {
-        return null;
+        let _professionalArray:Professional
+        _professionalArray = this.professionals.find(professional => professional.pid === pid);  
+        _professionalArray.deleted = true;  
+        return false;  
     }
 
 }
