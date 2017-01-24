@@ -1,26 +1,28 @@
 <ava-hdr-app [pageName]="'Alocação'" [icon]="'fa-calendar-check-o'"></ava-hdr-app>
 <div class="page-content" *ngIf="bookings">
-    <table class="table table-bordered table-striped table-hover table-responsive">
-        <thead>
-            <tr>
-                <th>Projeto</th>
-                <th>Profissional</th>
-                <th>Data de Início</th>
-                <th>Data Fim</th>
-                <th>% Alocação</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let booking of bookings" (click)="getDetails(booking)">
-                <td>{{ booking.project.name }}</td>
-                <td>{{ booking.professional.name }}</td>
-                <td class="text-center">{{ booking.initialDate | date:'dd/MM/yyyy' }}</td>
-                <td class="text-center">{{ booking.endDate | date:'dd/MM/yyyy' }}</td>
-                <td class="text-center">{{ booking.bookingPercentual | percentual }}</td>
-                <td class="text-center"><span class="fa fa-list-alt fa-small fa-black" [routerLink]="['/booking', 'details',booking.bookingID]"></span></td>
-            </tr>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-primary btn-outline">Novo</button>
+    <button type="button" class="btn btn-primary btn-outline ava-btn-list" [routerLink]="['/booking', 'create']">Nova alocação</button>
+<table class="table table-bordered table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>Projeto</th>
+            <th>Profissional</th>
+            <th>Data de Início</th>
+            <th>Data Fim</th>
+            <th>% Alocação</th>
+            <th>Detalhes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let booking of bookings">
+            <td>{{ booking.project.name }}</td>
+            <td>{{ booking.professional.name }}</td>
+            <td class="text-center">{{ booking.initialDate | date:'dd/MM/yyyy' }}</td>
+            <td class="text-center">{{ booking.endDate | date:'dd/MM/yyyy' }}</td>
+            <td class="text-center">{{ booking.bookingPercentual | percentual }}</td>
+            <td class="text-center">
+                <span class="fa fa-list-alt fa-small fa-black" [routerLink]="['/booking', 'details',booking.bookingID]">&nbsp;</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
 </div>

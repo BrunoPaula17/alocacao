@@ -37,11 +37,15 @@ export class BookingComponent implements OnInit {
         booking.professional = this.professionals.find(professional => professional.pid == booking.pid);
     }
 
+    delete(): void {
+        console.log('delete');
+    }
+
     ngOnInit(): void {
         this._professionalService.getProfessionalList()
             .then((professionals: Professional[]) => {
                 this.professionals = professionals;
-                
+
                 return this._projectService.getProjects()
             })
             .then((projects: Project[]) => {

@@ -16,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
                FormsModule,
         RouterModule.forChild([
             { path: 'bookings', component: BookingComponent },
+            { path: 'booking/:action', component: BookingDetailComponent },
             { path: 'booking/:action/:id', component: BookingDetailComponent }
         ])],
      declarations: [PercentualFilter,
