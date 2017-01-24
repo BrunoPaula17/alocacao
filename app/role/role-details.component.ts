@@ -17,8 +17,8 @@ import { SharedModule } from '../shared/shared.module';
 export class RoleDetailComponent implements OnInit {
     constructor(private _roleService: RoleService,
             private _route: ActivatedRoute,
-            private _location: Location,
-            private _roleApp: RoleApplication
+            private _location: Location//,
+            //private _roleApp: RoleApplication
     ) { }
 
     @Input() role: Role;
@@ -34,12 +34,12 @@ export class RoleDetailComponent implements OnInit {
     }
 
     onCreate(){
-        this._roleApp.CreateRole(this.role);
+        //this._roleApp.CreateRole(this.role);
         //salvar o objeto => this.role
     }
 
     onSave(){
-        this._roleApp.CreateRole(this.role);
+        //this._roleApp.CreateRole(this.role);
         //salvar o objeto => this.role
         console.log(this.role.level);
     }
@@ -55,7 +55,7 @@ export class RoleDetailComponent implements OnInit {
     ngOnInit(): void {
         this._route.params.subscribe((params: Params) => {
             let id: number = +params['id'];
-            this.getRoleDetails(id);
+            //this.getRoleDetails(id);
         })
 
     }
