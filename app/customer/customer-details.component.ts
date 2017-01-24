@@ -36,8 +36,8 @@ export class CustomerDetailsComponent implements OnInit {
             })
     }
 
-    update(customer: Customer){
-        this._customerService.updateCustomer(customer)
+    update(cust: Customer){
+        this._customerService.updateCustomer(cust)
         .then((customer: Customer) => {
             this.customer = customer;
         })

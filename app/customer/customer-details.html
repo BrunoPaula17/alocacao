@@ -1,6 +1,6 @@
 <ava-hdr-app [pageName]="'Clientes'" [icon]="'fa-user-circle'"></ava-hdr-app>
 
-<form ng-app="" name="customerForm" *ngIf="customer">
+<form ng-app="" name="customerForm" *ngIf="customer" [ngSwitch]="action">
     <div class="form-group col-md-6">
         <label for="idClient">ID Cliente</label>
         <input id="idClient" value="{{ customer.customerID }}" type="text" name="customerID" placeholder="ID do Cliente" class="form-control"
@@ -28,7 +28,7 @@
     </div>
     <br>
     <div class="form-group">
-        <div class="col-sm-8">
+        <div class="col-sm-8" *ngSwitchCase="edit">
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
              <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update(customer)">Salvar</button>
         </div>
