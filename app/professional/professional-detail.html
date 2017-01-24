@@ -81,8 +81,11 @@
                         <button type="button" class="btn btn-default" (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Adicionar Funcionário</button>
                     </div>
                     <div [ngSwitchCase]="update">
-                        <button type="button" class="btn btn-default" (click)="updateProfessional(professional)">Atualiza Informação"</button>
-                    </div>               
+                        <button type="button" class="btn btn-default" (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Atualizar Funcionário</button>
+                    </div>
+                    <div [ngSwitchCase]="delete">
+                        <button type="button" class="btn btn-default" (click)="deleteProfessional(professional.pid)">Deletar Funcionário</button>
+                    </div>                   
                  </div>
             <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
             </div>
