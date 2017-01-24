@@ -17,38 +17,43 @@ import { ProfessionalService } from "../professional/professional.service"
 
 export class CustomerDetailsComponent implements OnInit {
     constructor(private _customerService: CustomerService,
+        private _professionalService: ProfessionalService,
         private _router: ActivatedRoute,
         private _location: Location) { }
 
-    customer:Customer;
+    customer: Customer;
     professionals: Professional[];
     action: string;
 
-    goBack():void {
+    goBack(): void {
         this._location.back();
     }
 
-     getDetails(id: number): void {
-   
-         this._customerService.getCustomer(id)
+    getDetails(id: number): void {
+
+        this._professionalService.getProfessionalList()
+            .then((professional: Professional[]) => {
+                this.professionals = professional;
+                return this._customerService.getCustomer(id)
+            })
+            .then((customer: Customer) => {
+                this.customer = customer;
+            });
+    }
+
+    update(cust: Customer) {
+        this._customerService.updateCustomer(cust)
             .then((customer: Customer) => {
                 this.customer = customer;
             })
     }
 
-    update(cust: Customer){
-        this._customerService.updateCustomer(cust)
-        .then((customer: Customer) => {
-            this.customer = customer;
-        })
-    }
-
     ngOnInit(): void {
-          this._router.params.subscribe((params: Params) => {
-              let id: number = +params['id'];
-              this.action = params['action'];
-              this.getDetails(id);
-          })
-       
+        this._router.params.subscribe((params: Params) => {
+            let id: number = +params['id'];
+            this.action = params['action'];
+            this.getDetails(id);
+        })
+
     }
 }
