@@ -46,7 +46,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715377,
         "professional": null,
         "contact": "Roseli",
-        "email": "roseli@santander.com.br"
+        "email": "roseli@santander.com.br",
+        "deleted": false
     },
 
     {
@@ -55,7 +56,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715378,
         "professional": null,
         "contact": "João",
-        "email": "joao@itau.com.br"
+        "email": "joao@itau.com.br",
+        "deleted": false
     },
 
     {
@@ -64,7 +66,8 @@ export const CUSTOMERS: Customer[] = [    {
         "responsible": 10715376,
         "professional": null,
         "contact": "Gabriel",
-        "email": "gabriel@safra.com.br"
+        "email": "gabriel@safra.com.br",
+        "deleted": true
     }];
 
 export const PROFESSIONALS: Professional[] = [
@@ -76,8 +79,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 1,
         "prefix": 11,
         "phone": "971537512",
-        "role": null
-    },
+        "role": null,
+        "deleted": true    },
     {
         "pid": 10715377,
         "eid": "thomas.anjos",
@@ -86,7 +89,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 2,
         "prefix": 11,
         "phone": "963484588",
-        "role": null
+        "role": null,
+        "deleted": true
     },
     {
         "pid": 10715378,
@@ -96,7 +100,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID":3,
         "prefix": 11,
         "phone": "984841212",
-        "role": null
+        "role": null,
+        "deleted": true
     },
     {
         "pid": 10715379,
@@ -106,7 +111,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 4,
         "prefix": 11,
         "phone": "931312323",
-        "role": null
+        "role": null,
+        "deleted": true
     }
 ]
 

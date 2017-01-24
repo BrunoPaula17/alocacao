@@ -2,20 +2,31 @@ import { Professional } from '../../app/professional/professional';
 import { ProfessionalPersistence } from '../persistence/professional.persistence';
 
 export class ProfessionalApplication{
-    getProfessionals(): Professional[]{
+
+    /*
+        Recupera a lista de profissionais na base de dados.
+    */
+    List(): Professional[]{
+        
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
 
-        return professionalPersistence.getProfessionals();
+        return professionalPersistence.List();
     }
 
-    getProfessional(pid: number): Professional{
+    /*
+        Recupera um profissional específico.
+    */
+    Read(pid: number): Professional{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
-
-        return professionalPersistence.getProfessional(pid);
+        return professionalPersistence.Read(pid);
     }
 
-    insertProfessionals(pid: number, eid: string, name: string, email: string, 
+    /*
+        Cria um novo profissional na base de dados.
+    */
+    Create(pid: number, eid: string, name: string, email: string, 
                         roleID: number, prefix: number, phone: string): Professional{                            
+        
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
 
         if((isNaN(pid) || pid === null)||
@@ -24,11 +35,14 @@ export class ProfessionalApplication{
            (prefix === null)||(phone === null)){
             throw ("Por favor, verificar as informações.");
         }else{
-            return null;//professionalPersistence.insertProfessional(pid, eid, name, email, roleID, prefix, phone);
+            return null; //professionalPersistence.Create(pid, eid, name, email, roleID, prefix, phone);
         }
     }
 
-    updateProfessional(pid: number, eid: string, name: string, email: string, 
+    /*  
+        Atualiza as informações na base de dados.
+    */
+    Update(pid: number, eid: string, name: string, email: string, 
                         roleID: number, prefix: number, phone: string): Professional{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
@@ -42,7 +56,10 @@ export class ProfessionalApplication{
         }
     }
 
-    deleteProfessional(pid: number): Professional{
+    /*
+        Apaga logicamente as informações de um funcionário.
+    */
+    Delete(pid: number): Professional{
 
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         

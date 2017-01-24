@@ -10,4 +10,5 @@ export class Professional implements IProfessional{
     prefix: number;
     phone: string;
     role: Role;
+    deleted: boolean;
 }

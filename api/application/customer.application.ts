@@ -5,14 +5,20 @@ import { ProfessionalApplication } from './professional.application';
 
 export class CustomerApplication{
 
-    getCustomers(): Customer[]{
+    createCustomer(customer: Customer): Customer{
+        let customerPersistence: CustomerPersistence = new CustomerPersistence();
+
+        return customerPersistence.Create(customer);
+    }
+    
+    listCustomers(): Customer[]{
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
         let costumers: Customer[];
         let professionals: Professional[];
 
         costumers       = customerPersistence.List();
-        professionals   = professionalApp.getProfessionals();
+        professionals   = professionalApp.List();
 
         costumers.forEach(customer =>{
             customer.professional = professionals.find(professional => professional.pid == customer.responsible);
@@ -21,15 +27,26 @@ export class CustomerApplication{
         return costumers;
     }
 
-    getCustomer(id: number): Customer{
+    readCustomer(id: number): Customer{
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
         let costumer: Customer;
         let professional: Professional
 
         costumer = customerPersistence.Read(id);
-        costumer.professional = professionalApp.getProfessional(costumer.responsible);
+        costumer.professional = professionalApp.Read(costumer.responsible);
 
         return costumer;
+    }
+
+    updateCustomer(customer: Customer): Customer{
+        let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        
+        return customerPersistence.Update(customer);
+    }
+
+    deleteCustomer(id: number): boolean{
+        let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        return customerPersistence.Delete(id);
     }
 }

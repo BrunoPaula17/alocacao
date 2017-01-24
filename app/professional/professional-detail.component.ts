@@ -27,12 +27,12 @@ export class ProfessionalDetailComponent implements OnInit {
     action: String;
    
     getDetail(pid:number): void {
-        this._professionalService.getProfessional(pid)
+        this._professionalService.getProfessionalRead(pid)
                                  .then(professional => this.professional = professional)
     }
 
     insertProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string): void {
-        this._professionalService.insertProfessional(pid,eid,name,email,roleID,prefix,phone)
+        this._professionalService.createProfessional(pid,eid,name,email,roleID,prefix,phone)
                                  .then(professional => this.professional = professional)
 
     }
@@ -54,21 +54,9 @@ export class ProfessionalDetailComponent implements OnInit {
 
     ngOnInit(): void{
         this._router.params.subscribe((params: Params) => {
-            let id:number = +params['id'];
+            let pid:number = +params['pid'];
             this.action = params['action'];
-
-            switch(this.action){
-                case 'insert':
-                    //this.insertProfessional();
-                    break;
-                case 'update':
-                    //this.updateProfessional();
-                    break;
-                case 'delete':
-                    //this.deleteProfessional();
-                default:
-                    //this.getDetail();
-            }
+            this.getDetail(pid)
 
         })
 
