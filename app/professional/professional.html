@@ -1,12 +1,11 @@
 <ava-hdr-app [pageName]="'Profissional'" [icon]="'fa-users'"></ava-hdr-app>
 <div class="page-content">
     <!--<div class="form-group">
-        <button type="button" class="btn btn-default" [routerLink]="['/professional','insert', '']">Novo Funcionário</button>
+        <button type="button" class="btn btn-default" [routerLink]="['/professional','insert', professional.pid]">Novo Funcionário</button>
     </div>-->
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr>
-                <th>Pid</th>
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Cargo</th>
@@ -16,7 +15,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let professional of professionals" (click)="getDetails(professional)">
-                <td>{{ professional.pid}}</td>
                 <td>{{ professional.name }}</td>
                 <td>{{ professional.email }}</td>
                 <td class="text-center">{{ professional.role.name }}</td>
