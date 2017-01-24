@@ -4,7 +4,7 @@ import { RoleApplication } from '../application/role.application';
 
 const roleRouter: Router = Router();
 
-roleRouter.get('/read/list', (request: Request, response: Response) => {
+roleRouter.get('/list', (request: Request, response: Response) => {
     let roleApp: RoleApplication = new RoleApplication();
 
     return response.json(roleApp.ListRoles());
