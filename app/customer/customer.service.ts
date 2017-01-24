@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+
 
 import { Customer } from './Customer';
 
 const SERVICE_URL: string = '/api/customer'
+const HEADERS: Headers = new Headers({
+    'Content-Type': 'application/json'
+});
 
-@Injectable () export class CustomerService{
-    constructor(private _httpService: Http) {}
-    
-    // getCustomerList() : Promise<Customer[]>{
-    //     return Promise.resolve(CUSTOMERS);
-    // }
+@Injectable() export class CustomerService {
+    constructor(private _httpService: Http) { }
 
-    getCustomerList() : Promise<Customer[]>{
+    getCustomerList(): Promise<Customer[]> {
         let url: string = `${SERVICE_URL}/list`;
         return this._httpService.get(url)
             .toPromise()
@@ -21,17 +21,13 @@ const SERVICE_URL: string = '/api/customer'
                 return response.json() as Customer[];
             })
             .catch(this.errorHandling);
-     
-     }
 
-    // getCustomer(id:number) : Promise<Customer>{
-    //     return Promise.resolve(CUSTOMERS.find(customer => customer.customerID === id));
-    // }
+    }
 
-    getCustomer(id:number) : Promise<Customer>{
-         let url: string = `${SERVICE_URL}/details/${id}`;
+    getCustomer(id: number): Promise<Customer> {
+        let url: string = `${SERVICE_URL}/details/${id}`;
 
-         return this._httpService.get(url)
+        return this._httpService.get(url)
             .toPromise()
             .then((response: Response) => {
                 return response.json() as Customer
@@ -43,21 +39,26 @@ const SERVICE_URL: string = '/api/customer'
         console.log(error.message || error);
     }
 
-    createCustomer(customer: Customer) : void{
-        let url: string = `${SERVICE_URL}`;
+    createCustomer(customer: Customer): void {
+        let url: string = `${SERVICE_URL}/create/${customer}`;
         this._httpService.post(url, customer).toPromise().then((response: Response) => {
             return response.json() as Customer
         })
-        .catch(this.errorHandling);
-    } 
-
-    updateCustomer(customer: Customer): void{
-         let url: string = `${SERVICE_URL}`;
-        this._httpService.put(url, customer).toPromise().then((response: Response) => {
-            return response.json() as Customer
-        })
-        .catch(this.errorHandling);
+            .catch(this.errorHandling);
     }
+
+    updateCustomer(customer: Customer): Promise<Customer> {
+        let url: string = `${SERVICE_URL}/update/${customer.customerID}`;
+
+        return this._httpService.put(url, JSON.stringify(customer), HEADERS)
+            .toPromise()
+            .then((response: Response) => {
+                return response.json() as Customer
+            })
+            .catch(this.errorHandling);
+    }
+
+    erroHandling(error: any) { console.log(error.message || error); }
 }
 
 

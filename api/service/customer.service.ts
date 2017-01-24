@@ -4,7 +4,7 @@ import { CustomerApplication } from '../application/customer.application';
 
 const customerRouter: Router = Router();
 
-customerRouter.get('/create/:customer', (request: Request, response: Response) => {
+customerRouter.post('/create/:customer', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
     let customer: Customer = (Customer)+request.params.customer;
@@ -26,7 +26,7 @@ customerRouter.get('/details/:id', (request: Request, response: Response) => {
     return response.json(customerApp.readCustomer(id));
 });
 
-customerRouter.get('/update/:customer', (request: Request, response: Response) => {
+customerRouter.put('/update/:id', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
     let customer: Customer = (Customer)+request.params.customer;
@@ -34,7 +34,7 @@ customerRouter.get('/update/:customer', (request: Request, response: Response) =
     return response.json(customerApp.updateCustomer(customer));
 });
 
-customerRouter.get('/delete/:id', (request: Request, response: Response) => {
+customerRouter.delete('/delete/:id', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
     let id: number = +request.params.id;

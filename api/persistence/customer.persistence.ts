@@ -80,8 +80,6 @@ export class CustomerPersistence implements ICrud<Customer>{
             _customer = null;     
         }
 
-        //let customer: Customer = this.Read(custUpd.customerID);
-        //customer = custUpd;
         return _customer;
     }
 
