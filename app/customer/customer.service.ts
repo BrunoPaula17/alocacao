@@ -49,8 +49,9 @@ const HEADERS: Headers = new Headers({
 
     updateCustomer(customer: Customer): Promise<Customer> {
         let url: string = `${SERVICE_URL}/update/${customer.customerID}`;
+        console.log(JSON.stringify(customer));
 
-        return this._httpService.put(url, JSON.stringify(customer), HEADERS)
+        return this._httpService.put(url, { 'customer': JSON.stringify(customer)}, HEADERS)
             .toPromise()
             .then((response: Response) => {
                 return response.json() as Customer

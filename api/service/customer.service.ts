@@ -15,7 +15,7 @@ customerRouter.post('/create/:customer', (request: Request, response: Response) 
 customerRouter.get('/list', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
-    response.json(customerApp.listCustomers());
+        response.json(customerApp.listCustomers());
 });
 
 customerRouter.get('/details/:id', (request: Request, response: Response) => {
@@ -29,7 +29,10 @@ customerRouter.get('/details/:id', (request: Request, response: Response) => {
 customerRouter.put('/update/:id', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
-    let customer: Customer = (Customer)+request.params.customer;
+    let customer: Customer = (Customer)+request.body.customer;
+
+    let teste: string = request.body.customer.toString();
+    customer = JSON.parse(teste);
 
     return response.json(customerApp.updateCustomer(customer));
 });

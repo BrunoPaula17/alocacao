@@ -12,7 +12,7 @@ export class RoleService {
     constructor(private _httpService: Http) { }
 
     getRoleList(): Promise<Role[]> {
-        let url: string = `${SERVICE_URL}/read/list`;
+        let url: string = `${SERVICE_URL}/list`;
 
         return this._httpService.get(url)
         .toPromise()
@@ -34,9 +34,31 @@ export class RoleService {
     }
 
     createRole(role: Role): Promise<Role> {
-        let url: string = `${SERVICE_URL}/create/${role}`;
+        let url: string = `${SERVICE_URL}/create/`;
 
-        return this._httpService.get(url)
+        return this._httpService.post(url, role)
+        .toPromise()
+        .then((response: Response) => {
+            return response.json() as Role
+        })
+        .catch(this.erroHandling);
+    }
+
+    deleteRole(id: number): Promise<Role>{
+        let url: string = `${SERVICE_URL}/delete/${id}`;
+
+        return this._httpService.delete(url)
+        .toPromise()
+        .then((response: Response) => {
+           return  response.json() as Role
+        })
+        .catch(this.erroHandling);   
+    }
+    
+    updateRole(role: Role): Promise<Role> {
+        let url: string = `${SERVICE_URL}/create/${role.roleId}`;
+
+        return this._httpService.put(url, role)
         .toPromise()
         .then((response: Response) => {
             return response.json() as Role

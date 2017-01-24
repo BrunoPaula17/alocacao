@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Professional } from './professional';
 import { ProfessionalService } from './professional.service';
+import { RoleService} from '../role/role.service';
 import { Role } from '../role/role';
-import { ROLES } from '../shared/mock';
 
 
 
@@ -13,25 +13,39 @@ import { ROLES } from '../shared/mock';
 
 export class ProfessionalComponent implements OnInit {
 
-    constructor(private _professionalService:ProfessionalService) {}
+    constructor(private _professionalService:ProfessionalService,
+                private _roleService: RoleService) {}
 
-    roles: Role[] = ROLES;
+    roles: Role[];
     professionals: Professional[];
 
-    getRoleDetail(professional: Professional): void {
-        professional.role = this.roles.find(role => role.roleId == professional.roleID)
+    getProfessionalsDetails(): void {
+        this.professionals.forEach((item) => {
+            this.getRoleDetails(item);
+        });
     }
+
+    getRoleDetails(professional: Professional): void {
+        professional.role = this.roles.find(role => role.roleId == professional.roleID);
+    }
+
 
     /*
         Inicialização do componente inicial da tela de professional.
     */
     ngOnInit() {
-        this._professionalService.getProfessionalList().then((professional:Professional[])=>{
-                                        this.professionals = professional;
-                                        this.professionals.forEach((item,index)=>{
-                                           this.getRoleDetail(item);
-                                        });
-                                 });
-    }
+
+        this._roleService.getRoleList().then((role:Role[]) =>{
+            this.roles = role;
+            return this._professionalService.getProfessionalList();
+        })
+        .then((professional: Professional[]) => {
+            this.professionals = professional;
+            
+            this.getProfessionalsDetails();
+            
+        });
+
+            }
 
 }

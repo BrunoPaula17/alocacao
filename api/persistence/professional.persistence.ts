@@ -66,6 +66,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
     */
     Read(pid: number): Professional {
         return this.professionals.find(professional => professional.pid === pid);
+        
     }
       
     /*
