@@ -2,36 +2,36 @@
         <div class="form-group col-md-6" >
             <label for="pid">PID</label>
             <input id="pid" 
-                   value="{{ professional.pid }}"
                    type="text" 
                    name="pid" 
-                   placeholder="Informe o PID " 
+                   placeholder="Informe o PID "
+                   [(ngModel)]="professional.pid" 
                    class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="eid">EID</label>
             <input id="eid"
-                   value="{{ professional.eid }}"
                    type="text" 
                    name="entrepriseID" 
+                   [(ngModel)]="professional.eid" 
                    placeholder="Informe o EID " 
                    class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
-            <input id="name"
-                   value="{{ professional.name }}" 
+            <input id="name" 
                    type="text" 
                    name="name" 
+                   [(ngModel)]="professional.name" 
                    placeholder="Informe o Nome " 
                    class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="email">Email</label>
             <input id="email"
-                   value="{{ professional.email }}"
                    type="text" 
                    name="email" 
+                   [(ngModel)]="professional.email" 
                    placeholder="Informe o Email " 
                    class="form-control">
         </div>
@@ -48,18 +48,18 @@
         <div class="form-group col-md-6">
             <label for="prefix">Prefixo</label>
             <input id="prefix" 
-                   value="{{ professional.prefix}}"
                    type="text" 
-                   name="prefix" 
+                   name="prefix"
+                   [(ngModel)]="professional.prefix"  
                    placeholder="Informe o Prefixo do Telefone" 
                    class="form-control">
         </div>
         <div class="form-group col-md-6">
             <label for="phone">Telefone</label>
-            <input id="phone"
-                   value="{{ professional.phone }}" 
+            <input id="phone" 
                    type="text" 
                    name="phone" 
+                   [(ngModel)]="professional.phone" 
                    placeholder="Informe o Telefone" 
                    class="form-control">
         </div>

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule }   from '@angular/forms';
+
 import { PhoneFilter } from '../shared/phone.filter';
 import { ProfessionalComponent } from './professional.component';
 import { ProfessionalDetailComponent } from './professional-detail.component';
@@ -14,7 +16,8 @@ import { ProfessionalService } from './professional.service'
     RouterModule.forChild([
         {path:'professionals',component:ProfessionalComponent},
         {path:'professional/:action/:pid',component: ProfessionalDetailComponent}],
-    )],
+    ),
+    FormsModule],
     declarations: [ ProfessionalComponent,
     ProfessionalDetailComponent, 
     PhoneFilter],
