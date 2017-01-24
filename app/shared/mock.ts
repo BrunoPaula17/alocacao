@@ -76,6 +76,7 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 1,
         "prefix": 11,
         "phone": "971537512",
+        "deleted": false,
         "role": null
     },
     {
@@ -86,6 +87,7 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 2,
         "prefix": 11,
         "phone": "963484588",
+                "deleted": false,
         "role": null
     },
     {
@@ -96,6 +98,7 @@ export const PROFESSIONALS: Professional[] = [
         "roleID":3,
         "prefix": 11,
         "phone": "984841212",
+                "deleted": false,
         "role": null
     },
     {
@@ -106,6 +109,7 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 4,
         "prefix": 11,
         "phone": "931312323",
+                "deleted": false,
         "role": null
     }
 ]

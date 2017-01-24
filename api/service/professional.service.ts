@@ -4,6 +4,29 @@ import { ProfessionalApplication } from '../application/professional.application
 
 const professionalRouter: Router = Router();
 
+
+/*
+    Recupera a lista de professionais da base de dados.
+*/
+professionalRouter.get('/list', (request: Request, response: Response) => {
+    let professionalApp: ProfessionalApplication = new ProfessionalApplication();
+    response.json(professionalApp.List());
+});
+
+
+/*
+    Recupera um profissional da base de dados.
+*/
+professionalRouter.get('/details/:pid', (request: Request, response: Response) => {
+    let professionalApp: ProfessionalApplication = new ProfessionalApplication();
+    let pid:number = +request.params.pid;
+    return response.json(professionalApp.Read(pid));
+});
+
+
+/*
+    Insere um profissional na base de dados.
+*/
 professionalRouter.get('/insert/:pid/:eid/:name/:email/:roleID/:prefix/:phone', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
@@ -15,10 +38,14 @@ professionalRouter.get('/insert/:pid/:eid/:name/:email/:roleID/:prefix/:phone', 
     let prefix:number = +request.params.prefix;
     let phone:string = request.params.phone;
 
-    //response.json(professionalApp.insertProfessionals(action,pid,eid,name,email,roleID,prefix,phone));
+    response.json(professionalApp.Create(pid,eid,name,email,roleID,prefix,phone));
 
 }); 
 
+
+/*
+   Atualiza um profissional na base de dados.
+*/
 professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix:/phone', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
@@ -30,31 +57,19 @@ professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix:/phone', 
     let prefix:number = +request.params.prefix;
     let phone:string = request.params.phone;
 
-    //response.json(professionalApp.updateProfessional(action,pid,eid,name,email,roleID,prefix,phone));
+    response.json(professionalApp.Update(pid,eid,name,email,roleID,prefix,phone));
 
 });
 
 
-professionalRouter.get('/list', (request: Request, response: Response) => {
-    let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-
-    response.json(professionalApp.getProfessionals());
-});
-
-
-professionalRouter.get('/details/:pid', (request: Request, response: Response) => {
-    let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-
-    let pid:number = +request.params.pid;
-
-    //return response.json(professionalApp.getProfessional(action,pid));
-});
-
+/*
+    Deleta um profissional na base de dados.
+*/
 professionalRouter.get('/delete/:pid', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
     let pid:number = + request.params.pid;
-    //return response.json(professionalApp.deleteProfessional(action,pid));
+    return response.json(professionalApp.Delete(pid));
 
 });
 

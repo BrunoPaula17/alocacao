@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
-import { Professional } from "./professional";
-import { PROFESSIONALS } from "../shared/mock"
+import { Professional } from './professional';
+import 'rxjs/add/operator/toPromise';
 
 
 const SERVICE_URL:string = '/api/professional'
@@ -14,7 +14,7 @@ export class ProfessionalService {
 
     getProfessionalList():Promise<Professional[]>{
 
-        let url:string = `{$SERVICE_URL}/list`;
+        let url:string = `${SERVICE_URL}/list`;
 
         return this._httpService.get(url)
                    .toPromise()
@@ -25,9 +25,10 @@ export class ProfessionalService {
 
     }
 
+
     getProfessional(pid:number):Promise<Professional>{
         
-        let url:string = `{$SERVICE_URL}/${pid}`;
+        let url:string = `${SERVICE_URL}/${pid}`;
 
         return this._httpService.get(url)
                    .toPromise()
@@ -39,7 +40,7 @@ export class ProfessionalService {
 
     insertProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string):Promise<Professional>{
         
-        let url:string = `{$SERVICE_URL}/insert/${pid}/${eid}/${name}/${email}/${roleID}/${prefix}/${phone}`;
+        let url:string = `${SERVICE_URL}/insert/${pid}/${eid}/${name}/${email}/${roleID}/${prefix}/${phone}`;
 
         return this._httpService.get(url)
                    .toPromise()
@@ -51,7 +52,7 @@ export class ProfessionalService {
 
     updateProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string):Promise<Professional>{
 
-        let url:string = `{$SERVICE_URL}/update/${pid}/${eid}/${name}/${email}/${roleID}/${prefix}/${phone}`;
+        let url:string = `${SERVICE_URL}/update/${pid}/${eid}/${name}/${email}/${roleID}/${prefix}/${phone}`;
 
         return this._httpService.get(url)
                    .toPromise()
@@ -63,7 +64,7 @@ export class ProfessionalService {
 
     deleteProfessional(pid:number):Promise<Professional>{
 
-        let url:string = `{$SERVICE_URL}/delete/${pid}`;
+        let url:string = `${SERVICE_URL}/delete/${pid}`;
 
         return this._httpService.get(url)
                    .toPromise()

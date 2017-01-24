@@ -9,5 +9,6 @@ export class Professional implements IProfessional{
     roleID:number;
     prefix: number;
     phone: string;
+    deleted: boolean;
     role: Role;
 }

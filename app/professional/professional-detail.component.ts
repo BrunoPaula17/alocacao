@@ -54,21 +54,9 @@ export class ProfessionalDetailComponent implements OnInit {
 
     ngOnInit(): void{
         this._router.params.subscribe((params: Params) => {
-            let id:number = +params['id'];
+            let pid:number = +params['pid'];
             this.action = params['action'];
-
-            switch(this.action){
-                case 'insert':
-                    //this.insertProfessional();
-                    break;
-                case 'update':
-                    //this.updateProfessional();
-                    break;
-                case 'delete':
-                    //this.deleteProfessional();
-                default:
-                    //this.getDetail();
-            }
+            this.getDetail(pid)
 
         })
 
