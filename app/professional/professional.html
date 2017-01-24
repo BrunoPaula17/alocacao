@@ -3,6 +3,7 @@
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr>
+                <th>Pid</th>
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Cargo</th>
@@ -12,15 +13,16 @@
         </thead>
         <tbody>
             <tr *ngFor="let professional of professionals" (click)="getDetails(professional)">
+                <td>{{ professional.pid}}</td>
                 <td>{{ professional.name }}</td>
                 <td>{{ professional.email }}</td>
                 <td class="text-center">{{ professional.role.name }}</td>
                 <td class="text-center">({{ professional.prefix }}) {{ professional.phone | telephone}}</td>
                     
                 <td class="text-center">
-                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional', professional.pid]"></span>
-                    <!--<span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/update', professional.pid]"></span>-->
-                    <!--<span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/delete', professional.pid]"></span>-->
+                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional','details', professional.pid]"></span>
+                    <!--<span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/professional','update' professional.pid]"></span>-->
+                    <!--<span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/professional','delete', professional.pid]"></span>-->
                 </td>
                 
             </tr>

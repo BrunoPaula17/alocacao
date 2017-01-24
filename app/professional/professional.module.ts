@@ -13,7 +13,7 @@ import { ProfessionalService } from './professional.service'
     SharedModule,
     RouterModule.forChild([
         {path:'professionals',component:ProfessionalComponent},
-        {path:'professional/:action/:id',component: ProfessionalDetailComponent}],
+        {path:'professional/:action/:pid',component: ProfessionalDetailComponent}],
     )],
     declarations: [ ProfessionalComponent,
     ProfessionalDetailComponent, 

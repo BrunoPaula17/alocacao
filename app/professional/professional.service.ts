@@ -24,7 +24,7 @@ export class ProfessionalService {
 
     getProfessionalRead(pid:number):Promise<Professional>{
         
-        let url:string = `${SERVICE_URL}/${pid}`;
+        let url:string = `${SERVICE_URL}/details/${pid}`;
 
         return this._httpService.get(url)
                    .toPromise()

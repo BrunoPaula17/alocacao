@@ -26,7 +26,7 @@ export class ProfessionalDetailComponent implements OnInit {
     role: Role[];
     action: String;
    
-    getDetail(pid:number): void {
+    getDetails(pid:number): void {
         this._professionalService.getProfessionalRead(pid)
                                  .then(professional => this.professional = professional)
     }
@@ -56,7 +56,7 @@ export class ProfessionalDetailComponent implements OnInit {
         this._router.params.subscribe((params: Params) => {
             let pid:number = +params['pid'];
             this.action = params['action'];
-            this.getDetail(pid)
+            this.getDetails(pid);
 
         })
 
