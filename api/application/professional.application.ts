@@ -24,49 +24,63 @@ export class ProfessionalApplication{
     /*
         Cria um novo profissional na base de dados.
     */
-    Create(pid: number, eid: string, name: string, email: string, 
-                        roleID: number, prefix: number, phone: string): Professional{                            
+    Create(pid: number, eid: string, name: string, email: string,roleID: number, prefix: number, phone: string): Professional{                            
         
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
 
-        if((isNaN(pid) || pid === null)||
-           (eid === null)||(email === null)||
-           (isNaN(roleID) || roleID === null)||
-           (prefix === null)||(phone === null)){
-            throw ("Por favor, verificar as informações.");
-        }else{
-            return null; //professionalPersistence.Create(pid, eid, name, email, roleID, prefix, phone);
-        }
+        let professional : Professional = new Professional();
+        
+        professional = {
+            "pid": pid,
+            "eid": eid,
+            "name": name,
+            "email": email,
+            "roleID": roleID,
+            "prefix": prefix,
+            "phone": phone,
+            "role": null,
+            "deleted": false
+        };
+
+        return professionalPersistence.Create(professional);
+        
     }
 
     /*  
         Atualiza as informações na base de dados.
     */
     Update(pid: number, eid: string, name: string, email: string, 
-                        roleID: number, prefix: number, phone: string): Professional{
+           roleID: number, prefix: number, phone: string): Professional{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
-        if((isNaN(pid) || pid === null)||
-           (eid === null)||(email === null)||
-           (isNaN(roleID) || roleID === null)||
-           (prefix === null)||(phone === null)){
-            throw ("Por favor, verificar as informações.");
-        }else{
-            return null;//professionalPersistence.updateProfessional(pid, eid, name, email, roleID, prefix, phone);
-        }
+        let professional : Professional = new Professional();
+        
+        professional = {
+            "pid": pid,
+            "eid": eid,
+            "name": name,
+            "email": email,
+            "roleID": roleID,
+            "prefix": prefix,
+            "phone": phone,
+            "role": null,
+            "deleted": false
+        };
+       
+        return professionalPersistence.Update(professional);
     }
 
     /*
         Apaga logicamente as informações de um funcionário.
     */
-    Delete(pid: number): Professional{
+    Delete(pid: number): boolean{
 
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
         if(isNaN(pid) && typeof pid === "number"){
             throw ("Por favor, informa o PID.");
         }else{
-            return null;//professionalPersistence.deleteProfessional(pid);
+            return professionalPersistence.Delete(pid);
         }
     }
 }
