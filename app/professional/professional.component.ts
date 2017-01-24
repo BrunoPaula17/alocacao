@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Professional } from './professional';
+import { ProfessionalService } from './professional.service';
 import { Role } from '../role/role';
 import { ROLES } from '../shared/mock';
-import { ProfessionalService } from "./professional.service"
+
+
 
 @Component({
     selector: 'ava-pro-app',
@@ -10,6 +12,7 @@ import { ProfessionalService } from "./professional.service"
 })
 
 export class ProfessionalComponent implements OnInit {
+
     constructor(private _professionalService:ProfessionalService) {}
 
     roles: Role[] = ROLES;
@@ -23,8 +26,7 @@ export class ProfessionalComponent implements OnInit {
         Inicialização do componente inicial da tela de professional.
     */
     ngOnInit() {
-        this._professionalService.getProfessionalList()
-                                 .then((professional:Professional[])=>{
+        this._professionalService.getProfessionalList().then((professional:Professional[])=>{
                                         this.professionals = professional;
                                         this.professionals.forEach((item,index)=>{
                                            this.getRoleDetail(item);

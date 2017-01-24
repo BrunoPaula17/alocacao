@@ -27,12 +27,12 @@ export class ProfessionalDetailComponent implements OnInit {
     action: String;
    
     getDetail(pid:number): void {
-        this._professionalService.getProfessional(pid)
+        this._professionalService.getProfessionalRead(pid)
                                  .then(professional => this.professional = professional)
     }
 
     insertProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string): void {
-        this._professionalService.insertProfessional(pid,eid,name,email,roleID,prefix,phone)
+        this._professionalService.createProfessional(pid,eid,name,email,roleID,prefix,phone)
                                  .then(professional => this.professional = professional)
 
     }

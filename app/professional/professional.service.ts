@@ -5,28 +5,24 @@ import { Professional } from './professional';
 import 'rxjs/add/operator/toPromise';
 
 
-const SERVICE_URL:string = '/api/professional'
+const SERVICE_URL: string = '/api/professional'
 
 @Injectable()
 export class ProfessionalService {
+    constructor(private _httpService: Http) { }
 
-    constructor(private _httpService: Http) {}
-
-    getProfessionalList():Promise<Professional[]>{
-
-        let url:string = `${SERVICE_URL}/list`;
-
+    getProfessionalList(): Promise<Professional[]> {
+        let url: string = `${SERVICE_URL}/list`;
         return this._httpService.get(url)
-                   .toPromise()
-                   .then((response:Response) => {
-                       return response.json() as Professional[];
-                   })
-                   .catch(this.erroHandling);
-
+            .toPromise()
+            .then((response: Response) => {
+                return response.json() as Professional[];
+            })
+            .catch(this.erroHandling);
     }
 
 
-    getProfessional(pid:number):Promise<Professional>{
+    getProfessionalRead(pid:number):Promise<Professional>{
         
         let url:string = `${SERVICE_URL}/${pid}`;
 
@@ -38,7 +34,7 @@ export class ProfessionalService {
                    .catch(this.erroHandling);
     }
 
-    insertProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string):Promise<Professional>{
+    createProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string):Promise<Professional>{
         
         let url:string = `${SERVICE_URL}/insert/${pid}/${eid}/${name}/${email}/${roleID}/${prefix}/${phone}`;
 

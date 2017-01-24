@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Professional } from '../../app/professional/professional';
 import { ProfessionalApplication } from '../application/professional.application';
 
+
 const professionalRouter: Router = Router();
 
 
@@ -12,6 +13,7 @@ professionalRouter.get('/list', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
     response.json(professionalApp.List());
 });
+
 
 
 /*
@@ -72,9 +74,6 @@ professionalRouter.get('/delete/:pid', (request: Request, response: Response) =>
     return response.json(professionalApp.Delete(pid));
 
 });
-
-
-
 
 
 

@@ -52,7 +52,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
             "deleted": false,
             "role": null
         }
-        ];
+    ];
 
     /*
         Retorna a lista de profissionais.
