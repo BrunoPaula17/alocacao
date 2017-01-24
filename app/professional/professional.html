@@ -1,5 +1,8 @@
 <ava-hdr-app [pageName]="'Profissional'" [icon]="'fa-users'"></ava-hdr-app>
 <div class="page-content">
+    <!--<div class="form-group">
+        <button type="button" class="btn btn-default" [routerLink]="['/professional','insert', professional.pid]">Novo Funcionário</button>
+    </div>-->
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr>
@@ -18,10 +21,9 @@
                 <td class="text-center">({{ professional.prefix }}) {{ professional.phone | telephone}}</td>
                     
                 <td class="text-center">
-                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional', professional.pid]"></span>
-                    <!--<span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/update', professional.pid]"></span>-->
-                    <!--<span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/delete', professional.pid]"></span>-->
-                </td>
+                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional','details', professional.pid]"></span>
+                    <span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/professional','update', professional.pid]"></span>
+                    <span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/professional','delete', professional.pid]"></span>
                 
             </tr>
         </tbody>

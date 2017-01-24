@@ -48,7 +48,7 @@ professionalRouter.get('/insert/:pid/:eid/:name/:email/:roleID/:prefix/:phone', 
 /*
    Atualiza um profissional na base de dados.
 */
-professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix:/phone', (request: Request, response: Response) => {
+professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix/:phone', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
     let pid:number = +request.params.pid;

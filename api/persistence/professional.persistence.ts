@@ -57,28 +57,6 @@ export class ProfessionalPersistence implements ICrud<Professional>{
     /*
         Retorna a lista de profissionais.
     */
-    getProfessionals(): Professional[] {
-        return this.professionals;
-    }
-
-    /*
-        Retorna um funcionário específico selecionado na tabela.
-    */
-    getProfessional(pid: number): Professional {
-        return this.professionals.find(professional => professional.pid === pid);
-    }
-
-    
-    /*
-        Criação de um novo profissional na base de dados.
-    */
-    Create(professional: Professional): Professional {
-        return null;
-    }
-
-    /*
-        Retorna a lista de profissionais.
-    */
     List(): Professional[] {
         return this.professionals;
     }
@@ -88,6 +66,14 @@ export class ProfessionalPersistence implements ICrud<Professional>{
     */
     Read(pid: number): Professional {
         return this.professionals.find(professional => professional.pid === pid);
+    }
+      
+    /*
+        Criação de um novo profissional na base de dados.
+    */
+    Create(professionalCreate: Professional): Professional {
+        this.professionals.push(professionalCreate);
+        return null;
     }
 
     /*
@@ -103,7 +89,10 @@ export class ProfessionalPersistence implements ICrud<Professional>{
         Deleta logicamente as informações do profissional
     */
     Delete(pid: number): boolean {
-        return null;
+        let _professionalArray:Professional
+        _professionalArray = this.professionals.find(professional => professional.pid === pid);  
+        _professionalArray.deleted = true;  
+        return false;  
     }
 
 }

@@ -36,6 +36,13 @@ export class CustomerDetailsComponent implements OnInit {
             })
     }
 
+    update(customer: Customer){
+        this._customerService.updateCustomer(customer)
+        .then((customer: Customer) => {
+            this.customer = customer;
+        })
+    }
+
     ngOnInit(): void {
           this._router.params.subscribe((params: Params) => {
               let id: number = +params['id'];
