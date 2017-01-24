@@ -79,14 +79,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 1,
         "prefix": 11,
         "phone": "971537512",
-<<<<<<< HEAD
-        "deleted": false,
-        "role": null
-=======
         "role": null,
-        "deleted": true
->>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
-    },
+        "deleted": true    },
     {
         "pid": 10715377,
         "eid": "thomas.anjos",
@@ -95,13 +89,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 2,
         "prefix": 11,
         "phone": "963484588",
-<<<<<<< HEAD
-                "deleted": false,
-        "role": null
-=======
         "role": null,
         "deleted": true
->>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
     },
     {
         "pid": 10715378,
@@ -111,13 +100,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID":3,
         "prefix": 11,
         "phone": "984841212",
-<<<<<<< HEAD
-                "deleted": false,
-        "role": null
-=======
         "role": null,
         "deleted": true
->>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
     },
     {
         "pid": 10715379,
@@ -127,13 +111,8 @@ export const PROFESSIONALS: Professional[] = [
         "roleID": 4,
         "prefix": 11,
         "phone": "931312323",
-<<<<<<< HEAD
-                "deleted": false,
-        "role": null
-=======
         "role": null,
         "deleted": true
->>>>>>> b1858600dba0d7db7b3e91fb9aaca95377e7f431
     }
 ]
 
