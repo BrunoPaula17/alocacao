@@ -65,7 +65,7 @@ export class ProfessionalPersistence{
                         roleID:number,
                         prefix: number,
                         phone: string ): number {
-
+        
         return pid;
 
     }
@@ -79,10 +79,26 @@ export class ProfessionalPersistence{
                         prefix: number,
                         phone: string ): number {
 
+        let _professionalArray:Professional;
+        _professionalArray = this.professional.find(professional => professional.pid === pid);
+        
+        _professionalArray.eid= eid;
+        _professionalArray.name= name;
+        _professionalArray.email= email;
+        _professionalArray.roleID=roleID;
+        _professionalArray.prefix= prefix;
+        _professionalArray.phone=phone 
+
        return pid;
-    }
+    
+}
 
     deleteProfessional(pid: number ): boolean {
+            
+        let _professionalArray:Professional;
+        
+        _professionalArray = this.professional.find(professional => professional.pid === pid);
+        _professionalArray.deleted = true;
         
         return false;       
         
