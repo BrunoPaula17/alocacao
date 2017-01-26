@@ -38,7 +38,18 @@ export class CustomerPersistence implements ICrud<Customer>{
     }
 
     read(id: number): Promise<Customer> {
-        return null;
+         let database: Db = null;
+        return Promise.resolve(MongoClient.connect(mongoUrl)
+        
+        .then((db: Db) => {
+            database = db;
+            return db.collection('customers').findOne({ "customerID": id });
+        })
+        .then((customer: Customer) => {
+            database.close();
+            return customer;
+        }));
+
     }
 
     update(custUpd: Customer): Promise<Customer> {
