@@ -53,7 +53,7 @@ export class CustomerPersistence implements ICrud<Customer>{
         );
     }
 
-    update(custUpd: Customer): Promise<Customer> {
+ update(custUpd: Customer): Promise<Customer> {
 
         let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
@@ -69,22 +69,10 @@ export class CustomerPersistence implements ICrud<Customer>{
                     {
                         return null;
                     }
-            }));
-        
-        // let _customer: Customer;
-  
-        // _customer = this.customers.find(customer => customer.customerID === custUpd.customerID);
 
-        // if(_customer != null){
-        //     this.customers[this.customers.indexOf(_customer)] = custUpd;
-        // }
-        // else{
-        //     _customer = null;     
-        // }
+            })); 
+ }
 
-        // return _customer;
-
-    }
 
     delete(id: number): Promise<boolean> {
 
@@ -103,7 +91,8 @@ export class CustomerPersistence implements ICrud<Customer>{
                         return false;
                     }
             }));
-    }
+    } 
+
 }
 
 

@@ -12,4 +12,5 @@ export class Booking implements BookingInterface{
     bookingPercentual: number;
     project: Project;
     professional: Professional;
+    deleted: boolean;
 }
