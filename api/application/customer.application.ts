@@ -17,8 +17,9 @@ export class CustomerApplication {
         return customerPersistence.list();
     }
 
-    readCustomer(id: number): Customer {
-        return null;
+    readCustomer(id: number): Promise<Customer> {
+        let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        return customerPersistence.read(id);
     }
 
     updateCustomer(customer: Customer): Customer {
