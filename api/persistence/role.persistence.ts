@@ -1,81 +1,94 @@
 import { Role } from '../../app/role/role';
 import { ICrud } from './crud.interface';
+import { MongoClient, Db } from 'mongodb';
+import { Connection } from './connection';
 
 export class RolePersistence implements ICrud<Role> {
     private _deleted: boolean = true;
-    private roles: Role[] = [
-        {
-            "roleId": 1,
-            "name": "Associate Software Engineer",
-            "brc": "2017SE",
-            "level": 12,
-            "description": "Initial software development",
-            "deleted": false
-        },
-        {
-            "roleId": 2,
-            "name": "Software Engineer",
-            "brc": "2017SE2",
-            "level": 11,
-            "description": "Software development",
-            "deleted": false
-        },
-        {
-            "roleId": 3,
-            "name": "Senior Software Engineer",
-            "brc": "2017SES",
-            "level": 10,
-            "description": "Senior software development",
-            "deleted": false
-        },
-        {
-            "roleId": 4,
-            "name": "System Analyst",
-            "brc": "2017SA",
-            "level": 9,
-            "description": "Role`s description",
-            "deleted": false
-        },
-        {
-            "roleId": 5,
-            "name": "Senior System Analyst",
-            "brc": "2017SSA",
-            "level": 8,
-            "description": "Role`s description",
-            "deleted": false
-        }
-    ];
 
-    Create(role: Role): Role {
-        this.roles.push(role);
-        return role;
+    create(role: Role): Promise<Role> {
+        let database: Db;
+        let roleid: number;
+
+        return Promise.resolve(
+            Connection.Create()
+            .then((db: Db) => {
+                database = db;
+                return db.collection('roles').insertOne(role, roleid);
+            })
+            .then((result) => {
+                database.close();
+                console.log(result);
+                return role;
+            }));
     }
 
-    List(): Role[] {
-        return this.roles.filter(r => r.deleted != this._deleted);
+    list(): Promise<Role[]> {
+        let database: Db;
+
+        return Promise.resolve(
+            Connection.Create()
+            .then((db: Db) => {
+                database = db;
+                let teste : any = db.collection('roles').find( { deleted: false }).toArray();
+                return teste;
+            })
+            .then((roles: Role[]) => {
+                database.close();
+                return roles;
+
+            }));
     }
 
-    Read(id: number): Role {
-        return this.roles.find(r => r.roleId === id && r.deleted != this._deleted);
+    read(id: number): Promise<Role> {
+        let database: Db;
+
+        return Promise.resolve(
+            Connection.Create()
+            .then((db: Db) => {
+                database = db;
+                return db.collection('roles').findOne( { deleted: false,   "roleId": id});
+            })
+            .then((role: Role) => {
+                database.close();
+                return role;
+            }));
     }
 
-    Update(role: Role): Role {
-        let _role: Role = this.roles.find(r => r.roleId === role.roleId);
-        if (_role != null) {
-            _role = role;
-            return _role;
-        }
-        else
-            return null;
+    update(role: Role): Promise<Role> {
+        let database: Db;
+
+        return Promise.resolve(
+            Connection.Create()
+            .then((db: Db) => {
+                database = db;
+                return db.collection('roles').findOneAndUpdate(
+                    { "roleId" : role.roleId },
+                    role
+                );
+            })
+            .then((role: Role) => {
+                database.close();
+                return role;
+            }));
     }
 
-    Delete(id: number): boolean {
-        let _role: Role = this.roles.find(r => r.roleId === id);
-        if (_role != null) {
-            _role.deleted = true;
-            return true;
-        }
-        else
-            return false;
+    delete(id: number): Promise<boolean> {
+        let database: Db;
+
+        return Promise.resolve(
+            Connection.Create()
+            .then((db: Db) => {
+                database = db;
+                return db.collection('roles').remove( { roleId: id } );
+            })
+            .then((result) => {
+                database.close();
+                return true;
+            })
+            .catch((erro) => {
+                console.log(erro);
+                return false;
+            }));
     }
 }
