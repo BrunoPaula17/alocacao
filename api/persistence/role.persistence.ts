@@ -10,24 +10,30 @@ export class RolePersistence implements ICrud<Role> {
         let database: Db;
         let roleid: number;
 
+        let teste: any = role;
+
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
                 database = db;
-                return db.collection('roles').insertOne(role, roleid);
+                return db.collection('roles').insertOne(role);
             })
-            .then((result) => {
+            .then(() => {
                 database.close();
-                console.log(result);
+                console.log('Gravou');
                 return role;
-            }));
+            })
+            .catch(() => {
+                console.log('Erro ao gravar');
+            })
+            );
     }
 
     list(): Promise<Role[]> {
         let database: Db;
 
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
                 database = db;
                 let teste : any = db.collection('roles').find( { deleted: false }).toArray();
@@ -44,7 +50,7 @@ export class RolePersistence implements ICrud<Role> {
         let database: Db;
 
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
                 database = db;
                 return db.collection('roles').findOne( { deleted: false,   "roleId": id});
@@ -59,7 +65,7 @@ export class RolePersistence implements ICrud<Role> {
         let database: Db;
 
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
                 database = db;
                 return db.collection('roles').findOneAndUpdate(
@@ -77,7 +83,7 @@ export class RolePersistence implements ICrud<Role> {
         let database: Db;
 
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
                 database = db;
                 return db.collection('roles').remove( { roleId: id } );

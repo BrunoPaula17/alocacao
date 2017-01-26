@@ -14,17 +14,20 @@ export class CustomerApplication {
     listCustomers(): Promise<Customer[]> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        let professionals: Professional[];
+        //let professionals: Professional[];
 
-        professionals = professionalApp.List();
+        //professionals = professionalApp.List();
 
-        return Promise.resolve(customerPersistence.list()
+        return Promise.resolve(professionalApp.List()
+        .then((professionals: Professional[]) => {
+            Promise.resolve(customerPersistence.list()
             .then((costumers: Customer[]) => {
                 costumers.forEach(customer => {
                     customer.professional = professionals.find(professional => professional.pid == customer.responsible);
                 })
                 return costumers;
             }));
+        }));
 
         // costumers       = customerPersistence.List();
         // professionals   = professionalApp.List();
@@ -39,13 +42,16 @@ export class CustomerApplication {
     readCustomer(id: number): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        let professional: Professional
+        //let professional: Professional
 
         return Promise.resolve(customerPersistence.read(id)
-            .then((costumer: Customer) => {
-                costumer.professional = professionalApp.Read(costumer.responsible);
+        .then((costumer: Customer) => {
+            professionalApp.Read(costumer.responsible)
+            .then((professional: Professional) => {
+                costumer.professional = professional;
                 return costumer;
-            }));
+            })
+        }));
 
         // let customerPersistence: CustomerPersistence = new CustomerPersistence();
         // let professionalApp: ProfessionalApplication = new ProfessionalApplication();

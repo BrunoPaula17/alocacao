@@ -2,6 +2,7 @@ import { Customer } from '../../app/customer/customer';
 import { ICrud } from './crud.interface';
 import { MongoClient, Db, InsertOneWriteOpResult, FindAndModifyWriteOpResultObject, UpdateWriteOpResult, DeleteWriteOpResultObject } from 'mongodb';
 import { mongoUrl } from '../server';
+import { Connection } from './connection';
 
 
 export class CustomerPersistence implements ICrud<Customer>{
@@ -16,17 +17,16 @@ export class CustomerPersistence implements ICrud<Customer>{
             })
             .then((insertResult: InsertOneWriteOpResult) => {
                 database.close();
-                console.log("Inserted a document into the customers collection");    
-                if (insertResult.insertedId != null){
-                        customer.customerID = +insertResult.insertedId;
-                        return insertResult.insertedId;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                
-                             
+                console.log("Inserted a document into the customers collection");
+                if (insertResult.insertedId != null) {
+                    customer.customerID = +insertResult.insertedId;
+                    return insertResult.insertedId;
+                }
+                else {
+                    return null;
+                }
+
+
             }));
 
     }
@@ -34,29 +34,28 @@ export class CustomerPersistence implements ICrud<Customer>{
     list(): Promise<Customer[]> {
 
         let database: Db = null;
-        return Promise.resolve(MongoClient.connect(mongoUrl)
-        
-        .then((db: Db) => {
-            database = db;
-            return db.collection('customers').find({"deleted": false }).toArray();
-        })
-        .then((customer: Customer[]) => {
-            database.close();
-            return customer;
-        }));
-
+        return Promise.resolve(
+            Connection.create()
+            .then((db: Db) => {
+                database = db;
+                return db.collection('customers').find({ "deleted": false }).toArray();
+            })
+            .then((customer: Customer[]) => {
+                database.close();
+                return customer;
+            }));
     }
 
     read(id: number): Promise<Customer> {
         //return this.customers.find(customer => customer.customerID === id && customer.deleted === false);
 
-         let database: Db = null;
+        let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
-                database=db;
-                return db.collection ('customers').findOne({ "deleted": false, "customerID": id });
+                database = db;
+                return db.collection('customers').findOne({ "deleted": false, "customerID": id });
             })
-            .then((customer : Customer) => {
+            .then((customer: Customer) => {
                 database.close();
                 return customer;
             })
@@ -68,15 +67,15 @@ export class CustomerPersistence implements ICrud<Customer>{
         let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
-                database=db;
-                return db.collection ('customers').findOneAndUpdate({"customerID": custUpd.customerID }, {
-                        customerID: custUpd.customerID,
-                        name: custUpd.name,
-                        responsible: custUpd.name,
-                        contact: custUpd.contact,
-                        email: custUpd.email,
-                        deleted: custUpd.email
-                    }, {returnOriginal: false});
+                database = db;
+                return db.collection('customers').findOneAndUpdate({ "customerID": custUpd.customerID }, {
+                    customerID: custUpd.customerID,
+                    name: custUpd.name,
+                    responsible: custUpd.name,
+                    contact: custUpd.contact,
+                    email: custUpd.email,
+                    deleted: custUpd.email
+                }, { returnOriginal: false });
             })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {
                 database.close();
@@ -86,9 +85,9 @@ export class CustomerPersistence implements ICrud<Customer>{
                 else
                     return Error("An error ocurred while triyng to update a record");
             }));
-        
+
         // let _customer: Customer;
-  
+
         // _customer = this.customers.find(customer => customer.customerID === custUpd.customerID);
 
         // if(_customer != null){
@@ -97,9 +96,6 @@ export class CustomerPersistence implements ICrud<Customer>{
         // else{
         //     _customer = null;     
         // }
-
-        // return _customer;
-
     }
 
     delete(id: number): Promise<boolean> {
@@ -107,19 +103,19 @@ export class CustomerPersistence implements ICrud<Customer>{
         let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
-                database=db;
-                return db.collection ('customers').deleteOne({"customerID": id });
+                database = db;
+                return db.collection('customers').deleteOne({ "customerID": id });
             })
             .then((updateResult: DeleteWriteOpResultObject) => {
-                    if (updateResult.result.ok == 1){
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                if (updateResult.result.ok == 1) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }));
     }
+
 }
 
 
