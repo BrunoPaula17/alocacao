@@ -18,6 +18,7 @@ export class Project implements IProject{
     sponsor: Professional;
     name: string;
     wbs: string;
+    deleted: boolean;
 
     static Headers: Header[] = [
         {field: 'client.name', description:'Cliente', filter: 'text', class: 'text-left', insert: false, update: true, delete: true},

@@ -12,4 +12,5 @@ export interface IProject{
     sponsor:  Professional;
     name: string;
     wbs: string;
+    deleted: boolean;
 }
