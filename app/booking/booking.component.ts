@@ -30,7 +30,7 @@ export class BookingComponent implements OnInit {
     }
 
     getProjectDetails(booking: Booking): void {
-        booking.project = this.projects.find(project => project.projectID == booking.projectID);
+        booking.project = this.projects.find(project => project.projectId == booking.projectID);
     }
 
     getProfessionalDetails(booking: Booking): void {
@@ -46,7 +46,7 @@ export class BookingComponent implements OnInit {
             .then((professionals: Professional[]) => {
                 this.professionals = professionals;
 
-                return this._projectService.getProjects()
+                return this._projectService.getProjectsList()
             })
             .then((projects: Project[]) => {
                 this.projects = projects;
