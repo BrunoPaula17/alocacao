@@ -14,7 +14,7 @@ const app: express.Application = express();
 app.use(express.static(path.join(__dirname, '../')));
 app.use(json());
 
-// Rotas de API
+// Route Configuration
 app.use('/api/booking/', bookingRouter);
 app.use('/api/customer/', customerRouter);
 app.use('/api/role/', roleRouter);
@@ -24,8 +24,11 @@ app.get('*', (request: Request, response: Response) => {
     response.sendFile(path.join(__dirname, '../index.html'));
 });
 
+// Server Configuration
 const server: http.Server = http.createServer(app);
-
 server.listen(3000);
 
-export { app }
+// MongoDB Configuration
+const mongoUrl: string = "mongodb://localhost:27017/alocacao";
+
+export { app, mongoUrl }
