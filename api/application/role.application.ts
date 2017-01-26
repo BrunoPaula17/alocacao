@@ -2,33 +2,33 @@ import { Role } from '../../app/role/role';
 import { RolePersistence } from '../persistence/role.persistence';
 
 export class RoleApplication {
-    ListRoles(): Role[] {
+    listRoles(): Promise<Role[]> {
         let rolePersistence: RolePersistence = new RolePersistence();
          
-        return rolePersistence.List();
+        return rolePersistence.list();
     }
 
-    ReadRole(id: number): Role{
+    readRole(id: number): Promise<Role>{
         let rolePersistence: RolePersistence = new RolePersistence();
 
-        return rolePersistence.Read(id);
+        return rolePersistence.read(id);
     }
 
-    DeleteRole(id: number): boolean{
+    deleteRole(id: number): Promise<boolean>{
         let rolePersistence: RolePersistence = new RolePersistence();        
 
-        return rolePersistence.Delete(id);
+        return rolePersistence.delete(id);
     }
 
-    UpdateRole(role: Role): Role{
+    updateRole(role: Role): Promise<Role>{
         let rolePersistence: RolePersistence = new RolePersistence();
         
-        return rolePersistence.Update(role);
+        return rolePersistence.update(role);
     }
 
-    CreateRole(role: Role): Role{
+    createRole(role: Role): Promise<Role>{
         let rolePersistence: RolePersistence = new RolePersistence();
 
-        return rolePersistence.Create(role);
+        return rolePersistence.create(role);
     }
 }
