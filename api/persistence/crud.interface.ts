@@ -1,12 +1,12 @@
 export interface ICrud<T> {
     //Insert record
-    Create(entity: T): T;
+    create(entity: T): Promise<T>;
     //Recovery all entities
-    List(): T[];
+    list(): Promise<T[]>;
     //Recovery entity by id
-    Read(id: number): T;
+    read(id: number): Promise<T>;
     //Update entity by id
-    Update(entity: T): T;
+    update(entity: T): Promise<T>;
     //Delete entity by id
-    Delete(id: number): boolean;
+    delete(id: number): Promise<boolean>;
 }

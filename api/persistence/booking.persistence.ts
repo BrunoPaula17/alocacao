@@ -1,48 +1,55 @@
 import { Booking } from '../../app/booking/booking';
+import { MongoClient, Db, FindAndModifyWriteOpResultObject } from 'mongodb';
+import { ICrud } from './crud.interface';
+import { mongoUrl } from '../server';
 
-export class BookingPersistence {
-    private bookings: Booking[] = [
-        {
-            "bookingID": 1,
-            "projectID": 1,
-            "pid": 10715376,
-            "auditID": 1,
-            "initialDate": new Date("2017-02-17T02:00:00.000Z"),
-            "endDate": new Date("2017-03-03T03:00:00.000Z"),
-            "bookingPercentual": 1,
-            "project": null,
-            "professional": null
-        },
-        {
-            "bookingID": 1,
-            "projectID": 1,
-            "pid": 10715377,
-            "auditID": 1,
-            "initialDate": new Date("2017-02-16T02:00:00.000Z"),
-            "endDate": new Date("2017-03-03T03:00:00.000Z"),
-            "bookingPercentual": 1,
-            "project": null,
-            "professional": null
-        },
-        {
-            "bookingID": 1,
-            "projectID": 1,
-            "pid": 10715378,
-            "auditID": 1,
-            "initialDate": new Date("2017-02-16T02:00:00.000Z"),
-            "endDate": new Date("2017-03-03T03:00:00.000Z"),
-            "bookingPercentual": 1,
-            "project": null,
-            "professional": null
-        }
-    ];
+export class BookingPersistence implements ICrud<Booking> {
 
-
-    getBookings(): Booking[] {
-        return this.bookings;
+    create(): Promise<Booking> {
+        return null;
     }
 
-    getBooking(id: number): Booking {
-        return this.bookings.find(booking => booking.bookingID === id);
+    list(): Promise<Booking[]> {
+        let database: Db = null;
+        return Promise.resolve(MongoClient.connect(mongoUrl)
+            .then((db: Db) => {
+                database = db;
+                return db.collection('bookings').find().toArray();
+            })
+            .then((booking: Booking[]) => {
+                database.close();
+                return booking;
+            }));
+    }
+
+    read(id: number): Promise<Booking> {
+        let database: Db;
+        return Promise.resolve(
+            MongoClient.connect(mongoUrl)
+                .then((db: Db) => {
+                    return db.collection('bookings').findOne({ "bookingID": id });
+                })
+                .then((booking: Booking) => {
+                    return booking;
+                }));
+    }
+
+    update(booking: Booking): Promise<Booking> {
+        let database: Db;
+
+        return Promise.resolve(
+            MongoClient.connect(mongoUrl)
+                .then((db: Db) => {
+                    return db.collection('bookings').findOneAndUpdate({ bookingID: booking.bookingID }, booking);
+                })
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    delete updateResult.value._id;
+
+                    return updateResult.value;
+                }));
+    }
+
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false);
     }
 }

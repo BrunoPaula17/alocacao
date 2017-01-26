@@ -5,13 +5,12 @@ import { Header } from '../shared/grid/grid-header';
 import { CustomGridService } from '../shared/grid/grid.service';
 
 import { Project } from './project';
-import { Customer } from '../customer/customer'
-import { Professional } from '../professional/professional'
-import { ProjectService } from './project.service'
+import { Customer } from '../customer/customer';
+import { Professional } from '../professional/professional';
 
-
-//import { CustomerService } from '../customer/customer.service'
-import { ProfessionalService } from '../professional/professional.service'
+import { ProjectService } from './project.service';
+import { CustomerService } from '../customer/customer.service'
+import { ProfessionalService } from '../professional/professional.service';
 
 
 @Component({
@@ -19,41 +18,64 @@ import { ProfessionalService } from '../professional/professional.service'
     templateUrl: './app/project/project.html'
 })
 
-export class ProjectComponent extends OnInit {
-    constructor(private _gridService: CustomGridService<Project>,
-        private _router: Router,
-        //private _customerService: CustomerService,
-        private _professionalService: ProfessionalService,
-        private _projectService: ProjectService) {
-        super();
-        this._projectService.getProjects().then((projects: Project[]) => this._gridService.models = projects);
-        this._professionalService.getProfessionalList().then((professionals: Professional[]) => this.professionals = professionals);
-        //this._customerService.getCustomerList().then((customers: Customer[]) => this.customers = customers);
-    }
+export class ProjectComponent implements OnInit {
 
-    pageName: string = '<span class="fa fa-cubes"></span>&nbsp;Projetos';
-    project: Project = new Project();
+    constructor(private _projectService : ProjectService,
+                private _professionalService: ProfessionalService,
+                private _customerService: CustomerService) {}
+
+
+    projects: Project[];
     customers: Customer[];
     professionals: Professional[];
 
+    /*
+        Método disparado ao inicializar a tela, logo após carregar o Html.
+    */
     ngOnInit() {
-        this._projectService.getProjects().then((projects: Project[]) => this._gridService.models = projects);
-        this._gridService.headers = Project.Headers;
-        this._gridService.update = this.UpdateProject.bind(this);
-        this._gridService.delete = this.deleteProject.bind(this);
+
+        this._customerService.getCustomerList()
+                             .then((customer: Customer[]) => {
+                                this.customers = customer;
+                                return this._professionalService.getProfessionalList();
+                             })
+                             .then((professional: Professional[]) => {
+                                 this.professionals = professional;
+                                 return this._projectService.getProjectsList();
+                             })
+                             .then((project: Project[]) => {
+                                 this.projects = project;
+
+                                 this.getProjectsDetails();
+                             })
+
     }
 
-    public UpdateProject(project: Project) {
-        this.project = project;
-        this._router.navigate(['project', project.projectID]);
+
+    /*
+        Recupera os detalhes dos projetos a partir dos clientes e profissionais.
+    */
+    getProjectsDetails(){
+        this.projects.forEach ((item) => {
+            this.getCustomersList(item);
+            this.getProfessionalList(item);
+        });
+    }
+    
+    /*
+        Recupera a lista de clientes.
+    */
+    getCustomersList(project: Project){
+        project.customer = this.customers.find(customer => customer.customerID === project.customer.customerID);
+
     }
 
-    public deleteProject(project: Project) {
-        this._projectService.deleteProject(project.projectID)
-            .then(() => this._projectService.getProjects()
-                .then((projects: Project[]) => this._gridService.models = projects))
-            .then(() => alert("Elemento deletado"));
-
+    /*
+        Recupera a lista de profissionais.
+    */
+    getProfessionalList(project: Project){
+        project.sponsor = this.professionals.find(professional => professional.pid === project.sponsor.pid);
     }
+    
 
 }

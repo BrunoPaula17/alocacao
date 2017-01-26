@@ -9,13 +9,17 @@ customerRouter.post('/create/:customer', (request: Request, response: Response) 
 
     let customer: Customer = (Customer)+request.params.customer;
 
-    return response.json(customerApp.createCustomer(customer));
+    return customerApp.createCustomer(customer).then((customer:Customer) => {
+        response.json(customer);
+    });
 });
 
 customerRouter.get('/list', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
-        response.json(customerApp.listCustomers());
+        return customerApp.listCustomers().then((customers:Customer[]) => {
+            response.json(customers);
+        });
 });
 
 customerRouter.get('/details/:id', (request: Request, response: Response) => {
