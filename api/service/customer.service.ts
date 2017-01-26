@@ -21,6 +21,7 @@ customerRouter.get('/list', (request: Request, response: Response) => {
         .then((customers: Customer[]) => {
             response.json(customers);
         });
+
 });
 
 customerRouter.get('/details/:id', (request: Request, response: Response) => {
