@@ -1,5 +1,5 @@
 import { Booking } from '../../app/booking/booking';
-import { MongoClient, Db, FindAndModifyWriteOpResultObject } from 'mongodb';
+import { MongoClient, Db, UpdateWriteOpResult } from 'mongodb';
 import { ICrud } from './crud.interface';
 import { mongoUrl } from '../server';
 
@@ -40,12 +40,15 @@ export class BookingPersistence implements ICrud<Booking> {
         return Promise.resolve(
             MongoClient.connect(mongoUrl)
                 .then((db: Db) => {
-                    return db.collection('bookings').findOneAndUpdate({ bookingID: booking.bookingID }, booking);
-                })
-                .then((updateResult: FindAndModifyWriteOpResultObject) => {
-                    delete updateResult.value._id;
+                    let bookingToBeUpdated: Booking = booking;
+                    bookingToBeUpdated.project = null;
+                    bookingToBeUpdated.professional = null;
 
-                    return updateResult.value;
+                    return db.collection('bookings').updateOne({ bookingID: booking.bookingID }, bookingToBeUpdated);
+                })
+                .then((updateResult: UpdateWriteOpResult) => {
+                    if (updateResult.result.ok == 1)
+                        return booking;
                 }));
     }
 

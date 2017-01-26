@@ -36,7 +36,7 @@ export class BookingDetailComponent implements OnInit {
             })
             .then((booking: Booking) => {
                 booking.professional = this.professionals.find(professional => professional.pid === booking.pid);
-                booking.project = this.projects.find(project => project.projectID == booking.projectID);
+                booking.project = this.projects.find(project => project.projectId == booking.projectID);
                 this.booking = booking;
             });
     }
@@ -46,7 +46,7 @@ export class BookingDetailComponent implements OnInit {
             .then((professionals: Professional[]) => {
                 this.professionals = professionals;
 
-                return this._projectService.getProjects()
+                return this._projectService.getProjectsList()
             })
             .then((projects: Project[]) => {
                 this.projects = projects;
@@ -70,6 +70,7 @@ export class BookingDetailComponent implements OnInit {
         this._bookingService.saveBooking(this.booking)
             .then((bookingSaved: Booking) => {
                 this.booking = bookingSaved;
+                this.action = 'details';
             });
     }
 
