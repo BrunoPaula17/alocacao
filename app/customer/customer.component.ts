@@ -20,6 +20,7 @@ export class CustomerComponent implements OnInit {
     customers: Customer[];
     pageName: string = "Clientes";
 
+
     ngOnInit() {
         this._customerService.getCustomerList()
             .then((customer: Customer[]) => {

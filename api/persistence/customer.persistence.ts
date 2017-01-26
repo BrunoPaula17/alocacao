@@ -1,6 +1,6 @@
 import { Customer } from '../../app/customer/customer';
 import { ICrud } from './crud.interface';
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db, UpdateWriteOpResult, DeleteWriteOpResultObject } from 'mongodb';
 import { mongoUrl } from '../server';
 
 
@@ -52,15 +52,43 @@ export class CustomerPersistence implements ICrud<Customer>{
 
     }
 
-    update(custUpd: Customer): Promise<Customer> {
+ update(custUpd: Customer): Promise<Customer> {
 
-        return null;
-    }
+        let database: Db = null;
+        return Promise.resolve(MongoClient.connect(mongoUrl)
+            .then((db: Db) => {
+                database=db;
+                return db.collection ('customers').updateOne({"customerID": custUpd.customerID }, custUpd);
+            })
+            .then((updateResult: UpdateWriteOpResult) => {
+                    if (updateResult.result.ok == 1){
+                        return custUpd;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+            })); 
+ }
 
     delete(id: number): Promise<boolean> {
 
-        return null;
-    }
+        let database: Db = null;
+        return Promise.resolve(MongoClient.connect(mongoUrl)
+            .then((db: Db) => {
+                database=db;
+                return db.collection ('customers').deleteOne({"customerID": id });
+            })
+            .then((updateResult: DeleteWriteOpResultObject) => {
+                    if (updateResult.result.ok == 1){
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+            }));
+    } 
 }
 
 

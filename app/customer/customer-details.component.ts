@@ -44,6 +44,10 @@ export class CustomerDetailsComponent implements OnInit {
 
     }
 
+    editar(): void {
+        this.action = 'edit';
+    }
+
     ngOnInit(): void {
         this._router.params.subscribe((params: Params) => {
             let id: number = +params['id'];
