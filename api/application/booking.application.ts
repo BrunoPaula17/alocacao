@@ -13,4 +13,10 @@ export class BookingApplication {
 
         return bookingPersistence.getBooking(id);
     }
+
+    saveBooking(booking: Booking): Promise<Booking> {
+        let bookingPersistence: BookingPersistence = new BookingPersistence();
+
+        return bookingPersistence.saveBooking(booking);
+    }
 }

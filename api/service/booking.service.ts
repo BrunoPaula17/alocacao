@@ -24,5 +24,14 @@ bookingRouter.get('/:id', (request: Request, response: Response) => {
         })
 });
 
+bookingRouter.put('/:id', (request: Request, response: Response) => {
+    let bookingApp: BookingApplication = new BookingApplication();
+
+    bookingApp.saveBooking(request.body.booking)
+        .then((bookingSaved: Booking) => {
+            response.json(bookingSaved);
+        });
+});
+
 
 export { bookingRouter }
