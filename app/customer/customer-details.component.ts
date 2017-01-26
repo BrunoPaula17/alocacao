@@ -30,11 +30,7 @@ export class CustomerDetailsComponent implements OnInit {
     }
 
     getDetails(id: number): void {
-        this._professionalService.getProfessionalList()
-            .then((professional: Professional[]) => {
-                this.professionals = professional;
-                return this._customerService.getCustomer(id)
-            })
+        this._customerService.getCustomer(id)
             .then((customer: Customer) => {
                 this.customer = customer;
             });

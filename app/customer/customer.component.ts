@@ -19,8 +19,6 @@ export class CustomerComponent implements OnInit {
     }
     customers: Customer[];
     pageName: string = "Clientes";
-    currentCustomer: Customer;
-    professionals: Professional[];
 
     ngOnInit() {
         this._customerService.getCustomerList()
