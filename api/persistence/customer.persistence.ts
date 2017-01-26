@@ -28,7 +28,7 @@ export class CustomerPersistence implements ICrud<Customer>{
         
         .then((db: Db) => {
             database = db;
-            return db.collection('customers').find().toArray();
+            return db.collection('customers').find({"deleted": false }).toArray();
         })
         .then((customer: Customer[]) => {
             database.close();
@@ -38,18 +38,19 @@ export class CustomerPersistence implements ICrud<Customer>{
     }
 
     read(id: number): Promise<Customer> {
+        //return this.customers.find(customer => customer.customerID === id && customer.deleted === false);
+
          let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
-        
-        .then((db: Db) => {
-            database = db;
-            return db.collection('customers').findOne({ "customerID": id });
-        })
-        .then((customer: Customer) => {
-            database.close();
-            return customer;
-        }));
-
+            .then((db: Db) => {
+                database=db;
+                return db.collection ('customers').findOne({ "deleted": false, "customerID": id });
+            })
+            .then((customer : Customer) => {
+                database.close();
+                return customer;
+            })
+        );
     }
 
  update(custUpd: Customer): Promise<Customer> {
@@ -68,8 +69,10 @@ export class CustomerPersistence implements ICrud<Customer>{
                     {
                         return null;
                     }
+
             })); 
  }
+
 
     delete(id: number): Promise<boolean> {
 
@@ -89,6 +92,7 @@ export class CustomerPersistence implements ICrud<Customer>{
                     }
             }));
     } 
+
 }
 
 

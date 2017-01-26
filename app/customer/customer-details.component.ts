@@ -55,4 +55,8 @@ export class CustomerDetailsComponent implements OnInit {
             this.getDetails(id);
         })
     }
+
+    editar(): void {
+        this.action = 'edit';
+    } 
 }
