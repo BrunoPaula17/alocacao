@@ -27,4 +27,17 @@ export class BookingPersistence {
                     return booking;
                 }));
     }
+
+    saveBooking(booking: Booking): Promise<Booking> {
+        let database: Db;
+
+        return Promise.resolve(
+            MongoClient.connect(mongoUrl)
+                .then((db: Db) => {
+                    return db.collection('bookings').findOneAndUpdate({ bookingID: booking.bookingID }, booking);
+                })
+                .then((bookingSaved: Booking) => {
+                    return bookingSaved;
+                }));
+    }
 }

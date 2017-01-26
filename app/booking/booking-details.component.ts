@@ -67,7 +67,10 @@ export class BookingDetailComponent implements OnInit {
     }
 
     save(): void {
-        console.log('save');
+        this._bookingService.saveBooking(this.booking)
+            .then((bookingSaved: Booking) => {
+                this.booking = bookingSaved;
+            });
     }
 
     ngOnInit(): void {
