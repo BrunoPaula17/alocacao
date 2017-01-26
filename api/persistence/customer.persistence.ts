@@ -107,6 +107,7 @@ export class CustomerPersistence implements ICrud<Customer>{
                 return db.collection('customers').deleteOne({ "customerID": id });
             })
             .then((updateResult: DeleteWriteOpResultObject) => {
+                database.close();
                 if (updateResult.result.ok == 1) {
                     return true;
                 }
