@@ -1,2 +1,30 @@
-<ava-hdr-app [pageName]="'Projetos'" [icon]="'fa-folder'" ></ava-hdr-app>
-<ava-grid-app [headers]="_gridService.headers" [models]="_gridService.models"></ava-grid-app>
+<ava-hdr-app [pageName]="'Projetos'" [icon]="'fa-users'"></ava-hdr-app>
+<div class="page-content">
+    <button type="button" class="btn btn-primary btn-outline ava-btn-list" [routerLink]="['/projetos','insert', '']">Novo Projeto</button>
+    <table class="table table-bordered table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Projeto</th>
+                <th>Wbs</th>
+                <th>Data de Início</th>
+                <th>Data de Fim</th>
+                <th>Responsável</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of projects" (click)="getDetails(project)">
+                <td>{{ projetc.projectName }}</td>
+                <td>{{ projetc.wbs }}</td>
+                <td class="text-center">{{ projetc.startDate }}</td>
+                <td class="text-center">{{ projetc.endDate }}</td>
+                <td class="text-center">{{ projetc.sponsor.name }}</td>     
+                <td class="text-center">
+                    <span class="fa fa-list-alt fa-2x fa-black ava-cursor" 
+                          [routerLink]="['/project','details', project.projectId]">
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>    
+</div>

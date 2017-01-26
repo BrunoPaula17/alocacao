@@ -4,12 +4,11 @@ import { Professional } from '../professional/professional'
 
 
 export interface IProject{
-    projectID: number;
-    client:  Customer;
+    projectId: number;
+    customer:  Customer;
+    projectName: string;
     startDate: Date;
     endDate: Date;
-    concludeDate: Date;
     sponsor:  Professional;
-    name: string;
     wbs: string;
 }

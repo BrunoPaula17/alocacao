@@ -53,6 +53,7 @@
     <div class="form-group">
         <div class="col-sm-8">
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" *ngIf="'details'">Editar</button>
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update(customer)" *ngSwitchCase="'edit'">Salvar</button>
         </div>
     </div>

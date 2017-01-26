@@ -159,9 +159,9 @@ export const ROLES: Role[] = [
     }    
 ];
 
-export const PROJECTS: Project[] = [
+/*export const PROJECTS: Project[] = [
     {
-        "projectID": 1,
+        "projectId": 1,
         "clientID": 1,
         "client": null,
         "startDate": new Date("2017-02-11T12:21:00.761Z"),
@@ -340,4 +340,4 @@ export const PROJECTS: Project[] = [
         "name": "PRJ015",
         "wbs": "WBS00016"
     }
-]
+]*/
