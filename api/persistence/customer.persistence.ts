@@ -75,7 +75,7 @@ export class CustomerPersistence implements ICrud<Customer>{
         _customer = this.customers.find(customer => customer.customerID === custUpd.customerID);
 
         if(_customer != null){
-            this.customers[this.customers.indexOf(_customer)].contact = _customer.contact;
+            this.customers[this.customers.indexOf(_customer)] = custUpd;
         }
         else{
             _customer = null;     

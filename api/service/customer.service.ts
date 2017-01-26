@@ -15,7 +15,7 @@ customerRouter.post('/create/:customer', (request: Request, response: Response) 
 customerRouter.get('/list', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
-    response.json(customerApp.listCustomers());
+        response.json(customerApp.listCustomers());
 });
 
 customerRouter.get('/details/:id', (request: Request, response: Response) => {

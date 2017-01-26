@@ -29,60 +29,64 @@ export class BookingDetailComponent implements OnInit {
     action: string;
 
     getData(id: number): void {
-        this._professionalService.getProfessionalList()
+
+        this.getInitData()
+            .then((success: boolean) => {
+                return this._bookingService.getBooking(id);
+            })
+            .then((booking: Booking) => {
+                booking.professional = this.professionals.find(professional => professional.pid === booking.pid);
+                booking.project = this.projects.find(project => project.projectID == booking.projectID);
+                this.booking = booking;
+            });
+    }
+
+    getInitData(): Promise<boolean> {
+        return this._professionalService.getProfessionalList()
             .then((professionals: Professional[]) => {
                 this.professionals = professionals;
-            })
-            .then(() => {
+
                 return this._projectService.getProjects()
             })
             .then((projects: Project[]) => {
                 this.projects = projects;
             })
-            .then(() => {
-                return this._bookingService.getBooking(id);
-            })
-            .then((booking: Booking) => {
-                this.booking = booking;
-            });
-    }
-
-    getDetails(id: number): void {
-        let actualBooking: Booking;
-
-        this._bookingService.getBooking(id)
-            .then((booking: Booking) => {
-                actualBooking = booking;
-
-                return this._projectService.getProjectDetails(actualBooking.projectID);
-            })
-            .then((project: Project) => {
-                actualBooking.project = project;
-
-                return this._professionalService.getProfessionalRead(actualBooking.pid)
-            })
-            .then((professional: Professional) => {
-                actualBooking.professional = professional;
-
-                this.booking = actualBooking;
-            });
+            .then(() => { return true });
     }
 
     goBack(): void {
         this._location.back();
     }
 
+    edit(): void {
+        this.action = 'edit';
+    }
+
+    delete(): void {
+        console.log('delete');
+    }
+
+    save(): void {
+        this._bookingService.saveBooking(this.booking)
+            .then((bookingSaved: Booking) => {
+                this.booking = bookingSaved;
+            });
+    }
+
     ngOnInit(): void {
         this._router.params.subscribe((params: Params) => {
-            let id: number = +params['id'];
             this.action = params['action'];
-
             this.action = this.action.toLowerCase();
 
-            if (this.action === "details")
-                this.getDetails(id);
-            else
+            if (this.action === 'create') {
+                this.getInitData()
+                    .then((success: Boolean) => {
+                        this.booking = new Booking();
+                    });
+            } else {
+                let id: number = +params['id'];
                 this.getData(id);
+            }
         })
     }
 }

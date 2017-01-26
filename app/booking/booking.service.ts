@@ -18,7 +18,7 @@ export class BookingService {
             .then((response: Response) => {
                 return response.json() as Booking[];
             })
-            .catch(this.erroHandling);
+            .catch(this.errorHandling);
     }
 
     getBooking(id: number): Promise<Booking> {
@@ -29,8 +29,19 @@ export class BookingService {
             .then((response: Response) => {
                 return response.json() as Booking;
             })
-            .catch(this.erroHandling);
+            .catch(this.errorHandling);
     }
 
-    erroHandling(error: any) { console.log(error.message || error); }
+    saveBooking(booking: Booking): Promise<Booking> {
+        let url: string = `${SERVICE_URL}/${booking.bookingID}`;
+
+        return this._httpService.put(url, { booking: booking })
+            .toPromise()
+            .then((response: Response) => {
+                return response.json() as Booking;
+            })
+            .catch(this.errorHandling);
+    }
+
+    errorHandling(error: any) { console.log(error.message || error); }
 }

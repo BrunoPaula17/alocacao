@@ -7,15 +7,30 @@ const bookingRouter: Router = Router();
 bookingRouter.get('/list', (request: Request, response: Response) => {
     let bookingApp: BookingApplication = new BookingApplication();
 
-    response.json(bookingApp.getBookings());
+    bookingApp.getBookings()
+        .then((bookings: Booking[]) => {
+            response.json(bookings);
+        });
 });
 
 bookingRouter.get('/:id', (request: Request, response: Response) => {
     let bookingApp: BookingApplication = new BookingApplication();
-    
+
     let id: number = +request.params.id;
 
-    return response.json(bookingApp.getBooking(id));
+    bookingApp.getBooking(id)
+        .then((booking: Booking) => {
+            response.json(booking);
+        })
+});
+
+bookingRouter.put('/:id', (request: Request, response: Response) => {
+    let bookingApp: BookingApplication = new BookingApplication();
+
+    bookingApp.saveBooking(request.body.booking)
+        .then((bookingSaved: Booking) => {
+            response.json(bookingSaved);
+        });
 });
 
 

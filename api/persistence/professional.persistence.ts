@@ -73,27 +73,42 @@ export class ProfessionalPersistence implements ICrud<Professional>{
         Criação de um novo profissional na base de dados.
     */
     Create(professionalCreate: Professional): Professional {
-        this.professionals.push(professionalCreate);
-        return null;
+        if (professionalCreate.pid = undefined) {
+            return null
+           }
+        else
+            this.professionals.push(professionalCreate);
+            return this.professionals.find(professional => professional.pid === professionalCreate.pid);
     }
 
     /*
         Atualiza as informações do profissional 
     */
     Update(professionalUpdate: Professional): Professional {
-        let professional: Professional = this.Read(professionalUpdate.pid);
-        professional = professionalUpdate;
-        return professional;
+        let _professionalUpdate:Professional 
+        _professionalUpdate = this.professionals.find(professional => professional.pid === professionalUpdate.pid);
+
+        if (professionalUpdate != null) {
+            _professionalUpdate = professionalUpdate;
+            return professionalUpdate
+    }
+        else
+            return null;
     }
 
     /*
         Deleta logicamente as informações do profissional
     */
     Delete(pid: number): boolean {
-        let _professionalArray:Professional
-        _professionalArray = this.professionals.find(professional => professional.pid === pid);  
-        _professionalArray.deleted = true;  
-        return false;  
+        let _professionalDelete:Professional
+        _professionalDelete = this.professionals.find(professional => professional.pid === pid);  
+                
+        if (_professionalDelete != null) {
+           _professionalDelete.deleted = true;  
+           return _professionalDelete.deleted;
+        }
+        else
+            return false;
     }
 
 }

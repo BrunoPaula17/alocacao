@@ -5,9 +5,10 @@ import { CustomerComponent } from './customer.component'
 import { CustomerDetailsComponent } from './customer-details.component'
 import { CustomerService } from './customer.service'
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
-    imports: [SharedModule, BrowserModule,  RouterModule.forChild([
+    imports: [FormsModule, SharedModule, BrowserModule,  RouterModule.forChild([
             { path: 'customers', component: CustomerComponent },
             { path: 'customer/:action/:id', component: CustomerDetailsComponent}
         ])],
