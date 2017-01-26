@@ -7,7 +7,10 @@ const roleRouter: Router = Router();
 roleRouter.get('/list', (request: Request, response: Response) => {
     let roleApp: RoleApplication = new RoleApplication();
 
-    return response.json(roleApp.ListRoles());
+    roleApp.listRoles()
+        .then((roles: Role[]) => {
+            response.json(roles);
+        });
 });
 
 roleRouter.get('/read/:id', (request: Request, response: Response) => {
@@ -15,7 +18,10 @@ roleRouter.get('/read/:id', (request: Request, response: Response) => {
 
     let id: number = +request.params.id;
 
-    return response.json(roleApp.ReadRole(id));
+    roleApp.readRole(id)
+        .then((role: Role) => {
+            response.json(role);
+        });
 });
 
 roleRouter.delete('/delete/:id', (request: Request, response: Response) => {
@@ -23,17 +29,24 @@ roleRouter.delete('/delete/:id', (request: Request, response: Response) => {
 
     let id: number = +request.params.id;
 
-    return response.json(roleApp.DeleteRole(id));
+    roleApp.deleteRole(id)
+        .then(() => {
+            response.json(true);
+        })
+        .catch((() => {
+            response.json(false);
+        }));
 });
-
-/*?*/
 
 roleRouter.post('/create/:role', (request: Request, response: Response) => {
     let roleApp: RoleApplication = new RoleApplication();
 
     let role: Role = (Role)+request.params.role;
 
-    return response.json(roleApp.CreateRole(role));
+    roleApp.createRole(request.body.role)
+        .then((role: Role) => {
+            response.json(role);
+        });
 });
 
 roleRouter.put('/update/:role', (request: Request, response: Response) => {
@@ -41,7 +54,10 @@ roleRouter.put('/update/:role', (request: Request, response: Response) => {
 
     let role: Role = (Role)+request.params.role;
 
-    return response.json(roleApp.UpdateRole(role));
+    roleApp.updateRole(request.body.role)
+        .then((role: Role) => {
+            response.json(role);
+        });
 });
 
 export { roleRouter }

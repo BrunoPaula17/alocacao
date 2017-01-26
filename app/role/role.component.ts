@@ -14,7 +14,7 @@ export class RoleComponent implements OnInit {
    
     }
 
-    roles: Role[] = ROLES;
+    roles: Role[];
     currentRole: Role;
 
     ngOnInit(): void {

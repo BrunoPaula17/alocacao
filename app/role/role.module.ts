@@ -15,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
               FormsModule,
         RouterModule.forChild([
             { path: "roles", component: RoleComponent},
+            { path: "role/:action", component: RoleDetailComponent},
             { path: "role/:action/:id", component: RoleDetailComponent}
     ])],
     declarations: [RoleComponent,
