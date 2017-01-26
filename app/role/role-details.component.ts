@@ -20,6 +20,7 @@ export class RoleDetailComponent implements OnInit {
     ) { }
 
     @Input() role: Role;
+    action: string;
     levels: number[] = [6, 7, 8, 9, 10, 11, 12];
 
     getRoleDetails(id: number) : void{
@@ -31,17 +32,13 @@ export class RoleDetailComponent implements OnInit {
         this._location.back();
     }
 
-    onCreate(){
-        //this._roleApp.CreateRole(this.role);
-        //salvar o objeto => this.role
-    }
-
     onSave(){
          this._roleService.createRole(this.role);
         //console.log(this.role.level);
     }
 
     onEdit(){
+        this.action = 'edit';
         this._roleService.updateRole(this.role);
     }
 
@@ -54,7 +51,11 @@ export class RoleDetailComponent implements OnInit {
     ngOnInit(): void {
         this._route.params.subscribe((params: Params) => {
             let id: number = +params['id'];
-            this.getRoleDetails(id);
+            this.action = params['action'];
+            console.log(this.action);
+            this.role = new Role();
+            if(this.action != 'create')
+                this.getRoleDetails(id);
         })
 
     }
