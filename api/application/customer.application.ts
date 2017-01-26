@@ -58,14 +58,14 @@ export class CustomerApplication {
         // return costumer;
     }
 
-    updateCustomer(customer: Customer): Customer {
+    updateCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
 
-        return null; //customerPersistence.update(customer);
+        return customerPersistence.update(customer);
     }
 
-    deleteCustomer(id: number): boolean {
+    deleteCustomer(id: number): Promise<boolean> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
-        return null; //customerPersistence.delete(id);
+        return customerPersistence.delete(id);
     }
 }
