@@ -1,9 +1,15 @@
 import { Booking } from '../../app/booking/booking';
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db, FindAndModifyWriteOpResultObject } from 'mongodb';
+import { ICrud } from './crud.interface';
 import { mongoUrl } from '../server';
 
-export class BookingPersistence {
-    getBookings(): Promise<Booking[]> {
+export class BookingPersistence implements ICrud<Booking> {
+
+    create(): Promise<Booking> {
+        return null;
+    }
+
+    list(): Promise<Booking[]> {
         let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
@@ -16,7 +22,7 @@ export class BookingPersistence {
             }));
     }
 
-    getBooking(id: number): Promise<Booking> {
+    read(id: number): Promise<Booking> {
         let database: Db;
         return Promise.resolve(
             MongoClient.connect(mongoUrl)
@@ -28,7 +34,7 @@ export class BookingPersistence {
                 }));
     }
 
-    saveBooking(booking: Booking): Promise<Booking> {
+    update(booking: Booking): Promise<Booking> {
         let database: Db;
 
         return Promise.resolve(
@@ -36,8 +42,14 @@ export class BookingPersistence {
                 .then((db: Db) => {
                     return db.collection('bookings').findOneAndUpdate({ bookingID: booking.bookingID }, booking);
                 })
-                .then((bookingSaved: Booking) => {
-                    return bookingSaved;
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    delete updateResult.value._id;
+
+                    return updateResult.value;
                 }));
+    }
+
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false);
     }
 }
