@@ -18,7 +18,7 @@ export class BookingService {
             .then((response: Response) => {
                 return response.json() as Booking[];
             })
-            .catch(this.erroHandling);
+            .catch(this.errorHandling);
     }
 
     getBooking(id: number): Promise<Booking> {
