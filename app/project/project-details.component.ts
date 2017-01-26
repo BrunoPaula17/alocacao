@@ -15,7 +15,11 @@ import { ProfessionalService } from '../professional/professional.service'
     templateUrl: './app/project/project-details.html'
 })
 export class ProjectDetailsComponent implements OnInit {
-    constructor(private _router: ActivatedRoute,
+    
+    constructor(private _router:ActivatedRoute,
+                private _projectService: ProjectService) {}
+    
+    /*constructor(private _router: ActivatedRoute,
         private _projectService: ProjectService,
         //private _customerService: CustomerService,
         private _professionalService: ProfessionalService,
@@ -23,27 +27,36 @@ export class ProjectDetailsComponent implements OnInit {
 
         this._professionalService.getProfessionalList().then((professionals: Professional[]) => this.sponsors = professionals);
         //this._customerService.getCustomerList().then((customers: Customer[]) => this.customers = customers);
-    }
+    }*/
+
+    action: string;
 
     project: Project;
     customers: Customer[];
     sponsors: Professional[];
 
+    /*
     goBack(): void {
         this._location.back();
     }
+    */
 
-    getDetails(id: number): void {
-        this._projectService.getProjectDetails(id)
+    
+    getDetails(projectId: number): void {
+        this._projectService.getProjectDetail(projectId)
             .then((project: Project) => {
                 this.project = project;
             });
     }
+    
 
     ngOnInit(): void {
         this._router.params.subscribe((params: Params) => {
-            let id: number = +params['id'];
-            this.getDetails(id);
+            let projectId: number = +params['projectId'];
+            this.action = params['action'];
+
+
+            this.getDetails(projectId);
         });
     }
 }

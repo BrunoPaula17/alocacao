@@ -1,26 +1,36 @@
 import { Injectable } from '@angular/core';
 
 import { Project } from '../project/project'
-import { PROJECTS } from '../shared/mock';
+
+import { Http, Response } from '@angular/http';
+
+const SERVICE_URL: string = '/api/project'
 
 @Injectable()
 export class ProjectService {
-    _PROJECTS: Project[];
+    constructor(private _httpService: Http) {}
 
-    constructor() {
-        this._PROJECTS = PROJECTS;
+
+    getProjectsList(): Promise<Project[]> {
+        let url: string =`${SERVICE_URL}/list`;
+        return this._httpService.get(url)
+                   .toPromise()
+                   .then((response: Response) => {
+                       return response.json() as Project;
+                   })
+
     }
 
-
-    getProjectDetails(projectID: number): Promise<Project> {
-        return Promise.resolve(this._PROJECTS.find(project => project.projectID == projectID));
+    getProjectDetail(projectId:Number): Promise<Project> {
+        let url: string = `${SERVICE_URL}/detail/${projectId}`;
+        return this._httpService.get(url)
+                   .toPromise()
+                   .then((response: Response) => {
+                       return response.json() as Project;
+                   })
     }
 
-    getProjects(): Promise<Project[]> {
-        return Promise.resolve(this._PROJECTS);
-    }
-
-    insertProject(project: Project): Project {
+    /*insertProject(project: Project): Project {
         this._PROJECTS.push(project);
         return project;
     }
@@ -32,8 +42,8 @@ export class ProjectService {
 
     deleteProject(projectID: number): Promise<Boolean> {
         this._PROJECTS = this._PROJECTS.filter(function (project: Project) {
-            return project.projectID != projectID
+            return project.projectId != projectID
         });
         return Promise.resolve(true);
-    }
+    }*/
 }
