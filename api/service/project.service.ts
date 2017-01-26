@@ -9,65 +9,69 @@ const projectRouter : Router = Router();
 */
 projectRouter.get('/list', (request: Request, response: Response) =>{
     let projectApp: ProjectApplication = new ProjectApplication();
-    response.json(projectApp.List());
-});
-
-/*
-    Recupera um projeto da base de dados
-*/
-projectRouter.get('/details/:projectID', (request: Request, response: Response) => {
-    let projectApp: ProjectApplication = new ProjectApplication();
-    let projectID: number = +request.params.projectID;
-    return response.json(projectApp.Read(projectID));
-});
-
-/*
-    Insere um projeto da base de dados
-*/
-projectRouter.get('/insert/:projectID/:client/:startDate/:endDate/:concludeDate/:sponsor/:name/:wbs',
-                (request: Request, response: Response) =>{
-    let projectApp: ProjectApplication = new ProjectApplication();
     
-    let projectID: number = +request.params.projectID;
-    let client:  number = +request.params.client;
-    let startDate: Date = request.params.startDate;
-    let endDate: Date = request.params.endtDate;
-    let concludeDate: Date = request.params.concludeDate;
-    let sponsor:  number = request.params.sponsor;
-    let name: string = request.params.name;
-    let wbs: string = request.params.wbs;
-
-    return response.json(projectApp.Create(projectID, client, startDate, endDate, concludeDate, sponsor,name, wbs));
-});
-/*
-    Atualiza um projeto na base de dados
-*/
-projectRouter.put('/update/:projectID/:client/:startDate/:endDate/:concludeDate/:sponsor/:name/:wbs',
-                (request: Request, response: Response) =>{
-    let projectApp: ProjectApplication = new ProjectApplication();
-    
-    let projectID: number = +request.params.projectID;
-    let client:  number = +request.params.client;
-    let startDate: Date = request.params.startDate;
-    let endDate: Date = request.params.endtDate;
-    let concludeDate: Date = request.params.concludeDate;
-    let sponsor:  number = request.params.sponsor;
-    let name: string = request.params.name;
-    let wbs: string = request.params.wbs;
-
-    return response.json(projectApp.Update(projectID, client, startDate, endDate, concludeDate, sponsor,name, wbs));
+    projectApp.getProjects()
+        .then((projects: Project[]) =>{
+            response.json(projects);
+        });
 });
 
-/*
-    Deletar um projeto da base de dados
-*/
-projectRouter.get('/details/:projectID', (request: Request, response: Response) => {
-    let projectApp: ProjectApplication = new ProjectApplication();
+// /*
+//     Recupera um projeto da base de dados
+// */
+// projectRouter.get('/details/:projectId', (request: Request, response: Response) => {
+//     let projectApp: ProjectApplication = new ProjectApplication();
+//     let projectId: number = +request.params.projectId;
+//     return response.json(projectApp.Read(projectId));
+// });
+
+// /*
+//     Insere um projeto da base de dados
+// */
+// projectRouter.get('/insert/:projectId/:client/:startDate/:endDate/:concludeDate/:sponsor/:name/:wbs',
+//                 (request: Request, response: Response) =>{
+//     let projectApp: ProjectApplication = new ProjectApplication();
     
-    let projectID: number = +request.params.projectID;
+//     let projectId: number = +request.params.projectId;
+//     let customer:  number = +request.params.client;
+//     let projectName: string = request.params.projectName;
+//     let startDate: Date = request.params.startDate;
+//     let endDate: Date = request.params.endtDate;
+//     let sponsor: number = +request.params.sponsor;
+//     let wbs: string = request.params.wbs;
+//     let deleted: boolean = request.params.deleted;
+
+//     return response.json(projectApp.Create(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
+// });
+// /*
+//     Atualiza um projeto na base de dados
+// */
+// projectRouter.put('/update/:projectId/:customer/:projectName/:startDate/:endDate/:sponsor/:wbs/:deleted',
+//                 (request: Request, response: Response) =>{
+//     let projectApp: ProjectApplication = new ProjectApplication();
+      
+//     let projectId: number = +request.params.projectId;
+//     let customer:  number = +request.params.client;
+//     let projectName: string = request.params.projectName;
+//     let startDate: Date = request.params.startDate;
+//     let endDate: Date = request.params.endtDate;
+//     let sponsor: number = +request.params.sponsor;
+//     let wbs: string = request.params.wbs;
+//     let deleted: boolean = request.params.deleted;
+
+//     return response.json(projectApp.Update(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
+// });
+
+// /*
+//     Deletar um projeto da base de dados
+// */
+// projectRouter.get('/details/:projectId', (request: Request, response: Response) => {
+//     let projectApp: ProjectApplication = new ProjectApplication();
     
-    return response.json(projectApp.Delete(projectID));
-});
+//     let projectId: number = +request.params.projectId;
+    
+//     return response.json(projectApp.Delete(projectId));
+// });
 
 
 export { projectRouter } 

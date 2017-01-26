@@ -5,60 +5,58 @@ export class ProjectApplication{
 /*
     Recupera uma lista de projetos
 */
-List(): Project[]{
+getProjects(): Promise<Project[]>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return projectPersistence.List();
+    return projectPersistence.list();
 }
 
 /*
     Recupera um projeto específico
 */
-Read(projectID: number): Project{
+read(projectID: number): Promise<Project>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return projectPersistence.Read(projectID);
+    return null;//projectPersistence.Read(projectID);
 }
 
 /*
     Insere um projeto na base de dados
 */
-Create(projectID: number, clientID: number, client:string, startDate: Date, endDate: Date, concludeDate: Date, ): Project[]{
+create(projectId: number, customer: number, projectName: string, startDate: Date, endDate: Date, sponsor: number, wbs: string, deleted: boolean): Promise<Project[]>{
     let projectPersistence : ProjectPersistence = new ProjectPersistence();
     let projectCreate : ProjectPersistence = new ProjectPersistence();
 
-    // project = {
-    //     "projectID": projectID,
-    //     "clientID": clientID,
-    //     "client": null,
-    //     "startDate": new Date("2017-01-15T12:21:00.761Z"),
-    //     "endDate": new Date("2017-05-15T12:21:00.761Z"),
-    //     "concludeDate": null,
-    //     "sponsorID": 9,
-    //     "sponsor": null,
-    //     "name": "PRJ009",
-    //     "wbs": "WBS00009"
+    // projectCreate = {
+    //     "projectId": projectId,
+    //     "customer": customer,
+    //     "projectName": projectName,
+    //     "startDate": startDate,
+    //     "endDate": endDate,
+    //     "sponsor": sponsor,
+    //     "wbs": wbs,
+    //     "deleted": deleted
     // }
 
-    return projectPersistence.Create(projectCreate);
+    return null;//projectPersistence.Create(projectCreate);
 }
 /*
     Atualiza um projeto na base de dados
     return projectPersistence.Update();
 */
-Update(projectID: number, client: number, startDate: Date, endDate: Date, concludeDate: Date, sponsor: number,name: string, wbs: string): Project[]{
+update(projectID: number, client: number, startDate: Date, endDate: Date, concludeDate: Date, sponsor: number,name: string, wbs: string): Promise<Project[]>{
     let projectPersistence : ProjectPersistence = new ProjectPersistence();
     let projectUpdate : ProjectPersistence = new ProjectPersistence();
 
-    return projectPersistence.Update(projectUpdate);
+    return null;//projectPersistence.Update(projectUpdate);
 }
 /*
     Recupera um projeto específico
 */
-Delete(projectID: number): boolean[]{
+delete(projectID: number): Promise<boolean[]>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return projectPersistence.Delete(projectID);
+    return null;//projectPersistence.Delete(projectID);
 }
 
 
