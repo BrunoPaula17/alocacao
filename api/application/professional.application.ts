@@ -6,25 +6,23 @@ export class ProfessionalApplication{
     /*
         Recupera a lista de profissionais na base de dados.
     */
-    List(): Professional[]{
-        
+    List(): Promise<Professional[]> {
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
-
-        return professionalPersistence.List();
+         return professionalPersistence.list();
     }
 
     /*
         Recupera um profissional específico.
     */
-    Read(pid: number): Professional{
+    Read(pid: number): Promise<Professional>{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
-        return professionalPersistence.Read(pid);
+        return professionalPersistence.read(pid);
     }
 
     /*
         Cria um novo profissional na base de dados.
     */
-    Create(pid: number, eid: string, name: string, email: string,roleID: number, prefix: number, phone: string): Professional{                            
+    Create(pid: number, eid: string, name: string, email: string,roleID: number, prefix: number, phone: string): Promise<Professional>{                            
         
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
 
@@ -42,7 +40,7 @@ export class ProfessionalApplication{
             "deleted": false
         };
 
-        return professionalPersistence.Create(professional);
+        return professionalPersistence.create(professional);
         
     }
 
@@ -50,7 +48,7 @@ export class ProfessionalApplication{
         Atualiza as informações na base de dados.
     */
     Update(pid: number, eid: string, name: string, email: string, 
-           roleID: number, prefix: number, phone: string): Professional{
+           roleID: number, prefix: number, phone: string): Promise<Professional>{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
         let professional : Professional = new Professional();
@@ -67,20 +65,20 @@ export class ProfessionalApplication{
             "deleted": false
         };
        
-        return professionalPersistence.Update(professional);
+        return professionalPersistence.update(professional);
     }
 
     /*
         Apaga logicamente as informações de um funcionário.
     */
-    Delete(pid: number): boolean{
+    Delete(pid: number): Promise<boolean>{
 
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
         if(isNaN(pid) && typeof pid === "number"){
             throw ("Por favor, informa o PID.");
         }else{
-            return professionalPersistence.Delete(pid);
+            return professionalPersistence.delete(pid);
         }
     }
 }

@@ -14,5 +14,6 @@ export class Project implements IProject{
     endDate: Date;
     sponsor: Professional;
     wbs: string;
+    deleted: boolean;
 
 }
