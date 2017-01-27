@@ -14,7 +14,7 @@
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
             <input id="name" 
-                   [(ngModel)]="project.name" 
+                   [(ngModel)]="project.projectName" 
                    type="text" 
                    name="name" 
                    placeholder="Escreva o nome do projeto" 
@@ -26,6 +26,8 @@
             <select name="client" id="client" class="form-control">
                             <option value="">Selecione</option>    
                             <option *ngFor="let customer of customers"
+                            [attr.value]="customer.customerID"
+                            [attr.selected]="customer.customerID === project.customerID ? true : null"
                                     ((click)="getDetails(project)">{{customer.name}}</option>
                         </select>
         </div>
@@ -34,6 +36,8 @@
             <select name="sponsor" id="sponsor" class="form-control">
                             <option value="">Selecione</option>    
                             <option *ngFor="let sponsor of sponsors"
+                            [attr.value]="sponsor.pid"
+                            [attr.selected]="sponsor.pid === project.pid ? true : null"
                                     ((click)="getDetails(project)">{{sponsor.name}}</option>
                         </select>
         </div>
@@ -69,7 +73,7 @@
                 <button type="button" 
                         *ngIf="project"
                         class="btn btn-default ava-btn-list" 
-                        (click)="deleteButton(project.projectId)">Excluir</button>
+                        (click)="deleteButton(project)">Excluir</button>
                 <button type="button" 
                         class="btn btn-default ava-btn-list" 
                         (click)="goBackButton()">Voltar</button>
