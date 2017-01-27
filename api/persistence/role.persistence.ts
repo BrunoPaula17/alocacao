@@ -10,7 +10,7 @@ export class RolePersistence implements ICrud<Role> {
     create(role: Role): Promise<Role> {
         let database: Db;
         let sequence: number;
-        
+
         return Promise.resolve<Role>(
             Connection.getNextSequence('RoleId')
                 .then((retrievedSequence: number) => {
@@ -21,8 +21,7 @@ export class RolePersistence implements ICrud<Role> {
                     database = db;
 
                     return db.collection('roles').insertOne({
-                        //_id: null,
-                        roleId: 1,
+                        roleId: sequence,
                         name: role.name,
                         brc: role.brc,
                         level: role.level,
@@ -42,7 +41,6 @@ export class RolePersistence implements ICrud<Role> {
                 })
         );
     }
-
 
     list(): Promise<Role[]> {
         let database: Db;

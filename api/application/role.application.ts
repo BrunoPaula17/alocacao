@@ -29,6 +29,8 @@ export class RoleApplication {
     createRole(role: Role): Promise<Role>{
         let rolePersistence: RolePersistence = new RolePersistence();
 
+        role.deleted = false;
+
         return rolePersistence.create(role);
     }
 }
