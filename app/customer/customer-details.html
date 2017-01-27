@@ -1,7 +1,7 @@
 <ava-hdr-app [pageName]="'Clientes'" [icon]="'fa-user-circle'"></ava-hdr-app>
 
 <form name="customerForm" *ngIf="customer" [ngSwitch]="action" novalidate>
-    <div *ngSwitchCase="'details'">
+    <!-- <div *ngSwitchCase="'details'">
         <div class="form-group col-md-6">
             <label for="name">Nome: </label>
             <label for="name">{{ customer.name }}</label>
@@ -10,10 +10,10 @@
             <label for="cnpj">CNPJ: </label>
             <label for="cnpj">{{ customer.cnpj }}</label>
         </div>
-        <!-- <div class="form-group col-md-6">
+        <div class="form-group col-md-6">
             <label for="responsible">Responsável: </label>
             <label for="responsible">{{ customer.professional.name }}</label>
-        </div>-->
+        </div>
         <div class="form-group col-md-6">
             <label for="contact">Contato: </label>
             <label for="contact">{{ customer.contact }}</label>
@@ -22,22 +22,27 @@
             <label for="email">E-mail: </label>
             <label for="email">{{ customer.email }}</label>
         </div>
-    </div>
-    <div *ngSwitchCase="'edit'">
+    </div>-->
+    <div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
             <input id="name" type="text" name="name" [(ngModel)]="customer.name" placeholder="Nome do Cliente" class="form-control" [disabled]="action !== 'edit'"
                 required>
         </div>
-        <!-- <div class="form-group col-md-6">
+        <div class="form-group col-md-6">
             <label for="responsible">Responsável</label>
-            <input id="responsible" type="text" name="responsible" value="{{ customer.professional.name }}" placeholder="Nome do profissional Avanade responsável"
-                class="form-control" [disabled]="action !== 'edit'">
-        </div>-->
+            <select *ngSwitchCase="'details'" [(ngModel)]="customer.responsible" class="form-control" name="professional" disabled>
+            <option value="{{ customer.professional.pid }}">{{ customer.professional.name }}</option>
+            </select>
+            <select *ngSwitchCase="'edit'" [(ngModel)]="customer.responsible" class="form-control" name="professional" required>
+                <option *ngFor='let professional of professionals' value="{{ professional.pid }}" >{{ professional.name }}</option>
+            </select>
+
+        </div>
         <div class="form-group col-md-6">
             <label for="cnpj">CNPJ</label>
-            <input id="cnpj" type="text" name="cnpj" [(ngModel)]="customer.cnpj" placeholder="CNPJ do cliente" 
-            class="form-control" [disabled]="action !== 'edit'" required>
+            <input id="cnpj" type="text" name="cnpj" [(ngModel)]="customer.cnpj" placeholder="CNPJ do cliente" class="form-control" [disabled]="action !== 'edit'"
+                required>
         </div>
         <div class="form-group col-md-6">
             <label for="contact">Contato</label>
@@ -54,7 +59,7 @@
     <div class="form-group">
         <div class="col-sm-8">
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="editar()" *ngIf="'details'">Editar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="editar()" *ngSwitchCase="'details'">Editar</button>
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update(customer)" *ngSwitchCase="'edit'">Salvar</button>
         </div>
     </div>
