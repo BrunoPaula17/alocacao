@@ -41,7 +41,7 @@ export class CustomerDetailsComponent implements OnInit {
             .then((customer: Customer) => {
                 this.customer = customer;
             })
-
+        this.action = 'details';
     }
 
     editar(): void {
@@ -56,7 +56,4 @@ export class CustomerDetailsComponent implements OnInit {
         })
     }
 
-    editar(): void {
-        this.action = 'edit';
-    } 
 }

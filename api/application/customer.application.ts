@@ -26,14 +26,6 @@ export class CustomerApplication {
                 return costumers;
             }));
 
-        // costumers       = customerPersistence.List();
-        // professionals   = professionalApp.List();
-
-        // costumers.forEach(customer =>{
-        //     customer.professional = professionals.find(professional => professional.pid == customer.responsible);
-        // })
-
-        // return costumers;
     }
 
     readCustomer(id: number): Promise<Customer> {
@@ -47,25 +39,16 @@ export class CustomerApplication {
                 return costumer;
             }));
 
-        // let customerPersistence: CustomerPersistence = new CustomerPersistence();
-        // let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        // let costumer: Customer;
-        // let professional: Professional
-
-        // costumer = customerPersistence.Read(id);
-        // costumer.professional = professionalApp.Read(costumer.responsible);
-
-        // return costumer;
     }
 
-    updateCustomer(customer: Customer): Customer {
+    updateCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
 
-        return null; //customerPersistence.update(customer);
+        return customerPersistence.update(customer);
     }
 
-    deleteCustomer(id: number): boolean {
+    deleteCustomer(id: number): Promise<boolean> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
-        return null; //customerPersistence.delete(id);
-    }
+        return customerPersistence.delete(id);
+    } 
 }
