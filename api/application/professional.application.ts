@@ -75,10 +75,13 @@ export class ProfessionalApplication{
 
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
+        /*
         if(isNaN(pid) && typeof pid === "number"){
             throw ("Por favor, informa o PID.");
         }else{
             return professionalPersistence.delete(pid);
         }
+        */
+        return professionalPersistence.delete(pid);
     }
 }
