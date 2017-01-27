@@ -42,7 +42,7 @@ roleRouter.post('/create', (request: Request, response: Response) => {
     let roleApp: RoleApplication = new RoleApplication();
 
     let role: Role = new Role();
-    role = request.body.role;
+    role = JSON.parse(request.body.role);
 
     roleApp.createRole(role)
         .then((role: Role) => {
