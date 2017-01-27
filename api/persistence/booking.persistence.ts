@@ -1,5 +1,5 @@
 import { Booking } from '../../app/booking/booking';
-import { MongoClient, Db, UpdateWriteOpResult, InsertOneWriteOpResult } from 'mongodb';
+import { MongoClient, Db, FindAndModifyWriteOpResultObject, InsertOneWriteOpResult } from 'mongodb';
 import { ICrud } from './crud.interface';
 import { Connection } from './connection';
 
@@ -77,7 +77,7 @@ export class BookingPersistence implements ICrud<Booking> {
             Connection.create()
                 .then((db: Db) => {
                     database = db;
-                    return db.collection('bookings').updateOne({ bookingID: booking.bookingID }, {
+                    return db.collection('bookings').findOneAndUpdate({ bookingID: booking.bookingID }, {
                         bookingID: booking.bookingID,
                         projectID: booking.projectID,
                         pid: booking.pid,
@@ -86,15 +86,15 @@ export class BookingPersistence implements ICrud<Booking> {
                         endDate: booking.endDate,
                         bookingPercentual: booking.bookingPercentual,
                         deleted: booking.deleted
-                    });
+                    }, { returnOriginal: false });
                 })
-                .then((updateResult: UpdateWriteOpResult) => {
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
                     database.close();
 
-                    if (updateResult.result.ok == 1)
-                        return booking;
+                    if (updateResult.ok == 1)
+                        return updateResult.value;
                     else
-                        return null;
+                        return Error("An error ocurred while triyng to update a record");
                 }));
     }
 

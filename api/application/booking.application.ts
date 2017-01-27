@@ -19,4 +19,10 @@ export class BookingApplication {
 
         return bookingPersistence.update(booking);
     }
+
+    createBooking(booking: Booking): Promise<Booking> {
+        let bookingPersistence: BookingPersistence = new BookingPersistence();
+
+        return bookingPersistence.create(booking);
+    }
 }
