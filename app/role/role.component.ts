@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Role } from './role';
-import { ROLES } from '../shared/mock';
 
 import { RoleService } from './role.service';
 

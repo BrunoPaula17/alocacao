@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 
 import { Role } from './role';
 
 import 'rxjs/add/operator/toPromise';
 
-const SERVICE_URL: string = '/api/role'
+const SERVICE_URL: string = '/api/role';
+const HEADERS: Headers = new Headers({
+    'Content-Type': 'application/json'
+});
 
 @Injectable()
 export class RoleService {
@@ -34,9 +37,9 @@ export class RoleService {
     }
 
     createRole(role: Role): Promise<Role> {
-        let url: string = `${SERVICE_URL}/create/`;
+        let url: string = `${SERVICE_URL}/create`;
 
-        return this._httpService.post(url, role)
+        return this._httpService.post(url, { 'role': JSON.stringify(role)}, HEADERS)
         .toPromise()
         .then((response: Response) => {
             return response.json() as Role

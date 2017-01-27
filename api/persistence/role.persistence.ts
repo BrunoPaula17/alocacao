@@ -5,26 +5,33 @@ import { Connection } from './connection';
 
 export class RolePersistence implements ICrud<Role> {
     private _deleted: boolean = true;
+    private _db: Db;
 
     create(role: Role): Promise<Role> {
         let database: Db;
-        let roleid: number;
-
-        let teste: any = role;
 
         return Promise.resolve(
             Connection.create()
             .then((db: Db) => {
-                database = db;
-                return db.collection('roles').insertOne(role);
+                this._db = db;
+                
+                this._db.collection('roles').insertOne({
+                    roleId: role.roleId,
+                    name: role.name,
+                    brc: role.brc,
+                    level: role.level,
+                    description: role.description,
+                    deleted: false
+                });
+
             })
             .then(() => {
-                database.close();
-                console.log('Gravou');
+                this._db.close;
                 return role;
             })
             .catch(() => {
-                console.log('Erro ao gravar');
+                console.log('Error');
+                this._db.close;
             })
             );
     }
@@ -35,14 +42,12 @@ export class RolePersistence implements ICrud<Role> {
         return Promise.resolve(
             Connection.create()
             .then((db: Db) => {
-                database = db;
-                let teste : any = db.collection('roles').find( { deleted: false }).toArray();
-                return teste;
+                this._db = db;
+                return this._db.collection('roles').find( { deleted: false }).toArray();;
             })
             .then((roles: Role[]) => {
-                database.close();
+                this._db.close();
                 return roles;
-
             }));
     }
 
@@ -53,12 +58,12 @@ export class RolePersistence implements ICrud<Role> {
             Connection.create()
             .then((db: Db) => {
                 database = db;
-                return db.collection('roles').findOne( { deleted: false,   "roleId": id});
+                return db.collection('roles').findOne({ deleted: false, roleId: id});
             })
             .then((role: Role) => {
                 database.close();
                 return role;
-            }));
+        }));
     }
 
     update(role: Role): Promise<Role> {
