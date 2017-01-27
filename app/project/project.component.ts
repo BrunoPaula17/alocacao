@@ -56,7 +56,7 @@ export class ProjectComponent implements OnInit {
         Recupera os detalhes dos projetos a partir dos clientes e profissionais.
     */
     getProjectsDetails(){
-        this.projects.forEach ((item) => {
+        this.projects.forEach((item) => {
             this.getCustomersList(item);
             this.getProfessionalList(item);
         });
@@ -66,7 +66,7 @@ export class ProjectComponent implements OnInit {
         Recupera a lista de clientes.
     */
     getCustomersList(project: Project){
-        project.customer = this.customers.find(customer => customer.customerID === project.customer.customerID);
+        project.customer = this.customers.find(customer => customer.customerID === project.customerID);
 
     }
 
@@ -74,7 +74,7 @@ export class ProjectComponent implements OnInit {
         Recupera a lista de profissionais.
     */
     getProfessionalList(project: Project){
-        project.sponsor = this.professionals.find(professional => professional.pid === project.sponsor.pid);
+        project.sponsor = this.professionals.find(professional => professional.pid === project.pid);
     }
     
 
