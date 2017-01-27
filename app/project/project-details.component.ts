@@ -56,8 +56,8 @@ export class ProjectDetailsComponent implements OnInit {
     /*
         Retorna os detalhes de um projeto específico.
     */
-    getDetails(project:Project): void {
-        this._projectService.getProjectDetail(project)
+    getDetails(projectId:number): void {
+        this._projectService.getProjectDetail(projectId)
             .then((project: Project) => {
                 this.project = project;
             });
