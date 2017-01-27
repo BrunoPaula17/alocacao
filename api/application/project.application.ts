@@ -56,7 +56,7 @@ update(projectID: number, client: number, startDate: Date, endDate: Date, conclu
 delete(projectID: number): Promise<boolean[]>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return null;//projectPersistence.Delete(projectID);
+    return projectPersistence.delete(projectID);
 }
 
 

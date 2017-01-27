@@ -93,7 +93,7 @@
                     
                     <div *ngSwitchCase="'update'">
                         <button type="button" class="btn btn-primary btn-outline" (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Alterar</button>
-                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Excluir</button>
+                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid)">Excluir</button>
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>                 
                  </div>
