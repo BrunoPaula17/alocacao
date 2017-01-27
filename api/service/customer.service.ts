@@ -9,7 +9,7 @@ customerRouter.post('/create/:customer', (request: Request, response: Response) 
 
     let customer: Customer = (Customer) + request.params.customer;
 
-    return customerApp.createCustomer(customer).then((customer: Customer) => {
+    customerApp.createCustomer(customer).then((customer: Customer) => {
         response.json(customer);
     });
 });
@@ -17,7 +17,7 @@ customerRouter.post('/create/:customer', (request: Request, response: Response) 
 customerRouter.get('/list', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
-    return customerApp.listCustomers()
+    customerApp.listCustomers()
         .then((customers: Customer[]) => {
             response.json(customers);
         });
@@ -28,7 +28,7 @@ customerRouter.get('/details/:id', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
     let id: number = +request.params.id;
 
-    return customerApp.readCustomer(id).
+    customerApp.readCustomer(id).
         then((customer: Customer) => {
             response.json(customer);
         })
@@ -42,7 +42,7 @@ customerRouter.put('/update/:id', (request: Request, response: Response) => {
     let teste: string = request.body.customer.toString();
     customer = JSON.parse(teste);
 
-    return response.json(customerApp.updateCustomer(customer));
+    response.json(customerApp.updateCustomer(customer));
 });
 
 customerRouter.delete('/delete/:id', (request: Request, response: Response) => {
@@ -50,7 +50,7 @@ customerRouter.delete('/delete/:id', (request: Request, response: Response) => {
 
     let id: number = +request.params.id;
 
-    return response.json(customerApp.deleteCustomer(id));
+    response.json(customerApp.deleteCustomer(id));
 });
 
 

@@ -18,7 +18,7 @@ export class CustomerApplication {
 
         //professionals = professionalApp.List();
 
-        return Promise.resolve<Customer[]>(professionalApp.List()
+        return professionalApp.List()
             .then((professionals: Professional[]) => {
                 return customerPersistence.list()
                     .then((costumers: Customer[]) => {
@@ -27,7 +27,7 @@ export class CustomerApplication {
                         })
                         return costumers;
                     });
-            }));
+            });
 
     }
 
