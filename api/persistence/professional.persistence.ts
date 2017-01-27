@@ -1,75 +1,130 @@
-import {Professional } from '../../app/professional/Professional';
-import { MongoClient, Db, UpdateWriteOpResult } from 'mongodb';
+import { Professional } from '../../app/professional/Professional';
+import { MongoClient, Db, FindAndModifyWriteOpResultObject, InsertOneWriteOpResult } from 'mongodb';
 import { ICrud } from './crud.interface';
-import { mongoUrl } from '../server';
+import { Connection } from './connection';
 
 export class ProfessionalPersistence implements ICrud<Professional>{
 
+    create(professionalCreate: Professional): Promise<Professional> {
+    
+        let database: Db = null;
+        let sequence: number;
+
+        //
+        return Promise.resolve(
+            Connection.getNextSequence('professionalPID')
+                
+                .then((retrievedSequence: number) => {
+                    sequence = retrievedSequence;
+                    return Connection.create();
+                })
+
+                .then((db: Db) => {
+
+                    database = db;
+                
+                    return db.collection('professionals').insertOne({
+                            _id: sequence,
+                            pid:professionalCreate.pid,
+                            eid:professionalCreate.eid,
+                            name:professionalCreate.name,
+                            email:professionalCreate.email,
+                            roleID:professionalCreate.roleID,
+                            prefix:professionalCreate.prefix,
+                            phone:professionalCreate.phone,
+                            deleted:professionalCreate.deleted,
+                            role:professionalCreate.role
+                    })
+                })
+
+                .then((insertResult: InsertOneWriteOpResult) => {
+                    if (insertResult.result.ok == 1){
+                        professionalCreate.pid = sequence;
+                    }
+                    else{
+                        return Error("An error ocurred when trying to create a new record");
+                    }
+                })
+        );
+    }
+
+
     list(): Promise<Professional[]> {
 
-        let database: Db = null;
-        return Promise.resolve(MongoClient.connect(mongoUrl)
+        let database: Db;
+
+        return Promise.resolve(
+
+            Connection.create()
         
-        .then((db: Db) => {
-            database = db;
-            return db.collection('professional').find().toArray();
-        })
-        .then((customer: Professional[]) => {
-            database.close();
-            return customer;
-        }));
-    }
-
-    create(professional: Professional): Promise<Professional> {
-
-        let database: Db = null;
-
-        return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
                 database = db;
-                return db.collection('professionals').insert(JSON.stringify(professional));
+                return db.collection('professional').find().toArray();
             })
-            .then(() => {
+
+            .then((customer: Professional[]) => {
                 database.close();
-                 console.log("Inserted a document into the customers collection");                
+                return customer;
             }));
     }
-   
+
+    
 
     read(pid: number): Promise<Professional> {
+        
+        let database: Db;
 
-        let database: Db = null;
-
-        return Promise.resolve(MongoClient.connect(mongoUrl)
-            .then((db: Db) => {
-                database=db;
-                return db.collection ('professionals').findOne({ "deleted": false, "professionalPID": pid });
+        return Promise.resolve(
+            Connection.create()
+                .then((db: Db) => {
+                    database=db;
+                    return db.collection ('professionals').findOne({"pid": pid });
             })
             .then((professional : Professional) => {
                 database.close();
                 return professional;
             })
         );
+        
     }
 
     update(professionalUpdate: Professional): Promise<Professional> {
-        
+       
         let database: Db;
 
         return Promise.resolve(
-            MongoClient.connect(mongoUrl)
-                .then((db: Db) => {
-                    let _professionalUpdate: Professional ;
-                    return db.collection('professionals').findOneAndUpdate({ bookingID: professionalUpdate.pid }, professionalUpdate);
-                })
-                .then((updateResult: UpdateWriteOpResult) => {
-                    if (updateResult.result.ok == 1)
-                        return professionalUpdate;
-                }));
-    }
+            
+            Connection.create()
 
+                .then((db: Db) => {
+                    database.db;
+                    return db.collection('professionals').findOneAndUpdate({ pid: professionalUpdate.pid},{
+                            pid:professionalUpdate.pid,
+                            eid:professionalUpdate.eid,
+                            name:professionalUpdate.name,
+                            email:professionalUpdate.email,
+                            roleID:professionalUpdate.roleID,
+                            prefix:professionalUpdate.prefix,
+                            phone:professionalUpdate.phone,
+                            deleted:professionalUpdate.deleted,
+                            role:professionalUpdate.role
+                    }, { returnOriginal: false });
+                })
+
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    database.close
+                    if (updateResult.ok == 1)
+                        return professionalUpdate;
+                    else
+                        return Error("An error ocurred while triyng to update a record");
+                }));
+              
+    }
+    
+    
     delete(id: number): Promise<boolean> {
         return Promise.resolve(false);
-       
     }
+
+    
 }
