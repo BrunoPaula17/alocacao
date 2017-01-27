@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { Role } from './role';
 import { RoleService } from './role.service';
@@ -15,37 +15,37 @@ import { SharedModule } from '../shared/shared.module';
 })
 export class RoleDetailComponent implements OnInit {
     constructor(private _roleService: RoleService,
-            private _route: ActivatedRoute,
-            private _location: Location
+        private _route: ActivatedRoute,
+        private _location: Location
     ) { }
 
     @Input() role: Role;
     action: string;
     levels: number[] = [6, 7, 8, 9, 10, 11, 12];
 
-    getRoleDetails(id: number) : void{
+    getRoleDetails(id: number): void {
         this._roleService.getRoleId(id)
             .then(role => this.role = role);
     }
 
-    goBack(){
+    goBack() {
         this._location.back();
     }
 
-    onSave(){
-         this._roleService.createRole(this.role);
-        //console.log(this.role.level);
+    onSave() {
+        if (this.action === 'edit')
+            this._roleService.updateRole(this.role);
+        else
+            this._roleService.createRole(this.role);
     }
 
-    onEdit(){
+    onEdit() {
         this.action = 'edit';
-        this._roleService.updateRole(this.role);
     }
 
-    onDelete(){
-        let deleted: boolean; 
+    onDelete() {
+        let deleted: boolean;
         this._roleService.deleteRole(this.role.roleId);
-        console.log('Deletado');
     }
 
     ngOnInit(): void {
@@ -54,7 +54,7 @@ export class RoleDetailComponent implements OnInit {
             this.action = params['action'];
             console.log(this.action);
             this.role = new Role();
-            if(this.action != 'create')
+            if (this.action != 'create')
                 this.getRoleDetails(id);
         })
 

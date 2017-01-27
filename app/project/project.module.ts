@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
     imports: [BrowserModule, FormsModule, SharedModule,  RouterModule.forChild([
         { path: 'projects', component: ProjectComponent },
-        { path: 'project/:action/:id', component: ProjectDetailsComponent }])],
+        { path: 'project/:action/:projectId', component: ProjectDetailsComponent }])],
     declarations: [FieldSelector, CustomGridComponent, ProjectComponent, ProjectDetailsComponent],
     providers: [CustomGridService, ProjectService],
     bootstrap: [ProjectComponent]

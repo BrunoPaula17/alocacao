@@ -59,9 +59,9 @@ export class RoleService {
     }
     
     updateRole(role: Role): Promise<Role> {
-        let url: string = `${SERVICE_URL}/create/${role.roleId}`;
+        let url: string = `${SERVICE_URL}/update`;
 
-        return this._httpService.put(url, role)
+        return this._httpService.put(url,  { 'role': JSON.stringify(role)}, HEADERS)
         .toPromise()
         .then((response: Response) => {
             return response.json() as Role

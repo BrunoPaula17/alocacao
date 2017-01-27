@@ -14,10 +14,10 @@ getProjects(): Promise<Project[]>{
 /*
     Recupera um projeto específico
 */
-read(projectID: number): Promise<Project>{
+getProject(projectId: number): Promise<Project>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return null;//projectPersistence.Read(projectID);
+    return projectPersistence.read(projectId);
 }
 
 /*

@@ -28,6 +28,18 @@ export class BookingDetailComponent implements OnInit {
     projects: Project[];
     action: string;
 
+    getComplementaryData(booking: Booking): void {
+        if (this.professionals.length > 0)
+            booking.professional = this.professionals.find(professional => professional.pid === booking.pid);
+        else
+            booking.professional = new Professional();
+
+        if (this.projects.length > 0)
+            booking.project = this.projects.find(project => project.projectId == booking.projectID);
+        else
+            booking.project = new Project();
+    }
+
     getData(id: number): void {
 
         this.getInitData()
@@ -35,16 +47,7 @@ export class BookingDetailComponent implements OnInit {
                 return this._bookingService.getBooking(id);
             })
             .then((booking: Booking) => {
-                if (this.professionals.length > 0)
-                    booking.professional = this.professionals.find(professional => professional.pid === booking.pid);
-                else
-                    booking.professional = new Professional();
-
-                if (this.projects.length > 0)
-                    booking.project = this.projects.find(project => project.projectId == booking.projectID);
-                else
-                    booking.project = new Project();
-
+                this.getComplementaryData(booking);
                 this.booking = booking;
             });
     }
@@ -58,8 +61,9 @@ export class BookingDetailComponent implements OnInit {
             })
             .then((projects: Project[]) => {
                 this.projects = projects;
-            })
-            .then(() => { return true });
+
+                return true;
+            });
     }
 
     goBack(): void {
@@ -68,6 +72,12 @@ export class BookingDetailComponent implements OnInit {
 
     edit(): void {
         this.action = 'edit';
+        this._bookingService.editBooking(this.booking)
+            .then((bookingSaved: Booking) => {
+                this.getComplementaryData(bookingSaved);
+                this.booking = bookingSaved;
+                this.action = 'details';
+            });
     }
 
     delete(): void {
@@ -76,7 +86,8 @@ export class BookingDetailComponent implements OnInit {
 
     save(): void {
         this._bookingService.saveBooking(this.booking)
-            .then((bookingSaved: Booking) => {
+            .then((bookingSaved: Booking)=>{
+                this.getComplementaryData(bookingSaved);
                 this.booking = bookingSaved;
                 this.action = 'details';
             });
