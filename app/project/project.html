@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let project of projects" (click)="getDetails(project.projectId)">
+            <tr *ngFor="let project of projects" (click)="getDetails(project)">
                 <td>{{ project.projectName }}</td>
                 <td>{{ project.wbs }}</td>
                 <td class="text-center">{{ project.startDate }}</td>

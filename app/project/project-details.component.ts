@@ -7,7 +7,7 @@ import { ProjectService } from '../project/project.service';
 import { Customer } from '../customer/customer';
 import { Professional } from '../professional/professional';
 
-//import { CustomerService } from '../customer/customer.service'
+import { CustomerService } from '../customer/customer.service'
 import { ProfessionalService } from '../professional/professional.service'
 
 @Component({
@@ -18,6 +18,8 @@ export class ProjectDetailsComponent implements OnInit {
     
     constructor(private _router:ActivatedRoute,
                 private _projectService: ProjectService,
+                private _customerService: CustomerService,
+                private _sponsorService: ProfessionalService,
                 private _location:Location) {}
 
     action: string;
@@ -43,6 +45,13 @@ export class ProjectDetailsComponent implements OnInit {
                  this.project = new Project();
             }
         })
+
+        
+        this._customerService.getCustomerList()
+                             .then(customer => this.customers = customer);
+
+        this._sponsorService.getProfessionalList()
+                             .then(professional => this.sponsors = professional);
 
     }
 
