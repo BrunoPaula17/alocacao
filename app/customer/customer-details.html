@@ -1,10 +1,14 @@
 <ava-hdr-app [pageName]="'Clientes'" [icon]="'fa-user-circle'"></ava-hdr-app>
 
-<form name="customerForm" *ngIf="customer" [ngSwitch]="action">
+<form name="customerForm" *ngIf="customer" [ngSwitch]="action" novalidate>
     <div *ngSwitchCase="'details'">
         <div class="form-group col-md-6">
             <label for="name">Nome: </label>
             <label for="name">{{ customer.name }}</label>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="cnpj">CNPJ: </label>
+            <label for="cnpj">{{ customer.cnpj }}</label>
         </div>
        <!-- <div class="form-group col-md-6">
             <label for="responsible">Responsável: </label>
@@ -20,9 +24,10 @@
         </div>
     </div>
     <div *ngSwitchCase="'edit'">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" ngClass="has-error : customerForm.name.$error">
             <label for="name">Nome</label>
-            <input id="name" type="text" name="name" value="{{ customer.name }}" placeholder="Nome do Cliente" class="form-control" [disabled]="action !== 'edit'">
+            <input id="name" type="text" name="name" [(ngModel)]="customer.name" placeholder="Nome do Cliente" 
+            class="form-control" [disabled]="action !== 'edit'" required>
         </div>
        <!-- <div class="form-group col-md-6">
             <label for="responsible">Responsável</label>
@@ -30,18 +35,23 @@
                 class="form-control" [disabled]="action !== 'edit'">
         </div>-->
         <div class="form-group col-md-6">
+            <label for="cnpj">CNPJ</label>
+            <input id="cnpj" type="text" name="cnpj" [(ngModel)]="customer.cnpj" placeholder="CNPJ do cliente" class="form-control"
+                [disabled]="action !== 'edit'">
+        </div>
+        <div class="form-group col-md-6">
             <label for="contact">Contato</label>
-            <input id="contact" type="text" name="contact" value="{{ customer.contact }}" placeholder="Nome do contato no cliente" class="form-control"
+            <input id="contact" type="text" name="contact" [(ngModel)]="customer.contact" placeholder="Nome do contato no cliente" class="form-control"
                 [disabled]="action !== 'edit'">
         </div>
         <div class="form-group col-md-6">
             <label for="email">E-mail</label>
-            <input id="email" type="text" name="email" value="{{ customer.email }}" placeholder="E-mail para contato" class="form-control"
+            <input type="email" name="emailCustomer" [(ngModel)]="customer.email" placeholder="E-mail para contato" class="form-control"
                 [disabled]="action !== 'edit'">
         </div>
         <br>
     </div>
-    <div class="form-group">
+    <div class="form-group"> 
         <div class="col-sm-8">
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="editar()" *ngIf="'details'">Editar</button>
