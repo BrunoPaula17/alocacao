@@ -12,7 +12,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
 
         //
         return Promise.resolve<Professional>(
-            Connection.getNextSequence('professionalPID')
+            Connection.getNextSequence('pid')
                 
                 .then((retrievedSequence: number) => {
                     sequence = retrievedSequence;
