@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Project } from '../project/project'
 import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 const SERVICE_URL: string = '/api/project'
 
@@ -37,11 +38,10 @@ export class ProjectService {
                        return response.json() as Project;
                    })
     }
-
-
     /*
         Cria um novo projeto na base de dados.
     */
+    
     createProject(project:Project): Promise<Project> {
         let url: string=`${SERVICE_URL}/create/${project.projectId}/
                                                ${project.projectName}/

@@ -16,14 +16,18 @@ projectRouter.get('/list', (request: Request, response: Response) =>{
         });
 });
 
-// /*
-//     Recupera um projeto da base de dados
-// */
-// projectRouter.get('/details/:projectId', (request: Request, response: Response) => {
-//     let projectApp: ProjectApplication = new ProjectApplication();
-//     let projectId: number = +request.params.projectId;
-//     return response.json(projectApp.Read(projectId));
-// });
+/*
+    Recupera um projeto da base de dados
+*/
+projectRouter.get('/detail/:projectId', (request: Request, response: Response) => {
+    let projectApp: ProjectApplication = new ProjectApplication();
+    let projectId: number = +request.params.projectId;
+    
+    projectApp.getProject(projectId)
+        .then((project: Project) => {
+            response.json(project);
+        });
+});
 
 // /*
 //     Insere um projeto da base de dados
