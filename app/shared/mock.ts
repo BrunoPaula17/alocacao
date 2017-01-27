@@ -40,124 +40,124 @@ import { Project } from '../project/project';
 //     }
 // ];
 
-export const CUSTOMERS: Customer[] = [    {
-        "customerID": 1,
-        "name": "Santander",
-        "responsible": 10715377,
-        "professional": null,
-        "contact": "Roseli",
-        "email": "roseli@santander.com.br",
-        "deleted": false
-    },
+// export const CUSTOMERS: Customer[] = [    {
+//         "customerID": 1,
+//         "name": "Santander",
+//         "responsible": 10715377,
+//         "professional": null,
+//         "contact": "Roseli",
+//         "email": "roseli@santander.com.br",
+//         "deleted": false
+//     },
 
-    {
-        "customerID": 2,
-        "name": "Itaú",
-        "responsible": 10715378,
-        "professional": null,
-        "contact": "João",
-        "email": "joao@itau.com.br",
-        "deleted": false
-    },
+//     {
+//         "customerID": 2,
+//         "name": "Itaú",
+//         "responsible": 10715378,
+//         "professional": null,
+//         "contact": "João",
+//         "email": "joao@itau.com.br",
+//         "deleted": false
+//     },
 
-    {
-        "customerID": 3,
-        "name": "Safra",
-        "responsible": 10715376,
-        "professional": null,
-        "contact": "Gabriel",
-        "email": "gabriel@safra.com.br",
-        "deleted": true
-    }];
+//     {
+//         "customerID": 3,
+//         "name": "Safra",
+//         "responsible": 10715376,
+//         "professional": null,
+//         "contact": "Gabriel",
+//         "email": "gabriel@safra.com.br",
+//         "deleted": true
+//     }];
 
-export const PROFESSIONALS: Professional[] = [
-    {
-        "pid": 10715376,
-        "eid": "ronye.peterson.anjos",
-        "name": "Ronye Peterson Martins dos Anjos",
-        "email": "ronye.peterson.anjos@avanade.com",
-        "roleID": 1,
-        "prefix": 11,
-        "phone": "971537512",
-        "role": null,
-        "deleted": true    },
-    {
-        "pid": 10715377,
-        "eid": "thomas.anjos",
-        "name": "Thomas Jefferson Martins dos Anjos",
-        "email": "thomas.anjos@avanade.com",
-        "roleID": 2,
-        "prefix": 11,
-        "phone": "963484588",
-        "role": null,
-        "deleted": true
-    },
-    {
-        "pid": 10715378,
-        "eid": "elziria.anjos",
-        "name": "Elziria Martins dos Anjos",
-        "email": "elziria.dos.anjos@avanade.com",
-        "roleID":3,
-        "prefix": 11,
-        "phone": "984841212",
-        "role": null,
-        "deleted": true
-    },
-    {
-        "pid": 10715379,
-        "eid": "jose.dos.anjos",
-        "name": "Jose dos Anjos",
-        "email": "jose.dos.anjos@avanade.com",
-        "roleID": 4,
-        "prefix": 11,
-        "phone": "931312323",
-        "role": null,
-        "deleted": true
-    }
-]
+// export const PROFESSIONALS: Professional[] = [
+//     {
+//         "pid": 10715376,
+//         "eid": "ronye.peterson.anjos",
+//         "name": "Ronye Peterson Martins dos Anjos",
+//         "email": "ronye.peterson.anjos@avanade.com",
+//         "roleID": 1,
+//         "prefix": 11,
+//         "phone": "971537512",
+//         "role": null,
+//         "deleted": true    },
+//     {
+//         "pid": 10715377,
+//         "eid": "thomas.anjos",
+//         "name": "Thomas Jefferson Martins dos Anjos",
+//         "email": "thomas.anjos@avanade.com",
+//         "roleID": 2,
+//         "prefix": 11,
+//         "phone": "963484588",
+//         "role": null,
+//         "deleted": true
+//     },
+//     {
+//         "pid": 10715378,
+//         "eid": "elziria.anjos",
+//         "name": "Elziria Martins dos Anjos",
+//         "email": "elziria.dos.anjos@avanade.com",
+//         "roleID":3,
+//         "prefix": 11,
+//         "phone": "984841212",
+//         "role": null,
+//         "deleted": true
+//     },
+//     {
+//         "pid": 10715379,
+//         "eid": "jose.dos.anjos",
+//         "name": "Jose dos Anjos",
+//         "email": "jose.dos.anjos@avanade.com",
+//         "roleID": 4,
+//         "prefix": 11,
+//         "phone": "931312323",
+//         "role": null,
+//         "deleted": true
+//     }
+// ]
 
-export const ROLES: Role[] = [
-    {
-        "roleId": 1,
-        "name": "Associate Software Engineer",
-        "brc": "2017SE",
-        "level": 12,
-        "description":"Initial software development",
-        "deleted": false
-    },
-    {
-        "roleId": 2,
-        "name": "Software Engineer",
-        "brc": "2017SE2",
-        "level": 11,
-        "description":"Software development",
-        "deleted": false
-    },
-    {
-        "roleId": 3,
-        "name": "Senior Software Engineer",
-        "brc": "2017SES",
-        "level": 10,
-        "description":"Senior software development",
-        "deleted": false
-    },
-        {
-        "roleId": 4,
-        "name": "System Analyst",
-        "brc": "2017SA",
-        "level": 9,
-        "description":"Role`s description",
-        "deleted": false
-    },
-    {
-        "roleId": 5,
-        "name": "Senior System Analyst",
-        "brc": "2017SSA",
-        "level": 8,
-        "description":"Role`s description",
-        "deleted": false
-    }    
-];
+// export const ROLES: Role[] = [
+//     {
+//         "roleId": 1,
+//         "name": "Associate Software Engineer",
+//         "brc": "2017SE",
+//         "level": 12,
+//         "description":"Initial software development",
+//         "deleted": false
+//     },
+//     {
+//         "roleId": 2,
+//         "name": "Software Engineer",
+//         "brc": "2017SE2",
+//         "level": 11,
+//         "description":"Software development",
+//         "deleted": false
+//     },
+//     {
+//         "roleId": 3,
+//         "name": "Senior Software Engineer",
+//         "brc": "2017SES",
+//         "level": 10,
+//         "description":"Senior software development",
+//         "deleted": false
+//     },
+//         {
+//         "roleId": 4,
+//         "name": "System Analyst",
+//         "brc": "2017SA",
+//         "level": 9,
+//         "description":"Role`s description",
+//         "deleted": false
+//     },
+//     {
+//         "roleId": 5,
+//         "name": "Senior System Analyst",
+//         "brc": "2017SSA",
+//         "level": 8,
+//         "description":"Role`s description",
+//         "deleted": false
+//     }    
+// ];
 
 /*export const PROJECTS: Project[] = [
     {
