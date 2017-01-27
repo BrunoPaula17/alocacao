@@ -30,13 +30,20 @@ export class ProjectDetailsComponent implements OnInit {
         Método disparado ao inicializar a tela, logo após carregar o Html.
     */
     ngOnInit(): void {
+
         this._router.params.subscribe((params: Params) => {
-            let projectId: number = +params['projectId'];
+            
             this.action = params['action'];
+            
+            if(this.action != 'create') {
+                let projectId:number = +params['projectId'];
+                this.getDetails(projectId);
+            }
+            else{
+                 this.project = new Project();
+            }
+        })
 
-
-            this.getDetails(projectId);
-        });
     }
 
     /*
@@ -49,8 +56,8 @@ export class ProjectDetailsComponent implements OnInit {
     /*
         Retorna os detalhes de um projeto específico.
     */
-    getDetails(projectId: number): void {
-        this._projectService.getProjectDetail(projectId)
+    getDetails(project:Project): void {
+        this._projectService.getProjectDetail(project)
             .then((project: Project) => {
                 this.project = project;
             });
