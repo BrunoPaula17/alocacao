@@ -11,7 +11,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
         let sequence: number;
 
         //
-        return Promise.resolve(
+        return Promise.resolve<Professional>(
             Connection.getNextSequence('professionalPID')
                 
                 .then((retrievedSequence: number) => {
@@ -42,7 +42,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
                         professionalCreate.pid = sequence;
                     }
                     else{
-                        return Error("An error ocurred when trying to create a new record");
+                        return Promise.reject<Professional>(Error("An error ocurred when trying to create a new record"));
                     }
                 })
         );
@@ -80,9 +80,9 @@ export class ProfessionalPersistence implements ICrud<Professional>{
                     database=db;
                     return db.collection ('professionals').findOne({"pid": pid });
             })
-            .then((professional : Professional) => {
+            .then((professional : any) => {
                 database.close();
-                return professional;
+                return professional as Professional;
             })
         );
         
