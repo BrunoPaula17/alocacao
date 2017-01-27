@@ -14,16 +14,19 @@ export class CustomerApplication {
     listCustomers(): Promise<Customer[]> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        let professionals: Professional[];
+        //let professionals: Professional[];
 
-        professionals = professionalApp.List();
+        //professionals = professionalApp.List();
 
-        return Promise.resolve(customerPersistence.list()
-            .then((costumers: Customer[]) => {
-                costumers.forEach(customer => {
-                    customer.professional = professionals.find(professional => professional.pid == customer.responsible);
-                })
-                return costumers;
+        return Promise.resolve<Customer[]>(professionalApp.List()
+            .then((professionals: Professional[]) => {
+                return customerPersistence.list()
+                    .then((costumers: Customer[]) => {
+                        costumers.forEach(customer => {
+                            customer.professional = professionals.find(professional => professional.pid == customer.responsible);
+                        })
+                        return costumers;
+                    });
             }));
 
     }
@@ -31,13 +34,18 @@ export class CustomerApplication {
     readCustomer(id: number): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        let professional: Professional
 
-        return Promise.resolve(customerPersistence.read(id)
-            .then((costumer: Customer) => {
-                costumer.professional = professionalApp.Read(costumer.responsible);
-                return costumer;
-            }));
+        let customerReturn: Customer;
+
+        return customerPersistence.read(id)
+            .then((customer: Customer) => {
+                customerReturn = customer;
+                return professionalApp.Read(customer.responsible)
+            })
+            .then((professional: Professional) => {
+                customerReturn.professional = professional;
+                return customerReturn;
+            });;
 
     }
 
@@ -50,5 +58,7 @@ export class CustomerApplication {
     deleteCustomer(id: number): Promise<boolean> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         return customerPersistence.delete(id);
+
     } 
+
 }

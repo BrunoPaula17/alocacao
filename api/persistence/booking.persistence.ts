@@ -1,54 +1,102 @@
 import { Booking } from '../../app/booking/booking';
-import { MongoClient, Db, UpdateWriteOpResult } from 'mongodb';
+import { MongoClient, Db, FindAndModifyWriteOpResultObject, InsertOneWriteOpResult } from 'mongodb';
 import { ICrud } from './crud.interface';
-import { mongoUrl } from '../server';
+import { Connection } from './connection';
 
 export class BookingPersistence implements ICrud<Booking> {
 
-    create(): Promise<Booking> {
-        return null;
+    create(booking: Booking): Promise<Booking> {
+        let database: Db;
+        let sequence: number;
+
+        return Promise.resolve<Booking>(
+            Connection.getNextSequence('bookingID')
+                .then((retrievedSequence: number) => {
+                    sequence = retrievedSequence;
+                    return Connection.create();
+                })
+                .then((db: Db) => {
+                    database = db;
+
+                    return db.collection('bookings').insertOne({
+                        _id: sequence,
+                        bookingID: sequence,
+                        projectID: booking.projectID,
+                        pid: booking.pid,
+                        auditID: booking.auditID,
+                        initialDate: booking.initialDate,
+                        endDate: booking.endDate,
+                        bookingPercentual: booking.bookingPercentual,
+                        deleted: booking.deleted
+                    })
+                })
+                .then((insertResult: InsertOneWriteOpResult) => {
+                    if (insertResult.result.ok == 1) {
+                        booking.bookingID = sequence;
+
+                        return booking;
+                    }
+                    else {
+                        return Promise.reject<Booking>(Error("An error ocurred when trying to create a new record"));
+                    }
+                })
+        );
     }
 
     list(): Promise<Booking[]> {
-        let database: Db = null;
-        return Promise.resolve(MongoClient.connect(mongoUrl)
-            .then((db: Db) => {
-                database = db;
-                return db.collection('bookings').find().toArray();
-            })
-            .then((booking: Booking[]) => {
-                database.close();
-                return booking;
-            }));
+        let database: Db;
+        return Promise.resolve<Booking[]>(
+            Connection.create()
+                .then((db: Db) => {
+                    database = db;
+                    return db.collection('bookings').find().toArray();
+                })
+                .then((booking: Booking[]) => {
+                    database.close();
+                    return booking;
+                }));
     }
 
     read(id: number): Promise<Booking> {
         let database: Db;
-        return Promise.resolve(
-            MongoClient.connect(mongoUrl)
+        return Promise.resolve<Booking>(
+            Connection.create()
                 .then((db: Db) => {
+                    database = db;
                     return db.collection('bookings').findOne({ "bookingID": id });
                 })
-                .then((booking: Booking) => {
-                    return booking;
+                .then((booking: any) => {
+                    database.close();
+
+                    return booking as Booking;
                 }));
     }
 
     update(booking: Booking): Promise<Booking> {
         let database: Db;
 
-        return Promise.resolve(
-            MongoClient.connect(mongoUrl)
+        return Promise.resolve<Booking>(
+            Connection.create()
                 .then((db: Db) => {
-                    let bookingToBeUpdated: Booking = booking;
-                    bookingToBeUpdated.project = null;
-                    bookingToBeUpdated.professional = null;
-
-                    return db.collection('bookings').updateOne({ bookingID: booking.bookingID }, bookingToBeUpdated);
+                    database = db;
+                    return db.collection('bookings').findOneAndUpdate({ bookingID: booking.bookingID }, {
+                        bookingID: booking.bookingID,
+                        projectID: booking.projectID,
+                        pid: booking.pid,
+                        auditID: booking.auditID,
+                        initialDate: booking.initialDate,
+                        endDate: booking.endDate,
+                        bookingPercentual: booking.bookingPercentual,
+                        deleted: booking.deleted
+                    }, { returnOriginal: false });
                 })
-                .then((updateResult: UpdateWriteOpResult) => {
-                    if (updateResult.result.ok == 1)
-                        return booking;
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    database.close();
+
+                    if (updateResult.ok == 1)
+                        return updateResult.value;
+                    else
+                        return Error("An error ocurred while triyng to update a record");
                 }));
     }
 

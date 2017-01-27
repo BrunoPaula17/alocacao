@@ -11,4 +11,5 @@ export interface IProject{
     endDate: Date;
     sponsor:  Professional;
     wbs: string;
+    deleted: boolean;
 }

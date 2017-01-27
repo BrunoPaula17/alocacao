@@ -1,6 +1,8 @@
 <ava-hdr-app [pageName]="'Projetos'" [icon]="'fa-users'"></ava-hdr-app>
 <div class="page-content">
-    <button type="button" class="btn btn-primary btn-outline ava-btn-list" [routerLink]="['/projetos','insert', '']">Novo Projeto</button>
+    <button type="button" 
+            class="btn btn-primary btn-outline ava-btn-list" 
+            [routerLink]="['/project','insert', '']">Novo Projeto</button>
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr>
@@ -14,11 +16,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let project of projects" (click)="getDetails(project)">
-                <td>{{ projetc.projectName }}</td>
-                <td>{{ projetc.wbs }}</td>
-                <td class="text-center">{{ projetc.startDate }}</td>
-                <td class="text-center">{{ projetc.endDate }}</td>
-                <td class="text-center">{{ projetc.sponsor.name }}</td>     
+                <td>{{ project.projectName }}</td>
+                <td>{{ project.wbs }}</td>
+                <td class="text-center">{{ project.startDate }}</td>
+                <td class="text-center">{{ project.endDate }}</td>
+                <td class="text-center">{{ project.sponsor.name }}</td>     
                 <td class="text-center">
                     <span class="fa fa-list-alt fa-2x fa-black ava-cursor" 
                           [routerLink]="['/project','details', project.projectId]">

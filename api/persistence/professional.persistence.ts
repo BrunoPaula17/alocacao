@@ -1,116 +1,130 @@
-import {Professional } from '../../app/professional/Professional';
+import { Professional } from '../../app/professional/Professional';
+import { MongoClient, Db, FindAndModifyWriteOpResultObject, InsertOneWriteOpResult } from 'mongodb';
 import { ICrud } from './crud.interface';
+import { Connection } from './connection';
 
 export class ProfessionalPersistence implements ICrud<Professional>{
 
-    /*
-        
-    */
-    private professionals: Professional[] = [ 
-        {
+    create(professionalCreate: Professional): Promise<Professional> {
+    
+        let database: Db = null;
+        let sequence: number;
 
-            "pid": 10715376,
-            "eid": "ronye.peterson.anjos",
-            "name": "Ronye Peterson Martins dos Anjos",
-            "email": "ronye.peterson.anjos@avanade.com",
-            "roleID": 1,
-            "prefix": 11,
-            "phone": "971537512",
-            "deleted": false,
-            "role": null
-        },
-        {
-            "pid": 10715377,
-            "eid": "thomas.anjos",
-            "name": "Thomas Jefferson Martins dos Anjos",
-            "email": "thomas.anjos@avanade.com",
-            "roleID": 2,
-            "prefix": 11,
-            "phone": "963484588",
-            "deleted": false,
-            "role": null
-        },
-        {
-            "pid": 10715378,
-            "eid": "elziria.anjos",
-            "name": "Elziria Martins dos Anjos",
-            "email": "elziria.dos.anjos@avanade.com",
-            "roleID":3,
-            "prefix": 11,
-            "phone": "984841212",
-            "deleted": false,
-            "role": null
-        },
-        {
-            "pid": 10715379,
-            "eid": "jose.dos.anjos",
-            "name": "Jose dos Anjos",
-            "email": "jose.dos.anjos@avanade.com",
-            "roleID": 4,
-            "prefix": 11,
-            "phone": "931312323",
-            "deleted": false,
-            "role": null
-        }
-        ];
-
-    /*
-        Retorna a lista de profissionais.
-    */
-    List(): Professional[] {
-        return this.professionals;
-    }
-
-    /*
-        Retorna um funcionário específico selecionado na tabela.
-    */
-    Read(pid: number): Professional {
-        return this.professionals.find(professional => professional.pid === pid);
-        
-    }
-      
-    /*
-        Criação de um novo profissional na base de dados.
-    */
-    Create(professionalCreate: Professional): Professional {
-        if (professionalCreate.pid = undefined) {
-            return null
-           }
-        else
-            this.professionals.push(professionalCreate);
-            return this.professionals.find(professional => professional.pid === professionalCreate.pid);
-    }
-
-    /*
-        Atualiza as informações do profissional 
-    */
-    Update(professionalUpdate: Professional): Professional {
-        let _professionalUpdate:Professional 
-        _professionalUpdate = this.professionals.find(professional => professional.pid === professionalUpdate.pid);
-
-        if (professionalUpdate != null) {
-            _professionalUpdate = professionalUpdate;
-            return professionalUpdate
-    }
-        else
-            return null;
-    }
-
-    /*
-        Deleta logicamente as informações do profissional
-    */
-    Delete(pid: number): boolean {
-        let _professionalDelete:Professional
-        _professionalDelete = this.professionals.find(professional => professional.pid === pid);  
+        //
+        return Promise.resolve<Professional>(
+            Connection.getNextSequence('pid')
                 
-        if (_professionalDelete != null) {
-           _professionalDelete.deleted = true;  
-           return _professionalDelete.deleted;
-        }
-        else
-            return false;
+                .then((retrievedSequence: number) => {
+                    sequence = retrievedSequence;
+                    return Connection.create();
+                })
+
+                .then((db: Db) => {
+
+                    database = db;
+                
+                    return db.collection('professionals').insertOne({
+                            _id: sequence,
+                            pid:professionalCreate.pid,
+                            eid:professionalCreate.eid,
+                            name:professionalCreate.name,
+                            email:professionalCreate.email,
+                            roleID:professionalCreate.roleID,
+                            prefix:professionalCreate.prefix,
+                            phone:professionalCreate.phone,
+                            deleted:professionalCreate.deleted,
+                            role:professionalCreate.role
+                    })
+                })
+
+                .then((insertResult: InsertOneWriteOpResult) => {
+                    if (insertResult.result.ok == 1){
+                        professionalCreate.pid = sequence;
+                    }
+                    else{
+                        return Promise.reject<Professional>(Error("An error ocurred when trying to create a new record"));
+                    }
+                })
+        );
     }
 
-}
+
+    list(): Promise<Professional[]> {
+
+        let database: Db;
+
+        return Promise.resolve(
+
+            Connection.create()
+        
+            .then((db: Db) => {
+                database = db;
+                return db.collection('professionals').find().toArray();
+            })
+
+            .then((professional: Professional[]) => {
+                database.close();
+                return professional;
+            }));
+    }
 
     
+
+    read(pid: number): Promise<Professional> {
+        
+        let database: Db;
+
+        return Promise.resolve(
+            Connection.create()
+                .then((db: Db) => {
+                    database=db;
+                    return db.collection ('professionals').findOne({"pid": pid });
+            })
+            .then((professional : any) => {
+                database.close();
+                return professional as Professional;
+            })
+        );
+        
+    }
+
+    update(professionalUpdate: Professional): Promise<Professional> {
+       
+        let database: Db;
+
+        return Promise.resolve(
+            
+            Connection.create()
+
+                .then((db: Db) => {
+                    database.db;
+                    return db.collection('professionals').findOneAndUpdate({ pid: professionalUpdate.pid},{
+                            pid:professionalUpdate.pid,
+                            eid:professionalUpdate.eid,
+                            name:professionalUpdate.name,
+                            email:professionalUpdate.email,
+                            roleID:professionalUpdate.roleID,
+                            prefix:professionalUpdate.prefix,
+                            phone:professionalUpdate.phone,
+                            deleted:professionalUpdate.deleted,
+                            role:professionalUpdate.role
+                    }, { returnOriginal: false });
+                })
+
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    database.close
+                    if (updateResult.ok == 1)
+                        return professionalUpdate;
+                    else
+                        return Error("An error ocurred while triyng to update a record");
+                }));
+              
+    }
+    
+    
+    delete(id: number): Promise<boolean> {
+        return Promise.resolve(false);
+    }
+
+    
+}

@@ -1,65 +1,84 @@
 import { Role } from '../../app/role/role';
 import { ICrud } from './crud.interface';
-import { MongoClient, Db } from 'mongodb';
+import { MongoClient, Db, InsertOneWriteOpResult } from 'mongodb';
 import { Connection } from './connection';
 
 export class RolePersistence implements ICrud<Role> {
     private _deleted: boolean = true;
+    private _db: Db;
 
     create(role: Role): Promise<Role> {
         let database: Db;
-        let roleid: number;
+        let sequence: number;
+        
+        return Promise.resolve<Role>(
+            Connection.getNextSequence('RoleId')
+                .then((retrievedSequence: number) => {
+                    sequence = retrievedSequence;
+                    return Connection.create();
+                })
+                .then((db: Db) => {
+                    database = db;
 
-        return Promise.resolve(
-            Connection.Create()
-            .then((db: Db) => {
-                database = db;
-                return db.collection('roles').insertOne(role, roleid);
-            })
-            .then((result) => {
-                database.close();
-                console.log(result);
-                return role;
-            }));
+                    return db.collection('roles').insertOne({
+                        //_id: null,
+                        roleId: 1,
+                        name: role.name,
+                        brc: role.brc,
+                        level: role.level,
+                        description: role.description,
+                        deleted: role.deleted
+                    })
+                })
+                .then((insertResult: InsertOneWriteOpResult) => {
+                    if (insertResult.result.ok == 1) {
+                        role.roleId = sequence;
+
+                        return role;
+                    }
+                    else {
+                        return Promise.reject<Role>(Error("An error ocurred when trying to create a new record"));
+                    }
+                })
+        );
     }
+
 
     list(): Promise<Role[]> {
         let database: Db;
 
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
-                database = db;
-                let teste : any = db.collection('roles').find( { deleted: false }).toArray();
-                return teste;
+                this._db = db;
+                return this._db.collection('roles').find( { deleted: false }).toArray();;
             })
             .then((roles: Role[]) => {
-                database.close();
+                this._db.close();
                 return roles;
-
             }));
     }
 
     read(id: number): Promise<Role> {
         let database: Db;
 
-        return Promise.resolve(
-            Connection.Create()
+        return Promise.resolve<Role>(
+            Connection.create()
             .then((db: Db) => {
                 database = db;
-                return db.collection('roles').findOne( { deleted: false,   "roleId": id});
+                return db.collection('roles').findOne({ deleted: false, roleId: id});
             })
-            .then((role: Role) => {
+            .then((role: any) => {
                 database.close();
-                return role;
-            }));
+                return role as Role;
+        }));
     }
 
     update(role: Role): Promise<Role> {
         let database: Db;
 
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
                 database = db;
                 return db.collection('roles').findOneAndUpdate(
@@ -77,7 +96,7 @@ export class RolePersistence implements ICrud<Role> {
         let database: Db;
 
         return Promise.resolve(
-            Connection.Create()
+            Connection.create()
             .then((db: Db) => {
                 database = db;
                 return db.collection('roles').remove( { roleId: id } );

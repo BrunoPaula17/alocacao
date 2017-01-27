@@ -6,4 +6,5 @@ export interface BookingInterface {
     initialDate: Date;
     endDate: Date;
     bookingPercentual: number;
+    deleted: boolean;
 }
