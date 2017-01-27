@@ -69,10 +69,10 @@ export class ProjectDetailsComponent implements OnInit {
     */
     saveButton(project: Project): void {
 
-        if(this.action === 'insert') {
+        if(this.action === 'create') {
                     this._projectService.createProject(project)
                             .then(project => this.project = project);  
-        } else if(this.action === 'update') {
+        } else {
                     this._projectService.updateProject(project)
                             .then(project => this.project = project);  
         }
