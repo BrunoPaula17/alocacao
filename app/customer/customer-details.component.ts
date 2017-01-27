@@ -54,6 +54,11 @@ export class CustomerDetailsComponent implements OnInit {
 
     editar(){
         this.action = 'edit';
+         this._professionalService.getProfessionalList()
+            .then((professional: Professional[]) => {
+                this.professionals = professional;
+            })
+            
     }
 
 }
