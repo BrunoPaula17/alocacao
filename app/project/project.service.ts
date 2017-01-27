@@ -29,7 +29,7 @@ export class ProjectService {
     /*
         Recupera os detalhes dos projetos a partir dos clientes e profissionais.
     */
-    getProjectDetail(projectId:Number): Promise<Project> {
+    getProjectDetail(projectId:number): Promise<Project> {
         let url: string = `${SERVICE_URL}/detail/${projectId}`;
         return this._httpService.get(url)
                    .toPromise()
