@@ -11,7 +11,10 @@ const professionalRouter: Router = Router();
 */
 professionalRouter.get('/list', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-    response.json(professionalApp.List());
+    professionalApp.List()
+        .then((professionals: Professional[]) => {
+            response.json(professionals);
+        })
 });
 
 
@@ -21,7 +24,7 @@ professionalRouter.get('/list', (request: Request, response: Response) => {
 */
 professionalRouter.get('/details/:pid', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-    let pid:number = +request.params.pid;
+    let pid: number = +request.params.pid;
     return response.json(professionalApp.Read(pid));
 });
 
@@ -32,17 +35,17 @@ professionalRouter.get('/details/:pid', (request: Request, response: Response) =
 professionalRouter.get('/insert/:pid/:eid/:name/:email/:roleID/:prefix/:phone', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
-    let pid:number = +request.params.pid;
-    let eid:string = request.params.eid;
-    let name:string = request.params.name;
-    let email:string = request.params.email;
-    let roleID:number = +request.params.roleID;
-    let prefix:number = +request.params.prefix;
-    let phone:string = request.params.phone;
+    let pid: number = +request.params.pid;
+    let eid: string = request.params.eid;
+    let name: string = request.params.name;
+    let email: string = request.params.email;
+    let roleID: number = +request.params.roleID;
+    let prefix: number = +request.params.prefix;
+    let phone: string = request.params.phone;
 
-    response.json(professionalApp.Create(pid,eid,name,email,roleID,prefix,phone));
+    response.json(professionalApp.Create(pid, eid, name, email, roleID, prefix, phone));
 
-}); 
+});
 
 
 /*
@@ -51,15 +54,15 @@ professionalRouter.get('/insert/:pid/:eid/:name/:email/:roleID/:prefix/:phone', 
 professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix/:phone', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
-    let pid:number = +request.params.pid;
-    let eid:string = request.params.eid;
-    let name:string = request.params.name;
-    let email:string = request.params.email;
-    let roleID:number = +request.params.roleID;
-    let prefix:number = +request.params.prefix;
-    let phone:string = request.params.phone;
+    let pid: number = +request.params.pid;
+    let eid: string = request.params.eid;
+    let name: string = request.params.name;
+    let email: string = request.params.email;
+    let roleID: number = +request.params.roleID;
+    let prefix: number = +request.params.prefix;
+    let phone: string = request.params.phone;
 
-    response.json(professionalApp.Update(pid,eid,name,email,roleID,prefix,phone));
+    response.json(professionalApp.Update(pid, eid, name, email, roleID, prefix, phone));
 
 });
 
@@ -70,12 +73,12 @@ professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix/:phone', 
 professionalRouter.get('/delete/:pid', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
-    let pid:number = + request.params.pid;
+    let pid: number = + request.params.pid;
     return response.json(professionalApp.Delete(pid));
 
 });
 
 
 
-export { professionalRouter } 
+export { professionalRouter }
 
