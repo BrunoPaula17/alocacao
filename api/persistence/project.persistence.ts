@@ -2,6 +2,7 @@ import {Project } from '../../app/project/project';
 import { ICrud } from './crud.interface';
 import { MongoClient, Db } from 'mongodb';
 import { mongoUrl } from '../server';
+import { Connection } from './connection';
 
 export class ProjectPersistence implements ICrud<Project>{
 
@@ -20,7 +21,18 @@ export class ProjectPersistence implements ICrud<Project>{
     }
 
     read(projectId: number): Promise<Project>{
-        return null;//this.projects.find(project => project.projectId === projectId);
+        let database: Db;
+
+        return Promise.resolve<Project>(
+            Connection.create()
+            .then((db: Db) =>{
+                database = db;
+                return db.collection('projects').findOne({"deleted": false, "projectId": projectId});
+            })
+            .then((project: any)=>{
+                database.close();
+                return project as Project;
+        }));
     }
 
     create(projectCreate: Project): Promise<Project>{
