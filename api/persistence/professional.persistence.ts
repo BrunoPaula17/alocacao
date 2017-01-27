@@ -59,12 +59,12 @@ export class ProfessionalPersistence implements ICrud<Professional>{
         
             .then((db: Db) => {
                 database = db;
-                return db.collection('professional').find().toArray();
+                return db.collection('professionals').find().toArray();
             })
 
-            .then((customer: Professional[]) => {
+            .then((professional: Professional[]) => {
                 database.close();
-                return customer;
+                return professional;
             }));
     }
 
