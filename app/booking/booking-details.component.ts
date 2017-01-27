@@ -35,8 +35,16 @@ export class BookingDetailComponent implements OnInit {
                 return this._bookingService.getBooking(id);
             })
             .then((booking: Booking) => {
-                booking.professional = this.professionals.find(professional => professional.pid === booking.pid);
-                booking.project = this.projects.find(project => project.projectId == booking.projectID);
+                if (this.professionals.length > 0)
+                    booking.professional = this.professionals.find(professional => professional.pid === booking.pid);
+                else
+                    booking.professional = new Professional();
+
+                if (this.projects.length > 0)
+                    booking.project = this.projects.find(project => project.projectId == booking.projectID);
+                else
+                    booking.project = new Project();
+
                 this.booking = booking;
             });
     }

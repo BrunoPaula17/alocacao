@@ -14,7 +14,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let booking of bookings">
-            <td>{{ booking.project.name }}</td>
+            <td>{{ booking.project.projectName }}</td>
             <td>{{ booking.professional.name }}</td>
             <td class="text-center">{{ booking.initialDate | date:'dd/MM/yyyy' }}</td>
             <td class="text-center">{{ booking.endDate | date:'dd/MM/yyyy' }}</td>

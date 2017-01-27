@@ -4,10 +4,10 @@
     <div class="form-group col-md-6" [ngSwitch]='action'>
         <label for="projects">Projeto</label>
         <select *ngSwitchCase="'details'" [(ngModel)]="booking.projectID" class="form-control" name="project" disabled>
-                <option value="{{ booking.project.projectID }}">{{ booking.project.name }}</option>
+                <option value="{{ booking.project.projectId }}">{{ booking.project.projectName }}</option>
         </select>
         <select *ngSwitchDefault [(ngModel)]="booking.projectID" class="form-control" name="projects" required>
-                <option *ngFor='let project of projects' value="{{ project.projectID }}">{{ project.name }}</option>
+                <option *ngFor='let project of projects' value="{{ project.projectId }}">{{ project.projectName }}</option>
         </select>
     </div>
     <div class="form-group col-md-6" [ngSwitch]='action'>
