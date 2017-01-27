@@ -53,7 +53,7 @@ update(projectID: number, client: number, startDate: Date, endDate: Date, conclu
 /*
     Recupera um projeto específico
 */
-delete(projectID: number): Promise<boolean[]>{
+delete(projectID: number): Promise<boolean>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
     return projectPersistence.delete(projectID);
