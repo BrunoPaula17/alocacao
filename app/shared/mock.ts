@@ -40,7 +40,7 @@ import { Project } from '../project/project';
 //     }
 // ];
 
-export const CUSTOMERS: Customer[] = [    {
+/*export const CUSTOMERS: Customer[] = [    {
         "customerID": 1,
         "name": "Santander",
         "responsible": 10715377,

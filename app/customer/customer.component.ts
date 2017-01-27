@@ -4,7 +4,6 @@ import { Customer } from './customer';
 import { CustomerService } from '../customer/customer.service'
 
 import { Professional } from '../professional/professional'
-import { CUSTOMERS, PROFESSIONALS } from '../shared/mock';
 
 import { SharedModule } from '../shared/shared.module';
 
