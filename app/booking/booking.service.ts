@@ -33,6 +33,17 @@ export class BookingService {
     }
 
     saveBooking(booking: Booking): Promise<Booking> {
+        let url: string = `${SERVICE_URL}/create`;
+
+        return this._httpService.post(url, { booking: booking })
+            .toPromise()
+            .then((response: Response) => {
+                return response.json() as Booking;
+            })
+            .catch(this.errorHandling);
+    }
+
+    editBooking(booking: Booking): Promise<Booking> {
         let url: string = `${SERVICE_URL}/${booking.bookingID}`;
 
         return this._httpService.put(url, { booking: booking })
