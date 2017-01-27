@@ -18,16 +18,16 @@ export class CustomerApplication {
 
         //professionals = professionalApp.List();
 
-        return Promise.resolve(professionalApp.List()
-        .then((professionals: Professional[]) => {
-            Promise.resolve(customerPersistence.list()
-            .then((costumers: Customer[]) => {
-                costumers.forEach(customer => {
-                    customer.professional = professionals.find(professional => professional.pid == customer.responsible);
-                })
-                return costumers;
+        return Promise.resolve<Customer[]>(professionalApp.List()
+            .then((professionals: Professional[]) => {
+                return customerPersistence.list()
+                    .then((costumers: Customer[]) => {
+                        costumers.forEach(customer => {
+                            customer.professional = professionals.find(professional => professional.pid == customer.responsible);
+                        })
+                        return costumers;
+                    });
             }));
-        }));
 
         // costumers       = customerPersistence.List();
         // professionals   = professionalApp.List();
@@ -42,16 +42,18 @@ export class CustomerApplication {
     readCustomer(id: number): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        //let professional: Professional
 
-        return Promise.resolve(customerPersistence.read(id)
-        .then((costumer: Customer) => {
-            professionalApp.Read(costumer.responsible)
-            .then((professional: Professional) => {
-                costumer.professional = professional;
-                return costumer;
+        let customerReturn: Customer;
+
+        return customerPersistence.read(id)
+            .then((customer: Customer) => {
+                customerReturn = customer;
+                return professionalApp.Read(customer.responsible)
             })
-        }));
+            .then((professional: Professional) => {
+                customerReturn.professional = professional;
+                return customerReturn;
+            });;
 
         // let customerPersistence: CustomerPersistence = new CustomerPersistence();
         // let professionalApp: ProfessionalApplication = new ProfessionalApplication();

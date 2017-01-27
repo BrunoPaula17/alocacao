@@ -20,7 +20,7 @@ export class CustomerPersistence implements ICrud<Customer>{
                 console.log("Inserted a document into the customers collection");
                 if (insertResult.insertedId != null) {
                     customer.customerID = +insertResult.insertedId;
-                    return insertResult.insertedId;
+                    return customer;
                 }
                 else {
                     return null;
@@ -50,7 +50,7 @@ export class CustomerPersistence implements ICrud<Customer>{
         //return this.customers.find(customer => customer.customerID === id && customer.deleted === false);
 
         let database: Db = null;
-        return Promise.resolve(MongoClient.connect(mongoUrl)
+        return Promise.resolve<Customer>(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
                 database = db;
                 return db.collection('customers').findOne({ "deleted": false, "customerID": id });
