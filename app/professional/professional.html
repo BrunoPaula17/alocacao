@@ -14,6 +14,7 @@
             </tr>
         </thead>
         <tbody>
+            <!--
             <tr *ngFor="let professional of professionals" (click)="getDetails(professional)">
                 <td>{{ professional.name }}</td>
                 <td>{{ professional.email }}</td>
@@ -24,8 +25,20 @@
                     <span class="fa fa-list-alt fa-2x fa-black ava-cursor" [routerLink]="['/professional','details', professional.pid]"></span>
                     <span class="fa fa-edit fa-icon fa-small fa-black" [routerLink]="['/professional','update', professional.pid]"></span>
                     <span class="fa fa-close fa-icon fa-small fa-black" [routerLink]="['/professional','delete', professional.pid]"></span>
-                
             </tr>
+            -->
+            <tr *ngFor="let professional of professionals" (click)="getDetails(professional)">
+                
+                <td class="text-center">{{ professional.name }}</td>
+                <td class="text-center">{{ professional.email }}</td>
+                <td class="text-center">{{ professional.role.name }}</td>
+                <td class="text-center">({{ professional.prefix }}) {{ professional.phone | telephone}}</td>
+                
+                <td class="text-center">
+                    <span class="fa fa-list-alt fa-small fa-black fa-cursor" [routerLink]="['/professional','update', professional.pid]"></span>
+                </td>
+            
+            </tr>       
         </tbody>
     </table>    
 </div>
