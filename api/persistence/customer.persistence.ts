@@ -74,7 +74,7 @@ export class CustomerPersistence implements ICrud<Customer>{
                     responsible: custUpd.name,
                     contact: custUpd.contact,
                     email: custUpd.email,
-                    deleted: custUpd.email
+                    deleted: custUpd.deleted
                 }, { returnOriginal: false });
             })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {
