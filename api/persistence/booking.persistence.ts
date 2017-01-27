@@ -9,7 +9,7 @@ export class BookingPersistence implements ICrud<Booking> {
         let database: Db;
         let sequence: number;
 
-        return Promise.resolve(
+        return Promise.resolve<Booking>(
             Connection.getNextSequence('bookingID')
                 .then((retrievedSequence: number) => {
                     sequence = retrievedSequence;
@@ -31,11 +31,13 @@ export class BookingPersistence implements ICrud<Booking> {
                     })
                 })
                 .then((insertResult: InsertOneWriteOpResult) => {
-                    if (insertResult.result.ok == 1){
+                    if (insertResult.result.ok == 1) {
                         booking.bookingID = sequence;
+
+                        return booking;
                     }
-                    else{
-                        return Error("An error ocurred when trying to create a new record");
+                    else {
+                        return Promise.reject<Booking>(Error("An error ocurred when trying to create a new record"));
                     }
                 })
         );
@@ -43,7 +45,7 @@ export class BookingPersistence implements ICrud<Booking> {
 
     list(): Promise<Booking[]> {
         let database: Db;
-        return Promise.resolve(
+        return Promise.resolve<Booking[]>(
             Connection.create()
                 .then((db: Db) => {
                     database = db;
@@ -57,23 +59,23 @@ export class BookingPersistence implements ICrud<Booking> {
 
     read(id: number): Promise<Booking> {
         let database: Db;
-        return Promise.resolve(
+        return Promise.resolve<Booking>(
             Connection.create()
                 .then((db: Db) => {
                     database = db;
                     return db.collection('bookings').findOne({ "bookingID": id });
                 })
-                .then((booking: Booking) => {
+                .then((booking: any) => {
                     database.close();
 
-                    return booking;
+                    return booking as Booking;
                 }));
     }
 
     update(booking: Booking): Promise<Booking> {
         let database: Db;
 
-        return Promise.resolve(
+        return Promise.resolve<Booking>(
             Connection.create()
                 .then((db: Db) => {
                     database = db;

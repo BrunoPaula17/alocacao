@@ -38,12 +38,13 @@ roleRouter.delete('/delete/:id', (request: Request, response: Response) => {
         }));
 });
 
-roleRouter.post('/create/:role', (request: Request, response: Response) => {
+roleRouter.post('/create', (request: Request, response: Response) => {
     let roleApp: RoleApplication = new RoleApplication();
 
-    let role: Role = (Role)+request.params.role;
+    let role: Role = new Role();
+    role = request.body.role;
 
-    roleApp.createRole(request.body.role)
+    roleApp.createRole(role)
         .then((role: Role) => {
             response.json(role);
         });
