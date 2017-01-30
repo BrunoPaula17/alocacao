@@ -42,15 +42,23 @@ customerRouter.put('/update/:id', (request: Request, response: Response) => {
     let teste: string = request.body.customer.toString();
     customer = JSON.parse(teste);
 
-    response.json(customerApp.updateCustomer(customer));
+    customerApp.updateCustomer(customer)
+        .then((customerUp: Customer) => {
+            response.json(customerUp)
+        })
+
 });
 
 customerRouter.delete('/delete/:id', (request: Request, response: Response) => {
-    let customerApp: CustomerApplication = new CustomerApplication();
 
+    let customerApp: CustomerApplication = new CustomerApplication();
     let id: number = +request.params.id;
 
-    response.json(customerApp.deleteCustomer(id));
+    customerApp.deleteCustomer(id)
+        .then((bool: boolean) => {
+            response.json(bool);
+        });
+
 });
 
 

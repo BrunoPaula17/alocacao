@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { Customer } from './customer';
 import { CustomerService } from '../customer/customer.service';
@@ -36,11 +36,18 @@ export class CustomerDetailsComponent implements OnInit {
             });
     }
 
+    getProfessionals() {
+        this._professionalService.getProfessionalList()
+            .then((professional: Professional[]) => {
+                this.professionals = professional;
+            })
+    }
+
     update(cust: Customer) {
         this._customerService.updateCustomer(cust)
             .then((customer: Customer) => {
                 this.customer = customer;
-            })
+            });
         this.action = 'details';
     }
 
@@ -48,17 +55,14 @@ export class CustomerDetailsComponent implements OnInit {
         this._router.params.subscribe((params: Params) => {
             let id: number = +params['id'];
             this.action = params['action'];
+            this.getProfessionals();
             this.getDetails(id);
         })
     }
 
-    editar(){
+    editar() {
         this.action = 'edit';
-         this._professionalService.getProfessionalList()
-            .then((professional: Professional[]) => {
-                this.professionals = professional;
-            })
-            
+
     }
 
 }

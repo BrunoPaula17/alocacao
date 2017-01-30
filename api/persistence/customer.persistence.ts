@@ -63,18 +63,18 @@ export class CustomerPersistence implements ICrud<Customer>{
     }
 
     update(custUpd: Customer): Promise<Customer> {
-
         let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
                 database = db;
                 return db.collection('customers').findOneAndUpdate({ "customerID": custUpd.customerID }, {
-                    customerID: custUpd.customerID,
+                    customerID: +custUpd.customerID,
                     name: custUpd.name,
-                    responsible: custUpd.name,
+                    cnpj: custUpd.cnpj,
+                    responsible: +custUpd.responsible,
                     contact: custUpd.contact,
                     email: custUpd.email,
-                    deleted: custUpd.email
+                    deleted: custUpd.deleted
                 }, { returnOriginal: false });
             })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {
@@ -82,20 +82,10 @@ export class CustomerPersistence implements ICrud<Customer>{
 
                 if (updateResult.ok == 1)
                     return updateResult.value;
+                
                 else
                     return Error("An error ocurred while triyng to update a record");
             }));
-
-        // let _customer: Customer;
-
-        // _customer = this.customers.find(customer => customer.customerID === custUpd.customerID);
-
-        // if(_customer != null){
-        //     this.customers[this.customers.indexOf(_customer)] = custUpd;
-        // }
-        // else{
-        //     _customer = null;     
-        // }
     }
 
     delete(id: number): Promise<boolean> {

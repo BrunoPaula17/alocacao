@@ -14,9 +14,6 @@ export class CustomerApplication {
     listCustomers(): Promise<Customer[]> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        //let professionals: Professional[];
-
-        //professionals = professionalApp.List();
 
         return professionalApp.List()
             .then((professionals: Professional[]) => {
@@ -51,14 +48,21 @@ export class CustomerApplication {
 
     updateCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
-
-        return customerPersistence.update(customer);
+        let customerUp: Customer;
+        return customerPersistence.update(customer)
+            .then((customer: Customer) => {
+                return customerUp = customer;
+            });
     }
 
     deleteCustomer(id: number): Promise<boolean> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
-        return customerPersistence.delete(id);
+        let bool: boolean;
+        return customerPersistence.delete(id)
+        .then((retorno :boolean) => {
+            return bool = retorno;
+        });
 
-    } 
+    }
 
 }
