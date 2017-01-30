@@ -40,12 +40,13 @@
     <div class="form-group">
         <div class="col-sm-10">
             <button  *ngIf="action != 'read'" 
-                    type="button" class="btn btn-default" (click)="onSave()">Salvar</button>
+                    type="button" class="btn btn-default" (click)="save()">Salvar</button>
             <button *ngIf="action === 'read'" 
-                    type="button" class="btn btn-default" (click)="onEdit()">Editar</button>
+                    type="button" class="btn btn-default" (click)="edit()">Editar</button>
             <button *ngIf="action === ('edit' || 'read')"
-                    type="button" class="btn btn-default" (click)="onDelete()">Deletar</button>
-            <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
+                    type="button" class="btn btn-default" (click)="delete()"
+                    >Deletar</button>
+            <button type="button" class="btn btn-default" (click)="back()">Voltar</button>
         </div>
     </div>
 </form>

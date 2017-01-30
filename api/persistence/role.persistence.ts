@@ -104,7 +104,7 @@ export class RolePersistence implements ICrud<Role> {
         let database: Db;
         let sequence: number;
 
-        return Promise.resolve<Role>(
+        return Promise.resolve<boolean>(
             Connection.create()
                 .then((db: Db) => {
                     database = db;
