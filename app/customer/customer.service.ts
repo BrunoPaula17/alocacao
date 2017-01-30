@@ -39,11 +39,14 @@ const HEADERS: Headers = new Headers({
         console.log(error.message || error);
     }
 
-    createCustomer(customer: Customer): void {
-        let url: string = `${SERVICE_URL}/create/${customer}`;
-        this._httpService.post(url, customer).toPromise().then((response: Response) => {
-            return response.json() as Customer
-        })
+    createCustomer(customer: Customer): Promise<Customer> {
+        let url: string = `${SERVICE_URL}/create`;
+
+        return this._httpService.post(url, { 'customer': JSON.stringify(customer)}, HEADERS)
+            .toPromise()
+            .then((response: Response) => {
+                return response.json() as Customer
+            })
             .catch(this.errorHandling);
     }
 

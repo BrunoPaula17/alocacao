@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { PercentualFilter } from '../shared/percentual.filter'
+import { PercentualFilter } from '../shared/filter/percentual.filter'
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 

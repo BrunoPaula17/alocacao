@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 
-import { PhoneFilter } from '../shared/phone.filter';
+import { PhoneFilter } from '../shared/filter/phone.filter';
 import { ProfessionalComponent } from './professional.component';
 import { ProfessionalDetailComponent } from './professional-detail.component';
 import { RouterModule, Router} from '@angular/router';

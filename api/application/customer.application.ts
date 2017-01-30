@@ -8,24 +8,23 @@ export class CustomerApplication {
     createCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
 
+        customer.deleted = false;
+
         return customerPersistence.create(customer);
     }
 
     listCustomers(): Promise<Customer[]> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        //let professionals: Professional[];
-
-        //professionals = professionalApp.List();
 
         return professionalApp.List()
             .then((professionals: Professional[]) => {
                 return customerPersistence.list()
-                    .then((costumers: Customer[]) => {
-                        costumers.forEach(customer => {
+                    .then((customers: Customer[]) => {
+                        customers.forEach(customer => {
                             customer.professional = professionals.find(professional => professional.pid == customer.responsible);
                         })
-                        return costumers;
+                        return customers;
                     });
             });
 
@@ -43,22 +42,38 @@ export class CustomerApplication {
                 return professionalApp.Read(customer.responsible)
             })
             .then((professional: Professional) => {
+
                 customerReturn.professional = professional;
                 return customerReturn;
-            });;
+            });
 
     }
 
     updateCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        let professionalApp: ProfessionalApplication = new ProfessionalApplication();
+        let customerUp: Customer;
 
-        return customerPersistence.update(customer);
+        return customerPersistence.update(customer)
+            .then((customer: Customer) => {
+                customerUp = customer;
+                return professionalApp.Read(customer.responsible)
+            })
+            .then((professional: Professional) => {
+
+                customerUp.professional = professional;
+                return customerUp;
+            });
     }
 
     deleteCustomer(id: number): Promise<boolean> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
-        return customerPersistence.delete(id);
+        let bool: boolean;
+        return customerPersistence.delete(id)
+            .then((retorno: boolean) => {
+                return bool = retorno;
+            });
 
-    } 
+    }
 
 }

@@ -4,14 +4,15 @@ import { CustomerApplication } from '../application/customer.application';
 
 const customerRouter: Router = Router();
 
-customerRouter.post('/create/:customer', (request: Request, response: Response) => {
+customerRouter.post('/create', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
-    let customer: Customer = (Customer) + request.params.customer;
+    let customer: Customer = (Customer) + request.body.customer;
 
-    customerApp.createCustomer(customer).then((customer: Customer) => {
-        response.json(customer);
-    });
+    let teste: string = request.body.customer.toString();   
+    customer = JSON.parse(teste);
+
+    response.json(customerApp.createCustomer(customer));
 });
 
 customerRouter.get('/list', (request: Request, response: Response) => {
@@ -42,15 +43,23 @@ customerRouter.put('/update/:id', (request: Request, response: Response) => {
     let teste: string = request.body.customer.toString();
     customer = JSON.parse(teste);
 
-    response.json(customerApp.updateCustomer(customer));
+    customerApp.updateCustomer(customer)
+        .then((customerUp: Customer) => {
+            response.json(customerUp)
+        })
+
 });
 
 customerRouter.delete('/delete/:id', (request: Request, response: Response) => {
-    let customerApp: CustomerApplication = new CustomerApplication();
 
+    let customerApp: CustomerApplication = new CustomerApplication();
     let id: number = +request.params.id;
 
-    response.json(customerApp.deleteCustomer(id));
+    customerApp.deleteCustomer(id)
+        .then((bool: boolean) => {
+            response.json(bool);
+        });
+
 });
 
 
