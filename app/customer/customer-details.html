@@ -1,6 +1,6 @@
 <ava-hdr-app [pageName]="'Clientes'" [icon]="'fa-user-circle'"></ava-hdr-app>
 
-<form name="customerForm" *ngIf="customer" [ngSwitch]="action" novalidate>
+<form name="customerForm" #customerForm="ngForm" *ngIf="customer" [ngSwitch]="action" novalidate>
     <div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
@@ -45,12 +45,11 @@
 
     <div class="form-group">
         <div class="col-sm-8">
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update()" *ngSwitchCase="'details'">Editar</button>
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="updateCustomer(customer)" *ngIf="action === 'update'">Salvar</button>
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="insertCustomer(customer)" *ngIf="action === 'create'">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="updateCustomer(customer)" *ngIf="action === 'update'" [disabled]="!customerForm.form.valid">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="insertCustomer(customer)" *ngIf="action === 'create'" [disabled]="!customerForm.form.valid">Salvar</button>
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="delete()" *ngIf="action === 'details'">Excluir</button>
-            
+             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
         </div>
     </div>
 </form>
