@@ -24,21 +24,18 @@ getProject(projectId: number): Promise<Project>{
     Insere um projeto na base de dados
 */
 create(project: Project): Promise<Project>{
-    let projectPersistence : ProjectPersistence = new ProjectPersistence();
+        let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    project.deleted = false;
-    
-    return projectPersistence.create(project);
+        return projectPersistence.create(project);
 }
+
 /*
     Atualiza um projeto na base de dados
-    return projectPersistence.Update();
 */
-update(projectID: number, client: number, startDate: Date, endDate: Date, concludeDate: Date, sponsor: number,name: string, wbs: string): Promise<Project[]>{
-    let projectPersistence : ProjectPersistence = new ProjectPersistence();
-    let projectUpdate : ProjectPersistence = new ProjectPersistence();
+update(project: Project): Promise<Project>{
+        let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return null;//projectPersistence.Update(projectUpdate);
+        return projectPersistence.update(project);
 }
 /*
     Recupera um projeto específico

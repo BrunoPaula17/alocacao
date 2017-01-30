@@ -46,7 +46,7 @@ export class ProjectService {
     */
     createProject(project:Project): Promise<Project> {
         let url: string=`${SERVICE_URL}/create`;
-        return this._httpService.post(url, { project: project }, HEADERS)
+        return this._httpService.post(url, { 'project': JSON.stringify(project) }, HEADERS)
                    .toPromise()
                    .then((response: Response) => {
                        return response.json() as Project;
@@ -58,20 +58,13 @@ export class ProjectService {
         Atualiza um projeto na base de dados.
     */
     updateProject(project:Project): Promise<Project> {
-    let url: string=`${SERVICE_URL}/update/${project.projectId}/
-                                           ${project.customerID}/
-                                           ${project.projectName}/
-                                           ${project.startDate}/
-                                           ${project.endDate}/
-                                           ${project.pid}/
-                                           ${project.sponsor}/
-                                           ${project.wbs}/
-                                           ${project.deleted}/`;
-    return this._httpService.get(url)
+    let url: string=`${SERVICE_URL}/update/`
+    return this._httpService.put(url, {'project': JSON.stringify(project)}, HEADERS)
                .toPromise()
                .then((response: Response) => {
                     return response.json() as Project;
                })
+               .catch(this.erroHandling);
     }
 
 

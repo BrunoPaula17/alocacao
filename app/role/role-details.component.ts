@@ -36,7 +36,6 @@ export class RoleDetailComponent implements OnInit {
     }
 
     save() {
-        this.action = 'read';
         if (this.action === 'edit')
             this._roleService.updateRole(this.role)
                 .then((roleSaved: Role) => {
@@ -54,7 +53,6 @@ export class RoleDetailComponent implements OnInit {
     edit() { this.action = 'edit'; }
 
     delete() {
-        //modal.
         this._roleService.deleteRole(this.role.roleId)
             .then((roleSaved: Role) => {
                 this.role = roleSaved;

@@ -40,7 +40,7 @@ export class ProjectPersistence implements ICrud<Project>{
 
    create(project: Project): Promise<Project>{
         let database: Db;
-        let sequence:number;
+        let sequence: number;
 
         return Promise.resolve<Project>(
             Connection.getNextSequence('projectId')
@@ -48,23 +48,24 @@ export class ProjectPersistence implements ICrud<Project>{
                     sequence = retrievedSequence;
                     return Connection.create();
                 })
-                .then((db: Db) =>{
-                database = db;
+                .then((db: Db) => {
+                    database = db;
 
-                return db.collection('projects').insertOne({
-                    projectId: project.projectId,
-                    customerID: project.customerID,
-                    customer: Customer.name,
-                    projectName: project.projectName,
-                    startDate: project.startDate,
-                    endDate: project.endDate,
-                    pid: project.pid,
-                    sponsor: Professional.name,
-                    wbs: project.wbs,
-                    deleted: project.deleted
+                    return db.collection('projects').insertOne({
+                        projectId: sequence,
+                        customerID: project.customerID,
+                        customer:  null,
+                        projectName: project.projectName,
+                        startDate: project.startDate,
+                        endDate: project.endDate,
+                        pid: project.pid,
+                        sponsor: null,
+                        wbs: project.wbs,
+                        deleted: false
+
+                    });
                 })
-            })
-            .then((insertResult: InsertOneWriteOpResult) => {
+                .then((insertResult: InsertOneWriteOpResult) => {
                     if (insertResult.result.ok == 1) {
                         project.projectId = sequence;
 
@@ -73,17 +74,39 @@ export class ProjectPersistence implements ICrud<Project>{
                     else {
                         return Promise.reject<Project>(Error("An error ocurred when trying to create a new record"));
                     }
-        }));
+                })
+        );
     }
 
-    update(projectUpdate: Project): Promise<Project>{
-        // let project: Project = this.projects.find(p => p.projectId === projectUpdate.projectId);
-        // if(projectUpdate != null){
-        //     project = projectUpdate;
-        //     return project;
-        // }else
-        //     return null;
-        return null;
+    update(project: Project): Promise<Project>{
+        let database: Db;
+        let sequence: number;
+
+        return Promise.resolve<Project>(
+            Connection.create()
+                .then((db: Db) => {
+                    database = db;
+
+                    return db.collection('projects').findOneAndUpdate(
+                        { projectId: project.projectId },
+                        {
+                            customerID: project.customerID,
+                            customer:  null,
+                            projectName: project.projectName,
+                            startDate: project.startDate,
+                            endDate: project.endDate,
+                            pid: project.pid,
+                            sponsor: null,
+                            wbs: project.wbs,
+                            deleted: false
+                        })
+                })
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    if (updateResult.ok === 1)
+                        return updateResult.value.role;
+                    else
+                        return Error("An error ocurred while retrieving updated sequence");
+                }));
     }
 
     delete(projectId: number): Promise<boolean>{
