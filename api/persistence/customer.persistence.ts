@@ -12,7 +12,7 @@ export class CustomerPersistence implements ICrud<Customer>{
         let database: Db = null;
         let sequence: number;
 
-        return Promise.resolve<Role>(
+        return Promise.resolve<Customer>(
             Connection.getNextSequence('customerID')
                 .then((retrievedSequence: number) => {
                     sequence = retrievedSequence;

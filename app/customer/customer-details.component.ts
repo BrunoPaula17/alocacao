@@ -94,7 +94,7 @@ export class CustomerDetailsComponent implements OnInit {
 
     update() {
         this.action = 'update';
-        alert("update!!!";)
+        alert("update!!!");
     }
 
     updateCustomer(cust: Customer){
@@ -114,7 +114,7 @@ export class CustomerDetailsComponent implements OnInit {
 
         this.update(); // Depois do insert no Mongo a tela passa para o estado de alteração
         
-        alert(customer.name + " inserido com sucesso!!!");
+        alert(cust.name + " inserido com sucesso!!!");
     }
 
     getCustomer(id: number): void {
