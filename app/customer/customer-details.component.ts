@@ -94,6 +94,7 @@ export class CustomerDetailsComponent implements OnInit {
 
     update() {
         this.action = 'update';
+        alert("update!!!";)
     }
 
     updateCustomer(cust: Customer){
