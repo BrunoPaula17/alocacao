@@ -87,7 +87,7 @@ export class ProjectDetailsComponent implements OnInit {
 
         if(this.action === 'create') {
                     this._projectService.createProject(project)
-                            .then(project => this.project = project);  
+                            .then((project: Project) => this.project = project);  
         } else {
                     this._projectService.updateProject(project)
                             .then(project => this.project = project);  
