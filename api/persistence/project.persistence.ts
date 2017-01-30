@@ -78,14 +78,35 @@ export class ProjectPersistence implements ICrud<Project>{
         );
     }
 
-    update(projectUpdate: Project): Promise<Project>{
-        // let project: Project = this.projects.find(p => p.projectId === projectUpdate.projectId);
-        // if(projectUpdate != null){
-        //     project = projectUpdate;
-        //     return project;
-        // }else
-        //     return null;
-        return null;
+    update(project: Project): Promise<Project>{
+        let database: Db;
+        let sequence: number;
+
+        return Promise.resolve<Project>(
+            Connection.create()
+                .then((db: Db) => {
+                    database = db;
+
+                    return db.collection('projects').findOneAndUpdate(
+                        { projectId: project.projectId },
+                        {
+                            customerID: project.customerID,
+                            customer:  null,
+                            projectName: project.projectName,
+                            startDate: project.startDate,
+                            endDate: project.endDate,
+                            pid: project.pid,
+                            sponsor: null,
+                            wbs: project.wbs,
+                            deleted: false
+                        })
+                })
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    if (updateResult.ok === 1)
+                        return updateResult.value.role;
+                    else
+                        return Error("An error ocurred while retrieving updated sequence");
+                }));
     }
 
     delete(projectId: number): Promise<boolean>{

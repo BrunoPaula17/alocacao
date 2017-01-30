@@ -44,24 +44,20 @@ projectRouter.post('/create',(request: Request, response: Response) =>{
         });
 });
 
-// /*
-//     Atualiza um projeto na base de dados
-// */
-// projectRouter.put('/update/:projectId/:customer/:projectName/:startDate/:endDate/:sponsor/:wbs/:deleted',
-//                 (request: Request, response: Response) =>{
-//     let projectApp: ProjectApplication = new ProjectApplication();
-      
-//     let projectId: number = +request.params.projectId;
-//     let customer:  number = +request.params.client;
-//     let projectName: string = request.params.projectName;
-//     let startDate: Date = request.params.startDate;
-//     let endDate: Date = request.params.endtDate;
-//     let sponsor: number = +request.params.sponsor;
-//     let wbs: string = request.params.wbs;
-//     let deleted: boolean = request.params.deleted;
+/*
+    Atualiza um projeto na base de dados
+*/
+projectRouter.put('/update/',(request: Request, response: Response) =>{
+    let projectApp: ProjectApplication = new ProjectApplication();
 
-//     return response.json(projectApp.Update(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
-// });
+    let project = JSON.parse(request.body.project);
+
+    projectApp.update(project)
+              .then((project: Project) => {
+                response.json(project);
+              });
+    
+});
 
 /*
     Deletar um projeto da base de dados
