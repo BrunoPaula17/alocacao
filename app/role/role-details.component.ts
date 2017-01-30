@@ -8,6 +8,8 @@ import { RoleService } from './role.service';
 
 import { SharedModule } from '../shared/shared.module';
 
+//import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';  
+
 @Component({
     moduleId: module.id,
     selector: 'ava-rol-dtl-app',
@@ -16,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
 export class RoleDetailComponent implements OnInit {
     constructor(private _roleService: RoleService,
         private _route: ActivatedRoute,
-        private _location: Location
+        private _location: Location,
+        //private _modalService: NgbModal
     ) { }
 
     @Input() role: Role;
@@ -28,31 +31,41 @@ export class RoleDetailComponent implements OnInit {
             .then(role => this.role = role);
     }
 
-    goBack() {
+    back() {
         this._location.back();
     }
 
-    onSave() {
+    save() {
+        this.action = 'read';
         if (this.action === 'edit')
-            this._roleService.updateRole(this.role);
+            this._roleService.updateRole(this.role)
+                .then((roleSaved: Role) => {
+                    this.role = roleSaved;
+                    this.action = 'read';
+                });
         else
-            this._roleService.createRole(this.role);
+            this._roleService.createRole(this.role)
+                .then((roleSaved: Role) => {
+                    this.role = roleSaved;
+                    this.action = 'read';
+                });
     }
 
-    onEdit() {
-        this.action = 'edit';
-    }
+    edit() { this.action = 'edit'; }
 
-    onDelete() {
-        let deleted: boolean;
-        this._roleService.deleteRole(this.role.roleId);
+    delete() {
+        //modal.
+        this._roleService.deleteRole(this.role.roleId)
+            .then((roleSaved: Role) => {
+                this.role = roleSaved;
+            });
     }
 
     ngOnInit(): void {
         this._route.params.subscribe((params: Params) => {
             let id: number = +params['id'];
             this.action = params['action'];
-            console.log(this.action);
+
             this.role = new Role();
             if (this.action != 'create')
                 this.getRoleDetails(id);
