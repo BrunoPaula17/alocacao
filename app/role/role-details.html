@@ -31,8 +31,11 @@
         <div class="col-sm-10">
             <button *ngIf="action != 'read'" type="submit" class="btn btn-default btn-primary btn-outline" (click)="save()" [disabled]="!roleForm.form.valid">Salvar</button>
             <button *ngIf="action === 'read'" type="button" class="btn btn-default btn-primary btn-outline" (click)="edit()">Editar</button>
-            <button *ngIf="action === ('edit' || 'read')" type="button" class="btn btn-default btn-primary btn-outline" (click)="delete()">Excluir</button>
+            <button *ngIf="action === 'read'" type="button" class="btn btn-default btn-primary btn-outline" data-toggle="modal" data-target="#confirmDlg">Excluir</button>
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="back()">Voltar</button>
         </div>
     </div>
 </form>
+
+<ava-cfm-dlg [messageDialog]="'Do you realy want to delete it?'" 
+              (onDeleted)="onDeleted($event)" ></ava-cfm-dlg>
