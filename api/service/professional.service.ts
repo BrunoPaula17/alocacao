@@ -21,8 +21,6 @@ professionalRouter.get('/list', (request: Request, response: Response) => {
 professionalRouter.get('/details/:pid', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
     let pid: number = +request.params.pid;
-
-     //return response.json(professionalApp.Read(pid));
     professionalApp.Read(pid)
         .then((professional: Professional) =>  {
             response.json(professional);
@@ -34,7 +32,6 @@ professionalRouter.get('/details/:pid', (request: Request, response: Response) =
 */
 professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix/:phone', (request: Request, response: Response) => {
     let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-
     let pid: number = +request.params.pid;
     let eid: string = request.params.eid;
     let name: string = request.params.name;
@@ -43,34 +40,35 @@ professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix/:phone', 
     let prefix: number = +request.params.prefix;
     let phone: string = request.params.phone;
 
-    //response.json(professionalApp.Update(pid, eid, name, email, roleID, prefix, phone));
     professionalApp.Update(pid, eid, name, email, roleID, prefix, phone)
         .then((professional: Professional) =>  {
             response.json(professional);
     })
-
 });
-
 
 /*
     Deleta um profissional na base de dados.
 */
-    //professionalRouter.get('/delete/:pid', (request: Request, response: Response) => {
-    professionalRouter.delete('/delete/:pid', (request: Request, response: Response) => {
-    
-    let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-
-    let pid: number = + request.params.pid;
-    
-    //return response.json(professionalApp.Delete(pid));
-    professionalApp.Delete(pid)
-        .then((pid) =>  {
-            response.json(true);
-        })
-        .catch((pid)=> {
-            response.json(false);
-        })
-
+professionalRouter.delete('/delete/:pid', (request: Request, response: Response) => {
+        let professionalApp: ProfessionalApplication = new ProfessionalApplication();
+        let pid: number = +request.params.pid;
+        return response.json(professionalApp.Delete(pid));
 });
+
+professionalRouter.get('/insert/:pid/:eid/:name/:email/:roleID/:prefix/:phone', (request: Request, response: Response) => {  
+    let professionalApp: ProfessionalApplication = new ProfessionalApplication();  
+    let pid: number = +request.params.pid;  
+    let eid: string = request.params.eid;  
+    let name: string = request.params.name;  
+    let email: string = request.params.email;  
+    let roleID: number = +request.params.roleID;  
+    let prefix: number = +request.params.prefix;  
+    let phone: string = request.params.phone;  
+   
+    professionalApp.Create(pid, eid, name, email, roleID, prefix, phone)  
+        .then((professional: Professional) =>  {  
+            response.json(professional);  
+    })  
+});  
 
 export { professionalRouter }

@@ -75,25 +75,14 @@
         <div class="form-group">
             <div class="col-sm-10">
                 <div [ngSwitch]="action">
-                    <!--
-                    <div *ngSwitchCase="'details'">
-                    
-                    </div>
-                    
                     <div *ngSwitchCase="'insert'">
-                        <button type="button" class="btn btn-default" (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Adicionar Funcionário</button>
+                        <button type="button" class="btn btn-primary btn-outline" (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar</button>
+                        <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>
-                    <div *ngSwitchCase="'update'">
-                        <button type="button" class="btn btn-default" (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Atualizar Funcionário</button>
-                    </div>
-                    <div *ngSwitchCase="'delete'">
-                        <button type="button" class="btn btn-default" (click)="deleteProfessional(professional.pid)">Deletar Funcionário</button>
-                    </div> 
-                    --> 
-                    
+
                     <div *ngSwitchCase="'update'">
                         <button type="button" class="btn btn-primary btn-outline" (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Alterar</button>
-                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Excluir</button>
+                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid)">Excluir</button>
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>                 
                  </div>
