@@ -63,10 +63,11 @@ export class CustomerDetailsComponent implements OnInit {
     }
 
     updateCustomer(cust: Customer){
-           this.action = 'details';
-         this._customerService.updateCustomer(cust)
+        this.action = 'details';
+        this._customerService.updateCustomer(cust)
             .then((customer: Customer) => {
                 this.customer = customer;
+                this.action = 'details';
             })
         
     }
@@ -76,10 +77,9 @@ export class CustomerDetailsComponent implements OnInit {
          this._customerService.createCustomer(cust)
             .then((customer: Customer) => {
                 this.customer = customer;
+                this.action = 'details';
             })
-
-        this.update(); // Depois do insert no Mongo a tela passa para o estado de alteração
-        
+            
         alert(cust.name + " inserido com sucesso!!!");
     }
 
