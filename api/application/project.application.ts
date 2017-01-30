@@ -23,7 +23,7 @@ getProject(projectId: number): Promise<Project>{
 /*
     Insere um projeto na base de dados
 */
-create(project): Promise<Project[]>{
+create(project: Project): Promise<Project>{
     let projectPersistence : ProjectPersistence = new ProjectPersistence();
 
     project.deleted = false;

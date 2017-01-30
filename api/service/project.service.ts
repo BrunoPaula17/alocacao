@@ -32,12 +32,13 @@ projectRouter.get('/detail/:projectId', (request: Request, response: Response) =
 /*
     Insere um projeto da base de dados
 */
-projectRouter.post('/create',
-                (request: Request, response: Response) =>{
+projectRouter.post('/create',(request: Request, response: Response) =>{
     let projectApp: ProjectApplication = new ProjectApplication();
-    let project: Project = new Project();
 
-    project = projectApp.create(project)
+    let project: Project = new Project();
+    project = JSON.parse(request.body.project);
+
+    projectApp.create(project)
         .then((project: Project) => {
             response.json(project);
         });

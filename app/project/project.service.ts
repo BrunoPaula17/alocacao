@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Project } from '../project/project'
-import { Http, Response } from '@angular/http';
+import { Injectable,  } from '@angular/core';
+import { Project } from '../project/project';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 const SERVICE_URL: string = '/api/project'

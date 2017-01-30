@@ -53,12 +53,12 @@ export class ProjectPersistence implements ICrud<Project>{
 
                 return db.collection('projects').insertOne({
                     projectId: project.projectId,
-                    customerID: Customer.customerID,
-                    customer: Customer.name;
+                    customerID: project.customerID,
+                    customer: Customer.name,
                     projectName: project.projectName,
                     startDate: project.startDate,
                     endDate: project.endDate,
-                    pid: professional.pid,
+                    pid: project.pid,
                     sponsor: Professional.name,
                     wbs: project.wbs,
                     deleted: project.deleted
