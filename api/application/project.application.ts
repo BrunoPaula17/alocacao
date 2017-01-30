@@ -23,22 +23,12 @@ getProject(projectId: number): Promise<Project>{
 /*
     Insere um projeto na base de dados
 */
-create(projectId: number, customer: number, projectName: string, startDate: Date, endDate: Date, sponsor: number, wbs: string, deleted: boolean): Promise<Project[]>{
+create(project: Project): Promise<Project>{
     let projectPersistence : ProjectPersistence = new ProjectPersistence();
-    let projectCreate : ProjectPersistence = new ProjectPersistence();
 
-    // projectCreate = {
-    //     "projectId": projectId,
-    //     "customer": customer,
-    //     "projectName": projectName,
-    //     "startDate": startDate,
-    //     "endDate": endDate,
-    //     "sponsor": sponsor,
-    //     "wbs": wbs,
-    //     "deleted": deleted
-    // }
-
-    return null;//projectPersistence.Create(projectCreate);
+    project.deleted = false;
+    
+    return projectPersistence.create(project);
 }
 /*
     Atualiza um projeto na base de dados
