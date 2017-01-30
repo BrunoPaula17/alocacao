@@ -10,9 +10,13 @@ export class CustomerApplication {
         let returnCustomer: Customer;
 
         customer.deleted = false;
-        
+
+        //insertedCustomer = customerPersistence.create(customer).
         return customerPersistence.create(customer)
             .then((insertedCustomer: Customer) => {
+                returnCustomer = insertedCustomer;
+                return returnCustomer;
+                
                 if(insertedCustomer.customerID != null && insertedCustomer.customerID != undefined) {
                     return this.readCustomer(insertedCustomer.customerID);
                 }
@@ -24,8 +28,8 @@ export class CustomerApplication {
             .then((readCustomer: Customer) => {
                 returnCustomer = readCustomer;=
                 return returnCustomer;
-            });
-        }
+            })
+    }
 
     listCustomers(): Promise<Customer[]> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
