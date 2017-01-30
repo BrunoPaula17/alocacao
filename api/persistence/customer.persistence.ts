@@ -10,24 +10,33 @@ export class CustomerPersistence implements ICrud<Customer>{
 
     create(customer: Customer): Promise<Customer> {
         let database: Db = null;
-        return Promise.resolve(MongoClient.connect(mongoUrl)
+        return Promise.resolve(
+            
+            Connection.create()
             .then((db: Db) => {
                 database = db;
-                return db.collection('customers').insert(JSON.stringify(customer));
+
+                 return db.collection('customers').insertOne({
+                    customerID: customer.customerID,
+                    name: customer.name,
+                    cnpj: +customer.cnpj,
+                    responsible: customer.responsible,
+                    contact: customer.contact,
+                    email: customer.email,
+                    deleted: customer.deleted
+                    })
             })
-            .then((insertResult: InsertOneWriteOpResult) => {
-                database.close();
-                console.log("Inserted a document into the customers collection");
-                if (insertResult.insertedId != null) {
-                    customer.customerID = +insertResult.insertedId;
-                    return customer;
-                }
-                else {
-                    return null;
-                }
+             .then((insertResult: InsertOneWriteOpResult) => {
+                    if (insertResult.result.ok == 1) {
+                        customer.customerID = 666;
 
-
-            }));
+                        return customer;
+                    }
+                    else {
+                        return Promise.reject<Customer>(Error("An error ocurred when trying to create a new record"));
+                    }
+                })
+           );
 
     }
 
@@ -71,9 +80,11 @@ export class CustomerPersistence implements ICrud<Customer>{
                 return db.collection('customers').findOneAndUpdate({ "customerID": custUpd.customerID }, {
                     customerID: custUpd.customerID,
                     name: custUpd.name,
-                    responsible: custUpd.name,
+                    cnpj: +custUpd.cnpj,
+                    responsible: custUpd.responsible,
                     contact: custUpd.contact,
-                    email: custUpd.email
+                    email: custUpd.email,
+                    deleted: custUpd.deleted
                 }, { returnOriginal: false });
             })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {

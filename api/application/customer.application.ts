@@ -8,6 +8,9 @@ export class CustomerApplication {
     createCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
 
+        customer.customerID = 666;
+        customer.deleted = false;
+
         return customerPersistence.create(customer);
     }
 
@@ -29,7 +32,7 @@ export class CustomerApplication {
                     });
             });
 
-    }
+    } 
 
     readCustomer(id: number): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
@@ -43,9 +46,10 @@ export class CustomerApplication {
                 return professionalApp.Read(customer.responsible)
             })
             .then((professional: Professional) => {
-                customerReturn.professional = professional;
+                
+                    customerReturn.professional = professional;
                 return customerReturn;
-            });;
+            });
 
     }
 

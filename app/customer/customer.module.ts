@@ -10,6 +10,7 @@ import { FormsModule }   from '@angular/forms';
 @NgModule({
     imports: [FormsModule, SharedModule, BrowserModule, FormsModule, RouterModule.forChild([
             { path: 'customers', component: CustomerComponent },
+            { path: 'customer/:action', component: CustomerDetailsComponent },
             { path: 'customer/:action/:id', component: CustomerDetailsComponent}
         ])],
     declarations: [CustomerComponent, CustomerDetailsComponent],

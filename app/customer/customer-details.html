@@ -26,7 +26,7 @@
     <div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
-            <input id="name" type="text" name="name" [(ngModel)]="customer.name" placeholder="Nome do Cliente" class="form-control" [disabled]="action !== 'edit'"
+            <input id="name" type="text" name="name" [(ngModel)]="customer.name" placeholder="Nome do Cliente" class="form-control" [disabled]="action === 'details' ? true : false"
                 required>
         </div>
         <div class="form-group col-md-6">
@@ -34,34 +34,36 @@
             <select *ngSwitchCase="'details'" [(ngModel)]="customer.responsible" class="form-control" name="professional" disabled>
             <option value="{{ customer.professional.pid }}">{{ customer.professional.name }}</option>
             </select>
-            <select *ngSwitchCase="'edit'" [(ngModel)]="customer.responsible" class="form-control" name="professional" required>
+            <select *ngSwitchDefault [(ngModel)]="customer.responsible" class="form-control" name="professional" required>
                 <option *ngFor='let professional of professionals' value="{{ professional.pid }}" >{{ professional.name }}</option>
             </select>
 
         </div>
         <div class="form-group col-md-6">
             <label for="cnpj">CNPJ</label>
-            <input id="cnpj" type="text" name="cnpj" [(ngModel)]="customer.cnpj" placeholder="CNPJ do cliente" class="form-control" [disabled]="action !== 'edit'"
+            <input id="cnpj" type="text" name="cnpj" [(ngModel)]="customer.cnpj" placeholder="CNPJ do cliente" class="form-control" [disabled]="action === 'details' ? true : false"
                 required>
         </div>
         <div class="form-group col-md-6">
             <label for="contact">Contato</label>
             <input id="contact" type="text" name="contact" [(ngModel)]="customer.contact" placeholder="Nome do contato no cliente" class="form-control"
-                [disabled]="action !== 'edit'">
+                [disabled]="action === 'details' ? true : false">
         </div>
         <div class="form-group col-md-6">
             <label for="email">E-mail</label>
             <input type="email" name="emailCustomer" [(ngModel)]="customer.email" placeholder="E-mail para contato" class="form-control"
-                [disabled]="action !== 'edit'">
+                [disabled]="action === 'details' ? true : false">
         </div>
         <br>
     </div>
     <div class="form-group">
         <div class="col-sm-8">
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="editar()" *ngSwitchCase="'details'">Editar</button>
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update(customer)" *ngSwitchCase="'edit'">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update()" *ngSwitchCase="'details'">Editar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="updateCustomer(customer)" *ngIf="action === 'update'">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="insertCustomer(customer)" *ngIf="action === 'create'">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="delete()" *ngIf="action === 'details'">Excluir</button>
+            
         </div>
     </div>
-
 </form>
