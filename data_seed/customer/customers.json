@@ -1,30 +1,56 @@
+/* 1 */
+{
+    "customerID" : 1,
+    "name" : "Santander",
+    "cnpj" : "12.487.429/0001-34",
+    "responsible" : 10715377,
+    "contact" : "Roseli Camargo B.",
+    "email" : "roseli@santander.com.br",
+    "deleted" : false
+}
 
-        {
-            "customerID": 1,
-            "name": "Santander",
-            "responsible": 10715377,
-            "professional": null,
-            "contact": "Roseli",
-            "email": "roseli@santander.com.br",
-            "deleted": false
-        }
+/* 2 */
+{
+    "customerID" : 2,
+    "name" : "Itaú",
+    "cnpj" : "66.621.263/0001-26",
+    "responsible" : 10715378,
+    "professional" : null,
+    "contact" : "João",
+    "email" : "joao@itau.com.br",
+    "deleted" : false
+}
 
-        {
-            "customerID": 2,
-            "name": "Itaú",
-            "responsible": 10715378,
-            "professional": null,
-            "contact": "João",
-            "email": "joao@itau.com.br",
-            "deleted": false
-        }
+/* 3 */
+{
+    "customerID" : 3,
+    "name" : "Safra",
+    "cnpj" : "38.633.663/0001-16",
+    "responsible" : 10715376,
+    "professional" : null,
+    "contact" : "Gabriel",
+    "email" : "gabriel@safra.com.br",
+    "deleted" : true
+}
 
-        {
-            "customerID": 3,
-            "name": "Safra",
-            "responsible": 10715376,
-            "professional": null,
-            "contact": "Gabriel",
-            "email": "gabriel@safra.com.br",
-            "deleted": true
-        }
+/* 4 */
+{
+    "customerID" : 1,
+    "name" : "Mapfre",
+    "cnpj" : "38.633.663/0001-16",
+    "responsible" : "10715378",
+    "contact" : "Diego Chubbas",
+    "email" : "chubbas@mapfre.com",
+    "deleted" : false
+}
+
+/* 5 */
+{
+    "customerID" : 2,
+    "name" : "BTG ",
+    "cnpj" : "38.633.663/0001-16",
+    "responsible" : "10715376",
+    "contact" : "Gabriel B.",
+    "email" : "gabriel.b@btg.com",
+    "deleted" : false
+}
