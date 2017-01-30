@@ -8,8 +8,6 @@ import { RoleService } from './role.service';
 
 import { SharedModule } from '../shared/shared.module';
 
-//import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';  
-
 @Component({
     moduleId: module.id,
     selector: 'ava-rol-dtl-app',
@@ -18,8 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 export class RoleDetailComponent implements OnInit {
     constructor(private _roleService: RoleService,
         private _route: ActivatedRoute,
-        private _location: Location,
-        //private _modalService: NgbModal
+        private _location: Location
     ) { }
 
     @Input() role: Role;
@@ -53,7 +50,7 @@ export class RoleDetailComponent implements OnInit {
     edit() { this.action = 'edit'; }
 
     delete() {
-        this._roleService.deleteRole(this.role.roleId)
+        this._roleService.deleteRole(this.role)
             .then((roleSaved: Role) => {
                 this.role = roleSaved;
             });
@@ -69,5 +66,10 @@ export class RoleDetailComponent implements OnInit {
                 this.getRoleDetails(id);
         })
 
+    }
+
+    onDeleted(confirm: boolean) {
+        if(confirm)
+            this.delete();
     }
 }
