@@ -2,7 +2,7 @@
 <div class="page-content">
     <button type="button" 
             class="btn btn-primary btn-outline ava-btn-list" 
-            [routerLink]="['/project','insert', '']">Novo Projeto</button>
+            [routerLink]="['/project','create', '']">Novo Projeto</button>
     <table class="table table-bordered table-striped table-hover table-responsive">
         <thead>
             <tr>
@@ -10,8 +10,8 @@
                 <th>Wbs</th>
                 <th>Data de Início</th>
                 <th>Data de Fim</th>
-                <th>Cliente</th>
                 <th>Responsável</th>
+                <th>Cliente</th>
                 <th></th>
             </tr>
         </thead>
@@ -21,11 +21,11 @@
                 <td>{{ project.wbs }}</td>
                 <td class="text-center">{{ project.startDate }}</td>
                 <td class="text-center">{{ project.endDate }}</td>
-                <td class="text-center">{{ project.sponsor.name}}
+                <td class="text-center">{{ project.sponsor.name }}</td>
                 <td class="text-center">{{ project.customer.name }}</td>     
                 <td class="text-center">
                     <span class="fa fa-list-alt fa-2x fa-black ava-cursor" 
-                          [routerLink]="['/project','details', project.projectId]">
+                          [routerLink]="['/project','detail', project.projectId]">
                     </span>
                 </td>
             </tr>

@@ -4,14 +4,15 @@ import { CustomerApplication } from '../application/customer.application';
 
 const customerRouter: Router = Router();
 
-customerRouter.post('/create/:customer', (request: Request, response: Response) => {
+customerRouter.post('/create', (request: Request, response: Response) => {
     let customerApp: CustomerApplication = new CustomerApplication();
 
-    let customer: Customer = (Customer) + request.params.customer;
+    let customer: Customer = (Customer) + request.body.customer;
 
-    customerApp.createCustomer(customer).then((customer: Customer) => {
-        response.json(customer);
-    });
+    let teste: string = request.body.customer.toString();   
+    customer = JSON.parse(teste);
+
+    response.json(customerApp.createCustomer(customer));
 });
 
 customerRouter.get('/list', (request: Request, response: Response) => {

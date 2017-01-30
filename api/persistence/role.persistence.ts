@@ -1,6 +1,6 @@
 import { Role } from '../../app/role/role';
 import { ICrud } from './crud.interface';
-import { MongoClient, Db, InsertOneWriteOpResult } from 'mongodb';
+import { MongoClient, Db, InsertOneWriteOpResult, FindAndModifyWriteOpResultObject } from 'mongodb';
 import { Connection } from './connection';
 
 export class RolePersistence implements ICrud<Role> {
@@ -10,7 +10,7 @@ export class RolePersistence implements ICrud<Role> {
     create(role: Role): Promise<Role> {
         let database: Db;
         let sequence: number;
-        
+
         return Promise.resolve<Role>(
             Connection.getNextSequence('RoleId')
                 .then((retrievedSequence: number) => {
@@ -21,8 +21,7 @@ export class RolePersistence implements ICrud<Role> {
                     database = db;
 
                     return db.collection('roles').insertOne({
-                        //_id: null,
-                        roleId: 1,
+                        roleId: sequence,
                         name: role.name,
                         brc: role.brc,
                         level: role.level,
@@ -43,20 +42,19 @@ export class RolePersistence implements ICrud<Role> {
         );
     }
 
-
     list(): Promise<Role[]> {
         let database: Db;
 
         return Promise.resolve(
             Connection.create()
-            .then((db: Db) => {
-                this._db = db;
-                return this._db.collection('roles').find( { deleted: false }).toArray();;
-            })
-            .then((roles: Role[]) => {
-                this._db.close();
-                return roles;
-            }));
+                .then((db: Db) => {
+                    this._db = db;
+                    return this._db.collection('roles').find({ deleted: false }).toArray();;
+                })
+                .then((roles: Role[]) => {
+                    this._db.close();
+                    return roles;
+                }));
     }
 
     read(id: number): Promise<Role> {
@@ -64,50 +62,63 @@ export class RolePersistence implements ICrud<Role> {
 
         return Promise.resolve<Role>(
             Connection.create()
-            .then((db: Db) => {
-                database = db;
-                return db.collection('roles').findOne({ deleted: false, roleId: id});
-            })
-            .then((role: any) => {
-                database.close();
-                return role as Role;
-        }));
+                .then((db: Db) => {
+                    database = db;
+                    return db.collection('roles').findOne({ deleted: false, roleId: id });
+                })
+                .then((role: any) => {
+                    database.close();
+                    return role as Role;
+                }));
     }
 
     update(role: Role): Promise<Role> {
         let database: Db;
+        let sequence: number;
 
-        return Promise.resolve(
+        return Promise.resolve<Role>(
             Connection.create()
-            .then((db: Db) => {
-                database = db;
-                return db.collection('roles').findOneAndUpdate(
-                    { "roleId" : role.roleId },
-                    role
-                );
-            })
-            .then((role: Role) => {
-                database.close();
-                return role;
-            }));
+                .then((db: Db) => {
+                    database = db;
+
+                    return db.collection('roles').findOneAndUpdate(
+                        { roleId: role.roleId },
+                        {
+                            roleId: role.roleId,
+                            name: role.name,
+                            brc: role.brc,
+                            level: role.level,
+                            description: role.description,
+                            deleted: role.deleted
+                        })
+                })
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    if (updateResult.ok === 1)
+                        return updateResult.value.role;
+                    else
+                        return Error("An error ocurred while retrieving updated sequence");
+                }));
     }
 
     delete(id: number): Promise<boolean> {
         let database: Db;
+        let sequence: number;
 
-        return Promise.resolve(
+        return Promise.resolve<boolean>(
             Connection.create()
-            .then((db: Db) => {
-                database = db;
-                return db.collection('roles').remove( { roleId: id } );
-            })
-            .then((result) => {
-                database.close();
-                return true;
-            })
-            .catch((erro) => {
-                console.log(erro);
-                return false;
-            }));
+                .then((db: Db) => {
+                    database = db;
+
+                    return db.collection('roles').findOneAndUpdate(
+                        { roleId: id },
+                        { deleted: true },
+                        { projection: { value: true }})
+                })
+                .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    if (updateResult.ok === 1)
+                        return true;
+                    else
+                        return false;
+                }));
     }
 }

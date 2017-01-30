@@ -16,33 +16,34 @@ projectRouter.get('/list', (request: Request, response: Response) =>{
         });
 });
 
-// /*
-//     Recupera um projeto da base de dados
-// */
-// projectRouter.get('/details/:projectId', (request: Request, response: Response) => {
-//     let projectApp: ProjectApplication = new ProjectApplication();
-//     let projectId: number = +request.params.projectId;
-//     return response.json(projectApp.Read(projectId));
-// });
-
-// /*
-//     Insere um projeto da base de dados
-// */
-// projectRouter.get('/insert/:projectId/:client/:startDate/:endDate/:concludeDate/:sponsor/:name/:wbs',
-//                 (request: Request, response: Response) =>{
-//     let projectApp: ProjectApplication = new ProjectApplication();
+/*
+    Recupera um projeto da base de dados
+*/
+projectRouter.get('/detail/:projectId', (request: Request, response: Response) => {
+    let projectApp: ProjectApplication = new ProjectApplication();
+    let projectId: number = +request.params.projectId;
     
-//     let projectId: number = +request.params.projectId;
-//     let customer:  number = +request.params.client;
-//     let projectName: string = request.params.projectName;
-//     let startDate: Date = request.params.startDate;
-//     let endDate: Date = request.params.endtDate;
-//     let sponsor: number = +request.params.sponsor;
-//     let wbs: string = request.params.wbs;
-//     let deleted: boolean = request.params.deleted;
+    projectApp.getProject(projectId)
+        .then((project: Project) => {
+            response.json(project);
+        });
+});
 
-//     return response.json(projectApp.Create(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
-// });
+/*
+    Insere um projeto da base de dados
+*/
+projectRouter.post('/create',(request: Request, response: Response) =>{
+    let projectApp: ProjectApplication = new ProjectApplication();
+
+    let project: Project = new Project();
+    project = JSON.parse(request.body.project);
+
+    projectApp.create(project)
+        .then((project: Project) => {
+            response.json(project);
+        });
+});
+
 // /*
 //     Atualiza um projeto na base de dados
 // */
@@ -62,16 +63,16 @@ projectRouter.get('/list', (request: Request, response: Response) =>{
 //     return response.json(projectApp.Update(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
 // });
 
-// /*
-//     Deletar um projeto da base de dados
-// */
-// projectRouter.get('/details/:projectId', (request: Request, response: Response) => {
-//     let projectApp: ProjectApplication = new ProjectApplication();
+/*
+    Deletar um projeto da base de dados
+*/
+projectRouter.get('/delete/:projectId', (request: Request, response: Response) => {
+    let projectApp: ProjectApplication = new ProjectApplication();
     
-//     let projectId: number = +request.params.projectId;
+    let projectId: number = +request.params.projectId;
     
-//     return response.json(projectApp.Delete(projectId));
-// });
+    return response.json(projectApp.delete(projectId));
+});
 
 
 export { projectRouter } 

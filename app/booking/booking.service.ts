@@ -11,12 +11,38 @@ const SERVICE_URL: string = '/api/booking'
 export class BookingService {
     constructor(private _httpService: Http) { }
 
+    private convertBookings(bookings: Booking[]): Booking[] {
+        let newBookings: Booking[] = new Array<Booking>();
+
+        newBookings.forEach(booking => {
+            newBookings.push(this.convertBooking(booking));
+        });
+
+        return newBookings;
+    }
+
+    private convertBooking(booking: Booking): Booking {
+        let book: Booking = new Booking;
+        book.auditID = booking.auditID;
+        book.bookingID = booking.bookingID;
+        book.bookingPercentual = booking.bookingPercentual;
+        book.deleted = booking.deleted;
+        book.endDate = new Date(booking.endDate);
+        book.initialDate = new Date(booking.initialDate);
+        book.pid = booking.pid;
+        book.projectID = booking.projectID;
+
+        return book;
+    }
+
     getBookingList(): Promise<Booking[]> {
         let url: string = `${SERVICE_URL}/list`;
         return this._httpService.get(url)
             .toPromise()
             .then((response: Response) => {
-                return response.json() as Booking[];
+                let bookingsReceived: Booking[] = response.json() as Booking[];
+
+                return this.convertBookings(bookingsReceived);
             })
             .catch(this.errorHandling);
     }
@@ -27,18 +53,35 @@ export class BookingService {
         return this._httpService.get(url)
             .toPromise()
             .then((response: Response) => {
-                return response.json() as Booking;
+                let booking: Booking = response.json() as Booking;
+
+                return this.convertBooking(booking);
             })
             .catch(this.errorHandling);
     }
 
     saveBooking(booking: Booking): Promise<Booking> {
+        let url: string = `${SERVICE_URL}/create`;
+
+        return this._httpService.post(url, { booking: booking })
+            .toPromise()
+            .then((response: Response) => {
+                let booking: Booking = response.json() as Booking;
+
+                return this.convertBooking(booking);
+            })
+            .catch(this.errorHandling);
+    }
+
+    editBooking(booking: Booking): Promise<Booking> {
         let url: string = `${SERVICE_URL}/${booking.bookingID}`;
 
         return this._httpService.put(url, { booking: booking })
             .toPromise()
             .then((response: Response) => {
-                return response.json() as Booking;
+                let booking: Booking = response.json() as Booking;
+
+                return this.convertBooking(booking);
             })
             .catch(this.errorHandling);
     }

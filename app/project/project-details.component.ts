@@ -7,7 +7,7 @@ import { ProjectService } from '../project/project.service';
 import { Customer } from '../customer/customer';
 import { Professional } from '../professional/professional';
 
-//import { CustomerService } from '../customer/customer.service'
+import { CustomerService } from '../customer/customer.service'
 import { ProfessionalService } from '../professional/professional.service'
 
 @Component({
@@ -18,6 +18,8 @@ export class ProjectDetailsComponent implements OnInit {
     
     constructor(private _router:ActivatedRoute,
                 private _projectService: ProjectService,
+                private _customerService: CustomerService,
+                private _sponsorService: ProfessionalService,
                 private _location:Location) {}
 
     action: string;
@@ -30,26 +32,40 @@ export class ProjectDetailsComponent implements OnInit {
         Método disparado ao inicializar a tela, logo após carregar o Html.
     */
     ngOnInit(): void {
+
         this._router.params.subscribe((params: Params) => {
-            let projectId: number = +params['projectId'];
+            
             this.action = params['action'];
+            
+            if(this.action != 'create') {
+                let projectId:number = +params['projectId'];
+                this.getDetails(projectId);
+            }
+            else{
+                 this.project = new Project();
+            }
+        })
 
+        
+        this._customerService.getCustomerList()
+                             .then(customer => this.customers = customer);
 
-            this.getDetails(projectId);
-        });
+        this._sponsorService.getProfessionalList()
+                             .then(professional => this.sponsors = professional);
+
     }
 
     /*
         Volta para a última página chamada.
     */
-    goBack(): void {
+    goBackButton(): void {
         this._location.back();
     }
 
     /*
         Retorna os detalhes de um projeto específico.
     */
-    getDetails(projectId: number): void {
+    getDetails(projectId:number): void {
         this._projectService.getProjectDetail(projectId)
             .then((project: Project) => {
                 this.project = project;
@@ -69,10 +85,10 @@ export class ProjectDetailsComponent implements OnInit {
     */
     saveButton(project: Project): void {
 
-        if(this.action === 'insert') {
+        if(this.action === 'create') {
                     this._projectService.createProject(project)
                             .then(project => this.project = project);  
-        } else if(this.action === 'update') {
+        } else {
                     this._projectService.updateProject(project)
                             .then(project => this.project = project);  
         }

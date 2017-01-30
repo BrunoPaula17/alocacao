@@ -4,10 +4,9 @@
     <div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
-            <label class="alert-danger" [hidden]="name.valid || name.pristine && action !=='edit'">*Campo obrigatório</label>
-            <!--<label *ngIf="name.errors && (name.dirty || name.touched)">-->
-            <input id="name" type="text" name="name" [(ngModel)]="customer.name" placeholder="Nome do Cliente" class="form-control" [disabled]="action !== 'edit'"
-                value="{{ customer.name }}" #name="ngModel" required>
+            <label class="alert-danger" [hidden]="name.valid || name.pristine && action !=='update'">*Campo obrigatório</label>
+            <input id="name" type="text" name="name" [(ngModel)]="customer.name" placeholder="Nome do Cliente" class="form-control"
+                value="{{ customer.name }}" #name="ngModel" required [disabled]="action !== 'update' ? true : false">
         </div>
 
         <div class="form-group col-md-6">
@@ -15,8 +14,9 @@
             <select *ngSwitchCase="'details'" [(ngModel)]="customer.responsible" class="form-control" name="professional" disabled>
             <option value="{{ customer.responsible }}">{{ customer.professional.name }}</option>
             </select>
-            <select *ngSwitchCase="'edit'" [(ngModel)]="customer.responsible" class="form-control" name="professional" required>
-                <option *ngFor='let professional of professionals' value="{{ professional.pid }}">{{ professional.name }}</option>
+           
+            <select *ngSwitchDefault [(ngModel)]="customer.responsible" class="form-control" name="professional" required>
+                <option *ngFor='let professional of professionals' value="{{ professional.pid }}" >{{ professional.name }}</option>
             </select>
         </div>
 
@@ -27,18 +27,18 @@
                     *CNPJ inválido
                 </label>
             <input id="cnpj" type="text" name="cnpj" [(ngModel)]="customer.cnpj" placeholder="65.801.640/0001-46" class="form-control"
-                [disabled]="action !== 'edit'" pattern="^[0-9]{2}.[0-9]{3}.[0-9]{3}/[0-9]{4}-[0-9]{2}" #cnpj="ngModel" required>
+                [disabled]="action !== 'update' ? true : false" pattern="^[0-9]{2}.[0-9]{3}.[0-9]{3}/[0-9]{4}-[0-9]{2}" #cnpj="ngModel" required>
         </div>
         <div class="form-group col-md-6">
             <label for="contact">Contato</label>
             <input id="contact" type="text" name="contact" [(ngModel)]="customer.contact" placeholder="Nome do contato no cliente" class="form-control"
-                [disabled]="action !== 'edit'">
+                [disabled]="action !== 'update' ? true : false">
         </div>
         <div class="form-group col-md-6">
             <label for="email">E-mail</label>
             <label class="alert-danger" *ngIf="email.errors && (email.dirty || email.touched)" [hidden]="!email.errors.pattern">*E-mail inválido</label>
             <input type="email" name="emailCustomer" [(ngModel)]="customer.email" placeholder="email@email.com" class="form-control"
-                [disabled]="action !== 'edit'" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel">
+                [disabled]="action !== 'update' ? true : false" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel">
         </div>
         <br>
     </div>
@@ -46,9 +46,11 @@
     <div class="form-group">
         <div class="col-sm-8">
             <button type="button" class="btn btn-default btn-primary btn-outline" (click)="goBack()">Voltar</button>
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="editar()" *ngSwitchCase="'details'">Editar</button>
-            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update(customer)" *ngSwitchCase="'edit'">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="update()" *ngSwitchCase="'details'">Editar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="updateCustomer(customer)" *ngIf="action === 'update'">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="insertCustomer(customer)" *ngIf="action === 'create'">Salvar</button>
+            <button type="button" class="btn btn-default btn-primary btn-outline" (click)="delete()" *ngIf="action === 'details'">Excluir</button>
+            
         </div>
     </div>
-
 </form>

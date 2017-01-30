@@ -50,12 +50,12 @@ roleRouter.post('/create', (request: Request, response: Response) => {
         });
 });
 
-roleRouter.put('/update/:role', (request: Request, response: Response) => {
+roleRouter.put('/update', (request: Request, response: Response) => {
     let roleApp: RoleApplication = new RoleApplication();
 
-    let role: Role = (Role)+request.params.role;
+    let role: Role = JSON.parse(request.body.role);
 
-    roleApp.updateRole(request.body.role)
+    roleApp.updateRole(role)
         .then((role: Role) => {
             response.json(role);
         });

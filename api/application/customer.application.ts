@@ -8,6 +8,8 @@ export class CustomerApplication {
     createCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
 
+        customer.deleted = false;
+
         return customerPersistence.create(customer);
     }
 
@@ -18,11 +20,11 @@ export class CustomerApplication {
         return professionalApp.List()
             .then((professionals: Professional[]) => {
                 return customerPersistence.list()
-                    .then((costumers: Customer[]) => {
-                        costumers.forEach(customer => {
+                    .then((customers: Customer[]) => {
+                        customers.forEach(customer => {
                             customer.professional = professionals.find(professional => professional.pid == customer.responsible);
                         })
-                        return costumers;
+                        return customers;
                     });
             });
 
@@ -40,18 +42,27 @@ export class CustomerApplication {
                 return professionalApp.Read(customer.responsible)
             })
             .then((professional: Professional) => {
+
                 customerReturn.professional = professional;
                 return customerReturn;
-            });;
+            });
 
     }
 
     updateCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        let professionalApp: ProfessionalApplication = new ProfessionalApplication();
         let customerUp: Customer;
+
         return customerPersistence.update(customer)
             .then((customer: Customer) => {
-                return customerUp = customer;
+                customerUp = customer;
+                return professionalApp.Read(customer.responsible)
+            })
+            .then((professional: Professional) => {
+
+                customerUp.professional = professional;
+                return customerUp;
             });
     }
 
@@ -59,9 +70,9 @@ export class CustomerApplication {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let bool: boolean;
         return customerPersistence.delete(id)
-        .then((retorno :boolean) => {
-            return bool = retorno;
-        });
+            .then((retorno: boolean) => {
+                return bool = retorno;
+            });
 
     }
 
