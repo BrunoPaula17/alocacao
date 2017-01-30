@@ -16,6 +16,7 @@ export class CustomerPersistence implements ICrud<Customer>{
             Connection.getNextSequence('customerID')
                 .then((retrievedSequence: number) => {
                     sequence = retrievedSequence;
+                    customer.customerID = sequence;
                     return Connection.create();
                 })
                 .then((db: Db) => {
@@ -24,7 +25,7 @@ export class CustomerPersistence implements ICrud<Customer>{
                         customerID: sequence,
                         name: customer.name,
                         cnpj: +customer.cnpj,
-                        responsible: customer.responsible,
+                        responsible: +customer.responsible,
                         contact: customer.contact,
                         email: customer.email,
                         deleted: customer.deleted

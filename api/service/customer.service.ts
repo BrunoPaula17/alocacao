@@ -12,7 +12,10 @@ customerRouter.post('/create', (request: Request, response: Response) => {
     let teste: string = request.body.customer.toString();   
     customer = JSON.parse(teste);
 
-    response.json(customerApp.createCustomer(customer));
+    customerApp.createCustomer(customer)
+        .then((returnCustomer: Customer) => {
+            response.json(returnCustomer);
+        })
 });
 
 customerRouter.get('/list', (request: Request, response: Response) => {

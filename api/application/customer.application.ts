@@ -7,11 +7,25 @@ export class CustomerApplication {
 
     createCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        let returnCustomer: Customer;
 
         customer.deleted = false;
-
-        return customerPersistence.create(customer);
-    }
+        
+        return customerPersistence.create(customer)
+            .then((insertedCustomer: Customer) => {
+                if(insertedCustomer.customerID != null && insertedCustomer.customerID != undefined) {
+                    return this.readCustomer(insertedCustomer.customerID);
+                }
+                else
+                {
+                    return null;
+                }
+            })
+            .then((readCustomer: Customer) => {
+                returnCustomer = readCustomer;=
+                return returnCustomer;
+            });
+        }
 
     listCustomers(): Promise<Customer[]> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();

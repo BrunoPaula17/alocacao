@@ -9,7 +9,6 @@ import { Professional } from '../professional/professional';
 
 import { ProfessionalService } from "../professional/professional.service"
 
-
 @Component({
     moduleId: module.id,
     selector: 'ava-cust-dtl-app',
@@ -26,7 +25,6 @@ export class CustomerDetailsComponent implements OnInit {
     professionals: Professional[];
     action: string;
     id: number;
-
 
     ngOnInit(): void {
         this._router.params.subscribe((params: Params) => {
@@ -69,17 +67,15 @@ export class CustomerDetailsComponent implements OnInit {
                 this.customer = customer;
                 this.action = 'details';
             })
-        
     }
-
 
     insertCustomer(cust: Customer){
          this._customerService.createCustomer(cust)
             .then((customer: Customer) => {
                 this.customer = customer;
+                this.id = customer.customerID;
                 this.action = 'details';
             })
-            
         alert(cust.name + " inserido com sucesso!!!");
     }
 
