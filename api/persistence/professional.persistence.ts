@@ -124,7 +124,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
     }
     
     
-    delete(pid: number): Promise<boolean> {
+    delete(professional: Professional): Promise<boolean> {
 
         let database: Db;
 
@@ -132,7 +132,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
             Connection.create()
             .then((db: Db) => {
                 database = db;
-                return db.collection('professionals').remove({ "pid": pid });
+                return db.collection('professionals').remove({ "pid": professional.pid });
             })
             .then((result) => {
                 database.close();

@@ -62,12 +62,18 @@ projectRouter.put('/update/',(request: Request, response: Response) =>{
 /*
     Deletar um projeto da base de dados
 */
-projectRouter.get('/delete/:projectId', (request: Request, response: Response) => {
+projectRouter.put('/delete/', (request: Request, response: Response) => {
     let projectApp: ProjectApplication = new ProjectApplication();
     
-    let projectId: number = +request.params.projectId;
+    let project = JSON.parse(request.body.project);
     
-    return response.json(projectApp.delete(projectId));
+    projectApp.delete(project)
+        .then(() => {
+            response.json(true);
+        })
+        .catch((() => {
+            response.json(false);
+        }));
 });
 
 

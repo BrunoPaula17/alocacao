@@ -71,13 +71,14 @@ export class ProjectService {
     /*
         Realiza a exclusão lógica do projeto na base de dados.
     */
-     deleteProject(projectId:Number): Promise<Project> {
-        let url: string = `${SERVICE_URL}/delete/${projectId}`;
-        return this._httpService.get(url)
-                   .toPromise()
-                   .then((response: Response) => {
+     deleteProject(project:Project): Promise<Project> {
+        let url: string=`${SERVICE_URL}/delete/`
+        return this._httpService.put(url, {'project': JSON.stringify(project)}, HEADERS)
+                  .toPromise()
+                  .then((response: Response) => {
                        return response.json() as Project;
-                   })
+                  })
+                  .catch(this.erroHandling);
     }
 
     erroHandling(error: any) { 

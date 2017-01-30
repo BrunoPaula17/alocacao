@@ -15,7 +15,7 @@ export class ProjectPersistence implements ICrud<Project>{
         return Promise.resolve(MongoClient.connect(mongoUrl))
             .then((db: Db) =>{
                 database = db;
-                return db.collection('projects').find().toArray();
+                return db.collection('projects').find( {"deleted": false} ).toArray();
             })
             .then((project: Project[]) =>{
                 database.close();
@@ -90,6 +90,7 @@ export class ProjectPersistence implements ICrud<Project>{
                     return db.collection('projects').findOneAndUpdate(
                         { projectId: project.projectId },
                         {
+                            projectId: project.projectId,
                             customerID: project.customerID,
                             customer:  null,
                             projectName: project.projectName,
@@ -109,23 +110,32 @@ export class ProjectPersistence implements ICrud<Project>{
                 }));
     }
 
-    delete(projectId: number): Promise<boolean>{
+    delete(project: Project): Promise<boolean>{
         let database: Db;
 
-        return Promise.resolve(
+        return Promise.resolve<boolean>(
             Connection.create()
             .then((db:Db) =>{
                 database = db;
-                return db.collection('projects').remove({'projectId': projectId});
-            })
-            .then((result) =>{
-                database.close();
-                return true;
-            })
-            .catch((erro) =>{
-                console.log(erro);
-                return false;
-            })
-        )
-    }
+                return db.collection('projects')
+                         .findOneAndUpdate(
+                        { projectId: project.projectId },
+                        {
+                            projectId: project.projectId,
+                            customerID: project.customerID,
+                            customer:  null,
+                            projectName: project.projectName,
+                            startDate: project.startDate,
+                            endDate: project.endDate,
+                            pid: project.pid,
+                            sponsor: null,
+                            wbs: project.wbs,
+                            deleted: true
+                        })
+            .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    if (updateResult.ok === 1)
+                        return true;
+                    else
+                        return false;
+    })}))};
 }

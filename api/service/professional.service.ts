@@ -51,8 +51,8 @@ professionalRouter.get('/update/:pid/:eid/:name/:email/:roleID/:prefix/:phone', 
 */
 professionalRouter.delete('/delete/:pid', (request: Request, response: Response) => {
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
-        let pid: number = +request.params.pid;
-        return response.json(professionalApp.Delete(pid));
+        let professional: Professional;
+        return response.json(professionalApp.Delete(professional));
 });
 
 professionalRouter.get('/insert/:pid/:eid/:name/:email/:roleID/:prefix/:phone', (request: Request, response: Response) => {  
