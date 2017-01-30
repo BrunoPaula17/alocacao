@@ -8,7 +8,6 @@ export class CustomerApplication {
     createCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
 
-        customer.customerID = 666;
         customer.deleted = false;
 
         return customerPersistence.create(customer);

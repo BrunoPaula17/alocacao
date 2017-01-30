@@ -13,7 +13,6 @@ customerRouter.post('/create', (request: Request, response: Response) => {
     customer = JSON.parse(teste);
 
     response.json(customerApp.createCustomer(customer));
-    });
 });
 
 customerRouter.get('/list', (request: Request, response: Response) => {

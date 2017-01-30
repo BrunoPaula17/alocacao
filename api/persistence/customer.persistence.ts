@@ -10,34 +10,35 @@ export class CustomerPersistence implements ICrud<Customer>{
 
     create(customer: Customer): Promise<Customer> {
         let database: Db = null;
-        return Promise.resolve(
-            
-            Connection.create()
-            .then((db: Db) => {
-                database = db;
+        let sequence: number;
 
-                 return db.collection('customers').insertOne({
-                    customerID: customer.customerID,
-                    name: customer.name,
-                    cnpj: +customer.cnpj,
-                    responsible: customer.responsible,
-                    contact: customer.contact,
-                    email: customer.email,
-                    deleted: customer.deleted
-                    })
-            })
-             .then((insertResult: InsertOneWriteOpResult) => {
-                    if (insertResult.result.ok == 1) {
-                        customer.customerID = 666;
-
-                        return customer;
-                    }
-                    else {
-                        return Promise.reject<Customer>(Error("An error ocurred when trying to create a new record"));
-                    }
+        return Promise.resolve<Role>(
+            Connection.getNextSequence('customerID')
+                .then((retrievedSequence: number) => {
+                    sequence = retrievedSequence;
+                    return Connection.create();
                 })
-           );
-
+                .then((db: Db) => {
+                    database = db;
+                    return db.collection('customers').insertOne({
+                        customerID: sequence,
+                        name: customer.name,
+                        cnpj: +customer.cnpj,
+                        responsible: customer.responsible,
+                        contact: customer.contact,
+                        email: customer.email,
+                        deleted: customer.deleted
+                        })
+                })
+                .then((insertResult: InsertOneWriteOpResult) => {
+                        if (insertResult.result.ok == 1) {
+                            return customer;
+                        }
+                        else {
+                            return Promise.reject<Customer>(Error("An error ocurred when trying to create a new record"));
+                        }
+                    })
+            );
     }
 
     list(): Promise<Customer[]> {

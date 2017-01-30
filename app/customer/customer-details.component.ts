@@ -110,8 +110,10 @@ export class CustomerDetailsComponent implements OnInit {
             .then((customer: Customer) => {
                 this.customer = customer;
             })
+
+        this.update(); // Depois do insert no Mongo a tela passa para o estado de alteração
         
-        alert("insert");
+        alert(customer.name + " inserido com sucesso!!!");
     }
 
     getCustomer(id: number): void {
