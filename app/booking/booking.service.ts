@@ -14,7 +14,7 @@ export class BookingService {
     private convertBookings(bookings: Booking[]): Booking[] {
         let newBookings: Booking[] = new Array<Booking>();
 
-        newBookings.forEach(booking => {
+        bookings.forEach(booking => {
             newBookings.push(this.convertBooking(booking));
         });
 
