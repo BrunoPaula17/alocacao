@@ -58,7 +58,7 @@ export class ProjectDetailsComponent implements OnInit {
     /*
         Volta para a última página chamada.
     */
-    goBack(): void {
+    goBackButton(): void {
         this._location.back();
     }
 

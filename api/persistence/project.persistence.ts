@@ -51,14 +51,23 @@ export class ProjectPersistence implements ICrud<Project>{
         return null;
     }
 
-    delete(projectDelete: number): Promise<boolean>{
-        // let project: Project = this.projects.find(p => p.projectId === projectDelete.projectId);
-        // if (project != null) {
-        //     project.deleted = true;
-        //     return true;
-        // }
-        // else
-        //     return false;
-        return null;
+    delete(projectId: number): Promise<boolean>{
+        let database: Db;
+
+        return Promise.resolve(
+            Connection.create()
+            .then((db:Db) =>{
+                database = db;
+                return db.collection('projects').remove({'projectId': projectId});
+            })
+            .then((result) =>{
+                database.close();
+                return true;
+            })
+            .catch((erro) =>{
+                console.log(erro);
+                return false;
+            })
+        )
     }
 }

@@ -29,9 +29,9 @@ projectRouter.get('/detail/:projectId', (request: Request, response: Response) =
         });
 });
 
-// /*
-//     Insere um projeto da base de dados
-// */
+/*
+    Insere um projeto da base de dados
+*/
 // projectRouter.get('/insert/:projectId/:client/:startDate/:endDate/:concludeDate/:sponsor/:name/:wbs',
 //                 (request: Request, response: Response) =>{
 //     let projectApp: ProjectApplication = new ProjectApplication();
@@ -45,8 +45,9 @@ projectRouter.get('/detail/:projectId', (request: Request, response: Response) =
 //     let wbs: string = request.params.wbs;
 //     let deleted: boolean = request.params.deleted;
 
-//     return response.json(projectApp.Create(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
+//     return response.json(projectApp.create(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
 // });
+
 // /*
 //     Atualiza um projeto na base de dados
 // */
@@ -66,16 +67,16 @@ projectRouter.get('/detail/:projectId', (request: Request, response: Response) =
 //     return response.json(projectApp.Update(projectId, customer, projectName, startDate, endDate, sponsor, wbs, deleted));
 // });
 
-// /*
-//     Deletar um projeto da base de dados
-// */
-// projectRouter.get('/details/:projectId', (request: Request, response: Response) => {
-//     let projectApp: ProjectApplication = new ProjectApplication();
+/*
+    Deletar um projeto da base de dados
+*/
+projectRouter.get('/delete/:projectId', (request: Request, response: Response) => {
+    let projectApp: ProjectApplication = new ProjectApplication();
     
-//     let projectId: number = +request.params.projectId;
+    let projectId: number = +request.params.projectId;
     
-//     return response.json(projectApp.Delete(projectId));
-// });
+    return response.json(projectApp.delete(projectId));
+});
 
 
 export { projectRouter } 

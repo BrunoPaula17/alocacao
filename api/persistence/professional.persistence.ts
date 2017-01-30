@@ -1,6 +1,8 @@
 import { Professional } from '../../app/professional/Professional';
-import { MongoClient, Db, FindAndModifyWriteOpResultObject, InsertOneWriteOpResult } from 'mongodb';
+import { Customer } from '../../app/customer/customer';
 import { ICrud } from './crud.interface';
+import { MongoClient, Db, InsertOneWriteOpResult, FindAndModifyWriteOpResultObject, UpdateWriteOpResult, DeleteWriteOpResultObject } from 'mongodb';
+import { mongoUrl } from '../server';
 import { Connection } from './connection';
 
 export class ProfessionalPersistence implements ICrud<Professional>{
@@ -97,7 +99,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
             Connection.create()
 
                 .then((db: Db) => {
-                    database.db;
+                    database=db;
                     return db.collection('professionals').findOneAndUpdate({ pid: professionalUpdate.pid},{
                             pid:professionalUpdate.pid,
                             eid:professionalUpdate.eid,
@@ -122,9 +124,34 @@ export class ProfessionalPersistence implements ICrud<Professional>{
     }
     
     
+    delete(pid: number): Promise<boolean> {
+
+        let database: Db;
+
+        return Promise.resolve(
+            Connection.create()
+            .then((db: Db) => {
+                database = db;
+                return db.collection('professionals').remove({ "pid": pid });
+            })
+            .then((result) => {
+                database.close();
+                       return true;
+            })
+            .catch((erro)=>{
+                database.close();
+                return false;
+        })
+        
+    )
+
+            
+}
+
+/*
     delete(id: number): Promise<boolean> {
         return Promise.resolve(false);
     }
-
+*/
     
 }
