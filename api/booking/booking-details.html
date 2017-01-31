@@ -1,0 +1,51 @@
+<ava-hdr-app [pageName]="'Alocação'" [icon]="'fa-calendar-check-o'"></ava-hdr-app>
+<form name="bookingForm" *ngIf="booking">
+    <div class="form-group col-md-6" [ngSwitch]='action'>
+        <label for="projects">Projeto</label>
+        <select *ngSwitchCase="'create'" [(ngModel)]="booking.projectID" class="form-control" name="projects" required>
+                <option *ngFor='let project of projects' value="{{ project.projectId }}">{{ project.projectName }}</option>
+        </select>
+        <select *ngSwitchDefault [(ngModel)]="booking.projectID" class="form-control" name="project" disabled>
+                <option value="{{ booking.project.projectId }}">{{ booking.project.projectName }}</option>
+        </select>
+    </div>
+    <div class="form-group col-md-6" [ngSwitch]='action'>
+        <label for="professional">Profissional</label>
+        <select *ngSwitchCase="'create'" [(ngModel)]="booking.pid" class="form-control" name="professional" required>
+                <option *ngFor='let professional of professionals' value="{{ professional.pid }}">{{ professional.name }}</option>
+        </select>
+        <select *ngSwitchDefault [(ngModel)]="booking.pid" class="form-control" name="professional" disabled>
+            <option value="{{ booking.professional.pid }}">{{ booking.professional.name }}</option>
+        </select>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="initialDate">Data Início</label>
+        <input #initialDateInput id="initialDate" value="{{ booking.initialDate | date:'yyyy-MM-dd' }}" name="initialDate" placeholder="Informe a data início de alocação no projeto"
+            required [disabled]="action === 'details'" class="form-control" type="date" (input)="initialDateChanged(initialDateInput.value)">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="endDate">Data Fim</label>
+        <input #endDateInput id="endDate" value="{{ booking.endDate | date:'yyyy-MM-dd' }}" name="endDate" placeholder="Informe a data fim de alocação no projeto"
+            required [disabled]="action === 'details'" class="form-control" type="date" (input)="endDateChanged(endDateInput.value)">
+    </div>
+    <div class="form-group col-md-6">
+        <label for="bookingPercentual">Percentual Alocação</label>
+        <div class="input-group">
+            <input id="bookingPercentual" [(ngModel)]="booking.bookingPercentual" name="bookingPercentual" required class="form-control"
+                type="number" min="0" max="100" step="10" [disabled]="action === 'details'">
+            <div class="input-group-addon">%</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-10">
+            <button *ngIf="action === 'details'" type="button" class="btn btn-primary btn-outline" (click)="changeRoute('edit')">Alterar</button>
+            <button *ngIf="action === 'edit'" type="button" class="btn btn-primary btn-outline" (click)="edit()">Salvar</button>
+            <button *ngIf="action === 'create'" type="button" class="btn btn-primary btn-outline" (click)="save()">Salvar</button>
+            <button *ngIf="action === 'details'" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirmDlg">Excluir</button>
+            <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
+        </div>
+    </div>
+</form>
+
+<ava-cfm-dlg [messageDialog]="'Você deseja realmente excluir esta alocação?'" 
+              (onDeleted)="delete($event)" ></ava-cfm-dlg>

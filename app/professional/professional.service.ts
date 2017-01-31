@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 
 import { Professional } from './professional';
 import 'rxjs/add/operator/toPromise';
 
 
 const SERVICE_URL: string = '/api/professional'
+const HEADERS: Headers = new Headers({
+    'Content-Type': 'application/json'
+});
 
 @Injectable()
 export class ProfessionalService {
@@ -34,11 +37,11 @@ export class ProfessionalService {
                    .catch(this.erroHandling);
     }
 
-    createProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string):Promise<Professional>{
+    createProfessional(professional:Professional):Promise<Professional>{
         
-        let url:string = `${SERVICE_URL}/insert/${pid}/${eid}/${name}/${email}/${roleID}/${prefix}/${phone}`;
+        let url:string = `${SERVICE_URL}/insert/`;
 
-        return this._httpService.get(url)
+        return this._httpService.post(url, {'professional' : JSON.stringify(professional)}, HEADERS)
                    .toPromise()
                    .then((response: Response) => {
                        return response.json() as  Professional;
@@ -46,11 +49,11 @@ export class ProfessionalService {
                    .catch(this.erroHandling);
     }
 
-    updateProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string):Promise<Professional>{
+    updateProfessional(professional: Professional):Promise<Professional>{
 
-        let url:string = `${SERVICE_URL}/update/${pid}/${eid}/${name}/${email}/${roleID}/${prefix}/${phone}`;
+        let url:string = `${SERVICE_URL}/update/`;
 
-        return this._httpService.get(url)
+        return this._httpService.put(url, {'professional': JSON.stringify(professional)}, HEADERS)
                    .toPromise()
                    .then((response: Response) => {
                        return response.json() as Professional;
@@ -58,11 +61,11 @@ export class ProfessionalService {
                    .catch(this.erroHandling);
     }
 
-    deleteProfessional(pid:number):Promise<Professional>{
+    deleteProfessional(professional: Professional):Promise<Professional>{
 
-        let url:string = `${SERVICE_URL}/delete/${pid}`;
+        let url:string = `${SERVICE_URL}/delete/`;
 
-        return this._httpService.get(url)
+        return this._httpService.put(url, {'professional': JSON.stringify(professional)}, HEADERS)
                    .toPromise()
                    .then((response: Response) => {
                        return response.json() as Professional;
