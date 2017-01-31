@@ -8,7 +8,7 @@ import { Connection } from './connection';
 export class CustomerPersistence implements ICrud<Customer>{
 
 
-    create(customer: Customer): Promise<Customer> {
+    create(customer: Customer): Promise<Customer> { 
         let database: Db = null;
         let sequence: number;
 
@@ -99,13 +99,13 @@ export class CustomerPersistence implements ICrud<Customer>{
             }));
     }
 
-    delete(id: number): Promise<boolean> {
+    delete(custUpd: Customer): Promise<boolean> {
 
         let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
                 database = db;
-                return db.collection('customers').deleteOne({ "customerID": id });
+                return db.collection('customers').deleteOne({ "customerID": custUpd.customerID });
             })
             .then((updateResult: DeleteWriteOpResultObject) => {
                 database.close();
