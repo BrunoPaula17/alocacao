@@ -7,41 +7,29 @@ import { Connection } from './connection';
 
 export class ProfessionalPersistence implements ICrud<Professional>{
 
-    create(professionalCreate: Professional): Promise<Professional> {
-    
+    create(professional: Professional): Promise<Professional> {
         let database: Db = null;
-        let sequence: number;
-
-        //
+        
         return Promise.resolve<Professional>(
-            Connection.getNextSequence('pid')
-                
-                .then((retrievedSequence: number) => {
-                    sequence = retrievedSequence;
-                    return Connection.create();
-                })
-
+            Connection.create()
                 .then((db: Db) => {
-
                     database = db;
-                
                     return db.collection('professionals').insertOne({
-                            _id: sequence,
-                            pid:professionalCreate.pid,
-                            eid:professionalCreate.eid,
-                            name:professionalCreate.name,
-                            email:professionalCreate.email,
-                            roleID:professionalCreate.roleID,
-                            prefix:professionalCreate.prefix,
-                            phone:professionalCreate.phone,
-                            deleted:professionalCreate.deleted,
-                            role:professionalCreate.role
+                            pid:professional.pid,
+                            eid:professional.eid,
+                            name:professional.name,
+                            email:professional.email,
+                            roleID:professional.roleID,
+                            prefix:professional.prefix,
+                            phone:professional.phone,
+                            deleted:false,
+                            role:null
                     })
                 })
 
                 .then((insertResult: InsertOneWriteOpResult) => {
                     if (insertResult.result.ok == 1){
-                        professionalCreate.pid = sequence;
+                        return professional;
                     }
                     else{
                         return Promise.reject<Professional>(Error("An error ocurred when trying to create a new record"));
@@ -53,22 +41,17 @@ export class ProfessionalPersistence implements ICrud<Professional>{
 
     list(): Promise<Professional[]> {
 
-        let database: Db;
+        let database: Db = null;
 
-        return Promise.resolve(
-
-            Connection.create()
-        
+        return Promise.resolve(MongoClient.connect(mongoUrl))     
             .then((db: Db) => {
                 database = db;
-                return db.collection('professionals').find().toArray();
+                return db.collection('professionals').find({"deleted": false}).toArray();
             })
-
             .then((professional: Professional[]) => {
                 database.close();
                 return professional;
-            }));
-    }
+    })};
 
     
 
@@ -76,11 +59,11 @@ export class ProfessionalPersistence implements ICrud<Professional>{
         
         let database: Db;
 
-        return Promise.resolve(
+        return Promise.resolve<Professional>(
             Connection.create()
                 .then((db: Db) => {
                     database=db;
-                    return db.collection ('professionals').findOne({"pid": pid });
+                    return db.collection ('professionals').findOne({"deleted": false, "pid": pid });
             })
             .then((professional : any) => {
                 database.close();
@@ -90,68 +73,63 @@ export class ProfessionalPersistence implements ICrud<Professional>{
         
     }
 
-    update(professionalUpdate: Professional): Promise<Professional> {
-       
+    update(professional: Professional): Promise<Professional> {
         let database: Db;
 
-        return Promise.resolve(
-            
+        return Promise.resolve<Professional>(
             Connection.create()
-
                 .then((db: Db) => {
-                    database=db;
-                    return db.collection('professionals').findOneAndUpdate({ pid: professionalUpdate.pid},{
-                            pid:professionalUpdate.pid,
-                            eid:professionalUpdate.eid,
-                            name:professionalUpdate.name,
-                            email:professionalUpdate.email,
-                            roleID:professionalUpdate.roleID,
-                            prefix:professionalUpdate.prefix,
-                            phone:professionalUpdate.phone,
-                            deleted:professionalUpdate.deleted,
-                            role:professionalUpdate.role
-                    }, { returnOriginal: false });
-                })
+                    database = db;
 
+                    return db.collection('professionals').findOneAndUpdate(
+                        { pid: professional.pid },
+                        {
+                            pid:professional.pid,
+                            eid:professional.eid,
+                            name:professional.name,
+                            email:professional.email,
+                            roleID:professional.roleID,
+                            prefix:professional.prefix,
+                            phone:professional.phone,
+                            deleted:false,
+                            role:null
+                        })
+                })
                 .then((updateResult: FindAndModifyWriteOpResultObject) => {
-                    database.close
-                    if (updateResult.ok == 1)
-                        return professionalUpdate;
+                    if (updateResult.ok === 1)
+                        return updateResult.value.role;
                     else
-                        return Error("An error ocurred while triyng to update a record");
+                        return Error("An error ocurred while retrieving updated sequence");
                 }));
               
     }
     
     
-    delete(professional: Professional): Promise<boolean> {
-
+    delete(professional: Professional): Promise<boolean>{
         let database: Db;
 
-        return Promise.resolve(
+        return Promise.resolve<boolean>(
             Connection.create()
-            .then((db: Db) => {
+            .then((db:Db) =>{
                 database = db;
-                return db.collection('professionals').remove({ "pid": professional.pid });
-            })
-            .then((result) => {
-                database.close();
-                       return true;
-            })
-            .catch((erro)=>{
-                database.close();
-                return false;
-        })
-        
-    )
-
-            
-}
-
-/*
-    delete(id: number): Promise<boolean> {
-        return Promise.resolve(false);
-    }
-*/
+                    return db.collection('professionals').findOneAndUpdate(
+                        { pid: professional.pid },
+                        {
+                            pid:professional.pid,
+                            eid:professional.eid,
+                            name:professional.name,
+                            email:professional.email,
+                            roleID:professional.roleID,
+                            prefix:professional.prefix,
+                            phone:professional.phone,
+                            deleted:false,
+                            role:true
+                        })
+            .then((updateResult: FindAndModifyWriteOpResultObject) => {
+                    if (updateResult.ok === 1)
+                        return true;
+                    else
+                        return false;
+    })}))};
     
 }
