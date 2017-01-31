@@ -90,14 +90,14 @@
                             ng-disabled="resourceForm.$pristine || resourceForm.$invalid"
                             type="button" 
                             class="btn btn-primary btn-outline" 
-                            (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar
+                            (click)="insertProfessional(professional)">Salvar
                         </button>
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>
 
                     <div *ngSwitchCase="'update'">
-                        <button type="button" class="btn btn-primary btn-outline" (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Alterar</button>
-                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid)">Excluir</button>
+                        <button type="button" class="btn btn-primary btn-outline" (click)="updateProfessional(professional)">Alterar</button>
+                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional)">Excluir</button>
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>                 
                  </div>
