@@ -6,6 +6,6 @@ export class PercentualFilter implements PipeTransform {
         if(isNaN(value))
             return '';
         
-        return Math.round(value * 100).toString() + "%";
+        return value.toString() + "%";
     }
 }

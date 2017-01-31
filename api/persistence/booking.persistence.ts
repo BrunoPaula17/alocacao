@@ -21,8 +21,8 @@ export class BookingPersistence implements ICrud<Booking> {
                     return db.collection('bookings').insertOne({
                         _id: sequence,
                         bookingID: sequence,
-                        projectID: booking.projectID,
-                        pid: booking.pid,
+                        projectID: +booking.projectID,
+                        pid: +booking.pid,
                         auditID: booking.auditID,
                         initialDate: booking.initialDate,
                         endDate: booking.endDate,
@@ -32,9 +32,9 @@ export class BookingPersistence implements ICrud<Booking> {
                 })
                 .then((insertResult: InsertOneWriteOpResult) => {
                     if (insertResult.result.ok == 1) {
-                        booking.bookingID = sequence;
+                        let savedBooking: Booking = insertResult.ops[0] as Booking;
 
-                        return booking;
+                        return savedBooking;
                     }
                     else {
                         return Promise.reject<Booking>(Error("An error ocurred when trying to create a new record"));
@@ -81,8 +81,8 @@ export class BookingPersistence implements ICrud<Booking> {
                     database = db;
                     return db.collection('bookings').findOneAndUpdate({ bookingID: booking.bookingID }, {
                         bookingID: booking.bookingID,
-                        projectID: booking.projectID,
-                        pid: booking.pid,
+                        projectID: +booking.projectID,
+                        pid: +booking.pid,
                         auditID: booking.auditID,
                         initialDate: booking.initialDate,
                         endDate: booking.endDate,
@@ -101,6 +101,14 @@ export class BookingPersistence implements ICrud<Booking> {
     }
 
     delete(id: number): Promise<boolean> {
-        return Promise.resolve(false);
+        let database: Db;
+        return Connection.create()
+            .then((db: Db) => {
+                database = db;
+
+                return db.collection('bookings').findOneAndUpdate(
+                    { bookingID: id },
+                    { $set: { 'deleted': true } });
+            })
     }
 }

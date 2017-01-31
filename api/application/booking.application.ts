@@ -23,6 +23,14 @@ export class BookingApplication {
     createBooking(booking: Booking): Promise<Booking> {
         let bookingPersistence: BookingPersistence = new BookingPersistence();
 
+        booking.deleted = false;
+        
         return bookingPersistence.create(booking);
+    }
+
+    deleteBooking(id: number): Promise<boolean> {
+        let bookingPersistence: BookingPersistence = new BookingPersistence();
+
+        return bookingPersistence.delete(id);
     }
 }

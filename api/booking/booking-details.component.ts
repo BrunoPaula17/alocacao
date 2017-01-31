@@ -71,7 +71,6 @@ export class BookingDetailComponent implements OnInit {
     }
 
     edit(): void {
-        this.action = 'edit';
         this._bookingService.editBooking(this.booking)
             .then((bookingSaved: Booking) => {
                 this.getComplementaryData(bookingSaved);
@@ -81,12 +80,17 @@ export class BookingDetailComponent implements OnInit {
     }
 
     delete(): void {
-        console.log('delete');
+        this._bookingService.deleteBooking(this.booking.bookingID)
+            .then((result: boolean) => {
+                if (result) {
+                    this.goBack();
+                }
+            });
     }
 
     save(): void {
         this._bookingService.saveBooking(this.booking)
-            .then((bookingSaved: Booking)=>{
+            .then((bookingSaved: Booking) => {
                 this.getComplementaryData(bookingSaved);
                 this.booking = bookingSaved;
                 this.action = 'details';
@@ -108,5 +112,17 @@ export class BookingDetailComponent implements OnInit {
                 this.getData(id);
             }
         })
+    }
+
+    initialDateChanged(value: Date): void {
+        this.booking.initialDate = value;
+    }
+
+    endDateChanged(value: Date): void {
+        this.booking.endDate = value;
+    }
+
+    changeRoute(value: string) {
+        this.action = value;
     }
 }

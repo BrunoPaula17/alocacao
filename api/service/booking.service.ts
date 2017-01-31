@@ -24,10 +24,13 @@ bookingRouter.get('/:id', (request: Request, response: Response) => {
         })
 });
 
-bookingRouter.post('/create', (request: Request, response: Response)=>{
+bookingRouter.post('/create', (request: Request, response: Response) => {
     let bookingApp: BookingApplication = new BookingApplication();
 
-    //bookingApp.
+    bookingApp.createBooking(request.body.booking)
+        .then((bookingSaved: Booking) => {
+            response.json(bookingSaved);
+        })
 });
 
 bookingRouter.put('/:id', (request: Request, response: Response) => {
@@ -39,5 +42,15 @@ bookingRouter.put('/:id', (request: Request, response: Response) => {
         });
 });
 
+bookingRouter.delete('/:id', (request: Request, response: Response) => {
+    let bookingApp: BookingApplication = new BookingApplication();
+
+    let id: number = +request.params.id;
+
+    bookingApp.deleteBooking(id)
+        .then((result: boolean) => {
+            response.json(result);
+        });
+});
 
 export { bookingRouter }
