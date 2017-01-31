@@ -50,9 +50,10 @@ export class RoleDetailComponent implements OnInit {
     edit() { this.action = 'edit'; }
 
     delete() {
-        this._roleService.deleteRole(this.role)
-            .then((roleSaved: Role) => {
-                this.role = roleSaved;
+        this._roleService.deleteRole(this.role.roleId)
+            .then((roleDeleted: boolean) => {
+                if (roleDeleted)
+                    this.back();
             });
     }
 
@@ -68,8 +69,8 @@ export class RoleDetailComponent implements OnInit {
 
     }
 
-    onDeleted(confirm: boolean) {
-        if(confirm)
+    onConfirm(confirm: boolean) {
+        if (confirm)
             this.delete();
     }
 }

@@ -24,13 +24,12 @@ roleRouter.get('/read/:id', (request: Request, response: Response) => {
         });
 });
 
-roleRouter.put('/delete', (request: Request, response: Response) => {
+roleRouter.delete('/delete/:id', (request: Request, response: Response) => {
     let roleApp: RoleApplication = new RoleApplication();
 
-    let role: Role = new Role();
-    role = JSON.parse(request.body.role);
+    let id: number = +request.params.id;
 
-    roleApp.deleteRole(role)
+    roleApp.deleteRole(id)
         .then(() => {
             response.json(true);
         })

@@ -8,11 +8,13 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class ConfirmComponent implements OnInit {
 
     @Input() messageDialog: string;
-    @Output() onDeleted: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Input() idConfirm: string;
+    @Input() titleDialog: string;
+    @Output() onConfirm: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     ngOnInit(): void { }
 
-    delete(confirm: boolean) {
-        this.onDeleted.emit(confirm);
+    confirm(confirm: boolean) {
+        this.onConfirm.emit(confirm);
     }
 }

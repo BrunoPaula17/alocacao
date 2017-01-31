@@ -37,5 +37,7 @@
     </div>
 </form>
 
-<ava-cfm-dlg [messageDialog]="'Do you realy want to delete it?'" 
-              (onDeleted)="onDeleted($event)" ></ava-cfm-dlg>
+<ava-cfm-dlg [messageDialog]="'Você deseja realmente excluir este cargo?'" 
+             [titleDialog]="'Sistema de alocação'"
+             [idConfirm]="'confirmDlg'"
+             (onConfirm)="onConfirm($event)" ></ava-cfm-dlg>

@@ -8,5 +8,5 @@ export interface ICrud<T> {
     //Update entity by id
     update(entity: T): Promise<T>;
     //Delete entity by id
-    delete(entity: T): Promise<boolean>;
+    delete(id: number): Promise<boolean>;
 }
