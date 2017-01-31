@@ -49,7 +49,7 @@ export class BookingPersistence implements ICrud<Booking> {
             Connection.create()
                 .then((db: Db) => {
                     database = db;
-                    return db.collection('bookings').find().toArray();
+                    return db.collection('bookings').find({ deleted: false }).toArray();
                 })
                 .then((booking: Booking[]) => {
                     database.close();
@@ -63,7 +63,7 @@ export class BookingPersistence implements ICrud<Booking> {
             Connection.create()
                 .then((db: Db) => {
                     database = db;
-                    return db.collection('bookings').findOne({ "bookingID": id });
+                    return db.collection('bookings').findOne({ bookingID: id, deleted: false });
                 })
                 .then((booking: any) => {
                     database.close();
