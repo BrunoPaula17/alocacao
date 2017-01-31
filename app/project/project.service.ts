@@ -27,6 +27,7 @@ export class ProjectService {
                    .then((response: Response) => {
                        return response.json() as Project[];
                    })
+                   .catch(this.erroHandling);
 
     }
 

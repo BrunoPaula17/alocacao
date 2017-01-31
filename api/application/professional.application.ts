@@ -6,7 +6,7 @@ export class ProfessionalApplication{
     /*
         Recupera a lista de profissionais na base de dados.
     */
-    List(): Promise<Professional[]> {
+    list(): Promise<Professional[]> {
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
          return professionalPersistence.list();
     }
@@ -14,31 +14,20 @@ export class ProfessionalApplication{
     /*
         Recupera um profissional específico.
     */
-    Read(pid: number): Promise<Professional>{
+    read(pid: number): Promise<Professional>{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
+
+        pid = +pid;
+
         return professionalPersistence.read(pid);
     }
 
     /*
         Cria um novo profissional na base de dados.
     */
-    Create(pid: number, eid: string, name: string, email: string,roleID: number, prefix: number, phone: string): Promise<Professional>{                            
+    create(professional: Professional): Promise<Professional>{                            
         
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
-
-        let professional : Professional = new Professional();
-        
-        professional = {
-            "pid": pid,
-            "eid": eid,
-            "name": name,
-            "email": email,
-            "roleID": roleID,
-            "prefix": prefix,
-            "phone": phone,
-            "role": null,
-            "deleted": false
-        };
 
         return professionalPersistence.create(professional);
         
@@ -47,31 +36,16 @@ export class ProfessionalApplication{
     /*  
         Atualiza as informações na base de dados.
     */
-    Update(pid: number, eid: string, name: string, email: string, 
-           roleID: number, prefix: number, phone: string): Promise<Professional>{
+    update(professional: Professional): Promise<Professional>{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
-        let professional : Professional = new Professional();
-        
-        professional = {
-            "pid": pid,
-            "eid": eid,
-            "name": name,
-            "email": email,
-            "roleID": roleID,
-            "prefix": prefix,
-            "phone": phone,
-            "role": null,
-            "deleted": false
-        };
-       
         return professionalPersistence.update(professional);
     }
 
     /*
         Apaga logicamente as informações de um funcionário.
     */
-    Delete(professional: Professional): Promise<boolean>{
+    delete(professional: Professional): Promise<boolean>{
 
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
