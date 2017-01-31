@@ -16,6 +16,9 @@ export class ProfessionalApplication{
     */
     read(pid: number): Promise<Professional>{
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
+
+        pid = +pid;
+
         return professionalPersistence.read(pid);
     }
 
