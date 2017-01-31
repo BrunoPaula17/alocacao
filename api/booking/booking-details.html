@@ -41,8 +41,11 @@
             <button *ngIf="action === 'details'" type="button" class="btn btn-primary btn-outline" (click)="changeRoute('edit')">Alterar</button>
             <button *ngIf="action === 'edit'" type="button" class="btn btn-primary btn-outline" (click)="edit()">Salvar</button>
             <button *ngIf="action === 'create'" type="button" class="btn btn-primary btn-outline" (click)="save()">Salvar</button>
-            <button *ngIf="action === 'details'" type="button" class="btn btn-default" (click)="delete()">Excluir</button>
+            <button *ngIf="action === 'details'" type="button" class="btn btn-default" data-toggle="modal" data-target="#confirmDlg">Excluir</button>
             <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
         </div>
     </div>
 </form>
+
+<ava-cfm-dlg [messageDialog]="'Você deseja realmente excluir esta alocação?'" 
+              (onDeleted)="delete($event)" ></ava-cfm-dlg>
