@@ -8,6 +8,7 @@ export class CustomerApplication {
     /* Insere um novo cliente. */
     createCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
+        let professionalApp: ProfessionalApplication = new ProfessionalApplication();
         let returnCustomer: Customer;
 
         customer.deleted = false;
@@ -16,18 +17,17 @@ export class CustomerApplication {
         return customerPersistence.create(customer)
             .then((insertedCustomer: Customer) => {
                 returnCustomer = insertedCustomer;
-                return returnCustomer;
-                
+                             
                 if(insertedCustomer.customerID != null && insertedCustomer.customerID != undefined) {
-                    return this.readCustomer(insertedCustomer.customerID);
+                    return  professionalApp.read(returnCustomer.responsible);
                 }
                 else
                 {
                     return null;
                 }
             })
-            .then((readCustomer: Customer) => {
-                returnCustomer = readCustomer;
+            .then((professional: Professional) => {
+                returnCustomer.professional = professional;
                 return returnCustomer;
             })
     }
@@ -38,7 +38,7 @@ export class CustomerApplication {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
-        return professionalApp.List()
+        return professionalApp.list()
             .then((professionals: Professional[]) => {
                 return customerPersistence.list()
                     .then((customers: Customer[]) => {
@@ -62,7 +62,7 @@ export class CustomerApplication {
         return customerPersistence.read(id)
             .then((customer: Customer) => {
                 customerReturn = customer;
-                return professionalApp.Read(customer.responsible)
+                return professionalApp.read(customer.responsible)
             })
             .then((professional: Professional) => {
 
@@ -82,7 +82,7 @@ export class CustomerApplication {
         return customerPersistence.update(customer)
             .then((customer: Customer) => {
                 customerUp = customer;
-                return professionalApp.Read(customer.responsible)
+                return professionalApp.read(customer.responsible)
             })
             .then((professional: Professional) => {
 
