@@ -14,10 +14,10 @@ export class RoleApplication {
         return rolePersistence.read(id);
     }
 
-    deleteRole(role: Role): Promise<boolean>{
+    deleteRole(idRole: number): Promise<boolean>{
         let rolePersistence: RolePersistence = new RolePersistence();        
 
-        return rolePersistence.delete(role);
+        return rolePersistence.delete(idRole);
     }
 
     updateRole(role: Role): Promise<Role>{

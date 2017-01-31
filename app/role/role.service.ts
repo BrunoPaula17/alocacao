@@ -47,13 +47,13 @@ export class RoleService {
         .catch(this.erroHandling);
     }
 
-    deleteRole(role: Role): Promise<Role>{
-        let url: string = `${SERVICE_URL}/delete`;
+    deleteRole(idRole: number): Promise<boolean>{
+        let url: string = `${SERVICE_URL}/delete/${idRole}`;
 
-        return this._httpService.put(url,  { 'role': JSON.stringify(role)}, HEADERS)
+        return this._httpService.delete(url)
         .toPromise()
         .then((response: Response) => {
-           return  response.json() as Role
+           return  response.json() as boolean
         })
         .catch(this.erroHandling);   
     }

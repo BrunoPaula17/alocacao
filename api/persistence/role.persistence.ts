@@ -100,31 +100,15 @@ export class RolePersistence implements ICrud<Role> {
                 }));
     }
 
-    delete(role: Role): Promise<boolean> {
+    delete(idRole: number): Promise<boolean> {
         let database: Db;
-        let sequence: number;
+        return Connection.create()
+            .then((db: Db) => {
+                database = db;
 
-        return Promise.resolve<boolean>(
-            Connection.create()
-                .then((db: Db) => {
-                    database = db;
-                    return db.collection('roles').findOneAndUpdate(
-                        { roleId: role.roleId },
-                        {
-                            roleId: role.roleId,
-                            name: role.name,
-                            brc: role.brc,
-                            level: role.level,
-                            description: role.description,
-                            deleted: true
-                        },
-                        { projection: { value: true } })
-                })
-                .then((updateResult: FindAndModifyWriteOpResultObject) => {
-                    if (updateResult.ok === 1)
-                        return true;
-                    else
-                        return false;
-                }));
+                return db.collection('roles').findOneAndUpdate(
+                    { roleId: idRole },
+                    { $set: { 'deleted': true } });
+            })
     }
 }

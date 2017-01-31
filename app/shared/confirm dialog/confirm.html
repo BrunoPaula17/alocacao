@@ -1,17 +1,16 @@
-<div class="modal fade" id="confirmDlg" role="dialog">
+<div class="modal fade" [id]="[idConfirm]" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Scheduling App</h4>
+                <h4 class="modal-title">{{ titleDialog }}</h4>
             </div>
             <div class="modal-body">
                 <p> {{ messageDialog }} </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" value="false" (click)="delete(false)">No</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="delete(true)">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" value="false" (click)="confirm(false)">Não</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="confirm(true)">Sim</button>
             </div>
         </div>
-
     </div>
 </div>
