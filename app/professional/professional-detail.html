@@ -102,18 +102,23 @@
                             [disabled]="!professionalForm.form.valid"
                             type="button" 
                             class="btn btn-primary btn-outline" 
-                            (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar
+                            (click)="insertProfessional(professional)">Salvar
                         </button>
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>
 
                     <div *ngSwitchCase="'update'">
+<<<<<<< HEAD
                         <button type="button" 
                             [disabled]="!professionalForm.form.valid"
                             class="btn btn-primary btn-outline" 
                             (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar
                         </button>
                         <button [disabled]="!professionalForm.form.valid" type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid)">Excluir</button>
+=======
+                        <button type="button" class="btn btn-primary btn-outline" (click)="updateProfessional(professional)">Alterar</button>
+                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional)">Excluir</button>
+>>>>>>> 34674aff5cdff38bcfd81916b2a5a8843a0d5ecb
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>                 
                  </div>
