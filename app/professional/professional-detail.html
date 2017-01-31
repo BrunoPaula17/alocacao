@@ -14,6 +14,7 @@
                 placeholder="Informe o PID "
                 class="form-control"
                 required 
+                minlength="8"
                 [disabled] = "action === 'update' ? null : action === 'insert' ? null : true" 
                 #pid = "ngModel"  
             >
@@ -27,6 +28,8 @@
                    [(ngModel)]="professional.eid" 
                    placeholder="Informe o EID " 
                    class="form-control"
+                   required minlength="4"
+                   #eid = "ngModel"
                    [disabled] = "action === 'update' ? null : action === 'insert' ? null : true"
             >
         </div>
@@ -38,6 +41,8 @@
                    [(ngModel)]="professional.name" 
                    placeholder="Informe o Nome " 
                    [disabled] = "action === 'update' ? null : action === 'insert' ? null : true"
+                    required 
+                   #name = "ngModel"
                    class="form-control">
         </div>
         <div class="form-group col-md-6">
@@ -48,6 +53,8 @@
                    [(ngModel)]="professional.email" 
                    placeholder="Informe o Email " 
                    [disabled] = "action === 'update' ? null : action === 'insert' ? null : true"
+                   required 
+                   #name = "ngModel"
                    class="form-control">
         </div>
         <div class="form-group col-md-6">
@@ -70,6 +77,9 @@
                    [(ngModel)]="professional.prefix"  
                    placeholder="Informe o Prefixo do Telefone" 
                    [disabled] = "action === 'update' ? null : action === 'insert' ? null : true"
+                   required 
+                   minlength="2"
+                   #prefixo = "ngModel"
                    class="form-control">
         </div>
         <div class="form-group col-md-6">
@@ -80,6 +90,8 @@
                    [(ngModel)]="professional.phone" 
                    placeholder="Informe o Telefone" 
                    [disabled] = "action === 'update' ? null : action === 'insert' ? null : true"
+                   required 
+                   #telefone = "ngModel"
                    class="form-control">
         </div>
         <div class="form-group">
@@ -87,7 +99,7 @@
                 <div [ngSwitch]="action">
                     <div *ngSwitchCase="'insert'">
                         <button 
-                            ng-disabled="resourceForm.$pristine || resourceForm.$invalid"
+                            [disabled]="!professionalForm.form.valid"
                             type="button" 
                             class="btn btn-primary btn-outline" 
                             (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar
@@ -96,8 +108,12 @@
                     </div>
 
                     <div *ngSwitchCase="'update'">
-                        <button type="button" class="btn btn-primary btn-outline" (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Alterar</button>
-                        <button type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid)">Excluir</button>
+                        <button type="button" 
+                            [disabled]="!professionalForm.form.valid"
+                            class="btn btn-primary btn-outline" 
+                            (click)="updateProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar
+                        </button>
+                        <button [disabled]="!professionalForm.form.valid" type="button" class="btn btn-primary btn-outline" (click)="deleteProfessional(professional.pid)">Excluir</button>
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>                 
                  </div>
