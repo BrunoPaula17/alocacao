@@ -79,13 +79,15 @@ export class BookingDetailComponent implements OnInit {
             });
     }
 
-    delete(): void {
-        this._bookingService.deleteBooking(this.booking.bookingID)
-            .then((result: boolean) => {
-                if (result) {
-                    this.goBack();
-                }
-            });
+    delete(confirm: boolean): void {
+        if (confirm) {
+            this._bookingService.deleteBooking(this.booking.bookingID)
+                .then((result: boolean) => {
+                    if (result) {
+                        this.goBack();
+                    }
+                });
+        }
     }
 
     save(): void {
