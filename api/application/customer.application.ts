@@ -42,13 +42,8 @@ export class CustomerApplication {
                     return null;
                 }
             })
-<<<<<<< HEAD
             .then((professional: Professional) => {
                 returnCustomer.professional = professional;
-=======
-            .then((readCustomer: Customer) => {
-                returnCustomer = readCustomer;
->>>>>>> 448e5bf415c4dc3ee45f9dcdfcff199857be128f
                 return returnCustomer;
             })
     }
