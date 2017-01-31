@@ -34,7 +34,7 @@ export class CustomerApplication {
             .then((insertedCustomer: Customer) => { 
                 returnCustomer = insertedCustomer;
                 if(insertedCustomer.customerID != null && insertedCustomer.customerID != undefined) {
-                    return professionalApp.Read(returnCustomer.responsible);
+                    return professionalApp.read(returnCustomer.responsible);
                 }
                 else
                 {
@@ -51,7 +51,7 @@ export class CustomerApplication {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
-        return professionalApp.List()
+        return professionalApp.list()
             .then((professionals: Professional[]) => {
                 return customerPersistence.list()
                     .then((customers: Customer[]) => {
@@ -73,7 +73,7 @@ export class CustomerApplication {
         return customerPersistence.read(id)
             .then((customer: Customer) => {
                 customerReturn = customer;
-                return professionalApp.Read(customer.responsible)
+                return professionalApp.read(customer.responsible)
             })
             .then((professional: Professional) => {
 
@@ -91,7 +91,7 @@ export class CustomerApplication {
         return customerPersistence.update(customer)
             .then((customer: Customer) => {
                 customerUp = customer;
-                return professionalApp.Read(customer.responsible)
+                return professionalApp.read(customer.responsible)
             })
             .then((professional: Professional) => {
 
