@@ -61,11 +61,11 @@ export class ProfessionalService {
                    .catch(this.erroHandling);
     }
 
-    deleteProfessional(professional: Professional):Promise<Professional>{
+    deleteProfessional(pid:number):Promise<Professional>{
 
-        let url:string = `${SERVICE_URL}/delete/`;
+        let url:string = `${SERVICE_URL}/delete/${pid}`;
 
-        return this._httpService.put(url, {'professional': JSON.stringify(professional)}, HEADERS)
+        return this._httpService.delete(url)
                    .toPromise()
                    .then((response: Response) => {
                        return response.json() as Professional;

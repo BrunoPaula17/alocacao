@@ -72,9 +72,9 @@ export class ProjectService {
     /*
         Realiza a exclusão lógica do projeto na base de dados.
     */
-     deleteProject(project:Project): Promise<Project> {
-        let url: string=`${SERVICE_URL}/delete/`
-        return this._httpService.put(url, {'project': JSON.stringify(project)}, HEADERS)
+     deleteProject(projectId:Number): Promise<Project> {
+        let url: string=`${SERVICE_URL}/delete/${projectId}`
+        return this._httpService.delete(url)
                   .toPromise()
                   .then((response: Response) => {
                        return response.json() as Project;

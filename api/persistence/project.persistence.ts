@@ -110,7 +110,7 @@ export class ProjectPersistence implements ICrud<Project>{
                 }));
     }
 
-    delete(project: Project): Promise<boolean>{
+    delete(projectId: number): Promise<boolean>{
         let database: Db;
 
         return Promise.resolve<boolean>(
@@ -119,18 +119,11 @@ export class ProjectPersistence implements ICrud<Project>{
                 database = db;
                 return db.collection('projects')
                          .findOneAndUpdate(
-                        { projectId: project.projectId },
+                        { projectId: projectId },
                         {
-                            projectId: project.projectId,
-                            customerID: project.customerID,
-                            customer:  null,
-                            projectName: project.projectName,
-                            startDate: project.startDate,
-                            endDate: project.endDate,
-                            pid: project.pid,
-                            sponsor: null,
-                            wbs: project.wbs,
-                            deleted: true
+                            $set: {
+                                'deleted': true
+                            }
                         })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {
                     if (updateResult.ok === 1)

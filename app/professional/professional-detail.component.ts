@@ -43,8 +43,8 @@ export class ProfessionalDetailComponent implements OnInit {
                                  .then(professional => this.professional = professional)
     }
 
-    deleteProfessional(professional: Professional): void {
-        this._professionalService.deleteProfessional(professional)
+    deleteProfessional(pid:number): void {
+        this._professionalService.deleteProfessional(pid)
             .then(professional => this.professional = professional)
 
     }

@@ -99,8 +99,8 @@ export class ProjectDetailsComponent implements OnInit {
     /* 
         Realiza a exclusão das informações do projeto na base de dados.
     */
-    deleteButton(project:Project): void {
-        this._projectService.deleteProject(project)
+    deleteButton(projectId:number): void {
+        this._projectService.deleteProject(projectId)
                             .then((project:Project) => this.project = project);
     }
     

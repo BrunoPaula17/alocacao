@@ -45,7 +45,7 @@ export class ProfessionalApplication{
     /*
         Apaga logicamente as informações de um funcionário.
     */
-    delete(professional: Professional): Promise<boolean>{
+    delete(pid:number): Promise<boolean>{
 
         let professionalPersistence: ProfessionalPersistence = new ProfessionalPersistence();
         
@@ -56,6 +56,6 @@ export class ProfessionalApplication{
             return professionalPersistence.delete(pid);
         }
         */
-        return professionalPersistence.delete(professional);
+        return professionalPersistence.delete(pid);
     }
 }

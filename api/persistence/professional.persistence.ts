@@ -105,7 +105,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
     }
     
     
-    delete(professional: Professional): Promise<boolean>{
+    delete(pid:number): Promise<boolean>{
         let database: Db;
 
         return Promise.resolve<boolean>(
@@ -113,17 +113,11 @@ export class ProfessionalPersistence implements ICrud<Professional>{
             .then((db:Db) =>{
                 database = db;
                     return db.collection('professionals').findOneAndUpdate(
-                        { pid: professional.pid },
+                        { pid: pid },
                         {
-                            pid:professional.pid,
-                            eid:professional.eid,
-                            name:professional.name,
-                            email:professional.email,
-                            roleID:professional.roleID,
-                            prefix:professional.prefix,
-                            phone:professional.phone,
-                            deleted:true,
-                            role:true
+                            $set: {
+                                'deleted': true
+                            }
                         })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {
                     if (updateResult.ok === 1)

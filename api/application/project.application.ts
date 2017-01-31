@@ -40,10 +40,10 @@ update(project: Project): Promise<Project>{
 /*
     Recupera um projeto específico
 */
-delete(project: Project): Promise<boolean>{
+delete(projectId: number): Promise<boolean>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return projectPersistence.delete(project);
+    return projectPersistence.delete(projectId);
 }
 
 

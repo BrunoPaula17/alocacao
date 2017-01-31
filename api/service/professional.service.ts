@@ -49,9 +49,9 @@ professionalRouter.put('/update/', (request: Request, response: Response) => {
 professionalRouter.delete('/delete/:pid', (request: Request, response: Response) => {
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
 
-        let professional = JSON.parse(request.body.professional)
+        let pid = +request.params.pid;
 
-       professionalApp.delete(professional)
+       professionalApp.delete(pid)
                       .then(() => {
                           response.json(true);
                       })
