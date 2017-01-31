@@ -5,6 +5,7 @@ import { ProfessionalApplication } from './professional.application';
 
 export class CustomerApplication {
 
+    /* Insere um novo cliente. */
     createCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
@@ -41,11 +42,18 @@ export class CustomerApplication {
                     return null;
                 }
             })
+<<<<<<< HEAD
             .then((professional: Professional) => {
                 returnCustomer.professional = professional;
+=======
+            .then((readCustomer: Customer) => {
+                returnCustomer = readCustomer;
+>>>>>>> 448e5bf415c4dc3ee45f9dcdfcff199857be128f
                 return returnCustomer;
             })
     }
+
+    /* Retorna uma lista com todos os clientes. */
 
     listCustomers(): Promise<Customer[]> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
@@ -63,6 +71,8 @@ export class CustomerApplication {
             });
 
     }
+
+        /* Retorna o cliente de acordo com o id. */
 
     readCustomer(id: number): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
@@ -83,6 +93,8 @@ export class CustomerApplication {
 
     }
 
+        /* Atualiza as informações do cliente. */
+
     updateCustomer(customer: Customer): Promise<Customer> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
         let professionalApp: ProfessionalApplication = new ProfessionalApplication();
@@ -99,6 +111,8 @@ export class CustomerApplication {
                 return customerUp;
             });
     }
+
+        /* Delete lógico do cliente pelo id. */
 
     deleteCustomer(id: number): Promise<boolean> {
         let customerPersistence: CustomerPersistence = new CustomerPersistence();
