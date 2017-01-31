@@ -122,7 +122,7 @@ export class ProfessionalPersistence implements ICrud<Professional>{
                             roleID:professional.roleID,
                             prefix:professional.prefix,
                             phone:professional.phone,
-                            deleted:false,
+                            deleted:true,
                             role:true
                         })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {

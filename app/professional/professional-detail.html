@@ -53,6 +53,9 @@
         <div class="form-group col-md-6">
             <label for="roleID">Cargo</label>
             <select class="form-control" 
+            name="role" 
+            id="role"
+            [(ngModel)]="professional.roleID"
             required
             [disabled] = "action === 'update' ? null : action === 'insert' ? null : true"
             >
