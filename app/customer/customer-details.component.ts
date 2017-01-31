@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { Customer } from './customer';
 import { CustomerService } from '../customer/customer.service';
 import { Professional } from '../professional/professional';
 
 import { ProfessionalService } from "../professional/professional.service"
-
 
 @Component({
     moduleId: module.id,
@@ -24,42 +24,66 @@ export class CustomerDetailsComponent implements OnInit {
     customer: Customer;
     professionals: Professional[];
     action: string;
+    id: number;
+
+    ngOnInit(): void {
+        this._router.params.subscribe((params: Params) => {
+            if(params['id'] && params['id'] != null && params['id'] != undefined)
+                this.id = +params['id'];
+            if(params['action'] && params['action'] != null && params['action'] != undefined)
+                this.action = params['action']; 
+        });
+
+        if((this.id == null || this.id == undefined)){
+            this.action = 'create';
+            this.customer = new Customer();
+        } else {
+            this.action = 'details';
+            this.getCustomer(this.id);
+        }
+
+        this.getProfessionals();
+    }
+
+    getProfessionals(){
+         this._professionalService.getProfessionalList()
+            .then((professional: Professional[]) => {
+                this.professionals = professional;
+        })
+    }
 
     goBack(): void {
         this._location.back();
     }
 
-    getDetails(id: number): void {
+    update() {
+        this.action = 'update';
+    }
+
+    updateCustomer(cust: Customer){
+        this.action = 'details';
+        this._customerService.updateCustomer(cust)
+            .then((customer: Customer) => {
+                this.customer = customer;
+                this.action = 'details';
+            })
+    }
+
+    insertCustomer(cust: Customer){
+         this._customerService.createCustomer(cust)
+            .then((customer: Customer) => {
+                this.customer = customer;
+                this.id = customer.customerID;
+                this.action = 'details';
+            })
+        alert(cust.name + " inserido com sucesso!!!");
+    }
+
+    getCustomer(id: number): void {
         this._customerService.getCustomer(id)
             .then((customer: Customer) => {
                 this.customer = customer;
             });
-    }
-
-    update(cust: Customer) {
-        this._customerService.updateCustomer(cust)
-            .then((customer: Customer) => {
-                this.customer = customer;
-            })
-        this.action = 'details';
-        alert("update feito");
-    }
-
-    ngOnInit(): void {
-        this._router.params.subscribe((params: Params) => {
-            let id: number = +params['id'];
-            this.action = params['action'];
-            this.getDetails(id); 
-        })
-    }
-
-    editar(){
-        this.action = 'edit';
-         this._professionalService.getProfessionalList()
-            .then((professional: Professional[]) => {
-                this.professionals = professional;
-        })
-        
     }
 
 }

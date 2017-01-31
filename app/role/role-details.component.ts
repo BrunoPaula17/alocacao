@@ -28,35 +28,48 @@ export class RoleDetailComponent implements OnInit {
             .then(role => this.role = role);
     }
 
-    goBack() {
+    back() {
         this._location.back();
     }
 
-    onSave() {
+    save() {
         if (this.action === 'edit')
-            this._roleService.updateRole(this.role);
+            this._roleService.updateRole(this.role)
+                .then((roleSaved: Role) => {
+                    this.role = roleSaved;
+                    this.action = 'read';
+                });
         else
-            this._roleService.createRole(this.role);
+            this._roleService.createRole(this.role)
+                .then((roleSaved: Role) => {
+                    this.role = roleSaved;
+                    this.action = 'read';
+                });
     }
 
-    onEdit() {
-        this.action = 'edit';
-    }
+    edit() { this.action = 'edit'; }
 
-    onDelete() {
-        let deleted: boolean;
-        this._roleService.deleteRole(this.role.roleId);
+    delete() {
+        this._roleService.deleteRole(this.role)
+            .then((roleSaved: Role) => {
+                this.role = roleSaved;
+            });
     }
 
     ngOnInit(): void {
         this._route.params.subscribe((params: Params) => {
             let id: number = +params['id'];
             this.action = params['action'];
-            console.log(this.action);
+
             this.role = new Role();
             if (this.action != 'create')
                 this.getRoleDetails(id);
         })
 
+    }
+
+    onDeleted(confirm: boolean) {
+        if(confirm)
+            this.delete();
     }
 }

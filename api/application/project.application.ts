@@ -23,40 +23,27 @@ getProject(projectId: number): Promise<Project>{
 /*
     Insere um projeto na base de dados
 */
-create(projectId: number, customer: number, projectName: string, startDate: Date, endDate: Date, sponsor: number, wbs: string, deleted: boolean): Promise<Project[]>{
-    let projectPersistence : ProjectPersistence = new ProjectPersistence();
-    let projectCreate : ProjectPersistence = new ProjectPersistence();
+create(project: Project): Promise<Project>{
+        let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    // projectCreate = {
-    //     "projectId": projectId,
-    //     "customer": customer,
-    //     "projectName": projectName,
-    //     "startDate": startDate,
-    //     "endDate": endDate,
-    //     "sponsor": sponsor,
-    //     "wbs": wbs,
-    //     "deleted": deleted
-    // }
-
-    return null;//projectPersistence.Create(projectCreate);
+        return projectPersistence.create(project);
 }
+
 /*
     Atualiza um projeto na base de dados
-    return projectPersistence.Update();
 */
-update(projectID: number, client: number, startDate: Date, endDate: Date, concludeDate: Date, sponsor: number,name: string, wbs: string): Promise<Project[]>{
-    let projectPersistence : ProjectPersistence = new ProjectPersistence();
-    let projectUpdate : ProjectPersistence = new ProjectPersistence();
+update(project: Project): Promise<Project>{
+        let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return null;//projectPersistence.Update(projectUpdate);
+        return projectPersistence.update(project);
 }
 /*
     Recupera um projeto específico
 */
-delete(projectID: number): Promise<boolean>{
+delete(project: Project): Promise<boolean>{
     let projectPersistence: ProjectPersistence = new ProjectPersistence();
 
-    return projectPersistence.delete(projectID);
+    return projectPersistence.delete(project);
 }
 
 

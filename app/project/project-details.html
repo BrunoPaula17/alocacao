@@ -1,31 +1,22 @@
 <ava-hdr-app [pageName]="'Projetos'" [icon]="'fa-folder'"></ava-hdr-app>
-<form name="projectForm" *ngIf="project">
+<form name="projectForm" #professionalForm="ngForm" *ngIf="project" novalidade>
     <div class="row">
         <div class="form-group col-md-6">
             <label for="wbs">WBS</label>
+            <label 
+                class="alert-danger" 
+                [hidden]="wbs.valid || wbs.pristine">*Campo obrigatório
+            </label>
             <input id="wbs" 
                    [(ngModel)]="project.wbs" 
                    type="text" 
                    name="wbs" 
                    placeholder="Escreva a wbs do projeto." 
                    class="form-control"
-                   #name="ngModel"
-                   required  
-                   minlength="4" 
-                   maxlength="24">
+                   required
+                   #wbs=ngModel  
+                >
 
-             <div *ngIf="wbs.errors && (wbs.dirty || wbs.touched)"
-                   class="alert alert-danger">
-                <div [hidden]="!wbs.errors.required">
-                    Wbs is required
-                </div>
-                <div [hidden]="!wbs.errors.minlength">
-                    Wbs must be at least 4 characters long.
-                </div>
-                <div [hidden]="!wbs.errors.maxlength">
-                     Wbs cannot be more than 24 characters long.
-                </div>
-            </div>
         </div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
@@ -39,23 +30,23 @@
          </div>
         <div class="form-group col-md-6">
             <label for="client">Cliente</label>
-            <select name="client" id="client" class="form-control">
-                            <option value="">Selecione</option>    
+            <select [(ngModel)]="project.customerID" name="client" id="client" class="form-control"> 
+                            <option>Selecione</option>
                             <option *ngFor="let customer of customers"
                             [attr.value]="customer.customerID"
                             [attr.selected]="customer.customerID === project.customerID ? true : null"
                                     ((click)="getDetails(project)">{{customer.name}}</option>
-                        </select>
+            </select>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6" [ngSwitch]='action'>
             <label for="sponsor">Responsavel</label>
-            <select name="sponsor" id="sponsor" class="form-control">
-                            <option value="">Selecione</option>    
+           <select [(ngModel)]="project.pid" name="sponsor" id="sponsor" class="form-control"> 
+                            <option>Selecione</option>
                             <option *ngFor="let sponsor of sponsors"
                             [attr.value]="sponsor.pid"
                             [attr.selected]="sponsor.pid === project.pid ? true : null"
                                     ((click)="getDetails(project)">{{sponsor.name}}</option>
-                        </select>
+            </select>
         </div>
         <div class="form-group col-md-6">
             <label for="startDate">Data de Inicio</label>
@@ -63,7 +54,8 @@
                    name="startDate" 
                    placeholder="Escreva a data de início"
                    id="startDate" 
-                   class="form-control" 
+                   class="form-control"
+                   [(ngModel)]="project.startDate" 
                    value="{{project.startDate |  date : 'dd/MM/yyyy'}}"
             />
         </div>
@@ -74,6 +66,7 @@
                    placeholder="Escreva a data de fim"
                    id="endDate" 
                    class="form-control" 
+                   [(ngModel)]="project.endDate"
                    value="{{project.endDate | date : 'dd/MM/yyyy'}} " />
         </div>
         <div class="form-group">
@@ -89,7 +82,7 @@
                 <button type="button" 
                         *ngSwitchCase="'detail'"
                         class="btn btn-default ava-btn-list" 
-                        (click)="deleteButton(project.projectId)">Excluir</button>
+                        (click)="deleteButton(project)">Excluir</button>
                 <button type="button" 
                         class="btn btn-default ava-btn-list" 
                         (click)="goBackButton()">Voltar</button>

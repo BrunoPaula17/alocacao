@@ -10,25 +10,36 @@ export class CustomerPersistence implements ICrud<Customer>{
 
     create(customer: Customer): Promise<Customer> {
         let database: Db = null;
-        return Promise.resolve(MongoClient.connect(mongoUrl)
-            .then((db: Db) => {
-                database = db;
-                return db.collection('customers').insert(JSON.stringify(customer));
-            })
-            .then((insertResult: InsertOneWriteOpResult) => {
-                database.close();
-                console.log("Inserted a document into the customers collection");
-                if (insertResult.insertedId != null) {
-                    customer.customerID = +insertResult.insertedId;
-                    return customer;
-                }
-                else {
-                    return null;
-                }
+        let sequence: number;
 
-
-            }));
-
+        return Promise.resolve<Customer>(
+            Connection.getNextSequence('customerID')
+                .then((retrievedSequence: number) => {
+                    sequence = retrievedSequence;
+                    customer.customerID = sequence;
+                    return Connection.create();
+                })
+                .then((db: Db) => {
+                    database = db;
+                    return db.collection('customers').insertOne({
+                        customerID: sequence,
+                        name: customer.name,
+                        cnpj: +customer.cnpj,
+                        responsible: +customer.responsible,
+                        contact: customer.contact,
+                        email: customer.email,
+                        deleted: customer.deleted
+                        })
+                })
+                .then((insertResult: InsertOneWriteOpResult) => {
+                        if (insertResult.result.ok == 1) {
+                            return customer;
+                        }
+                        else {
+                            return Promise.reject<Customer>(Error("An error ocurred when trying to create a new record"));
+                        }
+                    })
+            );
     }
 
     list(): Promise<Customer[]> {
@@ -63,17 +74,18 @@ export class CustomerPersistence implements ICrud<Customer>{
     }
 
     update(custUpd: Customer): Promise<Customer> {
-
         let database: Db = null;
         return Promise.resolve(MongoClient.connect(mongoUrl)
             .then((db: Db) => {
                 database = db;
                 return db.collection('customers').findOneAndUpdate({ "customerID": custUpd.customerID }, {
-                    customerID: custUpd.customerID,
+                    customerID: +custUpd.customerID,
                     name: custUpd.name,
-                    responsible: custUpd.name,
+                    cnpj: custUpd.cnpj,
+                    responsible: +custUpd.responsible,
                     contact: custUpd.contact,
-                    email: custUpd.email
+                    email: custUpd.email,
+                    deleted: custUpd.deleted
                 }, { returnOriginal: false });
             })
             .then((updateResult: FindAndModifyWriteOpResultObject) => {
@@ -81,20 +93,10 @@ export class CustomerPersistence implements ICrud<Customer>{
 
                 if (updateResult.ok == 1)
                     return updateResult.value;
+                
                 else
                     return Error("An error ocurred while triyng to update a record");
             }));
-
-        // let _customer: Customer;
-
-        // _customer = this.customers.find(customer => customer.customerID === custUpd.customerID);
-
-        // if(_customer != null){
-        //     this.customers[this.customers.indexOf(_customer)] = custUpd;
-        // }
-        // else{
-        //     _customer = null;     
-        // }
     }
 
     delete(id: number): Promise<boolean> {
