@@ -32,19 +32,19 @@ export class ProfessionalDetailComponent implements OnInit {
                                  .then(professional => this.professional = professional)
     }
 
-    insertProfessional(professional: Professional): void {
-        this._professionalService.createProfessional(professional)
+    insertProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string): void {
+        this._professionalService.createProfessional(pid,eid,name,email,roleID,prefix,phone)
                                  .then(professional => this.professional = professional)
 
     }
 
-    updateProfessional(professional: Professional): void {
-        this._professionalService.updateProfessional(professional)
+    updateProfessional(pid:number,eid:string,name:string,email:string,roleID:number,prefix:number,phone:string): void {
+        this._professionalService.updateProfessional(pid,eid,name,email,roleID,prefix,phone)
                                  .then(professional => this.professional = professional)
     }
 
-    deleteProfessional(professional: Professional): void {
-        this._professionalService.deleteProfessional(professional)
+    deleteProfessional(pid:number): void {
+        this._professionalService.deleteProfessional(pid)
             .then(professional => this.professional = professional)
 
     }
