@@ -34,7 +34,7 @@ export class CustomerApplication {
             .then((insertedCustomer: Customer) => { 
                 returnCustomer = insertedCustomer;
                 if(insertedCustomer.customerID != null && insertedCustomer.customerID != undefined) {
-                    return professionalApp.Read(+returnCustomer.responsible);
+                    return professionalApp.Read(returnCustomer.responsible);
                 }
                 else
                 {
