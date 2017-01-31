@@ -1,14 +1,23 @@
-   <ava-hdr-app [pageName]="'Profissional'" [icon]="'fa-users'"></ava-hdr-app>
-    <form name="resourceForm" *ngIf="professional">
+    <ava-hdr-app [pageName]="'Profissional'" [icon]="'fa-users'"></ava-hdr-app>
+    <form name="professionalForm" #professionalForm="ngForm" *ngIf="professional" novalidate>
         <div class="form-group col-md-6" >
             <label for="pid">PID</label>
-            <input id="pid" 
-                   type="text" 
-                   name="pid" 
-                   placeholder="Informe o PID "
-                   [disabled] = "action === 'update' ? null : action === 'insert' ? null : true" 
-                   [(ngModel)]="professional.pid" 
-                   class="form-control">
+            <label 
+                class="alert-danger" 
+                [hidden]="pid.valid || pid.pristine">*Campo obrigatório
+            </label>
+            <input 
+                id="pid" 
+                type="text" 
+                name="pid" 
+                [(ngModel)]="professional.pid"
+                placeholder="Informe o PID "
+                class="form-control"
+                required 
+                [disabled] = "action === 'update' ? null : action === 'insert' ? null : true" 
+                #pid = "ngModel"  
+            >
+        
         </div>
         <div class="form-group col-md-6">
             <label for="eid">EID</label>
@@ -17,8 +26,9 @@
                    name="entrepriseID" 
                    [(ngModel)]="professional.eid" 
                    placeholder="Informe o EID " 
+                   class="form-control"
                    [disabled] = "action === 'update' ? null : action === 'insert' ? null : true"
-                   class="form-control">
+            >
         </div>
         <div class="form-group col-md-6">
             <label for="name">Nome</label>
@@ -76,7 +86,12 @@
             <div class="col-sm-10">
                 <div [ngSwitch]="action">
                     <div *ngSwitchCase="'insert'">
-                        <button type="button" class="btn btn-primary btn-outline" (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar</button>
+                        <button 
+                            ng-disabled="resourceForm.$pristine || resourceForm.$invalid"
+                            type="button" 
+                            class="btn btn-primary btn-outline" 
+                            (click)="insertProfessional(professional.pid,professional.eid,professional.name,professional.email,professional.roleID,professional.prefix,professional.phone)">Salvar
+                        </button>
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>
 
@@ -86,9 +101,6 @@
                         <button type="button" class="btn btn-primary btn-outline" (click)="goBack()">Voltar</button>
                     </div>                 
                  </div>
-            <!--
-            <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
-            -->
             </div>
         </div>
     </form>
